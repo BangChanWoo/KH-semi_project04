@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <header>
 	<div>
-		<a href="#"><img src="./css/밥도둑 로고.png" id="logoImg"></a>
+		<a href="main.jsp"><img src="./css/밥도둑 로고.png" id="logoImg"></a>
         <div id="headerBtn">
         	<a href="#" id="searchBtn"><i class="fas fa-search"></i></a>
         	<button id="loginBtn" class="headerBtnStyle">로그인</button>
@@ -10,7 +10,7 @@
         </div>
         <nav>
         	<ul>
-        		<li id="navRecipe"><a href="#">레시피</a></li>
+        		<li id="navRecipe"><a href="recipeCategory.jsp">레시피</a></li>
         		<li id="navStore"><a href="#">스토어</a></li>
         	</ul>
         </nav>

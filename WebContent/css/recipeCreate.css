@@ -1,0 +1,152 @@
+#contentContainer{
+    clear: both;
+    float: left;
+    width: 100%;
+    margin: 0.5rem 0;
+    padding: 7em 0;
+    background-color: #ebded4;
+    border-radius: 5px;
+}
+#titleImgContainer{
+    float: left;
+    width: 30%;
+    margin: 0 0 0 5%;
+    text-align: center;
+    font-size: 1.5rem;
+}
+#titleImg{
+    width: 100%;
+    border: solid 1px #9a7b6c;
+    border-radius: 5px;
+    color: #CFB9AF;
+    margin: 0 0 1rem 0;
+}
+#dropTitleLabel{
+    width: 100%;
+    height: 5rem;
+    color: #CFB9AF;
+    background-color: white;
+    border-radius: 5px;
+    margin: 0 0 1rem 0;
+    text-align: center;
+    font-size: 1.4rem;
+}
+#txtContainer{
+    float: right;
+    width: 60%;
+    margin: 0 5% 0 0;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    text-align: center;
+}
+label{
+    font-size: 1.3rem;
+    margin: 1.5rem;
+}
+input{
+    height: 2rem;
+    margin: 1.5rem 0;
+    border: solid 1px #9a7b6c;
+    border-radius: 8px;
+}
+textarea{
+    height: 3rem;
+    margin: 1rem 0;
+    border: solid 1px #9a7b6c;
+    border-radius: 8px;
+}
+#listContainer{
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+}
+#listContainer label{
+    margin: 1.5em 0 0 0;
+}
+select{
+    height: 2rem;
+    margin: 1.5rem 0.5rem 1.5rem 0.5rem;
+    font-size: 1rem;
+    text-align: center;
+    border: solid 1px #9a7b6c;
+    border-radius: 8px;
+}
+#ingreContainer{
+    clear: both;
+    width: 100%;
+    margin: 3em auto;
+    padding: 2em;
+}
+#ingreAddContainer{
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    margin: 0 1rem 0 0;
+}
+#ingreAddContainer input{
+    margin: 1rem;
+}
+#ingreAdd{
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+}
+#stepContainer{
+    clear: both;
+    float: left;
+    margin: 3em auto;
+    padding: 2em;
+    border-radius: 5px;
+    background-color: #ebded4;
+}
+#step{
+    list-style-type: none;
+}
+#step li h2{
+    clear: both;
+    margin: 1em 1em 0.5em 1em;
+}
+
+#stepContent{
+    width: 100%;
+}
+#stepTxt{
+    float: left;
+    width: 60%;
+    margin: 2.5%;
+    font-size: 1.2em;
+}
+#stepTxt textarea{
+    width: 100%;
+    height: 5rem;
+}
+#stepImg{
+    float: left;
+    width: 30%;
+    margin: 2.5%;
+    aspect-ratio: 8/5;
+}
+.btnContainer{
+    clear: both;
+    margin: 5rem;
+    text-align: center;
+}
+.recipeBtn{
+    background-color: #CFB9AF;
+    border: 0;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    margin: 0 1rem;
+    width: 4.5rem;
+    height: 3rem;
+}
+.recipeBtn:hover{
+    background-color: #9a7b6c;
+    -webkit-transform: scale(1.05);
+	transform: scale(1.05);
+	box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+}
+.clear{
+    clear: both;
+    border: solid 1px #CFB9AF;
+}

@@ -1,0 +1,35 @@
+/*main*/
+main{
+    width: 100%;
+    margin: auto;
+    position: relative;
+}
+#slideImg{
+    width: 100%;
+    aspect-ratio: 8/3;
+}
+.title-font{
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 3rem 0 1.5rem 0;
+}
+#recommendRecipe{
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    gap: 1rem;
+    margin-bottom: 5rem;
+}
+.recommendImg{
+    width: 20%;
+}
+.recommendImg:hover{
+	-webkit-transform: scale(1.03);
+	transform: scale(1.03);
+	box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+}
+#prContainer{
+    background-color: #EBDED4;
+    padding: 0.6rem;
+    border-radius: 5px;
+}

@@ -1,0 +1,48 @@
+/*header*/
+header{
+    width: 100%;
+    margin: auto;
+    position: relative;
+}
+header a{
+    text-decoration: none;
+    color: black;
+}
+#logoImg{
+    display : block;
+    margin : 4rem auto 2rem auto;
+    width : 25%;
+}
+#headerBtn{
+    position: absolute;
+    top: 0;
+    right: 15px;
+    text-decoration: none;
+}
+.headerBtnStyle{
+    background-color: #CFB9AF;
+    border: none;
+    font-size: 0.8rem;
+    padding: 0.3rem 0.3rem;
+    border-radius: 5px;
+    margin: 0.4rem auto;
+}
+.headerBtnStyle:hover{
+    background-color: #9a7b6c;
+}
+nav ul{
+    display: inline-block;
+    font-size: 1.6rem;
+}
+nav ul li{
+    display: inline-block;
+    list-style-type : none;
+    margin: 0.4rem 0 0.4rem 1.6rem;
+}
+nav ul li a{
+    text-decoration: none;
+    color: black;
+}
+nav ul li a:hover{
+    color: #CFB9AF;
+}

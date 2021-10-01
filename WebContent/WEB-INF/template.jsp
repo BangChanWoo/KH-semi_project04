@@ -19,6 +19,6 @@
 	
 	<!-- 여기에 입력 -->
 	
-	<%@ include file=riceThief_footer.jsp" %>
+	<%@ include file="riceThief_footer.jsp" %>
 </body>
 </html>

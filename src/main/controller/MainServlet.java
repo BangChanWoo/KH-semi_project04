@@ -29,7 +29,7 @@ public class MainServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		
-		response.sendRedirect("/main/mainpage.jsp");
+		response.sendRedirect("../WEB-INF/main.jsp");
 	}
 
 	/**

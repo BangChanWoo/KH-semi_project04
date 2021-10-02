@@ -13,11 +13,32 @@
 </head>
 <body>
 	<%@ include file="../WEB-INF/riceThief_header.jsp" %>
-
+	<hr>
 	<main>
-        <div id="slideContainer">
-            <img src="./css/alt.JPG" id="slideImg" alt="slide show">
-        </div>
+        <div class="slideContainer">
+			<div class="mySlides fade">
+			  <img src="./css/001.png" class="slideImg" alt="slide show">
+			</div>
+			<div class="mySlides fade">
+			  <img src="./css/002.png" class="slideImg" alt="slide show">
+			</div>
+			<div class="mySlides fade">
+			  <img src="./css/003.png" class="slideImg" alt="slide show">
+			</div>
+			<div class="mySlides fade">
+			  <img src="./css/004.png" class="slideImg" alt="slide show">
+			</div>
+			<a class="prev" onclick="plusSlides(-1)"><i class="fas fa-chevron-left"></i></a>
+			<a class="next" onclick="plusSlides(1)"><i class="fas fa-chevron-right"></i></a>
+		</div>
+		<br>
+		<div style="text-align:center">
+		  <span class="dot" onclick="currentSlide(1)"></span> 
+		  <span class="dot" onclick="currentSlide(2)"></span> 
+		  <span class="dot" onclick="currentSlide(3)"></span> 
+		  <span class="dot" onclick="currentSlide(4)"></span> 
+		</div>
+		
         <div class="ctMargin">
             <h2 class="title-font">추천 레시피</h2>
             <div id="recommendRecipe">
@@ -44,5 +65,34 @@
     <hr>
 
 	<%@ include file="../WEB-INF/riceThief_footer.jsp" %>
+	
+	<script>
+	var slideIndex = 1;
+	showSlides(slideIndex);
+	
+	function plusSlides(n) {
+	  showSlides(slideIndex += n);
+	}
+	
+	function currentSlide(n) {
+	  showSlides(slideIndex = n);
+	}
+	
+	function showSlides(n) {
+	  var i;
+	  var slides = document.getElementsByClassName("mySlides");
+	  var dots = document.getElementsByClassName("dot");
+	  if (n > slides.length) {slideIndex = 1}    
+	  if (n < 1) {slideIndex = slides.length}
+	  for (i = 0; i < slides.length; i++) {
+	      slides[i].style.display = "none";  
+	  }
+	  for (i = 0; i < dots.length; i++) {
+	      dots[i].className = dots[i].className.replace(" active", "");
+	  }
+	  slides[slideIndex-1].style.display = "block";  
+	  dots[slideIndex-1].className += " active";
+	}
+	</script>
 </body>
 </html>

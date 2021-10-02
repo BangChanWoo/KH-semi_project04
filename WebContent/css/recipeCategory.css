@@ -1,0 +1,98 @@
+main{
+    width: 100%;
+    margin: auto;
+    position: relative;
+}
+main h2{
+    margin: 3.5rem 0;
+    text-align: center;
+}
+#categoryBtnAll{
+    width: 80%;
+    margin: 4rem auto;
+    display: grid;
+}
+.categoryBtn{
+    height: 3.5rem;
+    border-radius: unset;
+    border: 0;
+    border-top: solid 1px black;
+    border-right: solid 1px black;
+    background-color: white;
+    font-size: 1rem;
+}
+.categoryBtn:hover{
+    background-color: #CFB9AF;
+}
+.imgCenter{
+    width: 80%;
+    margin: auto;
+    display: grid;
+    gap: 0 2%;
+}
+.categoryImg{
+    width: 100%;
+    margin: 2% 0;
+}
+.categoryImg:hover{
+	-webkit-transform: scale(1.03);
+	transform: scale(1.03);
+	box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+}
+.categoryRecipeTitle{
+    margin: 3% 0 10% 0;
+    font-size: 1.2rem;
+}
+.categoryRecipeTitle:hover{
+    color: #CFB9AF;
+}
+#pageBtnAll{
+    width: 18rem;
+    height: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 0.5rem;
+    margin: 4rem auto 6rem;
+}
+.pageBtn{
+    border: 0;
+    border-radius: 5px;
+    background-color: #CFB9AF;
+}
+.pageBtn:hover{
+    background-color: #9a7b6c;
+}
+/*responsive*/
+/*스마트폰*/
+@media screen and (max-width:  767px){
+    #categoryBtnAll{
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+    .categoryBtn:first-child, .categoryBtn:nth-child(7), .categoryBtn:nth-child(13){border-left: solid 1px black;}
+    .categoryBtn:nth-last-child(-n+6){border-bottom: solid 1px black;}
+    .imgCenter{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+/*태블릿 pc*/
+@media screen and (min-width:  768px) and (max-width: 959px){
+    #categoryBtnAll{
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+    .categoryBtn:first-child, .categoryBtn:nth-child(10){border-left: solid 1px black;}
+    .categoryBtn:nth-last-child(-n+9){border-bottom: solid 1px black;}
+    .imgCenter{
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+/*데스크탑*/
+@media screen and (min-width:  960px){
+    #categoryBtnAll{
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+    .categoryBtn:first-child, .categoryBtn:nth-child(10){border-left: solid 1px black;}
+    .categoryBtn:nth-last-child(-n+9){border-bottom: solid 1px black;}
+    .imgCenter{
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+} 

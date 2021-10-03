@@ -1,27 +1,25 @@
-package recipe.vo;
+package recipe.model.vo;
 
 import java.sql.Date;
 
 public class Recipe {
-	private int recipe_no; // 레시피 게시글 번호
-	private String uid; // 작성자
-	private String rec_img; // 대표사진
-	private String rec_title; // 제목
-	private String rec_summary; // 소개
-	private String rec_tip; // 팁
-	private int info_serving; // 양
-	private int info_time; // 조리시간
-	private int info_level; // 난이도
-	private String rec_video; // 동영상
-	private String rec_cate_no; // 카테고리 번호
+	private int recipe_no;       // 레시피 게시글 번호
+	private String uid;          // 작성자
+	private String rec_img;      // 대표사진
+	private String rec_title;    // 제목
+	private String rec_summary;  // 소개
+	private String rec_tip;      // 팁
+	private String info_serving;    // 양
+	private String info_time;       // 조리시간
+	private String info_level;      // 난이도
+	private String rec_video;    // 동영상
+	private int rec_cate_no;  // 카테고리 번호
 	private Date rec_write_date; // 작성시간
 
-	public Recipe() {
-
-	}
+	public Recipe() {}
 
 	public Recipe(int recipe_no, String uid, String rec_img, String rec_title, String rec_summary, String rec_tip,
-			int info_serving, int info_time, int info_level,String rec_video,String rec_cate_no,Date rec_write_date) {
+			String info_serving, String info_time, String info_level,String rec_video,int rec_cate_no,Date rec_write_date) {
 		this.recipe_no=recipe_no;
 		this.uid=uid;
 		this.rec_img=rec_img;
@@ -84,27 +82,27 @@ public class Recipe {
 		this.rec_tip = rec_tip;
 	}
 
-	public int getInfo_serving() {
+	public String getInfo_serving() {
 		return info_serving;
 	}
 
-	public void setInfo_serving(int info_serving) {
+	public void setInfo_serving(String info_serving) {
 		this.info_serving = info_serving;
 	}
 
-	public int getInfo_time() {
+	public String getInfo_time() {
 		return info_time;
 	}
 
-	public void setInfo_time(int info_time) {
+	public void setInfo_time(String info_time) {
 		this.info_time = info_time;
 	}
 
-	public int getInfo_level() {
+	public String getInfo_level() {
 		return info_level;
 	}
 
-	public void setInfo_level(int info_level) {
+	public void setInfo_level(String info_level) {
 		this.info_level = info_level;
 	}
 
@@ -116,11 +114,11 @@ public class Recipe {
 		this.rec_video = rec_video;
 	}
 
-	public String getRec_cate_no() {
+	public int getRec_cate_no() {
 		return rec_cate_no;
 	}
 
-	public void setRec_cate_no(String rec_cate_no) {
+	public void setRec_cate_no(int rec_cate_no) {
 		this.rec_cate_no = rec_cate_no;
 	}
 

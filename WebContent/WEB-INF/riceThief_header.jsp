@@ -10,7 +10,7 @@
         </div>
         <nav>
         	<ul>
-        		<li id="navRecipe"><a href="recipeCategory.jsp">레시피</a></li>
+        		<li id="navRecipe"><a href="recipeboard">레시피</a></li>
         		<li id="navStore"><a href="#">스토어</a></li>
         	</ul>
         </nav>

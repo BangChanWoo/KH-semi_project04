@@ -1,3 +1,5 @@
+<%@page import="recipe.model.vo.Recipe"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,6 +15,12 @@
 <title>밥도둑_레시피 카테고리</title>
 </head>
 <body>
+<% 
+	ArrayList<Recipe> volist = (ArrayList<Recipe>)request.getAttribute("recipeVoList");
+	int startPage = (int)request.getAttribute("startPage");
+	int endPage = (int)request.getAttribute("endPage");
+	int pageCount = (int)request.getAttribute("pageCount");
+%>
 	<%@ include file="../WEB-INF/riceThief_header.jsp" %>
 	<hr>
     <main>
@@ -41,96 +49,25 @@
             <!--여기 java에서 for문으로 사진 <5 으로 5개까지 데이터 들고옴-->
             <!--일단 structure-->
             <div class="imgCenter">
-                <div>
-                    <img src="./css/alt.JPG" class="categoryImg" alt="추천 레시피">
-                    <p class="categoryRecipeTitle">레시피이름</p>
+	            <%if(volist != null){
+	            	for(Recipe vo : volist){ %>
+	            <div>
+                    <img src="<%=vo.getRec_img() %>" class="categoryImg" alt="추천 레시피">
+                    <p class="categoryRecipeTitle"><%=vo.getRec_title() %></p>
                 </div>
-                <div>
-                    <img src="./css/alt.JPG" class="categoryImg" alt="추천 레시피">
-                    <p class="categoryRecipeTitle">레시피이름</p>
-                </div>
-                <div>
-                    <img src="./css/alt.JPG" class="categoryImg" alt="추천 레시피">
-                    <p class="categoryRecipeTitle">레시피이름</p>
-                </div>
-                <div>
-                    <img src="./css/alt.JPG" class="categoryImg" alt="추천 레시피">
-                    <p class="categoryRecipeTitle">레시피이름</p>
-                </div>
-                <div>
-                    <img src="./css/alt.JPG" class="categoryImg" alt="추천 레시피">
-                    <p class="categoryRecipeTitle">레시피이름</p>
-                </div>
-                <div>
-                    <img src="./css/alt.JPG" class="categoryImg" alt="추천 레시피">
-                    <p class="categoryRecipeTitle">레시피이름</p>
-                </div>
-                <div>
-                    <img src="./css/alt.JPG" class="categoryImg" alt="추천 레시피">
-                    <p class="categoryRecipeTitle">레시피이름</p>
-                </div>
-                <div>
-                    <img src="./css/alt.JPG" class="categoryImg" alt="추천 레시피">
-                    <p class="categoryRecipeTitle">레시피이름</p>
-                </div>
-                <div>
-                    <img src="./css/alt.JPG" class="categoryImg" alt="추천 레시피">
-                    <p class="categoryRecipeTitle">레시피이름</p>
-                </div>
-                <div>
-                    <img src="./css/alt.JPG" class="categoryImg" alt="추천 레시피">
-                    <p class="categoryRecipeTitle">레시피이름</p>
-                </div>
-                <div>
-                    <img src="./css/alt.JPG" class="categoryImg" alt="추천 레시피">
-                    <p class="categoryRecipeTitle">레시피이름</p>
-                </div>
-                <div>
-                    <img src="./css/alt.JPG" class="categoryImg" alt="추천 레시피">
-                    <p class="categoryRecipeTitle">레시피이름</p>
-                </div>
-                <div>
-                    <img src="./css/alt.JPG" class="categoryImg" alt="추천 레시피">
-                    <p class="categoryRecipeTitle">레시피이름</p>
-                </div>
-                <div>
-                    <img src="./css/alt.JPG" class="categoryImg" alt="추천 레시피">
-                    <p class="categoryRecipeTitle">레시피이름</p>
-                </div>
-                <div>
-                    <img src="./css/alt.JPG" class="categoryImg" alt="추천 레시피">
-                    <p class="categoryRecipeTitle">레시피이름</p>
-                </div>
-                <div>
-                    <img src="./css/alt.JPG" class="categoryImg" alt="추천 레시피">
-                    <p class="categoryRecipeTitle">레시피이름</p>
-                </div>
-                <div>
-                    <img src="./css/alt.JPG" class="categoryImg" alt="추천 레시피">
-                    <p class="categoryRecipeTitle">레시피이름</p>
-                </div>
-                <div>
-                    <img src="./css/alt.JPG" class="categoryImg" alt="추천 레시피">
-                    <p class="categoryRecipeTitle">레시피이름</p>
-                </div>
-                <div>
-                    <img src="./css/alt.JPG" class="categoryImg" alt="추천 레시피">
-                    <p class="categoryRecipeTitle">레시피이름</p>
-                </div>
-                <div>
-                    <img src="./css/alt.JPG" class="categoryImg" alt="추천 레시피">
-                    <p class="categoryRecipeTitle">레시피이름</p>
-                </div>
+	            <% } }%>
             </div>
         </div>
         <div id="pageBtnAll">
+        <%if(startPage > 1){%>
             <button type="button" id="" class="pageBtn"><i class="fas fa-chevron-left"></i></button>
-            <button type="button" id="" class="pageBtn selectBtnColor">1</button>
-            <button type="button" id="" class="pageBtn">2</button>
-            <button type="button" id="" class="pageBtn">3</button>
-            <button type="button" id="" class="pageBtn">4</button>
-            <button type="button" id="" class="pageBtn">5</button>
+            <%} %>
+            <%for (int i = startPage; i <= endPage; i++) {%>
+            <a id="pageBtn_<%=i%>" class="pageBtn" href="recipeboard?pagenum=<%=i%>"><%=i%></a>
+            <%} %>
+            <%if(endPage < pageCount){%>
             <button type="button" id="" class="pageBtn"><i class="fas fa-chevron-right"></i></button>
+            <%} %>
         </div>
     </main>
     <hr>

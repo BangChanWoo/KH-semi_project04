@@ -46,3 +46,8 @@ nav ul li a{
 nav ul li a:hover{
     color: #CFB9AF;
 }
+.loginAfterBtn{
+	float: right;
+	font-size: 1.6rem;
+	margin: 0 0.5rem;
+}

@@ -28,11 +28,12 @@ public class MainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		
-//		PrintWriter out = response.getWriter();
-//		out.println("안녕");
-		response.sendRedirect("riceThief/WebContent/WEB-INF/main.jsp");
-		///riceThief/WebContent/WEB-INF/main.jsp
+		
+		response.sendRedirect("./main.jsp");
 	}
 
 	/**

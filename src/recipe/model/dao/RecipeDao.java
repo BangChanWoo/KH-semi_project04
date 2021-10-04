@@ -10,14 +10,19 @@ import riceThief.common.JdbcTemplate;
 
 public class RecipeDao {
 	public RecipeDao() {}
-	public int getRecipeCount(Connection conn) {
+	public int getRecipeCount(Connection conn, int catenum) {
 		int result = 0;
-		String countQuery = "select count(recipe_no) from recipe";
-		
+		String countAllQuery = "select count(recipe_no) from recipe";
+		String countCateQuery = "select count(recipe_no) from recipe where rec_cate_no like ?";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
-			ps = conn.prepareStatement(countQuery);
+			if(catenum == 0) {
+				ps = conn.prepareStatement(countAllQuery);
+			}else {
+				ps = conn.prepareStatement(countCateQuery);
+				ps.setInt(1, catenum);
+			}
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				result = rs.getInt(1);
@@ -32,15 +37,28 @@ public class RecipeDao {
 		}
 		return result;
 	}
-	public ArrayList<Recipe> recipeList(Connection conn, int start , int end) {
+	public ArrayList<Recipe> recipeList(Connection conn, int start , int end, int catenum) {
 		ArrayList<Recipe> volist = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String selectAllQuery = "select t2.recipe_no, t2.rec_img, t2.rec_title from (select ROWNUM r, t1.* from recipe t1 order by recipe_no desc) t2 where t2.r between ? and ?";
+		String selectAllQuery = "select t2.recipe_no, t2.rec_img, t2.rec_title"
+				+ " from (select ROWNUM r, t1.* from recipe t1 order by recipe_no desc) t2"
+				+ " where t2.r between ? and ?";
+		
+		String selectCateQuery = "select t2.recipe_no, t2.rec_img, t2.rec_title"
+				+ " from (select ROWNUM r, t1.* from recipe t1 where t1.rec_cate_no like ? order by recipe_no desc) t2"
+				+ " where t2.r between ? and ?";
 		try {
-			ps = conn.prepareStatement(selectAllQuery);
-			ps.setInt(1, start);
-			ps.setInt(2, end);
+			if(catenum == 0) {
+				ps = conn.prepareStatement(selectAllQuery);
+				ps.setInt(1, start);
+				ps.setInt(2, end);
+			}else {
+				ps = conn.prepareStatement(selectCateQuery);
+				ps.setInt(1, catenum);
+				ps.setInt(2, start);
+				ps.setInt(3, end);
+			}
 			rs = ps.executeQuery();
 			
 			volist = new ArrayList<Recipe>();

@@ -1,0 +1,171 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+caption {
+    display: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.board_list_wrap {
+    padding: 50px;
+}
+
+.board_list {
+    width: 100%;
+    border-top: 2px solid black;
+}
+
+.board_list tr {
+    border-bottom: 1px solid #ccc;
+}
+
+.board_list th,
+.board_list td {
+    padding: 10px;
+    font-size: 14px;
+}
+
+.board_list td {
+    text-align: center;
+}
+
+
+.gender {
+    padding: 50px;
+}
+
+.gender_table {
+    width: 100%;
+    border-top: 2px solid black;
+}
+
+.gender_table tr {
+    border-bottom: 1px solid #ccc;
+}
+
+.gender_table th,
+.gender_table td {
+    padding: 10px;
+    font-size: 14px;
+}
+
+.gender_table td {
+    text-align: center;
+}
+.age_group {
+    padding: 50px;
+}
+
+.age_group_table {
+    width: 100%;
+    border-top: 2px solid black;
+}
+
+.age_group_table tr {
+    border-bottom: 1px solid #ccc;
+}
+
+.age_group_table th,
+.age_group_table td {
+    padding: 10px;
+    font-size: 14px;
+}
+
+.age_group_table td {
+    text-align: center;
+}
+
+.board_list .tit {
+    text-align: center;
+}
+
+.board_list .tit:hover {
+    text-decoration: underline;
+}
+
+.paging {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.paging a {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+
+.paging a.bt:hover {
+    background-color: #999;
+}
+
+.paging a.first {
+    background-position: 10px -40px;
+}
+
+.paging a.prev {
+    margin-right: 5px;
+    background-position: 10px 10px;
+}
+
+.paging a.next {
+    margin-left: 5px;
+    background-position: -40px 10px;
+}
+
+.paging a.last {
+    background-position: -40px -40px;
+}
+
+.paging a.num {
+    margin: 0 5px;
+}
+
+.paging a.num.on {
+    color: black;
+}
+
+.paging a.num:hover {
+    text-decoration: underline;
+}
+.board_list_wrap .paging {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0;
+}
+.board_list_wrap .paging a {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 5px 10px;
+    border-radius: 100px;
+    font-size: 12px;
+}
+.board_list_wrap .paging a:first-child {
+    margin-left: 0;
+}
+
+.board_list_wrap .paging a.bt {
+    border: 1px solid #eee;
+    background: #eee;
+}
+
+.board_list_wrap .paging a.num {
+    border: 1px solid black;
+    font-weight: 600;
+    color: black;
+}
+
+.board_list_wrap .paging a.num.on {
+    background: black;
+    color: #fff;
+}

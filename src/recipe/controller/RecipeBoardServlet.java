@@ -35,6 +35,12 @@ public class RecipeBoardServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
+		String catenumStr = request.getParameter("catenum");
+		int catenum = 0;
+		if(catenumStr != null) {
+			catenum = Integer.parseInt(catenumStr);
+		}
+		
 		final int PAGE_SIZE = 20;  //한페이지당 글 수 
 		final int PAGE_BLOCK = 3;  //한화면에 나타날 페이지 링크 수
 		int rCount = 0;  //총 글수
@@ -49,7 +55,7 @@ public class RecipeBoardServlet extends HttpServlet {
 		if(pageNum != null) {
 			currentPage = Integer.parseInt(pageNum);
 		}
-		rCount = new RecipeService().getRecipeCount();
+		rCount = new RecipeService().getRecipeCount(catenum);
 		
 		pageCount = (rCount/PAGE_SIZE) + (rCount%PAGE_SIZE == 0 ? 0 : 1);
 
@@ -70,13 +76,14 @@ public class RecipeBoardServlet extends HttpServlet {
 			endPage = pageCount;
 		}
 		
-		ArrayList<Recipe> volist = new RecipeService().recipeList(startRnum, endRnum);
+		ArrayList<Recipe> volist = new RecipeService().recipeList(startRnum, endRnum, catenum);
 
 		//Data 전달을 위해서 request에 셋
 		request.setAttribute("recipeVoList", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
+		request.setAttribute("catenum", catenum);
 
 		request.getRequestDispatcher("./recipeCategory.jsp").forward(request, response);
 	}

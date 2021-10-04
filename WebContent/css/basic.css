@@ -5,12 +5,18 @@
     font-weight: normal;
     font-style: normal;
 }
-
+@font-face {
+    font-family: 'Cafe24Oneprettynight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 /*structure*/
 * {
     padding: 0;
     margin: 0;
-    font-family: 'GmarketSansMedium';
+    font-family: 'Cafe24Oneprettynight';
+    font-weight: bold;
 }
 body{
     background-color: white;

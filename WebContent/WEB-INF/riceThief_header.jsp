@@ -2,11 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	User memberLoginInfo = (User)request.getSession().getAttribute("loginInfo");
+	/* User memberLoginInfo = (User)request.getSession().getAttribute("loginInfo");
 	String id = null;
 	if(memberLoginInfo != null){
 		id = memberLoginInfo.getUid();
-	}
+	} */
 	//request.getSession().setAttribute("id", "admin");
 	//request.getSession().getAttribute("id");
 %>

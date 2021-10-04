@@ -42,7 +42,7 @@ public class RecipeBoardServlet extends HttpServlet {
 		}
 		
 		final int PAGE_SIZE = 20;  //한페이지당 글 수 
-		final int PAGE_BLOCK = 3;  //한화면에 나타날 페이지 링크 수
+		final int PAGE_BLOCK = 5;  //한화면에 나타날 페이지 링크 수
 		int rCount = 0;  //총 글수
 		int pageCount = 0;  //총페이지 수 
 		int startPage = 1;  //화면에 나타날 시작페이지

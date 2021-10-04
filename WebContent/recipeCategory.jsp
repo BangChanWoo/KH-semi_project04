@@ -54,20 +54,20 @@
 	            	for(Recipe vo : volist){ %>
 	            <div>
                     <a href="selectrecipe?rno=<%=vo.getRecipe_no()%>"><img src="<%=vo.getRec_img() %>" class="categoryImg" alt="추천 레시피"></a>
-                    <p class="categoryRecipeTitle"><a href="selectrecipe?rno=<%=vo.getRecipe_no()%>"><%=vo.getRec_title() %></a></p>
+                    <div class="categoryRecipeTitle"><a href="selectrecipe?rno=<%=vo.getRecipe_no()%>"><%=vo.getRec_title() %></a></div>
                 </div>
 	            <% } }%>
             </div>
         </div>
         <div id="pageBtnAll">
         <%if(startPage > 1){%>
-            <button type="button" id="" class="pageBtn"><i class="fas fa-chevron-left"></i></button>
+            <a class="pageBtn" href="recipeboard?catenum=<%=catenum%>&pagenum=<%=startPage-1%>"><i class="fas fa-chevron-left"></i></a>
             <%} %>
             <%for (int i = startPage; i <= endPage; i++) {%>
             <a id="pageBtn_<%=i%>" class="pageBtn" href="recipeboard?catenum=<%=catenum%>&pagenum=<%=i%>"><%=i%></a>
             <%} %>
             <%if(endPage < pageCount){%>
-            <button type="button" id="" class="pageBtn"><i class="fas fa-chevron-right"></i></button>
+            <a class="pageBtn" href="recipeboard?catenum=<%=catenum%>&pagenum=<%=endPage+1%>"><i class="fas fa-chevron-right"></i></a>
             <%} %>
         </div>
     </main>

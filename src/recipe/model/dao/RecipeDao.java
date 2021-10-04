@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import ingredient.vo.Ingredient;
 import recipe.model.vo.Recipe;
+import recipe_steps.vo.RecipeSteps;
 import riceThief.common.JdbcTemplate;
 
 public class RecipeDao {
@@ -78,24 +80,22 @@ public class RecipeDao {
 		}
 		return volist;
 	}
-	public ArrayList<Recipe> recipeDetailList(Connection conn, int rno) {
-		ArrayList<Recipe> volist = null;
+	public Recipe recipeDetailList(Connection conn, int rno) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String selectAllQuery = "";
+		Recipe vo = new Recipe();
+		String query = "select * from recipe where recipe_no like ?";
 		try {
-			ps = conn.prepareStatement(selectAllQuery);
+			ps = conn.prepareStatement(query);
 			ps.setInt(1, rno);
 			rs = ps.executeQuery();
 			
-			volist = new ArrayList<Recipe>();
 			while(rs.next()) {
-				Recipe vo = new Recipe();
-					vo.setRecipe_no(rs.getInt("recipe_no"));
-				vo.setUid(rs.getString("uid"));
+				vo.setRecipe_no(rs.getInt("recipe_no"));
+				vo.setUid(rs.getString("id"));
 				vo.setRec_img(rs.getString("rec_img"));
 				vo.setRec_title(rs.getString("rec_title"));
-				vo.setRec_summary(rs.getString("rs_summary"));
+				vo.setRec_summary(rs.getString("rec_summary"));
 				vo.setRec_tip(rs.getString("rec_tip"));
 				vo.setInfo_serving(rs.getString("info_serving"));
 				vo.setInfo_time(rs.getString("info_time"));
@@ -103,6 +103,63 @@ public class RecipeDao {
 				vo.setRec_video(rs.getString("rec_video"));
 				vo.setRec_cate_no(rs.getInt("rec_cate_no"));
 				vo.setRec_write_date(rs.getDate("rec_write_date"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(ps);
+		}
+		return vo;
+	}
+	public ArrayList<Ingredient> ingreList(Connection conn, int rno){
+//		private int ingre_no; // 재료 번호
+//		private String ingre_name; // 재료명
+//		private String ingre_unit; // 재료양
+//		private int recipe_no; // 레시피 게시글 번호
+//		private String uid; // 아이디
+		ArrayList<Ingredient> volist = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String selectIngreQuery = "select ingre_name, ingre_unit from ingredient where recipe_no like ? order by ingre_no";
+		try {
+			ps = conn.prepareStatement(selectIngreQuery);
+			ps.setInt(1, rno);
+			rs = ps.executeQuery();
+			
+			volist = new ArrayList<Ingredient>();
+			while(rs.next()) {
+				Ingredient vo = new Ingredient();
+				vo.setIngre_name(rs.getString("ingre_name"));
+				vo.setIngre_unit(rs.getString("ingre_unit"));
+				volist.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(ps);
+		}
+		return volist;
+	}
+	public ArrayList<RecipeSteps> stepList(Connection conn, int rno){
+		ArrayList<RecipeSteps> volist = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String selectStepQuery = "select rownum r, step_content, step_img from recipe_steps where recipe_no like ? order by step_no";
+		try {
+			ps = conn.prepareStatement(selectStepQuery);
+			ps.setInt(1, rno);
+			rs = ps.executeQuery();
+			
+			volist = new ArrayList<RecipeSteps>();
+			while(rs.next()) {
+				RecipeSteps vo = new RecipeSteps();
+				vo.setStep_no(rs.getInt("r"));
+				vo.setStep_content(rs.getString("step_content"));
+				vo.setStep_img(rs.getString("step_img"));
 				volist.add(vo);
 			}
 		} catch (Exception e) {

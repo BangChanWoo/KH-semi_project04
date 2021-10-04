@@ -53,8 +53,8 @@
 	            <%if(volist != null){
 	            	for(Recipe vo : volist){ %>
 	            <div>
-                    <a href="#"><img src="<%=vo.getRec_img() %>" class="categoryImg" alt="추천 레시피"></a>
-                    <p class="categoryRecipeTitle"><a href="#"><%=vo.getRec_title() %></a></p>
+                    <a href="selectrecipe?rno=<%=vo.getRecipe_no()%>"><img src="<%=vo.getRec_img() %>" class="categoryImg" alt="추천 레시피"></a>
+                    <p class="categoryRecipeTitle"><a href="selectrecipe?rno=<%=vo.getRecipe_no()%>"><%=vo.getRec_title() %></a></p>
                 </div>
 	            <% } }%>
             </div>

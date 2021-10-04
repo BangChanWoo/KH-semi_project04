@@ -1,5 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page import="recipe_steps.vo.RecipeSteps"%>
+<%@page import="ingredient.vo.Ingredient"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="recipe.model.vo.Recipe"%>
+<%@page import="user.vo.User"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,63 +18,75 @@
 <title>밥도둑_레시피 상세조회</title>
 </head>
 <body>
+<%
+	User memberLoginInfo = (User)request.getSession().getAttribute("loginInfo");
+	String id = null;
+	if(memberLoginInfo != null){
+		id = memberLoginInfo.getUid();
+	}
+	Recipe vo = (Recipe)request.getAttribute("vo");
+	int rno = (int)request.getAttribute("rno");
+
+	ArrayList<Ingredient> ingreList = (ArrayList<Ingredient>)request.getAttribute("ingreList");
+	ArrayList<RecipeSteps> stepList = (ArrayList<RecipeSteps>)request.getAttribute("stepList");
+	ArrayList<Recipe> commentList = (ArrayList<Recipe>)request.getAttribute("commentList");
+%>
 	<%@ include file="../WEB-INF/riceThief_header.jsp" %>
 	<hr>
     <main>
         <div id="detailImgContainer">
-            <img src="./css/alt.JPG" id="titleImg" alt="레시피 대표 사진">
+            <img src="<%=vo.getRec_img() %>" id="titleImg" alt="레시피 대표 사진">
+            <c:if test="${id == vo.getUid() or id == 'admin'}">
             <a href="#" id="updateRecipe"><i class="fas fa-edit"></i></a>
             <a href="#" id="deleteRecipe"><i class="fas fa-trash-alt"></i></a>
+            </c:if>
+            <c:if test="${not empty id}">
             <a href="#" id="likeRecipe"><i class="far fa-heart"></i></a>
+            </c:if>
             <a href="#" id="shareRecipe"><i class="fas fa-share-square"></i></a>
         </div>
         <div id="detailTitleContainer">
-            <h2 id="detailTitle" class="categoryRecipeTitle">레시피이름</h2>
-            <p id="detailIntro">레시피 소개 [레시피 소개글이 문장형태로 와르르르르 적혀있을 겁니다. 더미로 넣는 텍스트 이니 신경쓰지 마세요.]</p>
+            <h2 id="detailTitle" class="categoryRecipeTitle"><%=vo.getRec_title()%></h2>
+            <p id="detailIntro"><%=vo.getRec_summary()%></p>
         </div>
         <div id="detailInfoContainer">
             <div>
                 <p class="infoIcon"><i class="fas fa-users"></i></p>
-                <p id="detailServing" class="infoText">1인분</p>
+                <p id="detailServing" class="infoText"><%=vo.getInfo_serving()%></p>
             </div>
             <div>
                 <p class="infoIcon"><i class="fas fa-stopwatch"></i></p>
-                <p id="detailTime" class="infoText">30분 이내</p>
+                <p id="detailTime" class="infoText"><%=vo.getInfo_time()%></p>
             </div>
             <div>
                 <P class="infoIcon"><i class="fas fa-cookie-bite"></i></P>
-                <p id="detailLevel" class="infoText">초급</p>
+                <p id="detailLevel" class="infoText"><%=vo.getInfo_level()%></p>
             </div>
         </div>
+        <!-- 재료 리스트로 따로 가져와야함 -->
         <div id="detailIngreContainer">
             <h2>재료</h2>
             <ul id="detailIngre">
-                <li><p>식빵</p><p>1장</p></li>
-                <li><p>식빵</p><p>1장</p></li>
-                <li><p>식빵</p><p>1장</p></li>
-                <li><p>식빵</p><p>1장</p></li>
-                <li><p>식빵</p><p>1장</p></li>
-                <li><p>식빵</p><p>1장</p></li>
-                <li><p>식빵</p><p>1장</p></li>
+            <%if(ingreList != null){
+	            for(Ingredient ingre : ingreList){ %>
+                <li><p><%=ingre.getIngre_name()%></p><p><%=ingre.getIngre_unit()%></p></li>
+            <%} } %>
             </div>
         </div>
+        <!-- 레시피 순서 리스트로 따로 가져와야함 -->
         <div id="detailStepContainer">
             <h2>레시피 순서</h2>
             <ul id="detailStep">
+            <%if(stepList != null){
+	            for(RecipeSteps step : stepList){ %>
                 <li>
-                    <h2>Step 1</h2>
+                    <h2>Step <%=step.getStep_no()%></h2>
                     <div class="stepContent">
-                        <p>먼저 식빵을 가위로 잘게 잘라 줍니다.먼저 식빵을 가위로 잘게 잘라 줍니다.먼저 식빵을 가위로 잘게 잘라 줍니다.먼저 식빵을 가위로 잘게 잘라 줍니다.먼저 식빵을 가위로 잘게 잘라 줍니다.</p>
-                        <img src="./css/alt.JPG" id="stepImg" alt="레시피 순서">
+                        <p><%=step.getStep_content() %></p>
+                        <img src="<%=step.getStep_img()%>" id="stepImg" alt="레시피 순서">
                     </div>
                 </li>
-                <li>
-                    <h2>Step 1</h2>
-                    <div class="stepContent">
-                        <p>먼저 식빵을 가위로 잘게 잘라 줍니다.먼저 식빵을 가위로 잘게 잘라 줍니다.먼저 식빵을 가위로 잘게 잘라 줍니다.먼저 식빵을 가위로 잘게 잘라 줍니다.먼저 식빵을 가위로 잘게 잘라 줍니다.</p>
-                        <img src="./css/alt.JPG" id="stepImg" alt="레시피 순서">
-                    </div>
-                </li>
+            <%} } %>
             </ul>
         </div>
         <div id="detailCommentContainer">

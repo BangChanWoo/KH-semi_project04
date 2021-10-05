@@ -37,7 +37,7 @@
                 	<input type="text" class="vv" placeholder="핸드폰 번호 입력"><br>
                 </div>
                
-                <button id="findpwbtn">찾기</button>
+                <button id="findpwbtn">찾기<a href="findPw_02.jsp"></a></button>
             </form>
     </section>
 

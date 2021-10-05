@@ -5,12 +5,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/basic.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_header.css" /> <!-- header css -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_footer.css" /><!-- footer css -->
 <title>회원가입</title>
 <style>
-	body{
-	 text-align: center;
-	}
-</style>
+        body{
+            text-align: center;
+        }
+        #id{
+            margin-left: 55px;
+        }
+        .in{
+            margin: 7px;
+            
+            width: 200px;
+        }
+        
+        #agenum{
+            width: 50px;
+        }
+    </style>
 <script>
     window.addEventListener("load",ck);
         function ck(){
@@ -50,43 +65,49 @@
 </head>
 <body>
 	<header>
-        <a href="" target="_self"> <img src="./images/밥도둑 로고.png"></a>
+        <a href="main.jsp" target="_self"> <img src="./css/밥도둑 로고.png"></a>
         <hr>
     </header>
-
-    <section>
+<section>
+		<div>
+		<br>
         <h1>회원가입</h1>
-        <form action="joinuser" method="Post">
-            <label>아이디</label>
-            <input type="text" id="id" name="id" placeholder="아이디를 입력해주세요(6~16자).">
-            <button id="idckbtn">중복확인</button><br>
-            <label>비밀번호</label>
-            <input type="password" id="pw" name="pw" placeholder="비밀번호를 입력해주세요(6~16자)."><br>
-            <label>비밀번호 확인</label>
-            <input type="password" id="repw" placeholder="비밀번호를 재입력해주세요."><br>
-            <label>이름</label>
-            <input type="text" name="uname" placeholder="이름을 입력해주세요."><br>
-            <label>닉네임</label>
-            <input type="text" placeholder="닉네임을 입력해주세요."><br>
-            <label>이메일</label>
-            <input type="text" name="email" placeholder="이메일을 입력해주세요."><br>
-            <label>핸드폰 번호</label>
-            <input type="text"  name="phone" placeholder="-를 제외하고 입력해주세요."><br>
-            <label>주소</label>
-            <input type="text" name="address" placeholder="주소를 입력해주세요."><br>
-            <label>성별</label>
-            <input type="radio" name="gender" value="M" checked>남자
-            <input type="radio" name="gender" value="F">여자<br>
-            <label>나이</label>
-            <input type="number" name="age"  min="12" max="99" step="1" name="age"><br>
+        </div>
+        <br>
+        <form action="#" method="POST">
+            <div class="filedlable"><label class="io1">아이디</label></div>
+            <div class="formlable"><input type="text" id="id" class="in" placeholder="아이디를 입력해주세요(6~16자).">
+                <button id="idckbtn">중복확인</button>
+            </div>
+           
+            <div class="filedlable"><label >비밀번호</label></div>
+            <div class="formlable"><input type="password" id="pw" class="in" placeholder="비밀번호를 입력해주세요(6~16자)."></div>
+            <div class="filedlable"><label >비밀번호 확인</label></div>
+            <div class="formlable"><input type="password" id="repw" class="in" placeholder="비밀번호를 재입력해주세요."></div>
+            <div class="filedlable"><label>이름</label></div>
+            <div class="formlable"><input type="text" class="in" placeholder="이름을 입력해주세요."></div>
+            <div class="filedlable"><label>닉네임</label></div>
+            <div class="formlable"><input type="text" class="in" placeholder="닉네임을 입력해주세요."></div>
+            <div class="filedlable"><label>이메일</label></div>
+            <div class="formlable"><input type="text" class="in" placeholder="이메일을 입력해주세요."></div>
+            <div class="filedlable"><label>핸드폰 번호</label></div>
+            <div class="formlable"><input type="text" class="in" placeholder="-를 제외하고 입력해주세요."></div>
+            <div class="filedlable"><label>주소</label></div>
+            <div class="formlable"> <input type="text" class="in" placeholder="주소를 입력해주세요."></div>
+            <div class="filedlable"><label>성별</label></div>
+            <div class="formlable"><input type="radio" name="gender" value="M" checked>남자
+            <input type="radio" name="gender" value="F">여자
+        </div><br>
+            <div class="filedlable"><label>나이</label></div>
+            <div><input type="number" id="agenum" class="in" min="12" max="99" step="1" name="age"></div>
             <button type="submit" id="joinbtn">회원가입</button>
         </form>
 
     </section>
 
     <footer>
-        <hr>
-        <p>4조 팀명</p>
+    <hr>
+        <%@ include file="../WEB-INF/riceThief_footer.jsp" %>
     </footer>
 	
 </body>

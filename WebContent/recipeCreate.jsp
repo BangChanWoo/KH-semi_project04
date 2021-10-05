@@ -22,27 +22,27 @@
 	<%@ include file="../WEB-INF/riceThief_header.jsp" %>
 	<hr>
     <main>
-        <form method="get" action="#" id="contentFrm">
+        <form method="get" action="insertrecipe.kh" id="contentFrm">
             <div id="contentContainer">
                 <div id="titleImgContainer">
                     <img id="titleImg" src="./css/alt.JPG">
                     <div id="dropTitleImg">
-                        <input type="text" id="dropTitleLabel" value="이곳에 사진 파일 드랍" required="required">
+                        <input type="text" name="dropTitleLabel" id="dropTitleLabel" value="이곳에 사진 파일 드랍" required="required">
                     </div>
                     <p>레시피 대표 사진</p>
                 </div>
                 <div id="txtContainer">
                     <label>레시피 제목</label>
-                    <input type="text" name="title" id="recipeTitle" required="required" placeholder=" 예) 노오븐 케이크 만들기 ">
+                    <input type="text" name="recipeTitle" id="recipeTitle" required="required" placeholder=" 예) 노오븐 케이크 만들기 ">
 
                     <label>레시피 소개</label>
-                    <textarea name="intro" id="recipeIntro" required="required" placeholder=" 예) 오븐 없이 간단하게 만드는 케이크 레시피"></textarea>
+                    <textarea  name="recipeIntro" id="recipeIntro" required="required" placeholder=" 예) 오븐 없이 간단하게 만드는 케이크 레시피"></textarea>
 
                     <label>동영상</label>
-                    <textarea name="video" id="recipeVideo" required="required" placeholder=" 예) https://www.youtube.com/watch?v=oJPmqm6QgUA"></textarea>
+                    <textarea name="recipeVideo" id="recipeVideo" required="required" placeholder=" 예) https://www.youtube.com/watch?v=oJPmqm6QgUA"></textarea>
 
                     <label>카테고리</label>
-                    <select id="cateList">
+                    <select id="cateList" name="cateList">
                         <option value="cateAll">종류별</option>
                         <option value="63">밑반찬</option>
                         <option value="56">메인반찬</option>
@@ -67,7 +67,7 @@
                     
                     <div id="listContainer">
                         <label>양</label><label>시간</label><label>난이도</label>
-                        <select id="servingList">
+                        <select id="servingList" name="servingList">
                             <option value="servingAll">~ 인분</option>
                             <option value="1">1인분</option>
                             <option value="2">2인분</option>
@@ -77,7 +77,7 @@
                             <option value="6">대량</option>
                         </select>
                         
-                        <select id="timeList">
+                        <select id="timeList" name="timeList">
                             <option value="timeAll">시간</option>
                             <option value="1">30분 미만</option>
                             <option value="2">1시간 미만</option>
@@ -90,7 +90,7 @@
                             <option value="9">4시간 이상</option>
                         </select>
                         
-                        <select id="levelList">
+                        <select id="levelList" name="levelList">
                             <option value="levelAll">난이도</option>
                             <option value="1">초급</option>
                             <option value="2">중급</option>
@@ -99,42 +99,38 @@
                     </div>
 
                     <label>레시피 tip</label>
-                    <textarea name="tip" id="recipeTip" required="required"  placeholder=" 예) 판 젤라틴은 찬물에 10분간 불린 후, 손으로 짜서 물기를 제거해주세요"></textarea>
+                    <textarea name="recipeTip" id="recipeTip" required="required"  placeholder=" 예) 판 젤라틴은 찬물에 10분간 불린 후, 손으로 짜서 물기를 제거해주세요"></textarea>
                 </div>
             </div>
             <div id="ingreContainer">
                 <h2>레시피 재료</h2>
                 <div id="ingreAddContainer">
-                    <input type="text" id="recipeIngre_1" required="required"  placeholder=" 예) 버터">
-                    <input type="text" id="recipeIngreUnit_1" required="required"  placeholder=" 예) 30g"><br>
+                    <input name="recipeIngre_1" type="text" id="recipeIngre_1" required="required"  placeholder=" 예) 버터">
+                    <input name="recipeIngreUnit_1" type="text" id="recipeIngreUnit_1" required="required"  placeholder=" 예) 30g"><br>
                 </div>
                 <a href='#' id='ingreAdd'><i class='fas fa-plus-circle'></i></a><br>
             </div>
             <div id="stepContainer">
                 <h2>레시피 순서</h2>
-                <ul id="step">
-                    <li>
-                        <h2>Step 1</h2>
-                        <div class="stepContent">
-                            <div id="stepTxt">
-                                <label>레시피 내용</label>
-                                <textarea type="text" name="title" id="recipeTitle" required="required"></textarea>
-                            </div>
-                            <img src="./css/alt.JPG" id="stepImg" alt="레시피 순서">
-                        </div>
-                    </li>
-                    <li>
-                        <h2>Step 1</h2>
-                        <div class="stepContent">
-                            <p>먼저 식빵을 가위로 잘게 잘라 줍니다.먼저 식빵을 가위로 잘게 잘라 줍니다.먼저 식빵을 가위로 잘게 잘라 줍니다.먼저 식빵을 가위로 잘게 잘라 줍니다.먼저 식빵을 가위로 잘게 잘라 줍니다.</p>
-                            <img src="./css/alt.JPG" id="stepImg" alt="레시피 순서">
-                        </div>
-                    </li>
-                </ul>
+                <div>
+                	<ul id="step">
+	                    <li>
+	                        <h2>Step 1</h2>
+	                        <div class="stepContent">
+	                            <div id="stepTxt">
+	                                <label>레시피 내용</label>
+	                                <textarea name="recipeContent_1" type="text" id="recipeContent_1" required="required"></textarea>
+	                            </div>
+	                            <img src="./css/alt.JPG" name="stepImg_1" id="stepImg_1" alt="레시피 순서">
+	                        </div>
+	                    </li>
+	                </ul>
+                </div>
+                <a href='#' id='stepAdd'><i class='fas fa-plus-circle'></i></a><br>
             </div>
             <div class="btnContainer">
                 <button type="submit" id="saveBtn" class="recipeBtn">저장</button>
-                <button type="submit" id="cancleBtn" class="recipeBtn">취소</button>
+                <button type="button" id="cancleBtn" class="recipeBtn" onclick="location.href='main?msg=게시글 작성을 취소하였습니다.'">취소</button>
             </div>
         </form>
     </main>
@@ -142,6 +138,9 @@
     <%@ include file="../WEB-INF/riceThief_footer.jsp" %>
     
     <script>
+	    $('#ingreAdd').click(function(e){ e.preventDefault(); });
+	    $('#stepAdd').click(function(e){ e.preventDefault(); });
+    	//재료
         var ingreId = 1;
         var ingreUnitId = 1;
         //재료 추가 버튼 클릭
@@ -150,11 +149,22 @@
         function ingreAddFunc(){
             ingreId++;
             ingreUnitId++;
-            $("#ingreAddContainer").append("<input type='text' id='recipeIngre_"+ ingreId +" required='required' placeholder=' 예) 버터'>");
-            $("#ingreAddContainer").append("<input type='text' id='recipeIngreUnit_"+ ingreUnitId +" required='required' placeholder=' 예) 30g'><br>");
+            $("#ingreAddContainer").append("<input type='text' name='recipeIngre_"+ ingreId +" id='recipeIngre_"+ ingreId +" required='required' placeholder=' 예) 버터'>");
+            $("#ingreAddContainer").append("<input type='text' name='recipeIngreUnit_"+ ingreUnitId +" id='recipeIngreUnit_"+ ingreUnitId +" required='required' placeholder=' 예) 30g'><br>");
+        }
+        
+        //순서
+        var stepId = 1;
+        var stepImgId = 1;
+        //재료 추가 버튼 클릭
+        $("#stepAdd").click(stepAddFunc);
+        
+        function stepAddFunc(){
+            stepId++;
+            stepImgId++;
+            $("#step").append("<li><h2>Step " + stepId + "</h2><div class='stepContent'><div id='stepTxt'><label>레시피 내용</label><textarea type='text' name='recipeContent_"+stepId+"' id='recipeContent_"+stepId+"' required='required'></textarea></div><img src='./css/alt.JPG' name='stepImg_"+stepImgId+"' id='stepImg_"+stepImgId+"' alt='레시피 순서'></div></li>");
             $("#recipeIngre_"+ingreId).css("margin", "1rem");
         }
-
 
 
 

@@ -5,18 +5,20 @@ public class RecipeSteps {
 	private String step_content; //레시피 순서 내용
 	private String step_img; //레시피 순서 이미지
 	private int recipe_no; //레시피 게시글 번호
-	private String uid; //작성자
 
 	public RecipeSteps() {
 
 	}
 
-	public RecipeSteps(int step_no,String step_content,String step_img,int recipe_no,String uid) {
+	public RecipeSteps(int step_no,String step_content,String step_img,int recipe_no) {
 		this.step_no=step_no;
 		this.step_content=step_content;
 		this.step_img=step_img;
 		this.recipe_no=recipe_no;
-		this.uid=uid;
+	}
+	public RecipeSteps(String step_content,String step_img) {
+		this.step_content=step_content;
+		this.step_img=step_img;
 	}
 
 	public int getStep_no() {
@@ -51,18 +53,10 @@ public class RecipeSteps {
 		this.recipe_no = recipe_no;
 	}
 
-	public String getUid() {
-		return uid;
-	}
-
-	public void setUid(String uid) {
-		this.uid = uid;
-	}
-
 	@Override
 	public String toString() {
 		return "RecipeSteps [step_no=" + step_no + ", step_content=" + step_content + ", step_img=" + step_img
-				+ ", recipe_no=" + recipe_no + ", uid=" + uid + "]";
+				+ ", recipe_no=" + recipe_no + "]";
 	}
 	
 }

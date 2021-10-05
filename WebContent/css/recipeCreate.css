@@ -1,3 +1,6 @@
+h2{
+	font-size: 2.2rem;
+}
 #contentContainer{
     clear: both;
     float: left;
@@ -48,12 +51,16 @@ input{
     margin: 1.5rem 0;
     border: solid 1px #9a7b6c;
     border-radius: 8px;
+    font-size: 1rem;
+    padding: 0.3rem;
 }
 textarea{
     height: 3rem;
     margin: 1rem 0;
     border: solid 1px #9a7b6c;
     border-radius: 8px;
+    font-size: 1rem;
+    padding: 0.5rem;
 }
 #listContainer{
     display: grid;
@@ -82,7 +89,7 @@ select{
     text-align: center;
     margin: 0 1rem 0 0;
 }
-#ingreAddContainer input{
+input[id^="recipeIngre_"], input[id^="recipeIngreUnit_"]{
     margin: 1rem;
 }
 #ingreAdd{
@@ -90,8 +97,10 @@ select{
     display: flex;
     justify-content: center;
     text-decoration: none;
+    color: #9a7b6c;
 }
 #stepContainer{
+	width: 100%;
     clear: both;
     float: left;
     margin: 3em auto;
@@ -100,7 +109,9 @@ select{
     background-color: #ebded4;
 }
 #step{
+	width: 100%;
     list-style-type: none;
+    float: left;
 }
 #step li h2{
     clear: both;
@@ -116,15 +127,25 @@ select{
     margin: 2.5%;
     font-size: 1.2em;
 }
-#stepTxt textarea{
+textarea[id^="recipeTitle"]{
     width: 100%;
     height: 5rem;
 }
-#stepImg{
+img[id^="stepImg"]{
     float: left;
     width: 30%;
-    margin: 2.5%;
-    aspect-ratio: 8/5;
+    margin: 2.2%;
+    aspect-ratio: 8/7;
+    border: solid 1px #9a7b6c;
+    border-radius: 5px;
+}
+#stepAdd{
+	font-size: 2.5rem;
+	clear: both;
+	display: flex;
+    justify-content: center;
+    text-decoration: none;
+    color: #9a7b6c;
 }
 .btnContainer{
     clear: both;

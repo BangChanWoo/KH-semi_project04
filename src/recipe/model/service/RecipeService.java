@@ -10,6 +10,16 @@ import recipe_steps.vo.RecipeSteps;
 import riceThief.common.JdbcTemplate;
 
 public class RecipeService {
+	//create
+	public int insertRecipe(Recipe recipeVo, Ingredient ingreVo, RecipeSteps stepVo) {
+		int result =-1;
+		Connection conn = JdbcTemplate.getConnection();
+			
+		result = new RecipeDao().insertRecipe(conn, recipeVo, ingreVo, stepVo);
+				
+		JdbcTemplate.close(conn);
+		return result;	
+	}
 	public int getRecipeCount(int catenum) {
 		int result = 0;
 		Connection conn = JdbcTemplate.getConnection();

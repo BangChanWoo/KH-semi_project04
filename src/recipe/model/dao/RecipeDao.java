@@ -12,6 +12,57 @@ import riceThief.common.JdbcTemplate;
 
 public class RecipeDao {
 	public RecipeDao() {}
+	
+	public int insertRecipe(Connection conn, Recipe recipeVo, Ingredient ingreVo, RecipeSteps stepVo) {
+		int result = -1;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+	
+		String recipeInsert = "insert into recipe"
+					+ " values(rec_seq_no.NEXTVAL, ?, ?, ?, ?, ?, ?, ?', ?, ?, ?, sysdate)";
+		String ingreInsert = "insert into ingredient"
+				+ " values(ingre_seq_no.NEXTVAL, ?, ?, rec_seq_no.CURRVAL)";
+		String stepInsert = "insert into recipe_steps"
+				+ " values(step_seq_no.NEXTVAL, ?, ?, rec_seq_no.CURRVAL)";
+		try {
+			//레시피
+			ps = conn.prepareStatement(recipeInsert);
+			ps.setString(1, recipeVo.getUid());
+			ps.setString(2, recipeVo.getRec_img());
+			ps.setString(3, recipeVo.getRec_title());
+			ps.setString(4, recipeVo.getRec_summary());
+			ps.setString(5, recipeVo.getRec_tip());
+			ps.setString(6, recipeVo.getInfo_serving());
+			ps.setString(7, recipeVo.getInfo_time());
+			ps.setString(8, recipeVo.getInfo_level());
+			ps.setString(9, recipeVo.getRec_video());
+			ps.setInt(10, recipeVo.getRec_cate_no());
+			result = ps.executeUpdate();
+			JdbcTemplate.close(ps);
+			
+			//재료
+			ps = conn.prepareStatement(ingreInsert);
+			ps.setString(1, ingreVo.getIngre_name());
+			ps.setString(2, ingreVo.getIngre_unit());
+			result = ps.executeUpdate();
+			JdbcTemplate.close(ps);
+			
+			//순서
+			ps = conn.prepareStatement(stepInsert);
+			ps.setString(1, stepVo.getStep_content());
+			ps.setString(2, stepVo.getStep_img());
+			result = ps.executeUpdate();
+			
+		} catch (Exception e) {
+			//-1
+			System.out.println("연결 실패");
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(ps);
+		}
+		return result;
+	}
 	public int getRecipeCount(Connection conn, int catenum) {
 		int result = 0;
 		String countAllQuery = "select count(recipe_no) from recipe";
@@ -114,11 +165,6 @@ public class RecipeDao {
 		return vo;
 	}
 	public ArrayList<Ingredient> ingreList(Connection conn, int rno){
-//		private int ingre_no; // 재료 번호
-//		private String ingre_name; // 재료명
-//		private String ingre_unit; // 재료양
-//		private int recipe_no; // 레시피 게시글 번호
-//		private String uid; // 아이디
 		ArrayList<Ingredient> volist = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;

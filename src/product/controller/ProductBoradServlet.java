@@ -79,13 +79,11 @@ public class ProductBoradServlet extends HttpServlet {
 		}
 		
 		
-		//여기부터 수정필요함
-		
 		
 		ArrayList<ProductPost> volist = new ProductService().productList(startRnum, endRnum, catenum);
 
 		//Data 전달을 위해서 request에 셋
-		request.setAttribute("producPostVolist", volist);
+		request.setAttribute("productPostVolist", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);

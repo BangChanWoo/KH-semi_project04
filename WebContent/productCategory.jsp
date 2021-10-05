@@ -11,13 +11,12 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/basic.css" />  <!-- 공통 css -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_header.css" /> <!-- header css -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_footer.css" /><!-- footer css -->
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/recipeCategory.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/productCategory.css"/>
 <title>밥도둑_스토어 카테고리</title>
 </head>
 <body>
-
 <% 
-	ArrayList<ProductPost> volist = (ArrayList<ProductPost>)request.getAttribute("productVoList");
+	ArrayList<ProductPost> volist = (ArrayList<ProductPost>)request.getAttribute("productVolist");
 	int startPage = (int)request.getAttribute("startPage");
 	int endPage = (int)request.getAttribute("endPage");
 	int pageCount = (int)request.getAttribute("pageCount");
@@ -26,7 +25,7 @@
 	<%@ include file="../WEB-INF/riceThief_header.jsp" %>
 	<hr>
     <main>
-        <h2>Product</h2>
+        <h2>Store</h2>
         <div id="categoryBtnAll">
             <a href="productboard?catenum=<%=0%>" id="0" class="categoryBtn selectBtnColor">전체</a>
             <a href="productboard?catenum=<%=6001%>" id="6001" class="categoryBtn">국/찌개/탕</a>
@@ -53,13 +52,13 @@
         </div>
         <div id="pageBtnAll">
         <%if(startPage > 1){%>
-            <a class="pageBtn" href="recipeboard?catenum=<%=catenum%>&pagenum=<%=startPage-1%>"><i class="fas fa-chevron-left"></i></a>
+            <a class="pageBtn" href="productboard?catenum=<%=catenum%>&pagenum=<%=startPage-1%>"><i class="fas fa-chevron-left"></i></a>
             <%} %>
             <%for (int i = startPage; i <= endPage; i++) {%>
-            <a id="pageBtn_<%=i%>" class="pageBtn" href="recipeboard?catenum=<%=catenum%>&pagenum=<%=i%>"><%=i%></a>
+            <a id="pageBtn_<%=i%>" class="pageBtn" href="productboard?catenum=<%=catenum%>&pagenum=<%=i%>"><%=i%></a>
             <%} %>
             <%if(endPage < pageCount){%>
-            <a class="pageBtn" href="recipeboard?catenum=<%=catenum%>&pagenum=<%=endPage+1%>"><i class="fas fa-chevron-right"></i></a>
+            <a class="pageBtn" href="prudctboard?catenum=<%=catenum%>&pagenum=<%=endPage+1%>"><i class="fas fa-chevron-right"></i></a>
             <%} %>
         </div>
         

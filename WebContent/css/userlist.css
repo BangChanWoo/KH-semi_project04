@@ -2,7 +2,14 @@
     margin: 0;
     padding: 0;
 }
-
+.right-box {
+	float: right;
+	margin: 10px;
+}
+main h2 {
+	margin: 1rem 0;
+	text-align: center;
+}
 table {
     border-collapse: collapse;
 }
@@ -38,7 +45,6 @@ a {
 .board_list td {
     text-align: center;
 }
-
 
 .gender {
     padding: 50px;

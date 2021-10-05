@@ -29,7 +29,7 @@
         <nav>
         	<ul>
         		<li id="navRecipe"><a href="recipeboard">레시피</a></li>
-        		<li id="navStore"><a href="#">스토어</a></li>
+        		<li id="navStore"><a href="productboard">스토어</a></li>
         	</ul>
         	<c:if test="${not empty id}">
         	<a id="cart" class="loginAfterBtn" href="#"><i class="fas fa-shopping-cart"></i></a>

@@ -36,7 +36,7 @@
             <a href="recipeboard?catenum=<%=53%>" id="53" class="categoryBtn">면/만두</a>
             <a href="recipeboard?catenum=<%=52%>" id="52" class="categoryBtn">밥/죽/떡</a>
             <a href="recipeboard?catenum=<%=61%>" id="61" class="categoryBtn">퓨전</a>
-            <a href="recipeboard?catenum=<%=57%>" id="57" class="categoryBtn">김치/젓갈/장류</a>
+            <a href="recipeboard?catenum=<%=57%>" id="57" class="categoryBtn">김치/젓갈/장</a>
             <a href="recipeboard?catenum=<%=58%>" id="58" class="categoryBtn">양념/소스/잼</a>
             <a href="recipeboard?catenum=<%=65%>" id="65" class="categoryBtn">양식</a>
             <a href="recipeboard?catenum=<%=64%>" id="64" class="categoryBtn">샐러드</a>

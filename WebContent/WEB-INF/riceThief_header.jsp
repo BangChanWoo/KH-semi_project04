@@ -7,12 +7,12 @@
 	if(memberLoginInfo != null){
 		id = memberLoginInfo.getUid();
 	} */
-	//request.getSession().setAttribute("id", "admin");
-	//request.getSession().getAttribute("id");
+	request.getSession().setAttribute("id", "admin");
+	request.getSession().getAttribute("id");
 %>
 <header>
 	<div>
-		<a href="main.jsp"><img src="./css/밥도둑 로고.png" id="logoImg"></a>
+		<a href="main"><img src="./css/밥도둑 로고.png" id="logoImg"></a>
         <div id="headerBtn">
         	<a href="#" id="searchBtn"><i class="fas fa-search"></i></a>
         	<c:choose>

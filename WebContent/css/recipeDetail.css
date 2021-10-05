@@ -3,6 +3,9 @@ main{
     margin: auto;
     position: relative;
 }
+h2{
+	font-size: 2.2rem;
+}
 #detailImgContainer{
     position: relative;
     width: 35em;
@@ -57,11 +60,12 @@ main{
 }
 #detailTitle{
     margin: 1em;
-    font-size: 2rem;
+    font-size: 2.2rem;
 }
 #detailIntro{
 	margin: 1em;
     font-size: 1.4rem;
+    line-height: 2rem;
 }
 #detailInfoContainer{
     display: flex;
@@ -106,7 +110,7 @@ main{
 }
 #detailStep li h2{
     clear: both;
-    margin: 1em 1em 0.5em 1em;
+    margin: 2rem 1rem 0.5rem 1rem;
 }
 
 #stepContent{
@@ -115,7 +119,7 @@ main{
 #detailStep li p{
     float: left;
     width: 60%;
-    margin: 2.5%;
+    margin: 2.5% 0 10% 0;
     font-size: 1.6em;
     line-height: 2rem;
 }

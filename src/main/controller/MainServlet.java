@@ -32,8 +32,10 @@ public class MainServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
-		
-		response.sendRedirect("./main.jsp");
+		String msg = request.getParameter("msg");
+
+		request.setAttribute("msg", msg);
+		request.getRequestDispatcher("./main.jsp").forward(request, response);
 	}
 
 	/**

@@ -20,7 +20,20 @@ public class User {
 		
 	}
 
-public User(String uid,String pw,String uname,String nickname,int age,char gender,String email,String phone,String address,Date join_date,int point,char type) {
+public User(String uid,String pw,String uname,String nickname,int age,char gender,String email,String phone,String address,int point) {
+		this.uid=uid;
+		this.pw=pw;
+		this.uname=uname;
+		this.nickname=nickname;
+		this.age=age;
+		this.gender=gender;
+		this.email=email;
+		this.phone=phone;
+		this.address=address;
+		this.point=point;
+	}
+
+public User(String uid,String pw,String uname,String nickname,int age,char gender,String email,String phone,String address,Date join_date,int point) {
 		this.uid=uid;
 		this.pw=pw;
 		this.uname=uname;
@@ -32,9 +45,15 @@ public User(String uid,String pw,String uname,String nickname,int age,char gende
 		this.address=address;
 		this.join_date=join_date;
 		this.point=point;
-		this.type=type;
 	}
 
+
+@Override
+public String toString() {
+	return "User [uid=" + uid + ", pw=" + pw + ", uname=" + uname + ", nickname=" + nickname + ", age=" + age
+			+ ", gender=" + gender + ", email=" + email + ", phone=" + phone + ", address=" + address + ", join_date="
+			+ join_date + ", point=" + point + ", type=" + type + "]";
+}
 public String getUid() {
 	return uid;
 }
@@ -131,12 +150,6 @@ public void setType(char type) {
 	this.type = type;
 }
 
-@Override
-public String toString() {
-	return "User [uid=" + uid + ", pw=" + pw + ", uname=" + uname + ", nickname=" + nickname + ", age=" + age
-			+ ", gender=" + gender + ", email=" + email + ", phone=" + phone + ", address=" + address + ", join_date="
-			+ join_date + ", point=" + point + ", type=" + type + "]";
-}
 
 
 }

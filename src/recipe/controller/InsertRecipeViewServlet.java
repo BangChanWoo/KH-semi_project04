@@ -37,7 +37,7 @@ public class InsertRecipeViewServlet extends HttpServlet {
 		}
 		
 		request.setAttribute("rno", rno);
-		request.getRequestDispatcher("./recipeCreate.jsp").forward(request, response);
+		request.getRequestDispatcher("./WEB-INF/view/recipeCreate.jsp").forward(request, response);
 	}
 
 	/**

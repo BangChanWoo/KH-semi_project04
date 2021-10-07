@@ -24,16 +24,6 @@ h2{
     color: #CFB9AF;
     margin: 0 0 1rem 0;
 }
-#dropTitleLabel{
-    width: 100%;
-    height: 5rem;
-    color: #CFB9AF;
-    background-color: white;
-    border-radius: 5px;
-    margin: 0 0 1rem 0;
-    text-align: center;
-    font-size: 1.4rem;
-}
 #txtContainer{
     float: right;
     width: 60%;
@@ -89,7 +79,7 @@ select{
     text-align: center;
     margin: 0 1rem 0 0;
 }
-input[id^="recipeIngre_"], input[id^="recipeIngreUnit_"]{
+input[id^="recipeIngre"], input[id^="recipeIngreUnit"]{
     margin: 1rem;
 }
 #ingreAdd{
@@ -127,13 +117,17 @@ input[id^="recipeIngre_"], input[id^="recipeIngreUnit_"]{
     margin: 2.5%;
     font-size: 1.2em;
 }
-textarea[id^="recipeTitle"]{
+textarea[id^="recipeContent"]{
     width: 100%;
     height: 5rem;
 }
-img[id^="stepImg"]{
-    float: left;
+#stepImgContainer{
+	float: left;
     width: 30%;
+    margin: auto;
+}
+img[id^="stepImg"]{
+    width: 100%;
     margin: 2.2%;
     aspect-ratio: 8/7;
     border: solid 1px #9a7b6c;

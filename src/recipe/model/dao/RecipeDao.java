@@ -13,13 +13,13 @@ import riceThief.common.JdbcTemplate;
 public class RecipeDao {
 	public RecipeDao() {}
 	
-	public int insertRecipe(Connection conn, Recipe recipeVo, Ingredient ingreVo, RecipeSteps stepVo) {
+	public int insertRecipe(Connection conn, Recipe recipeVo, ArrayList<Ingredient> IngreList, ArrayList<RecipeSteps> stepList) {
 		int result = -1;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 	
 		String recipeInsert = "insert into recipe"
-					+ " values(rec_seq_no.NEXTVAL, ?, ?, ?, ?, ?, ?, ?', ?, ?, ?, sysdate)";
+					+ " values(rec_seq_no.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate)";
 		String ingreInsert = "insert into ingredient"
 				+ " values(ingre_seq_no.NEXTVAL, ?, ?, rec_seq_no.CURRVAL)";
 		String stepInsert = "insert into recipe_steps"
@@ -41,18 +41,22 @@ public class RecipeDao {
 			JdbcTemplate.close(ps);
 			
 			//재료
-			ps = conn.prepareStatement(ingreInsert);
-			ps.setString(1, ingreVo.getIngre_name());
-			ps.setString(2, ingreVo.getIngre_unit());
-			result = ps.executeUpdate();
+			for(int i=0; i<IngreList.size(); i++) {
+				ps = conn.prepareStatement(ingreInsert);
+				ps.setString(1, IngreList.get(i).getIngre_name());
+				ps.setString(2, IngreList.get(i).getIngre_unit());
+				result = ps.executeUpdate();
+			}
+			
 			JdbcTemplate.close(ps);
 			
 			//순서
-			ps = conn.prepareStatement(stepInsert);
-			ps.setString(1, stepVo.getStep_content());
-			ps.setString(2, stepVo.getStep_img());
-			result = ps.executeUpdate();
-			
+			for(int i=0; i<stepList.size(); i++) {
+				ps = conn.prepareStatement(stepInsert);
+				ps.setString(1, stepList.get(i).getStep_content());
+				ps.setString(2, stepList.get(i).getStep_img());
+				result = ps.executeUpdate();
+			}
 		} catch (Exception e) {
 			//-1
 			System.out.println("연결 실패");

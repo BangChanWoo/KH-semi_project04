@@ -85,7 +85,7 @@ public class RecipeBoardServlet extends HttpServlet {
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("catenum", catenum);
 
-		request.getRequestDispatcher("./recipeCategory.jsp").forward(request, response);
+		request.getRequestDispatcher("./WEB-INF/view/recipeCategory.jsp").forward(request, response);
 	}
 
 	/**

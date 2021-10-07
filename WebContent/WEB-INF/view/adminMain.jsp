@@ -12,7 +12,7 @@
 <title>밥도둑_관리자 메인</title>
 </head>
 <body>
-<%@ include file="../WEB-INF/riceThief_adminHeader.jsp" %>
+<%@ include file="../WEB-INF/view/riceThief_adminHeader.jsp" %>
 	<hr>
 	<main>
         <div class="slideContainer">

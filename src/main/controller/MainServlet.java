@@ -35,7 +35,7 @@ public class MainServlet extends HttpServlet {
 		String msg = request.getParameter("msg");
 
 		request.setAttribute("msg", msg);
-		request.getRequestDispatcher("./main.jsp").forward(request, response);
+		request.getRequestDispatcher("./WEB-INF/view/main.jsp").forward(request, response);
 	}
 
 	/**

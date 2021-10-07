@@ -23,7 +23,7 @@
 <%
 	
 %>
-	<%@ include file="../WEB-INF/riceThief_header.jsp" %>
+	<%@ include file="riceThief_header.jsp" %>
 	<hr>
 	<main>
         <div class="slideContainer">
@@ -75,7 +75,7 @@
     </main>
     <hr>
 
-	<%@ include file="../WEB-INF/riceThief_footer.jsp" %>
+	<%@ include file="riceThief_footer.jsp" %>
 	
 	<script>
 	var slideIndex = 1;

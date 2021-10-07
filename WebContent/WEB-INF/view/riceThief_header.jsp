@@ -12,7 +12,7 @@
 %>
 <header>
 	<div>
-		<a href="main"><img src="./css/밥도둑 로고.png" id="logoImg"></a>
+		<a href="./main"><img src="./css/밥도둑 로고.png" id="logoImg"></a>
         <div id="headerBtn">
         	<a href="#" id="searchBtn"><i class="fas fa-search"></i></a>
         	<c:choose>

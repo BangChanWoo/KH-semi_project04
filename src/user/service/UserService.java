@@ -15,8 +15,21 @@ public class UserService {
 		int result=-1;
 		Connection conn=getConnection();
 		result=new UserDao().insertUser(conn,vo);
+		if(result > 0) {
+			commit(conn); 
+		}else {
+			rollback(conn);
+		}
 		close(conn);
 		return result;
 	}
+	public User loginUser(String id,String pw) {
+		Connection conn=getConnection();
+		User u=new UserDao().loginUser(conn, id, pw);
+		close(conn);
+		return u;
+		
+	}
+	
 	
 }

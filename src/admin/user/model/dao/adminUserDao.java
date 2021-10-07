@@ -38,6 +38,8 @@ public class adminUserDao {
 				vo.setJoin_date(rset.getDate("join_date"));
 				vo.setPoint(rset.getInt("point"));
 				vo.setType(rset.getString("kind").charAt(0));
+				volist.add(vo);
+				
 				
 			}
 		} catch (Exception e) {
@@ -50,14 +52,40 @@ public class adminUserDao {
 		
 		return volist;
 	}
+	
+	public ArrayList<User> getUserAge(Connection conn) {
+		// TODO Auto-generated method stub
+		ArrayList<User> volist = null;
+		String sql = "select age from member";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<User>();
+			while(rset.next()) {
+				User vo = new User();
+				vo.setAge(rset.getInt("age"));
+				volist.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);
+		}
+		return volist;
+	}
+	
 
 	public ArrayList<User> adminUserList(Connection conn, int start, int end){
 		ArrayList<User> volist = null;
 		
 //		String sql="select rownum r, id, uname from member where rownum between ? and ?";
-		String sql="select rnum, id, uname "
-				+ "from (select rownum as rnum, id, uname "
-				+ "from (select rownum as rnum, id, uname from member order by join_date))"
+		String sql="select rnum, id, uname, join_date "
+				+ "from (select rownum as rnum, id, uname, join_date "
+				+ "from (select rownum as rnum, id, uname, join_date from member order by join_date))"
 				+ "where rnum between ? and ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -76,6 +104,7 @@ public class adminUserDao {
 				
 				vo.setUid(rset.getString("id"));
 				vo.setUname(rset.getString("uname"));
+				vo.setJoin_date(rset.getDate("join_date"));
 				volist.add(vo);
 			}
 		} catch (Exception e) {
@@ -132,6 +161,60 @@ public class adminUserDao {
 
 		System.out.println("testtest1 : "+men);
 		return men;
+	}
+	
+	public int updateUser(Connection conn, String pw, String uname, String nickname, int age, char gender, String email, String phone, String address, int point, char kind, String id) {
+		int result= -1;
+		String sql = "update member set pw=?,uname=?,nickname=?,age=?,gender=?,email=?,phone=?,address=?,point=?,kind=? where id = ? ";
+		
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pw);
+			pstmt.setString(2, uname);
+			pstmt.setString(3, nickname);
+			pstmt.setInt(4, age);
+			pstmt.setString(5, String.valueOf(gender));
+			pstmt.setString(6, email);
+			pstmt.setString(7, phone);
+			pstmt.setString(8, address);
+			pstmt.setInt(9, point);
+			pstmt.setString(10, String.valueOf(kind));
+			pstmt.setString(11, id);
+			
+			result = pstmt.executeUpdate();
+			if(result > 0) {
+				System.out.println("수정 성공");
+				result=1;
+			} else {
+				System.out.println("수정 실패");
+				result=0;
+			}
+					
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public int deleteUser(Connection conn, String id) {
+		int result= -1;
+		String sql = "delete from member where id=?";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,id);
+			result = pstmt.executeUpdate();     // 위 연결된 곳으로 insert/delete/update query 문을 날려줌
+			if(result > 0) {
+				System.out.println("삭제 성공");
+				result=1;
+			} else {
+				System.out.println("삭제 실패");
+				result=0;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 	
 }

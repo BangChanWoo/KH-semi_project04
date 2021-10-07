@@ -6,11 +6,20 @@
 <% 
 	ArrayList<User> volist = (ArrayList<User>) request.getAttribute("adminUserList");
 	ArrayList<User> volist1 = (ArrayList<User>) request.getAttribute("adminUserList1");
+	//ArrayList<User> volist2 = (ArrayList<User>) request.getAttribute("getUserAge");
 	int startPage = (int) request.getAttribute("startPage");
 	int endPage = (int) request.getAttribute("endPage");
 	int pageCount = (int) request.getAttribute("pageCount");
 	int bCount = (int) request.getAttribute("bCount");
 	int genderCount = (int) request.getAttribute("genderCount");
+	//나이 불러오는 것
+	int age11 = (int) request.getAttribute("age11");
+	int age22 = (int) request.getAttribute("age22");
+	int age33 = (int) request.getAttribute("age33");
+	int age44 = (int) request.getAttribute("age44");
+	int age55 = (int) request.getAttribute("age55");
+	int age66 = (int) request.getAttribute("age66");
+	int age00 = (int) request.getAttribute("age00");
 %>
 <!DOCTYPE html>
 <html>
@@ -19,6 +28,7 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <script src="https://kit.fontawesome.com/616f27e0c4.js"
 	crossorigin="anonymous"></script>
+
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath() %>/css/basic.css" />
 <!-- 공통 css -->
@@ -31,10 +41,10 @@
 <!--<link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath() %>/css/recipeCategory.css" />-->
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath() %>/css/userlist.css" />
+	href="<%=request.getContextPath()%>/css/userlist.css" />
 
 <title>관리자_회원관리</title>
-</head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <body>
 	<%@ include file="../WEB-INF/riceThief_adminHeader.jsp"%>
 	<hr>
@@ -54,49 +64,66 @@
 						<th>번호</th>
 						<th>아이디</th>
 						<th>이름</th>
-						<th>상세정보</th>
+						<th>가입 날짜</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<%
-                    		int bCount1=bCount;
-                    		if(volist != null){
-                    			for(User vo : volist){	
-                    	%>
+							int bCount1 = bCount;
+						if (volist != null) {
+							for (User vo : volist) {
+						%>
 						<%
 							//for(int i=1;i<=bCount;i++){
-							if(bCount!=0){
-								//bCount=1;
-								bCount1+=1;
+						if (bCount != 0) {
+							//bCount=1;
+							bCount1 += 1;
 						%>
-						<td><%=bCount1-bCount %></td>
-						<td><%=vo.getUid()%></td>
+
+						<td><%=bCount1 - bCount%></td>
+						<form method="get" action="userInfo" >
+							<td><button type="submit" class="info_btn" name="id" value="<%=vo.getUid()%>"><%=vo.getUid()%></button></td>
+						</form>
+
+						<!--<td><button type="submit" id="info_btn" onclick="javascript:location.href='./userInfo.jsp?type=<%=vo.getUid()%>'" ><%=vo.getUid()%></button></td>-->
+						<!--<td><button type="button" id="info_btn" onclick="popup()"><%=vo.getUid()%></button></td> -->
 						<td><%=vo.getUname()%></td>
-						<td><button type="button" class="info_btn">
-								<img src="./css/user.png">
-							</button></td>
-						<%} %>
+						<td><%=vo.getJoin_date() %> <%
+							}
+						%>
 					</tr>
 					<%
-                    			}
-                    		}
-                    	%>
+						}
+					}
+					%>
 				</tbody>
 			</table>
 
 			<div class="paging">
 				<a href="#" class="bt">첫 페이지</a> <a href="#" class="bt">이전 페이지</a>
-				<%if(startPage > 1){ %>
-				<a href="./SelectUserServlet?pagenum=<%=startPage-1 %>"
+				<%
+					if (startPage > 1) {
+				%>
+				<a href="./SelectUserServlet?pagenum=<%=startPage - 1%>"
 					class="num on"></a>
-				<%} %>
-				<%for(int i = startPage; i<=endPage; i++){ %>
-				<a href="./SelectUserServlet?pagenum=<%=i %>" class="num"><%=i %></a>
-				<%} %>
-				<%if(endPage < pageCount){ %>
-				<a href="./SelectUserServlet?pagenum=<%=endPage+1%>" class="num"></a>
-				<%} %>
+				<%
+					}
+				%>
+				<%
+					for (int i = startPage; i <= endPage; i++) {
+				%>
+				<a href="./SelectUserServlet?pagenum=<%=i%>" class="num"><%=i%></a>
+				<%
+					}
+				%>
+				<%
+					if (endPage < pageCount) {
+				%>
+				<a href="./SelectUserServlet?pagenum=<%=endPage + 1%>" class="num"></a>
+				<%
+					}
+				%>
 				<a href="#" class="bt">다음 페이지</a> <a href="#" class="bt">마지막 페이지</a>
 			</div>
 
@@ -113,16 +140,16 @@
 				</thead>
 				<tbody>
 					<tr>
-						<% 
-					   double checkPerc=0.0;
-                       checkPerc=100*genderCount/bCount;
-                       int female=bCount-genderCount;
-                    	%>
+						<%
+							double checkPerc = 0.0;
+						checkPerc = 100 * genderCount / bCount;
+						int female = bCount - genderCount;
+						%>
 						<td>남녀 성비</td>
 
-						<td><%=checkPerc+"%"+" ("+genderCount+"명)" %></td>
-						<td><%=100-checkPerc+"%"+" ("+ female +"명)" %></td>
-						<td><%="100%"+" (" + bCount + "명)" %></td>
+						<td><%=checkPerc + "%" + " (" + genderCount + "명)"%></td>
+						<td><%=100 - checkPerc + "%" + " (" + female + "명)"%></td>
+						<td><%="100%" + " (" + bCount + "명)"%></td>
 
 					</tr>
 				</tbody>
@@ -142,69 +169,38 @@
 						<th>50대</th>
 						<th>60대</th>
 						<th>그 외</th>
+						<th>총</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<%
-                    		if(volist1 != null){
-                    			for(User vo : volist1){	
-                    %>
-						<%
-						
-						int age=vo.getAge();
-						int age1=0;
-						int age2=0;
-						int age3=0;
-						int age4=0;
-						int age5=0;
-						int age6=0;
-						int age0=0;
-                    	for(int i=0; i<=bCount;i++){
-                    		ArrayList<Integer> list = new ArrayList<Integer>();
-                    		list.add(age);
-                    		for(int a : list){
-                    			if(a>=10 && a<=19){
-                        			age1++;
-                        		}
-                        		else if(a>=20 && a<=29){
-                        			
-                        			age2++;
-                        		}
-                        		else if(a>=30 && a<=39){
-                        		
-                        			age3++;
-                        		}
-                        		else if(a>=40 && a<=49){
-                        	
-                        			age4++;
-                        		}
-                        		else if(a>=50 && a<=59){
-                        			
-                        			age5++;
-                        		}
-                        		else if(a>=60 && a<=69){
-                        	
-                        			age6++;
-                        		}
-                        		else {
-                        		
-                        			age0++;
-                        		}
-                    		}
-                    		
-                    	}
-                    %>
+						double per1 = 0.0;
+						double per2 = 0.0;
+						double per3 = 0.0;
+						double per4 = 0.0;
+						double per5 = 0.0;
+						double per6 = 0.0;
+						double per0 = 0.0;
+					
+						per1=age11*100/bCount;
+						per2=age22*100/bCount;
+						per3=age33*100/bCount;
+						per4=age44*100/bCount;
+						per5=age55*100/bCount;
+						per6=age66*100/bCount;
+						per0=age00*100/bCount;
+						%>
 						<td>연령대</td>
-						<td>10%<%=age %></td>
-						<td>20%<%=age2 %></td>
-						<td>30%<%=age3 %></td>
-						<td>40%<%=age4 %></td>
-						<td>50%<%=age5 %></td>
-						<td>60%<%=age6 %></td>
-						<td>2% <%=age0 %></td>
+						<td><%=per1 + "%" + " (" + age11 + "명)"%></td>
+						<td><%=per2 + "%" + " (" + age22 + "명)"%></td>
+						<td><%=per3 + "%" + " (" + age33 + "명)"%></td>
+						<td><%=per4 + "%" + " (" + age44 + "명)"%></td>
+						<td><%=per5 + "%" + " (" + age55 + "명)"%></td>
+						<td><%=per6 + "%" + " (" + age66 + "명)"%></td>
+						<td><%=per0 + "%" + " (" + age00 + "명)"%></td>
+						<td><%="100%" + " (" + bCount + "명)"%></td>
 					</tr>
-					<%}} %>
 				</tbody>
 			</table>
 		</div>
@@ -212,5 +208,29 @@
 	</main>
 	</hr>
 	<%@ include file="../WEB-INF/riceThief_footer.jsp"%>
+	<script>
+	$(".info_btn").click(function(){ 	
+			var str = ""
+			var tdArr = new Array();	// 배열 선언
+			var tr = $(this);
+			var td = tr.children();
+			console.log(" id : "+tr.text());
+			window.open("userInfo.jsp?type="+tr.text(), "a", "width=400, height=300, left=100, top=50");
+			
+		// 반복문을 이용해서 배열에 값을 담아 사용할 수 도 있다.
+	});
+	
+	
+	function popup(){
+		window.open("userInfo.jsp", "a", "width=400, height=300, left=100, top=50");
+		//window.name = "parentForm";
+            // window.open("open할 window", "자식창 이름", "팝업창 옵션");
+        //openWin = window.open("userInfo.jsp", "childForm", "width=570, height=350, resizable = no, scrollbars = no");
+        //openWin.document.getElementById("cInput").value = document.getElementById(".info_btn").value;
+
+	}
+
+
+
 </body>
 </html>

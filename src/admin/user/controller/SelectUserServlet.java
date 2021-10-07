@@ -83,17 +83,80 @@ public class SelectUserServlet extends HttpServlet {
 		
 		
 		ArrayList<User> volist1 = new adminUserService().adminUserList(uid);
-		
+		ArrayList<User> volist2 = new adminUserService().getUserAge();
+		int age1 = 0;
+		int age2 = 0;
+		int age3 = 0;
+		int age4 = 0;
+		int age5 = 0;
+		int age6 = 0;
+		int age0 = 0;
+		int age11 = 0;
+		int age22 = 0;
+		int age33 = 0;
+		int age44 = 0;
+		int age55 = 0;
+		int age66 = 0;
+		int age00 = 0;
+		if (volist2 != null) {
+			System.out.println("null아님 select");
+			for (User vo : volist2) {
+				ArrayList<Integer> list = new ArrayList<>();
+				list.add(vo.getAge());
+				for (int a : list) {
+					if (a >= 10 && a <= 19) {
+						age1+=1;
+						break;
+					} else if (a >= 20 && a <= 29) {
+						age2 ++;
+						break;
+					} else if (a >= 30 && a <= 39) {
+						age3 ++;
+						break;
+					} else if (a >= 40 && a <= 49) {
+						age4++;
+						break;
+					} else if (a >= 50 && a <= 59) {
+						age5++;
+						break;
+					} else if (a >= 60 && a <= 69) {
+						age6++;
+						break;
+					} else {
+						age0++;
+						break;
+					}
+
+				}
+				
+			}
+			age11=age1;
+			age22=age2;
+			age33=age3;
+			age44=age4;
+			age55=age5;
+			age66=age6;
+			age00=age0;
+		}
 		
 		//TODO
 		request.setAttribute("adminUserList", volist);
 		request.setAttribute("adminUserList1", volist1);
+		//request.setAttribute("getUserAge", volist2);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("bCount", bCount);
 		request.setAttribute("genderCount", genderCount);
 		
+		//age넘겨주는것
+		request.setAttribute("age11", age11);
+		request.setAttribute("age22", age22);
+		request.setAttribute("age33", age33);
+		request.setAttribute("age44", age44);
+		request.setAttribute("age55", age55);
+		request.setAttribute("age66", age66);
+		request.setAttribute("age00", age00);
 		request.getRequestDispatcher("/adminMemberManagement.jsp").forward(request, response);
 	}
 

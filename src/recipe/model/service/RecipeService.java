@@ -11,11 +11,11 @@ import riceThief.common.JdbcTemplate;
 
 public class RecipeService {
 	//create
-	public int insertRecipe(Recipe recipeVo, Ingredient ingreVo, RecipeSteps stepVo) {
+	public int insertRecipe(Recipe recipeVo, ArrayList<Ingredient> IngreList, ArrayList<RecipeSteps> stepList) {
 		int result =-1;
 		Connection conn = JdbcTemplate.getConnection();
 			
-		result = new RecipeDao().insertRecipe(conn, recipeVo, ingreVo, stepVo);
+		result = new RecipeDao().insertRecipe(conn, recipeVo, IngreList, stepList);
 				
 		JdbcTemplate.close(conn);
 		return result;	

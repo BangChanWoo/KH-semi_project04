@@ -221,4 +221,52 @@ public class RecipeDao {
 		}
 		return volist;
 	}
+	//update
+	public int updateRecipe(Connection conn, Recipe vo, String writer) {
+		int result = -1;
+		String query = "update recipe set title = ?, content = ? where recipe_no like ?";
+		PreparedStatement ps = null;
+		try {
+			ps = conn.prepareStatement(query);
+//			ps.setString(1, vo.getTitle());
+//			ps.setString(2, vo.getContent());
+			
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("연결 실패");
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(ps);
+		}
+		return result;
+	}
+	//delete
+	public int deleteRecipe(Connection conn, int rno) {
+		int result = -1;
+		String deleteStepQuery = "delete from recipe_steps where recipe_no like ?";
+		String deleteIngreQuery = "delete from ingredient where recipe_no like ?";
+		String deleteQuery = "delete from recipe where recipe_no like ?";
+		PreparedStatement ps = null;
+		try {
+			ps = conn.prepareStatement(deleteStepQuery);
+			ps.setInt(1, rno);
+			result = ps.executeUpdate();
+			JdbcTemplate.close(ps);
+			
+			ps = conn.prepareStatement(deleteIngreQuery);
+			ps.setInt(1, rno);
+			result = ps.executeUpdate();
+			JdbcTemplate.close(ps);
+			
+			ps = conn.prepareStatement(deleteQuery);
+			ps.setInt(1, rno);
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("연결 실패");
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(ps);
+		}
+		return result;
+	}
 }

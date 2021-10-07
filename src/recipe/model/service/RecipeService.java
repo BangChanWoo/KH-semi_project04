@@ -56,4 +56,20 @@ public class RecipeService {
 		JdbcTemplate.close(conn);
 		return volist;
 	}
+	//update
+	public int updateRecipe(Recipe vo, String writer) {
+		int result = -1;
+		Connection conn = JdbcTemplate.getConnection();
+		result = new RecipeDao().updateRecipe(conn, vo, writer);
+		JdbcTemplate.close(conn);
+		return result;
+	}
+	//delete
+	public int deleteRecipe(int rno) {
+		int result = -1;
+		Connection conn = JdbcTemplate.getConnection();
+		result = new RecipeDao().deleteRecipe(conn, rno);
+		JdbcTemplate.close(conn);
+		return result;
+	}
 }

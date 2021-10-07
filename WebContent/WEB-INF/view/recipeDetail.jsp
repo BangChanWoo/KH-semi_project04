@@ -37,8 +37,8 @@
         <div id="detailImgContainer">
             <img src="<%=vo.getRec_img() %>" id="titleImg" alt="레시피 대표 사진">
             <c:if test="${id == vo.getUid() or id == 'admin'}">
-            <a href="#" id="updateRecipe"><i class="fas fa-edit"></i></a>
-            <a href="#" id="deleteRecipe"><i class="fas fa-trash-alt"></i></a>
+            <a href="updateget?rno=<%=rno%>" id="updateRecipe"><i class="fas fa-edit"></i></a>
+            <a href="#" onclick="deleteAlert()" id="deleteRecipe"><i class="fas fa-trash-alt"></i></a>
             </c:if>
             <c:if test="${not empty id}">
             <a href="#" id="likeRecipe"><i class="far fa-heart"></i></a>
@@ -129,5 +129,17 @@
     </main>
     <hr>
     <%@ include file="riceThief_footer.jsp" %>
+    <script type="text/javascript">
+	function deleteAlert(){
+		if (confirm("정말 게시글을 삭제하시겠습니까?") == true){
+			//확인 버튼을 눌렀을 때 실행 할 코드
+			location.href = "deleterecipe?rno=<%=rno%>&writer=<%=vo.getUid()%>"
+			return true;
+		}else{   
+			alert("게시글 삭제를 취소하였습니다.")
+			return false;
+		}
+	}
+</script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,16 +49,16 @@ body {
 				<i class="far fa-user" style="font-size: 1px 1px;"></i> <input
 					type="text" class="id" placeholder="UserId"><br> <br>
 					<i class="fas fa-key" style="font-size: 1px 1px;"></i> <input
-					type="text" class="pw" placeholder="Password"><br> <br>
+					type="password" class="pw" placeholder="Password"><br> <br>
 				<div class="vv">
-					<button id="loginbtn">로그인</button>
+					<button  type="submit" id="loginbtn1">로그인</button>
 					<br>
 
 					<button id="ckid">
 						아이디 찾기<a href="findId.jsp" target="_self"></a>
 					</button>
 					<button id="ckpw">
-						비밀번호 찾기<a href="#"></a>
+						비밀번호 찾기<a href="findpw.jsp"></a>
 					</button>
 				</div>
 
@@ -70,5 +71,7 @@ body {
 			<hr>
 			<%@ include file="../WEB-INF/riceThief_footer.jsp"%>
 		</footer>
+		
+	
 </body>
 </html>

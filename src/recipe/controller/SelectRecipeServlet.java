@@ -60,7 +60,7 @@ public class SelectRecipeServlet extends HttpServlet {
 		request.setAttribute("ingreList", ingreList);
 		request.setAttribute("stepList", stepList);
 		//request.setAttribute("commentList", commentList);
-		request.getRequestDispatcher("./recipeDetail.jsp").forward(request, response);
+		request.getRequestDispatcher("./WEB-INF/view/recipeDetail.jsp").forward(request, response);
 		
 	}
 

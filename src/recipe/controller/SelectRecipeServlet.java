@@ -37,6 +37,14 @@ public class SelectRecipeServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
+		String msg = request.getParameter("msg");
+		String msgTxt = null;
+		if(msg == null) {
+			msgTxt = null;
+		}
+		else if(msg.equals("cancle")) {
+			msgTxt = "게시글 수정을 취소하였습니다.";
+		}
 		String rnoStr = request.getParameter("rno");
 		int rno = 0;
 		if(rnoStr != null) {
@@ -59,6 +67,7 @@ public class SelectRecipeServlet extends HttpServlet {
 		request.setAttribute("rno", rno);
 		request.setAttribute("ingreList", ingreList);
 		request.setAttribute("stepList", stepList);
+		request.setAttribute("msg", msgTxt);
 		//request.setAttribute("commentList", commentList);
 		request.getRequestDispatcher("./WEB-INF/view/recipeDetail.jsp").forward(request, response);
 		

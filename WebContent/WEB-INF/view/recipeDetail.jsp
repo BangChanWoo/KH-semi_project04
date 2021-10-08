@@ -16,6 +16,14 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_footer.css" /><!-- footer css -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/recipeDetail.css"/>
 <title>밥도둑_레시피 상세조회</title>
+<%
+	String msg = (String)request.getAttribute("msg");
+%>
+<script type="text/javascript">
+    <%if(msg != null){%>
+    	alert("<%=msg%>");
+    <%}%>
+</script>
 </head>
 <body>
 <%
@@ -43,7 +51,7 @@
             <c:if test="${not empty id}">
             <a href="#" id="likeRecipe"><i class="far fa-heart"></i></a>
             </c:if>
-            <a href="#" id="shareRecipe"><i class="fas fa-share-square"></i></a>
+            <a href="#" onclick="recipeShare()" id="shareRecipe"><i class="fas fa-share-square"></i></a>
         </div>
         <div id="detailTitleContainer">
             <h2 id="detailTitle" class="categoryRecipeTitle"><%=vo.getRec_title()%></h2>
@@ -78,12 +86,13 @@
             <h2>레시피 순서</h2>
             <ul id="detailStep">
             <%if(stepList != null){
-	            for(RecipeSteps step : stepList){ %>
+	            //for(RecipeSteps step : stepList){ 
+	            for(int i=0; i<stepList.size(); i++){%>
                 <li>
-                    <h2>Step <%=step.getStep_no()%></h2>
+                    <h2>Step <%=i+1%></h2>
                     <div class="stepContent">
-                        <p><%=step.getStep_content() %></p>
-                        <img src="<%=step.getStep_img()%>" id="stepImg" alt="레시피 순서">
+                        <p><%=stepList.get(i).getStep_content() %></p>
+                        <img src="<%=stepList.get(i).getStep_img()%>" id="stepImg" alt="레시피 순서">
                     </div>
                 </li>
             <%} } %>
@@ -139,6 +148,17 @@
 			alert("게시글 삭제를 취소하였습니다.")
 			return false;
 		}
+	}
+	function recipeShare(){
+		var url = '';
+		var textarea = document.createElement("textarea");
+		document.body.appendChild(textarea);
+		url = window.document.location.href;
+		textarea.value = url;
+		textarea.select();
+		document.execCommand("copy");
+		document.body.removeChild(textarea);
+		alert("URL이 복사되었습니다.")
 	}
 </script>
 </body>

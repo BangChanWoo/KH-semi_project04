@@ -22,7 +22,7 @@
 	int pageCount = (int)request.getAttribute("pageCount");
 	int catenum = (int)request.getAttribute("catenum");
 %>
-	<%@ include file="../WEB-INF/riceThief_header.jsp" %>
+	<%@ include file="riceThief_header.jsp" %>
 	<hr>
     <main>
         <h2>Store</h2>
@@ -46,6 +46,7 @@
 	            <div>
                     <a href="selectproductpost?rno=<%=vo.getPro_no()%>"><img src="<%=vo.getPro_img() %>" class="categoryImg" alt="추천 상품"></a>
                     <div class="categoryProductTitle"><a href="selectproductpost?rno=<%=vo.getPro_no()%>"><%=vo.getPro_title() %></a></div>
+                    <div> class="categoryProductPrice"><a href="selectproductpost?rno=<%=vo.getPro_no()%>"><%=vo.getPro_pirce() %></a></div>
                 </div>
 	            <% } }%>
             </div>
@@ -65,9 +66,6 @@
         
     </main>
     <hr>
-	<%@ include file="../WEB-INF/riceThief_footer.jsp" %>
-
-
-
+	<%@ include file="riceThief_footer.jsp" %>
 </body>
 </html>

@@ -1,0 +1,42 @@
+
+main{
+    width: 100%;
+    margin: auto;
+    position: relative;
+}
+h2{
+	font-size: 2.2rem;
+}
+#detailImgContainer{
+    position: relative;
+    width: 35em;
+    margin: 5em auto;
+    text-align: left;
+}
+#likeProduct{
+    color: #9a7b6c;
+    font-size: 2em;
+    position: absolute;
+    bottom: 1.5em;
+    right: -1.3em;
+    display: block;
+}
+#shareProduct{
+    color: #9a7b6c;
+    font-size: 2em;
+    position: absolute;
+    bottom: 0;
+    right: -1.5em;
+    display: block;
+}
+#likeRecipe:hover, #shareRecipe:hover{
+    color: #CFB9AF;
+}
+#detailTitleContainer{
+    width: 35em;
+    margin: 0 auto 4em auto;
+}
+#detailTitle{
+    margin: 1em;
+    font-size: 2.2rem;
+}

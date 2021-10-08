@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import ingredient.vo.Ingredient;
+import product_img.vo.ProductImg;
+import product_option.vo.ProductOption;
 import product_post.vo.ProductPost;
 import riceThief.common.JdbcTemplate;
 
@@ -39,15 +42,16 @@ public class ProductDao {
 		}
 		return result;
 	}
+
 	public ArrayList<ProductPost> productList(Connection conn, int start , int end, int catenum) {
 		ArrayList<ProductPost> volist = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String selectAllQuery = "select t2.pro_no, t2.pro_img, t2.pro_title"
+		String selectAllQuery = "select t2.pro_no, t2.pro_img, t2.pro_title, t2.pro_price"
 				+ " from (select ROWNUM r, t1.* from productpost t1 order by pro_no desc) t2"
 				+ " where t2.r between ? and ?";
 		
-		String selectCateQuery = "select t2.pro_no, t2.rec_img, t2.rec_title"
+		String selectCateQuery = "select t2.pro_no, t2.pro_img, t2.pro_title, t2.pro_price"
 				+ " from (select ROWNUM r, t1.* from productpost t1 where t1.pro_cate_no like ? order by pro_no desc) t2"
 				+ " where t2.r between ? and ?";
 		try {
@@ -69,6 +73,7 @@ public class ProductDao {
 				vo.setPro_no(rs.getInt("pro_no"));
 				vo.setPro_img(rs.getString("pro_img"));
 				vo.setPro_title(rs.getString("pro_title"));
+				vo.setPro_pirce(rs.getInt("pro_pirce"));
 				volist.add(vo);
 			}
 		} catch (Exception e) {
@@ -81,10 +86,61 @@ public class ProductDao {
 		return volist;
 	}
 
+	public ArrayList<ProductOption> optionList(Connection conn, int rno){
+		ArrayList<ProductOption> volist = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String selectIngreQuery = "select pro_option_content from product_option where pro_no like ? order by pro_option_no";
+		try {
+			ps = conn.prepareStatement(selectIngreQuery);
+			ps.setInt(1, rno);
+			rs = ps.executeQuery();
+			
+			volist = new ArrayList<ProductOption>();
+			while(rs.next()) {
+				ProductOption vo = new ProductOption();
+				vo.setPro_option_content(rs.getString("pro_option_content"));
+				volist.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(ps);
+		}
+		return volist;
+	}
 	
-	// 더 작업해야하는 것 : 상품 상세설명, 후기
+	public ArrayList<ProductImg> proImgList(Connection conn, int rno){
+		ArrayList<ProductImg> volist = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String selectIngreQuery = "select pro_content_img from product_img where pro_no like ? order by pro_content_no";
+		try {
+			ps = conn.prepareStatement(selectIngreQuery);
+			ps.setInt(1, rno);
+			rs = ps.executeQuery();
+			
+			volist = new ArrayList<ProductImg>();
+			while(rs.next()) {
+				ProductImg vo = new ProductImg();
+				vo.setPro_content_img(rs.getString("pro_content_img"));
+				volist.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(ps);
+		}
+		return volist;
+	}
 	
-	/*public Recipe recipeDetailList(Connection conn, int rno) {
+	// 더 작업해야하는 것 : 상품 상세조회, 후기(리뷰) 
+	
+	/*public product_post productDetailList(Connection conn, int rno) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Recipe vo = new Recipe();
@@ -95,18 +151,11 @@ public class ProductDao {
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				vo.setRecipe_no(rs.getInt("recipe_no"));
+				vo.setPro_no(rs.getInt("pro_no"));
 				vo.setUid(rs.getString("id"));
-				vo.setRec_img(rs.getString("rec_img"));
-				vo.setRec_title(rs.getString("rec_title"));
-				vo.setRec_summary(rs.getString("rec_summary"));
-				vo.setRec_tip(rs.getString("rec_tip"));
-				vo.setInfo_serving(rs.getString("info_serving"));
-				vo.setInfo_time(rs.getString("info_time"));
-				vo.setInfo_level(rs.getString("info_level"));
-				vo.setRec_video(rs.getString("rec_video"));
-				vo.setRec_cate_no(rs.getInt("rec_cate_no"));
-				vo.setRec_write_date(rs.getDate("rec_write_date"));
+				vo.setPro_img(rs.getString("pro_img"));
+				vo.setPro_title(rs.getString("pro_title"));
+				vo.setPro_cate_no(rs.getInt("pro_cate_no"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

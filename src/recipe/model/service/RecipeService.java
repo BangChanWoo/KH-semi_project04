@@ -72,4 +72,28 @@ public class RecipeService {
 		JdbcTemplate.close(conn);
 		return result;
 	}
+	//like read
+	public int likeRead(int rno, String id) {
+		int result = -1;
+		Connection conn = JdbcTemplate.getConnection();
+		result = new RecipeDao().likeRead(conn, rno, id);
+		JdbcTemplate.close(conn);
+		return result;
+	}
+	//like create
+	public int likeCreate(int rno, String id) {
+		int result = -1;
+		Connection conn = JdbcTemplate.getConnection();
+		result = new RecipeDao().likeCreate(conn, rno, id);
+		JdbcTemplate.close(conn);
+		return result;
+	}
+	//like delete
+	public int likeDelete(int rno, String id) {
+		int result = -1;
+		Connection conn = JdbcTemplate.getConnection();
+		result = new RecipeDao().likeDelete(conn, rno, id);
+		JdbcTemplate.close(conn);
+		return result;
+	}
 }

@@ -13,6 +13,7 @@ import ingredient.vo.Ingredient;
 import recipe.model.service.RecipeService;
 import recipe.model.vo.Recipe;
 import recipe_steps.vo.RecipeSteps;
+import user.vo.User;
 
 /**
  * Servlet implementation class SelectRecipeServlet
@@ -50,6 +51,17 @@ public class SelectRecipeServlet extends HttpServlet {
 		if(rnoStr != null) {
 			rno = Integer.parseInt(rnoStr);
 		}
+		User LoginInfo = (User)request.getSession().getAttribute("LoginInfo");
+		String id = null;
+		if(LoginInfo != null) {
+			id = LoginInfo.getUid();
+		}
+		//로그인 기능 완료되면 삭제!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		if(id == null) {
+			id = "kyy806";
+		}
+				
+		int result = new RecipeService().likeRead(rno, id);
 		//게시글 한개 정보
 		Recipe vo  = new RecipeService().recipeDetailList(rno);
 		
@@ -62,6 +74,12 @@ public class SelectRecipeServlet extends HttpServlet {
 		//게시글에 달린 댓글 list
 		//ArrayList<Recipe> commentList = new RecipeService().commentList(rno);
 		
+		System.out.println(result);
+		if(result > 0) {
+			request.setAttribute("like", "yes");
+		}else {
+			request.setAttribute("like", null);
+		}
 		
 		request.setAttribute("vo", vo);
 		request.setAttribute("rno", rno);

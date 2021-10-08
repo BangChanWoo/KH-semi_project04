@@ -27,11 +27,12 @@
 </head>
 <body>
 <%
-	User memberLoginInfo = (User)request.getSession().getAttribute("loginInfo");
+	/* User memberLoginInfo = (User)request.getSession().getAttribute("loginInfo");
 	String id = null;
 	if(memberLoginInfo != null){
 		id = memberLoginInfo.getUid();
-	}
+	} */
+	String id = (String)request.getSession().getAttribute("id");
 	Recipe vo = (Recipe)request.getAttribute("vo");
 	int rno = (int)request.getAttribute("rno");
 
@@ -49,7 +50,12 @@
             <a href="#" onclick="deleteAlert()" id="deleteRecipe"><i class="fas fa-trash-alt"></i></a>
             </c:if>
             <c:if test="${not empty id}">
-            <a href="#" id="likeRecipe"><i class="far fa-heart"></i></a>
+            <c:if test="${like == 'yes'}">
+            	<a href="likeornot?like=yes&rno=<%=rno%>" id="likeRecipe"><i class="fas fa-heart"></i></a>
+            </c:if>
+            <c:if test="${like == null}">
+            	<a href="likeornot?rno=<%=rno%>" id="likeRecipe"><i class="far fa-heart"></i></a>
+            </c:if>
             </c:if>
             <a href="#" onclick="recipeShare()" id="shareRecipe"><i class="fas fa-share-square"></i></a>
         </div>

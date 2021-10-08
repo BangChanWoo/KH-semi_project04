@@ -28,6 +28,7 @@ public class RecipeDao {
 		try {
 			//레시피
 			ps = conn.prepareStatement(recipeInsert);
+			System.out.println(recipeVo.getUid());
 			ps.setString(1, recipeVo.getUid());
 			ps.setString(2, recipeVo.getRec_img());
 			ps.setString(3, recipeVo.getRec_title());
@@ -325,6 +326,69 @@ public class RecipeDao {
 			
 			ps = conn.prepareStatement(deleteQuery);
 			ps.setInt(1, rno);
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("연결 실패");
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(ps);
+		}
+		return result;
+	}
+	//like read
+	public int likeRead(Connection conn, int rno, String id) {
+		int result = -1;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String likeInsertQuery = "select count(inter_no) from interest_recipe where recipe_no like ? and id like ?";
+		try {
+			ps = conn.prepareStatement(likeInsertQuery);
+			ps.setInt(1, rno);
+			ps.setString(2, id);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			System.out.println("연결 실패");
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(ps);
+		}
+		return result;
+	}
+	//like create
+	public int likeCreate(Connection conn, int rno, String id) {
+		int result = -1;
+		PreparedStatement ps = null;
+	
+		String likeInsertQuery = "insert into interest_recipe values(inter_seq_no.NEXTVAL, ?, sysdate, ?)";
+		try {
+			ps = conn.prepareStatement(likeInsertQuery);
+			ps.setString(1, id);
+			ps.setInt(2, rno);
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("연결 실패");
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(ps);
+		}
+		return result;
+	}
+	//like delete
+	public int likeDelete(Connection conn, int rno, String id) {
+		int result = -1;
+		PreparedStatement ps = null;
+	
+		String likeDeleteQuery = "delete from interest_recipe where recipe_no like ? and id like ?";
+		try {
+			ps = conn.prepareStatement(likeDeleteQuery);
+			ps.setInt(1, rno);
+			ps.setString(2, id);
 			result = ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("연결 실패");

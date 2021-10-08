@@ -57,10 +57,10 @@ public class RecipeService {
 		return volist;
 	}
 	//update
-	public int updateRecipe(Recipe vo, String writer) {
+	public int updateRecipe(Recipe recipeVo, ArrayList<Ingredient> IngreList, ArrayList<RecipeSteps> stepList) {
 		int result = -1;
 		Connection conn = JdbcTemplate.getConnection();
-		result = new RecipeDao().updateRecipe(conn, vo, writer);
+		result = new RecipeDao().updateRecipe(conn, recipeVo, IngreList, stepList);
 		JdbcTemplate.close(conn);
 		return result;
 	}

@@ -17,7 +17,7 @@ public class Recipe {
 	private Date rec_write_date; // 작성시간
 
 	public Recipe() {}
-
+	//read
 	public Recipe(int recipe_no, String uid, String rec_img, String rec_title, String rec_summary, String rec_tip,
 			String info_serving, String info_time, String info_level,String rec_video,int rec_cate_no,Date rec_write_date) {
 		this.recipe_no=recipe_no;
@@ -33,6 +33,22 @@ public class Recipe {
 		this.rec_cate_no=rec_cate_no;
 		this.rec_write_date=rec_write_date;
 	}
+	//update
+	public Recipe(int recipe_no, String uid, String rec_img, String rec_title, String rec_summary, String rec_tip,
+			String info_serving, String info_time, String info_level,String rec_video,int rec_cate_no) {
+		this.recipe_no=recipe_no;
+		this.uid=uid;
+		this.rec_img=rec_img;
+		this.rec_title=rec_title;
+		this.rec_summary=rec_summary;
+		this.rec_tip=rec_tip;
+		this.info_serving=info_serving;
+		this.info_time=info_time;
+		this.info_level=info_level;
+		this.rec_video=rec_video;
+		this.rec_cate_no=rec_cate_no;
+	}
+	//create
 	public Recipe(String uid, String rec_img, String rec_title, String rec_summary, String rec_tip,
 			String info_serving, String info_time, String info_level,String rec_video,int rec_cate_no) {
 		this.uid=uid;

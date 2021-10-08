@@ -1,6 +1,7 @@
 package recipe.model.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -172,7 +173,7 @@ public class RecipeDao {
 		ArrayList<Ingredient> volist = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String selectIngreQuery = "select ingre_name, ingre_unit from ingredient where recipe_no like ? order by ingre_no";
+		String selectIngreQuery = "select ingre_no, ingre_name, ingre_unit from ingredient where recipe_no like ? order by ingre_no";
 		try {
 			ps = conn.prepareStatement(selectIngreQuery);
 			ps.setInt(1, rno);
@@ -181,6 +182,7 @@ public class RecipeDao {
 			volist = new ArrayList<Ingredient>();
 			while(rs.next()) {
 				Ingredient vo = new Ingredient();
+				vo.setIngre_no(rs.getInt("ingre_no"));
 				vo.setIngre_name(rs.getString("ingre_name"));
 				vo.setIngre_unit(rs.getString("ingre_unit"));
 				volist.add(vo);
@@ -198,7 +200,7 @@ public class RecipeDao {
 		ArrayList<RecipeSteps> volist = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String selectStepQuery = "select rownum r, step_content, step_img from recipe_steps where recipe_no like ? order by step_no";
+		String selectStepQuery = "select step_no, step_content, step_img from recipe_steps where recipe_no like ? order by step_no";
 		try {
 			ps = conn.prepareStatement(selectStepQuery);
 			ps.setInt(1, rno);
@@ -207,7 +209,7 @@ public class RecipeDao {
 			volist = new ArrayList<RecipeSteps>();
 			while(rs.next()) {
 				RecipeSteps vo = new RecipeSteps();
-				vo.setStep_no(rs.getInt("r"));
+				vo.setStep_no(rs.getInt("step_no"));
 				vo.setStep_content(rs.getString("step_content"));
 				vo.setStep_img(rs.getString("step_img"));
 				volist.add(vo);
@@ -222,16 +224,79 @@ public class RecipeDao {
 		return volist;
 	}
 	//update
-	public int updateRecipe(Connection conn, Recipe vo, String writer) {
+	public int updateRecipe(Connection conn, Recipe recipeVo, ArrayList<Ingredient> IngreList, ArrayList<RecipeSteps> stepList) {
 		int result = -1;
-		String query = "update recipe set title = ?, content = ? where recipe_no like ?";
+		String updateQuery = "update recipe set rec_title = ?, rec_img = ?, rec_summary = ?, rec_tip = ?,"
+				+ " info_serving = ?, info_time = ?, info_level = ?, rec_video = ?, rec_cate_no = ? where recipe_no like ?";
+		String updateIngreQuery = "update ingredient set ingre_name = ?, ingre_unit = ? where recipe_no like ? and ingre_no like ?";
+		String updateStepQuery = "update recipe_steps set step_content = ?, step_img = ? where recipe_no like ? and step_no like ?";
+		
+		String ingreInsert = "insert into ingredient"
+				+ " values(ingre_seq_no.NEXTVAL, ?, ?, ?)";
+		String stepInsert = "insert into recipe_steps"
+				+ " values(step_seq_no.NEXTVAL, ?, ?, ?)";
+		
 		PreparedStatement ps = null;
 		try {
-			ps = conn.prepareStatement(query);
-//			ps.setString(1, vo.getTitle());
-//			ps.setString(2, vo.getContent());
-			
+			ps = conn.prepareStatement(updateQuery);
+			ps.setString(1, recipeVo.getRec_title());
+			ps.setString(2, recipeVo.getRec_img());
+			ps.setString(3, recipeVo.getRec_summary());
+			ps.setString(4, recipeVo.getRec_tip());
+			ps.setString(5, recipeVo.getInfo_serving());
+			ps.setString(6, recipeVo.getInfo_time());
+			ps.setString(7, recipeVo.getInfo_level());
+			ps.setString(8, recipeVo.getRec_video());
+			ps.setInt(9, recipeVo.getRec_cate_no());
+			ps.setInt(10, recipeVo.getRecipe_no());
 			result = ps.executeUpdate();
+			JdbcTemplate.close(ps);
+			
+			//재료
+			for(int i=0; i<IngreList.size(); i++) {
+				if(IngreList.get(i).getIngre_no() != 0) {
+					//기존거 update
+					ps = conn.prepareStatement(updateIngreQuery);
+					ps.setString(1, IngreList.get(i).getIngre_name());
+					ps.setString(2, IngreList.get(i).getIngre_unit());
+					ps.setInt(3, recipeVo.getRecipe_no());
+					ps.setInt(4, IngreList.get(i).getIngre_no());
+					result = ps.executeUpdate();
+					JdbcTemplate.close(ps);
+				}else {
+					//새로 insert
+					ps = conn.prepareStatement(ingreInsert);
+					ps.setString(1, IngreList.get(i).getIngre_name());
+					ps.setString(2, IngreList.get(i).getIngre_unit());
+					ps.setInt(3, recipeVo.getRecipe_no());
+					result = ps.executeUpdate();
+					JdbcTemplate.close(ps);
+				}
+			}
+			
+			JdbcTemplate.close(ps);
+			
+			//순서
+			for(int i=0; i<stepList.size(); i++) {
+				if(stepList.get(i).getStep_no() != 0) {
+					//기존거 update
+					ps = conn.prepareStatement(updateStepQuery);
+					ps.setString(1, stepList.get(i).getStep_content());
+					ps.setString(2, stepList.get(i).getStep_img());
+					ps.setInt(3, recipeVo.getRecipe_no());
+					ps.setInt(4, stepList.get(i).getStep_no());
+					result = ps.executeUpdate();
+					JdbcTemplate.close(ps);
+				}else {
+					//새로 insert
+					ps = conn.prepareStatement(stepInsert);
+					ps.setString(1, stepList.get(i).getStep_content());
+					ps.setString(2, stepList.get(i).getStep_img());
+					ps.setInt(3, recipeVo.getRecipe_no());
+					result = ps.executeUpdate();
+					JdbcTemplate.close(ps);
+				}
+			}
 		} catch (Exception e) {
 			System.out.println("연결 실패");
 			e.printStackTrace();

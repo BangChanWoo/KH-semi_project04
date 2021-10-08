@@ -71,6 +71,20 @@
                 <p id="detailLevel" class="infoText"><%=vo.getInfo_level()%></p>
             </div>
         </div>
+        <c:if test="${not empty vo.getRec_tip()}">
+        <hr style="margin: 3rem 0">
+        <div style="width: 100%; margin: 3rem 0;">
+        	<h2>레시피 Tip</h2>
+        	<p style="margin: 0.5em auto; font-size: 1.2rem;"><%=vo.getRec_tip()%></p>
+        </div>
+        </c:if>
+        <c:if test="${not empty vo.getRec_video()}">
+        <hr style="margin: 3rem 0">
+        <div style="width: 100%; margin: 3rem 0; text-align: center;">
+        	<h2 style="margin: 2rem 0; text-align: left;">레시피 동영상</h2>
+        	<iframe src="<%=vo.getRec_video()%>" frameborder="0" allowfullscreen style="width: 60%; aspect-ratio: 16/9;"></iframe>
+        </div>
+        </c:if>
         <!-- 재료 리스트로 따로 가져와야함 -->
         <div id="detailIngreContainer">
             <h2>재료</h2>

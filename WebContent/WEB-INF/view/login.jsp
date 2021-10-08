@@ -69,7 +69,7 @@ body {
 
 		<footer>
 			<hr>
-			<%@ include file="../WEB-INF/riceThief_footer.jsp"%>
+			<%@ include file="riceThief_footer.jsp" %>
 		</footer>
 		
 	

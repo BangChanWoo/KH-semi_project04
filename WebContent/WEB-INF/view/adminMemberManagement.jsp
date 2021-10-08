@@ -46,7 +46,7 @@
 <title>관리자_회원관리</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <body>
-	<%@ include file="../WEB-INF/riceThief_adminHeader.jsp"%>
+	<%@ include file="riceThief_header.jsp" %>
 	<hr>
 	<main>
 		<h2>회원관리</h2>
@@ -207,7 +207,7 @@
 
 	</main>
 	</hr>
-	<%@ include file="../WEB-INF/riceThief_footer.jsp"%>
+	<%@ include file="riceThief_footer.jsp" %>
 	<script>
 	$(".info_btn").click(function(){ 	
 			var str = ""

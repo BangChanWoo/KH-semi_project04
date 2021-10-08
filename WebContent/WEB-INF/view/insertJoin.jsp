@@ -65,7 +65,7 @@
 </head>
 <body>
 	<header>
-        <a href="main.jsp" target="_self"> <img src="./css/밥도둑 로고.png"></a>
+        <%@ include file="riceThief_header.jsp" %>
         <hr>
     </header>
 <section>
@@ -107,7 +107,7 @@
 
     <footer>
     <hr>
-        <%@ include file="../WEB-INF/riceThief_footer.jsp" %>
+        <%@ include file="riceThief_footer.jsp" %>
     </footer>
 	
 </body>

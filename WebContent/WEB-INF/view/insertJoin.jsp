@@ -76,30 +76,30 @@
         <br>
         <form action="#" method="POST">
             <div class="filedlable"><label class="io1">아이디</label></div>
-            <div class="formlable"><input type="text" id="id" class="in" placeholder="아이디를 입력해주세요(6~16자).">
+            <div class="formlable"><input type="text" id="id" name="id" class="in" placeholder="아이디를 입력해주세요(6~16자).">
                 <button id="idckbtn">중복확인</button>
             </div>
            
             <div class="filedlable"><label >비밀번호</label></div>
-            <div class="formlable"><input type="password" id="pw" class="in" placeholder="비밀번호를 입력해주세요(6~16자)."></div>
+            <div class="formlable"><input type="password" id="pw" name="pw" class="in" placeholder="비밀번호를 입력해주세요(6~16자)."></div>
             <div class="filedlable"><label >비밀번호 확인</label></div>
             <div class="formlable"><input type="password" id="repw" class="in" placeholder="비밀번호를 재입력해주세요."></div>
             <div class="filedlable"><label>이름</label></div>
-            <div class="formlable"><input type="text" class="in" placeholder="이름을 입력해주세요."></div>
+            <div class="formlable"><input type="text" name="uname" class="in" placeholder="이름을 입력해주세요."></div>
             <div class="filedlable"><label>닉네임</label></div>
-            <div class="formlable"><input type="text" class="in" placeholder="닉네임을 입력해주세요."></div>
+            <div class="formlable"><input type="text" name="nickname" class="in" placeholder="닉네임을 입력해주세요."></div>
             <div class="filedlable"><label>이메일</label></div>
-            <div class="formlable"><input type="text" class="in" placeholder="이메일을 입력해주세요."></div>
+            <div class="formlable"><input type="text" name="email" class="in" placeholder="이메일을 입력해주세요."></div>
             <div class="filedlable"><label>핸드폰 번호</label></div>
-            <div class="formlable"><input type="text" class="in" placeholder="-를 제외하고 입력해주세요."></div>
+            <div class="formlable"><input type="text" name="phone" class="in" placeholder="-를 제외하고 입력해주세요."></div>
             <div class="filedlable"><label>주소</label></div>
-            <div class="formlable"> <input type="text" class="in" placeholder="주소를 입력해주세요."></div>
+            <div class="formlable"> <input type="text" name="address" class="in" placeholder="주소를 입력해주세요."></div>
             <div class="filedlable"><label>성별</label></div>
             <div class="formlable"><input type="radio" name="gender" value="M" checked>남자
             <input type="radio" name="gender" value="F">여자
         </div><br>
             <div class="filedlable"><label>나이</label></div>
-            <div><input type="number" id="agenum" class="in" min="12" max="99" step="1" name="age"></div>
+            <div><input type="number" id="agenum" name="id" class="in" min="12" max="99" step="1" name="age"></div>
             <button type="submit" id="joinbtn">회원가입</button>
         </form>
 

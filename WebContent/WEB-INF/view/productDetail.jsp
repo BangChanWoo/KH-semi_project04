@@ -1,4 +1,6 @@
 <%@page import="product_post.vo.ProductPost"%>
+<%@page import="product_img.vo.ProductImg"%>
+<%@page import="product_option.vo.ProductOption"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="user.vo.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -12,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/basic.css" />  <!-- 공통 css -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_header.css" /> <!-- header css -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_footer.css" /><!-- footer css -->
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/recipeDetail.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/productDetail.css"/>
 <title>밥도둑_스토어 상품 상세조회</title>
 </head>
 <body>
@@ -31,22 +33,30 @@
     <main>
         <div id="detailImgContainer">
             <img src="<%=vo.getPro_img() %>" id="titleImg" alt="상품 대표 사진">
-            <c:if test="${id == vo.getUid() or id == 'admin'}">
-            <a href="updateget?rno=<%=rno%>" id="updateRecipe"><i class="fas fa-edit"></i></a>
-            <a href="#" onclick="deleteAlert()" id="deleteRecipe"><i class="fas fa-trash-alt"></i></a>
-            </c:if>
-            <c:if test="${not empty id}">
-            <a href="#" id="likeRecipe"><i class="far fa-heart"></i></a>
-            </c:if>
-            <a href="#" id="shareRecipe"><i class="fas fa-share-square"></i></a>
-        </div>
-        <div id="detailTitleContainer">
-            <h2 id="detailTitle" class="categoryRecipeTitle"><%=vo.getPro_title()%></h2>
         </div>
         
+        <!-- 화면구현 순서 : 상품명/가격(옆에 : 좋아요/공유)/별점/배송비/옵션/옵션이름/수량 (옆에: 가격)/ 밑줄/ 상품금액 / 합계금액 / 장바구니 버튼, 바로구매 버튼  -->
+        
+        <div>
+     	    <h2 id="detailTitle" class="categoryProductTitle"><%=vo.getPro_title()%></h2>
+     	</div>
+     	<div>
+     	    <h3 id="detailPrice" class="categoryProductPrice"><%=vo.getPro_pirce()%></h3>
+     	       
+            <c:if test="${not empty id}">
+            <a href="#" id="likeProduct"><i class="far fa-heart"></i></a>
+            </c:if>
+            <a href="#" id="shareProduct"><i class="fas fa-share-square"></i></a> 	    
+ 	    </div>
+ 	    <div>
+ 	    	<!-- 별점 -->
+ 	    </div>
+ 	    <div>
+ 	    	<!-- 배송비 -->
+ 	    </div>
+ 	    
        
-       	<!--  -->
-   
+     
     <%@ include file="riceThief_footer.jsp" %>
 </body>
 </html>

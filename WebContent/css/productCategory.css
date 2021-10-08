@@ -72,9 +72,6 @@ main h2 {
   text-decoration: none;
   color: black;
 }
-.categoryProductPrice:hover {
-  color: #cfb9af;
-}
 #pageBtnAll {
   width: 18rem;
   height: 2rem;

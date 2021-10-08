@@ -12,7 +12,7 @@
 <title>밥도둑_관리자 메인</title>
 </head>
 <body>
-<%@ include file="../WEB-INF/view/riceThief_adminHeader.jsp" %>
+<%@ include file="riceThief_header.jsp" %>
 	<hr>
 	<main>
         <div class="slideContainer">
@@ -45,7 +45,7 @@
     </main>
     <hr>
 
-	<%@ include file="../WEB-INF/riceThief_footer.jsp" %>
+	<%@ include file="riceThief_footer.jsp" %>
 	
 	<script>
 	var slideIndex = 1;

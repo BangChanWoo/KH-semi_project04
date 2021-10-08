@@ -89,7 +89,7 @@ public class ProductBoradServlet extends HttpServlet {
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("catenum", catenum);
 
-		request.getRequestDispatcher("./productCategory.jsp").forward(request, response);
+		request.getRequestDispatcher("./WEB-INF/view/productCategory.jsp").forward(request, response);
 	}
 
 	/**

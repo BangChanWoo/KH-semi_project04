@@ -38,8 +38,7 @@ body {
 </head>
 <body>
 	<header>
-		<header>
-			<a href="#" target="_self"> <img src="./css/밥도둑 로고.png"></a>
+		<%@ include file="riceThief_header.jsp" %>
 			<hr>
 		</header>
 
@@ -69,7 +68,7 @@ body {
 
 		<footer>
 			<hr>
-			<%@ include file="../WEB-INF/riceThief_footer.jsp"%>
+			<%@ include file="riceThief_footer.jsp" %>
 		</footer>
 		
 	

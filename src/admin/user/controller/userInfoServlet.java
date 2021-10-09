@@ -70,7 +70,7 @@ public class userInfoServlet extends HttpServlet {
 		
 		
 		request.setAttribute("adminUserList1", volist1);
-		request.getRequestDispatcher("/userInfo.jsp").forward(request, response);
+		request.getRequestDispatcher("./WEB-INF/view/userInfo.jsp").forward(request, response);
 	}
 
 	/**

@@ -157,7 +157,7 @@ public class SelectUserServlet extends HttpServlet {
 		request.setAttribute("age55", age55);
 		request.setAttribute("age66", age66);
 		request.setAttribute("age00", age00);
-		request.getRequestDispatcher("/adminMemberManagement.jsp").forward(request, response);
+		request.getRequestDispatcher("./WEB-INF/view/adminMemberManagement.jsp").forward(request, response);
 	}
 
 	/**

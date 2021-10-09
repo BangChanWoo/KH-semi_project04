@@ -39,9 +39,9 @@ public class userDelete extends HttpServlet {
 			System.out.println("삭제성공");
 		}
 		else {
-			System.out.println("444망");
+			System.out.println("삭제 실패");
 		}
-		request.getRequestDispatcher("/userInfo.jsp").forward(request, response);
+		request.getRequestDispatcher("./WEB-INF/view/userInfo.jsp").forward(request, response);
 	}
 
 	/**

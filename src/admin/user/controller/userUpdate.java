@@ -71,9 +71,9 @@ public class userUpdate extends HttpServlet {
 			System.out.println("수정성공");
 		}
 		else {
-			System.out.println("444망");
+			System.out.println("수정 실패");
 		}
-		request.getRequestDispatcher("/userInfo.jsp").forward(request, response);
+		request.getRequestDispatcher("./WEB-INF/view/userInfo.jsp").forward(request, response);
 	}
 
 	/**

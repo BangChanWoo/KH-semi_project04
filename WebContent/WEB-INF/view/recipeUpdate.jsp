@@ -113,7 +113,7 @@
                     </div>
 
                     <label>레시피 tip</label>
-                    <textarea name="recipeTip" id="recipeTip" required="required"  placeholder=" 예) 판 젤라틴은 찬물에 10분간 불린 후, 손으로 짜서 물기를 제거해주세요"><%=vo.getRec_tip()%></textarea>
+                    <textarea name="recipeTip" id="recipeTip"  placeholder=" 예) 판 젤라틴은 찬물에 10분간 불린 후, 손으로 짜서 물기를 제거해주세요"><%=vo.getRec_tip()%></textarea>
                 </div>
             </div>
             <div id="ingreContainer">

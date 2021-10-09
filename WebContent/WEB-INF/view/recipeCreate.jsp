@@ -38,7 +38,7 @@
                     <textarea name="recipeVideo" id="recipeVideo" placeholder=" 예) https://www.youtube.com/watch?v=oJPmqm6QgUA"></textarea>
 
                     <label>카테고리</label>
-                    <select id="cateList" name="cateList">
+                    <select id="cateList" name="cateList" required="required">
                         <option value="62">종류별</option>
                         <option value="63">밑반찬</option>
                         <option value="56">메인반찬</option>
@@ -63,7 +63,7 @@
                     
                     <div id="listContainer">
                         <label>양</label><label>시간</label><label>난이도</label>
-                        <select id="servingList" name="servingList">
+                        <select id="servingList" name="servingList" required="required">
                             <option value="~인분">~ 인분</option>
                             <option value="1인분">1인분</option>
                             <option value="2인분">2인분</option>
@@ -73,7 +73,7 @@
                             <option value="6인분">대량</option>
                         </select>
                         
-                        <select id="timeList" name="timeList">
+                        <select id="timeList" name="timeList" required="required">
                             <option value="시간">시간</option>
                             <option value="30분 미만">30분 미만</option>
                             <option value="1시간 미만">1시간 미만</option>
@@ -86,7 +86,7 @@
                             <option value="4시간 이상">4시간 이상</option>
                         </select>
                         
-                        <select id="levelList" name="levelList">
+                        <select id="levelList" name="levelList" required="required">
                             <option value="난이도">난이도</option>
                             <option value="초급">초급</option>
                             <option value="중급">중급</option>
@@ -95,7 +95,7 @@
                     </div>
 
                     <label>레시피 tip</label>
-                    <textarea name="recipeTip" id="recipeTip" required="required"  placeholder=" 예) 판 젤라틴은 찬물에 10분간 불린 후, 손으로 짜서 물기를 제거해주세요"></textarea>
+                    <textarea name="recipeTip" id="recipeTip"  placeholder=" 예) 판 젤라틴은 찬물에 10분간 불린 후, 손으로 짜서 물기를 제거해주세요"></textarea>
                 </div>
             </div>
             <div id="ingreContainer">
@@ -119,7 +119,7 @@
 	                            </div>
 	                            <div id="stepImgContainer">
 	                            	<img src="./css/alt.JPG" name="stepImg_1" id="stepImg_1" alt="레시피 순서">
-	                            	<input type="file" name="uploadStepImg_1" required="required">
+	                            	<input type="file" name="uploadStepImg_1" id="uploadStepImg_1" required="required">
 	                            </div>
 	                        </div>
 	                    </li>
@@ -162,29 +162,44 @@
         $("#stepAdd").click(stepAddFunc);
         
         function stepAddFunc(){
-            stepId++;
+        	stepId++;
             stepImgId++;
-            $("#step").append('<h2>Step '+stepId+'</h2><div class="stepContent"><div id="stepTxt"><label>레시피 내용</label><textarea name="recipeContent_'+stepId+'" type="text" id="recipeContent_'+stepId+'" required="required"></textarea></div><div id="stepImgContainer"><img src="./css/alt.JPG" name="stepImg_'+stepId+'" id="stepImg_'+stepId+'" alt="레시피 순서"><input type="file" name="uploadStepImg_'+stepId+'" required="required"></div></div>');
+            $("#step").append('<li><h2>Step '+stepId+'</h2><div class="stepContent"><div id="stepTxt"><label>레시피 내용</label><textarea name="recipeContent_'+stepId+'" type="text" id="recipeContent_'+stepId+'" required="required"></textarea></div><div id="stepImgContainer"><img src="./css/alt.JPG" name="stepImg_'+stepId+'" id="stepImg_'+stepId+'" alt="레시피 순서"><input type="file" name="uploadStepImg_'+stepId+'" required="required"></div></div></li>');
             $("#recipeIngre_"+ingreId).css("margin", "1rem");
             $("#stepCount").val(stepId);
         }
-        
         //미리보기
         // 이벤트를 바인딩해서 input에 파일이 올라올때 위의 함수를 this context로 실행합니다.
-        $("#uploadTitleImg").change(function(){
-        	readURL(this);
+        $('#uploadTitleImg').change(function(){
+        	readTitle(this);
         });
-        function readURL(input) {
-        	 if (input.files && input.files[0]) {
-        	  var reader = new FileReader();
-        	  
-        	  reader.onload = function (e) {
-        	   $('#titleImg').attr('src', e.target.result);  
-        	  }
-        	  
-        	  reader.readAsDataURL(input.files[0]);
-        	  }
+        function readTitle(input) {
+        	if (input.files && input.files[0]) {
+        		var reader = new FileReader();
+        		
+        		reader.onload = function (e) {
+        			$('#titleImg').attr('src', e.target.result);  
+        		}
+        		reader.readAsDataURL(input.files[0]);
         	}
+        }
+        //순서 이미지 넣어야함
+        $("input[id^='uploadStepImg_']").change(function(){
+        	console.log($(this).attr('id').charAt(14));
+        	var num = $(this).attr('id').charAt(14);
+    		readStep(this, num);
+        });
+        function readStep(input, num) {
+        	console.log(num);
+        	if (input.files && input.files[0]) {
+        		var reader = new FileReader();
+        		
+        		reader.onload = function (e) {
+        			$("#stepImg_"+num).prev().attr('src', e.target.result);
+        		}
+        		reader.readAsDataURL(input.files[0]);
+        	}
+        }
     </script>
 </body>
 </html>

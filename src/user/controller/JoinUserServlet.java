@@ -3,11 +3,13 @@ package user.controller;
 import java.io.IOException;
 import java.sql.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import user.dao.UserDao;
 import user.service.UserService;
@@ -65,11 +67,16 @@ public class JoinUserServlet extends HttpServlet {
 		
 		int result=new UserService().insertUser(uservo);
 		
-		if(result>0) {
-//			request.getRequestDispatcher("./login.jsp").forward(request,response);
-			response.sendRedirect("main.jsp"); 
+		if(result==1) {
+			request.setAttribute("result",result);
+			HttpSession session=request.getSession();
+			session.setAttribute("sessionID", uid);
+			RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/main.jsp");
+			rd.forward(request, response);
 		}else {
-			
+			request.setAttribute("result", 0);
+			RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/insertJoin.jsp");
+			rd.forward(request, response);	
 		}
 		
 		

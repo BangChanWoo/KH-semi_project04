@@ -33,34 +33,18 @@ public class UserDao {
 		 return result;
 	}
 	
-	public User loginUser(Connection conn,String id,String pw) {
+	public User loginUser(Connection conn,String uid,String pw) {
 		User u=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
+		
 		String sql="select *from member where memeber where id=? and pw=?";
 			try {
 				pstmt=conn.prepareStatement(sql);
-				pstmt.setString(1, id);
+				pstmt.setString(1, uid);
 				pstmt.setString(2, pw);
 				rs=pstmt.executeQuery();
-				
-//				  
-//				
-//				NICKNAME  NOT NULL VARCHAR2(30)  
-//				AGE       NOT NULL NUMBER        
-//				GENDER    NOT NULL CHAR(1)       
-//				EMAIL     NOT NULL VARCHAR2(50)  
-//				PHONE     NOT NULL VARCHAR2(40)  
-//				ADDRESS   NOT NULL VARCHAR2(200) 
-//				JOIN_DATE NOT NULL DATE          
-//				POINT              NUMBER        
-//				KIND      NOT NULL CHAR(1) 
-				if(rs.next()) {
-					u=new User();
-					u.setUid(rs.getString("id"));
-					u.setPw(rs.getString("pw"));
-				}
-				
+		
 			}catch(Exception e) {
 				e.printStackTrace();
 			}finally {
@@ -69,7 +53,28 @@ public class UserDao {
 			}
 		return u;
 	}
-	
+	public int dupIdCheck(Connection conn,String uid) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="select count(*) from user where id=?";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, uid);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
 }

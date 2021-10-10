@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import user.vo.User;
+
 /**
  * Servlet implementation class InsertProductServlet
  */
@@ -28,6 +30,16 @@ public class InsertProductServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
+		User memberLoginInfo = (User)request.getSession().getAttribute("memberLoginInfo");
+		String id = null;
+		if(memberLoginInfo != null) {
+			id = memberLoginInfo.getUid();
+		}
+		//잠깐 쓰자
+		if(id == null) {
+			id = "admin";
+		}
+		
 		request.getRequestDispatcher("./WEB-INF/view/productInsert.jsp").forward(request, response);
 	}
 

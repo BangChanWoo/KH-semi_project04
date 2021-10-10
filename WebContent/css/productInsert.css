@@ -4,7 +4,7 @@
             height: 30rem;
             background-color: #EBDED4;
         }
-#body {
+#productDetailExplane {
             width: 100%;
             height: 30rem;
             background-color: white;
@@ -23,18 +23,13 @@ border: 1px solid #EBDED4;
 	width:60%;
 	margin : 10px 0px 0px 10px;
 }
-#stepImgContainer{
-	border: 1px solid white;
+<!--#stepImgContainer{
+	
 	float:left;
 	width:33%;
 	margin : 10px 0px 10px 10px;
 }
-#stepImgContainer{
-border: 1px solid white;
-	float:left;
-	width:60%;
-	margin : 10px 0px 0px 10px;
-}
+-->
 
 #productTitle{
 width:300px;
@@ -79,9 +74,10 @@ textarea[id^="productContent"]{
     height: 5rem;
 }
 #stepImgContainer{
-	float: left;
+	float: center;
     width: 30%;
     margin: auto;
+    padding: 10px 10px 10px 10px;
 }
 img[id^="stepImg"]{
     width: 100%;

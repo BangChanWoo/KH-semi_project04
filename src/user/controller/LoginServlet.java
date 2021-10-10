@@ -41,21 +41,22 @@ public class LoginServlet extends HttpServlet {
 		String uid = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		
-		String url="";
-
+		
 		User u = new UserService().loginUser(uid, pw);
 
 		if (u != null) {
 			request.setAttribute("u", u);
 			HttpSession session=request.getSession();
 			session.setAttribute("sessionID", uid);
-			RequestDispatcher rd = request.getRequestDispatcher("riceThief_header.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/riceThief_header.jsp");
 			rd.forward(request, response);
 //			response.sendRedirect("main.jsp"); 
 			
 			 
 		}else {
-			
+			request.setAttribute("u", u);
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/login.jsp");
+			rd.forward(request, response);
 		}
 
 	}

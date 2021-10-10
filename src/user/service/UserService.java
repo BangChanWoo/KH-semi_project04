@@ -24,11 +24,19 @@ public class UserService {
 		return result;
 	}
 	public User loginUser(String id,String pw) {
+	
 		Connection conn=getConnection();
 		User u=new UserDao().loginUser(conn, id, pw);
+		
 		close(conn);
 		return u;
 		
+	}
+	public int dupIdCheck(String uid) {
+		int result=0;
+		Connection conn=getConnection();
+		result=new UserDao().dupIdCheck(conn,uid);
+		return result;
 	}
 	
 	

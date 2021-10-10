@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,11 +75,16 @@
         <h1>회원가입</h1>
         </div>
         <br>
-        <form action="#" method="POST">
+        <form action="/joinuser" method="POST">
             <div class="filedlable"><label class="io1">아이디</label></div>
             <div class="formlable"><input type="text" id="id" name="id" class="in" placeholder="아이디를 입력해주세요(6~16자).">
                 <button id="idckbtn">중복확인</button>
             </div>
+            <c:if test="${ result == 0}">
+			<script>
+			alert("아이디가 중복됩니다.");
+			</script>
+</c:if>
            
             <div class="filedlable"><label >비밀번호</label></div>
             <div class="formlable"><input type="password" id="pw" name="pw" class="in" placeholder="비밀번호를 입력해주세요(6~16자)."></div>

@@ -36,10 +36,11 @@ public class UpdateRecipeServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
@@ -82,7 +83,12 @@ public class UpdateRecipeServlet extends HttpServlet {
 		}
 		
 		//레시피
-		String uploadTitleImg = "upload/" + multi.getFilesystemName("uploadTitleImg");
+		String uploadTitleImg = multi.getFilesystemName("uploadTitleImg");
+		if(uploadTitleImg == null) {
+			uploadTitleImg = multi.getParameter("defaultTitleImg");
+		}else {
+			uploadTitleImg = "upload/" + uploadTitleImg;
+		}
 		String recipeTitle = multi.getParameter("recipeTitle");
 		String recipeIntro = multi.getParameter("recipeIntro");
 		String recipeVideo = multi.getParameter("recipeVideo");
@@ -140,7 +146,14 @@ public class UpdateRecipeServlet extends HttpServlet {
 			}
 			stepVo.setStep_no(stepIdInt);
 			stepVo.setStep_content(multi.getParameter("recipeContent_"+ i));
-			stepVo.setStep_img("upload/" +multi.getFilesystemName("uploadStepImg_"+ i));
+			
+			String uploadStepImg = multi.getFilesystemName("uploadStepImg_"+ i);
+			if(uploadStepImg == null) {
+				stepVo.setStep_img(multi.getParameter("defaultStepImg_"+ i));
+			}else {
+				stepVo.setStep_img("upload/" + uploadStepImg);
+			}
+			
 			stepList.add(stepVo);
 		}
 		
@@ -151,21 +164,11 @@ public class UpdateRecipeServlet extends HttpServlet {
 		
 		if(result > 0) {
 			request.setAttribute("msg", "변경 성공");
-			System.out.println("변경 성공");
 			request.getRequestDispatcher("selectrecipe?rno="+rno).forward(request, response);
 		}else {
 			request.setAttribute("msg", "변경 실패");
-			System.out.println("변경 실패");
 			request.getRequestDispatcher("selectrecipe?rno="+rno).forward(request, response);
 		}
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

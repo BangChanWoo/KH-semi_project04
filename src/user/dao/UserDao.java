@@ -33,31 +33,37 @@ public class UserDao {
 		 return result;
 	}
 	
-	public User loginUser(Connection conn,String uid,String pw) {
-		User u=null;
+	public int loginUser(Connection conn,String uid,String pw) {
+		int result=-1;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		
-		String sql="select *from member where memeber where id=? and pw=?";
-			try {
-				pstmt=conn.prepareStatement(sql);
-				pstmt.setString(1, uid);
-				pstmt.setString(2, pw);
-				rs=pstmt.executeQuery();
-		
-			}catch(Exception e) {
-				e.printStackTrace();
-			}finally {
-				close(rs);
-				close(pstmt);
+//		String sql="SELECT * FROM member WHERE ID = ? AND PASSWD = ?";
+		StringBuffer sql = new StringBuffer();
+		sql.append("SELECT pw").append(" FROM member").append(" WHERE ID = ?");
+		try {
+			pstmt=conn.prepareStatement(sql.toString());
+			pstmt.setString(1, uid);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				if(rs.getString("pw").equals(pw)) {
+					return 1;
+				}else {
+					return 0;
+				}
 			}
-		return u;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
 	}
 	public int dupIdCheck(Connection conn,String uid) {
 		int result=0;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="select count(*) from user where id=?";
+		String sql="select count(*) from member where id=?";
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, uid);

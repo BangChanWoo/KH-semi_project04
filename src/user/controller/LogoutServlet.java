@@ -25,25 +25,26 @@ public class LogoutServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
+    /**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	/*
-	 * protected void doGet(HttpServletRequest request, HttpServletResponse
-	 * response) throws ServletException, IOException {
-	 * 
-	 * }
-	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		process(request,response);
+		
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		process(request,response);
+	}
+	private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		
-		RequestDispatcher rd = request.getRequestDispatcher("main");
-		rd.forward(request, response);	
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/main.jsp");
+		rd.forward(request, response);		
 	}
 	
 

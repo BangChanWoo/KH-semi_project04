@@ -46,20 +46,25 @@ body {
 		<br>
 		<form action="login" method="POST">
 			<i class="far fa-user" style="font-size: 1px 1px;"></i> <input
-				type="text" class="id" placeholder="UserId"><br> <br>
+				type="text" class="id" name="uid" placeholder="UserId"><br> <br>
 			<i class="fas fa-key" style="font-size: 1px 1px;"></i> <input
-				type="password" class="pw" placeholder="Password"><br>
+				type="password" class="pw" name="pw" placeholder="Password"><br>
 			<br>
 			<div class="vv">
 				<button type="submit" id="loginbtn1">로그인</button>
-				
+				<c:if test="${ loginResult == -1 || loginResult == 0 }">
+					<script>
+						alert("아이디 혹은 비밀번호가 틀렸습니다.");
+					</script>
+				</c:if>
+
 				<br>
 
 				<button id="ckid">
-					아이디 찾기<a href="findId.jsp" target="_self"></a>
+					아이디 찾기
 				</button>
 				<button id="ckpw">
-					비밀번호 찾기<a href="findpw.jsp"></a>
+					비밀번호 찾기
 				</button>
 			</div>
 

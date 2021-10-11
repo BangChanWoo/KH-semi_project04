@@ -23,21 +23,19 @@ public class UserService {
 		close(conn);
 		return result;
 	}
-	public User loginUser(String id,String pw) {
+	public int loginUser(String uid,String pw) {
+		int result=-1;
+	Connection conn=getConnection();
+	result=new UserDao().loginUser(conn, uid, pw);
+	if(result > 0) {
+		commit(conn); 
+	}else {
+		rollback(conn);
+	}
+	close(conn);
+	return result;
+	}
 	
-		Connection conn=getConnection();
-		User u=new UserDao().loginUser(conn, id, pw);
-		
-		close(conn);
-		return u;
-		
-	}
-	public int dupIdCheck(String uid) {
-		int result=0;
-		Connection conn=getConnection();
-		result=new UserDao().dupIdCheck(conn,uid);
-		return result;
-	}
 	
 	
 }

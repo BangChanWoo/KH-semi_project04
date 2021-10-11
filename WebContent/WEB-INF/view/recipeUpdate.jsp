@@ -1,3 +1,4 @@
+<%@page import="user.vo.User"%>
 <%@page import="recipe_steps.vo.RecipeSteps"%>
 <%@page import="ingredient.vo.Ingredient"%>
 <%@page import="java.util.ArrayList"%>
@@ -22,10 +23,10 @@
 </head>
 <body>
 <%
-	User memberLoginInfo = (User)request.getSession().getAttribute("loginInfo");
+	User LoginInfo = (User)request.getSession().getAttribute("loginInfo");
 	String id = null;
-	if(memberLoginInfo != null){
-		id = memberLoginInfo.getUid();
+	if(LoginInfo != null){
+		id = LoginInfo.getUid();
 	}
 	Recipe vo = (Recipe)request.getAttribute("vo");
 	int rno = (int)request.getAttribute("rno");
@@ -42,8 +43,9 @@
         <input type="hidden" name="writer" id="writer" readonly="readonly" value="<%=vo.getUid()%>">
             <div id="contentContainer">
                 <div id="titleImgContainer">
+                	<input type="hidden" name="defaultTitleImg" id="defaultTitleImg" value="<%=vo.getRec_img()%>">
                     <img id="titleImg" src="<%=vo.getRec_img()%>">
-                    <input data-buttontext="<%=vo.getRec_img()%>" value="<%=vo.getRec_img()%>" type="file" name="uploadTitleImg" id="uploadTitleImg" class="hidden_input" accept="image/jpeg, image/jpg, image/png">
+                    <input type="file" name="uploadTitleImg" id="uploadTitleImg" class="hidden_input" accept="image/jpeg, image/jpg, image/png">
                     <p>레시피 대표 사진</p>
                 </div>
                 <div id="txtContainer">
@@ -54,7 +56,7 @@
                     <textarea  name="recipeIntro" id="recipeIntro" required="required" placeholder=" 예) 오븐 없이 간단하게 만드는 케이크 레시피"><%=vo.getRec_summary()%></textarea>
 
                     <label>동영상</label>
-                    <textarea name="recipeVideo" id="recipeVideo" placeholder=" 예) https://www.youtube.com/watch?v=oJPmqm6QgUA"><%=vo.getRec_video()%></textarea>
+                    <textarea name="recipeVideo" id="recipeVideo" placeholder=" 예) https://www.youtube.com/watch?v=oJPmqm6QgUA"><c:if test="${not empty vo.getRec_video()}"><%=vo.getRec_video()%></c:if></textarea>
 
                     <label>카테고리</label>
                     <select id="cateList" name="cateList" required="required">
@@ -143,6 +145,7 @@
 	                                <textarea name="recipeContent_<%=sCnt+1%>" type="text" id="recipeContent_<%=sCnt+1%>" required="required"><%=stepList.get(sCnt).getStep_content()%></textarea>
 	                            </div>
 	                            <div id="stepImgContainer">
+	                            	<input type="hidden" name="defaultStepImg_<%=sCnt+1%>" id="defaultStepImg_<%=sCnt+1%>" value="<%=stepList.get(sCnt).getStep_img()%>">
 	                            	<img src="<%=stepList.get(sCnt).getStep_img()%>" name="stepImg_<%=sCnt+1%>" id="stepImg_<%=sCnt+1%>" alt="레시피 순서">
 	                            	<input value="<%=stepList.get(sCnt).getStep_img()%>" type="file" name="uploadStepImg_<%=sCnt+1%>">
 	                            </div>

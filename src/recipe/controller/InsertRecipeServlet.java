@@ -140,10 +140,6 @@ public class InsertRecipeServlet extends HttpServlet {
 			request.setAttribute("msg", "레시피 게시글 작성을 실패했습니다.");
 			request.getRequestDispatcher("main").forward(request, response);
 		}
-		
-		
-		//request.setAttribute("rno", rno);
-		//request.getRequestDispatcher("./recipedetail?rno="+rno).forward(request, response);
 	}
 
 }

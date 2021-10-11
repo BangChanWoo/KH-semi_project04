@@ -1,4 +1,4 @@
-package admin.product.service;
+package admin.product.model.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;

@@ -89,8 +89,6 @@
 	
 	</script>
 <%} }%>
-
-	
 <script>
 		$("#text_box").hide();
 		</script>

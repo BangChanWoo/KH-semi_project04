@@ -33,9 +33,9 @@ public class adminProductDao {
 			pstmt.setInt(1, productVo.getPro_cate_no());
 			pstmt.setString(2, productVo.getPro_title());
 			pstmt.setString(3, productVo.getPro_img());
-			pstmt.setInt(1, productVo.getPro_pirce());
-			pstmt.setInt(1, productVo.getPro_delivery_fee());
-			pstmt.setInt(1, productVo.getPro_stock());
+			pstmt.setInt(4, productVo.getPro_pirce());
+			pstmt.setInt(5, productVo.getPro_delivery_fee());
+			pstmt.setInt(6, productVo.getPro_stock());
 			result = pstmt.executeUpdate();
 			JdbcTemplate.close(pstmt);
 			

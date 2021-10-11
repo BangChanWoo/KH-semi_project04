@@ -168,12 +168,12 @@ public class UpdateRecipeServlet extends HttpServlet {
 			request.setAttribute("func", "recipeUpdate");
 			request.setAttribute("msg", "변경 성공");
 			request.setAttribute("rno", rno);
-			request.getRequestDispatcher("/WEB-INF/view/resultAlert.jsp").forward(request, response);
+			request.getRequestDispatcher("./WEB-INF/view/resultAlert.jsp").forward(request, response);
 		}else {
 			request.setAttribute("func", "recipeUpdate");
 			request.setAttribute("msg", "변경 실패");
 			request.setAttribute("rno", rno);
-			request.getRequestDispatcher("/WEB-INF/view/resultAlert.jsp").forward(request, response);
+			request.getRequestDispatcher("./WEB-INF/view/resultAlert.jsp").forward(request, response);
 		}
 	}
 

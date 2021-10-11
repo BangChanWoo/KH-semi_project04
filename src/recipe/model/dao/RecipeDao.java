@@ -23,9 +23,9 @@ public class RecipeDao {
 		String recipeInsert = "insert into recipe"
 					+ " values(recipe_no.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate)";
 		String ingreInsert = "insert into ingredient"
-				+ " values(ingre_no.NEXTVAL, ?, ?, rec_seq_no.CURRVAL)";
+				+ " values(ingre_no.NEXTVAL, ?, ?, recipe_no.CURRVAL)";
 		String stepInsert = "insert into recipe_steps"
-				+ " values(step_no.NEXTVAL, ?, ?, rec_seq_no.CURRVAL)";
+				+ " values(step_no.NEXTVAL, ?, ?, recipe_no.CURRVAL)";
 		try {
 			//레시피
 			ps = conn.prepareStatement(recipeInsert);

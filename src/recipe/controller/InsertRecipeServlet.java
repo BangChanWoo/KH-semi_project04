@@ -44,13 +44,8 @@ public class InsertRecipeServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
-		User LoginInfo = (User)request.getSession().getAttribute("memberLoginInfo");
-		String id = null;
-		if(LoginInfo != null) {
-			//id = LoginInfo.getUid();
-			id = (String)request.getSession().getAttribute("sessionID");
-		}
-
+		String id = (String)request.getSession().getAttribute("sessionID");
+		
 		//사진 업로드 설정
 		// 파일 저장 경로 (web 경로 밑에 해당 폴더를 생성해 주어야 한다)
 		String fileSavePath = "upload";
@@ -125,11 +120,13 @@ public class InsertRecipeServlet extends HttpServlet {
 		
 		int result = new RecipeService().insertRecipe(recipeVo, IngreList, stepList);
 		if(result > 0) {
+			request.setAttribute("func", "recipeInsert");
 			request.setAttribute("msg", "레시피 게시글 작성을 성공했습니다.");
-			request.getRequestDispatcher("main").forward(request, response);
+			request.getRequestDispatcher("./WEB-INF/view/resultAlert.jsp").forward(request, response);
 		}else {
+			request.setAttribute("func", "recipeInsert");
 			request.setAttribute("msg", "레시피 게시글 작성을 실패했습니다.");
-			request.getRequestDispatcher("main").forward(request, response);
+			request.getRequestDispatcher("./WEB-INF/view/resultAlert.jsp").forward(request, response);
 		}
 	}
 

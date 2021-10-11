@@ -33,33 +33,25 @@ public class DeleteRecipeServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
-		String writer = request.getParameter("writer");
 		String rno = request.getParameter("rno");
 		int rnoInt = 0;
 		if(rno != null) {
 			rnoInt = Integer.parseInt(rno);  //눌려진 페이지
 		}
-		User LoginInfo = (User)request.getSession().getAttribute("LoginInfo");
-		String id = null;
-		if(LoginInfo != null) {
-			id = LoginInfo.getUid();
-		}
-		//로그인 기능 완료되면 삭제!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		if(id == null) {
-			id = "admin";
-		}
+		String id = (String)request.getSession().getAttribute("sessionID");
 		
-		int result = 0;
-		if(writer == id || id.equals("admin")) {
-			result = new RecipeService().deleteRecipe(rnoInt);
-		}
+		int result = new RecipeService().deleteRecipe(rnoInt);
 		
 		if(result > 0) {
-			//request.setAttribute("msg", "레시피 게시글 삭제에 성공했습니다.");
-			request.getRequestDispatcher("main?msg=레시피 게시글 삭제에 성공했습니다.").forward(request, response);
+			request.setAttribute("rno", rno);
+			request.setAttribute("func", "recipeDelete");
+			request.setAttribute("msg", "레시피 게시글 삭제를 성공했습니다.");
+			request.getRequestDispatcher("./WEB-INF/view/resultAlert.jsp").forward(request, response);
 		}else {
-			request.setAttribute("msg", "레시피 게시글 삭제에 실패했습니다.");
-			request.getRequestDispatcher("recipedetail?rno="+rno).forward(request, response);
+			request.setAttribute("rno", rno);
+			request.setAttribute("func", "recipeDelete");
+			request.setAttribute("msg", "레시피 게시글 삭제를 실패했습니다.");
+			request.getRequestDispatcher("./WEB-INF/view/resultAlert.jsp").forward(request, response);
 		}
 	}
 

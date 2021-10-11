@@ -21,7 +21,7 @@
 </head>
 <body>
 <%
-	
+	session.getAttribute("sessionId");
 %>
 	<%@ include file="riceThief_header.jsp" %>
 	<hr>

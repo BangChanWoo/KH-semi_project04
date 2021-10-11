@@ -17,6 +17,10 @@
 <title>밥도둑_게시글 작성</title>
 </head>
 <body>
+<%
+	session.getAttribute("sessionID");
+	session.getAttribute("sessionNickname");
+%>
 	<%@ include file="riceThief_header.jsp" %>
 	<hr>
     <main>

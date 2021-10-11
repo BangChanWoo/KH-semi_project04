@@ -27,12 +27,6 @@
 </head>
 <body>
 <%
-	/* User memberLoginInfo = (User)request.getSession().getAttribute("loginInfo");
-	String id = null;
-	if(memberLoginInfo != null){
-		id = memberLoginInfo.getUid();
-	} */
-	String id = (String)request.getSession().getAttribute("id");
 	Recipe vo = (Recipe)request.getAttribute("vo");
 	int rno = (int)request.getAttribute("rno");
 	
@@ -45,11 +39,11 @@
     <main>
         <div id="detailImgContainer">
             <img src="<%=vo.getRec_img() %>" id="titleImg" alt="레시피 대표 사진">
-            <c:if test="${id == vo.getUid() or id == 'admin'}">
+            <c:if test="${sessionID == vo.getUid() or sessionID == 'admin'}">
             <a href="updateget?rno=<%=rno%>" id="updateRecipe"><i class="fas fa-edit"></i></a>
             <a href="#" onclick="deleteAlert()" id="deleteRecipe"><i class="fas fa-trash-alt"></i></a>
             </c:if>
-            <c:if test="${not empty id}">
+            <c:if test="${not empty sessionID}">
             <c:if test="${like == 'yes'}">
             	<a href="likeornot?like=yes&rno=<%=rno%>" id="likeRecipe"><i class="fas fa-heart"></i></a>
             </c:if>

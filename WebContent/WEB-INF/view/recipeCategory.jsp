@@ -16,6 +16,8 @@
 </head>
 <body>
 <% 
+	session.getAttribute("sessionID");
+	session.getAttribute("sessionNickname");
 	ArrayList<Recipe> volist = (ArrayList<Recipe>)request.getAttribute("recipeVoList");
 	int startPage = (int)request.getAttribute("startPage");
 	int endPage = (int)request.getAttribute("endPage");

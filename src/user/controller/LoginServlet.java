@@ -63,7 +63,7 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("result", result);
 			HttpSession session=request.getSession();
 			session.setAttribute("sessionID", uid);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/riceThief_header.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/main.jsp");
 			rd.forward(request, response);
 //			response.sendRedirect("/WEB-INF/view/main.jsp"); 
 			

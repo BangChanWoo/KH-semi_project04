@@ -52,11 +52,7 @@ body {
 			<br>
 			<div class="vv">
 				<button type="submit" id="loginbtn1">로그인</button>
-				<c:if test="${ u == null }">
-					<script>
-						alert("아이디 혹은 비밀번호가 틀렸습니다.");
-					</script>
-				</c:if>
+				
 				<br>
 
 				<button id="ckid">

@@ -64,7 +64,7 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("result", result);
 			HttpSession session=request.getSession();
 			session.setAttribute("sessionID", uid);
-			session.setAttribute("nickname", nickname);
+			session.setAttribute("sessionNickname", nickname);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/main.jsp");
 			rd.forward(request, response);
 //			response.sendRedirect("/WEB-INF/view/main.jsp"); 

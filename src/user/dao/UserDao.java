@@ -37,14 +37,15 @@ public class UserDao {
 		int result=-1;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="SELECT * FROM TEST_MEMBER WHERE ID = ? AND PASSWD = ?";
+//		String sql="SELECT * FROM member WHERE ID = ? AND PASSWD = ?";
+		StringBuffer sql = new StringBuffer();
+		sql.append("SELECT pw").append(" FROM member").append(" WHERE ID = ?");
 		try {
-			pstmt=conn.prepareStatement(sql);
+			pstmt=conn.prepareStatement(sql.toString());
 			pstmt.setString(1, uid);
-			pstmt.setString(2, pw);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				if(rs.getString("uid").equals(uid) && rs.getString("pw").equals(pw)) {
+				if(rs.getString("pw").equals(pw)) {
 					return 1;
 				}else {
 					return 0;
@@ -62,7 +63,7 @@ public class UserDao {
 		int result=0;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="select count(*) from user where id=?";
+		String sql="select count(*) from member where id=?";
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, uid);

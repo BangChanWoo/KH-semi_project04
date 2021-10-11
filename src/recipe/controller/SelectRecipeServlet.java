@@ -38,14 +38,17 @@ public class SelectRecipeServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
-		String msg = request.getParameter("msg");
+		String msg = (String)request.getAttribute("msg");
 		String msgTxt = null;
 		if(msg == null) {
 			msgTxt = null;
 		}
 		else if(msg.equals("cancle")) {
 			msgTxt = "게시글 수정을 취소하였습니다.";
+		}else {
+			msgTxt = msg;
 		}
+		
 		String rnoStr = request.getParameter("rno");
 		int rno = 0;
 		if(rnoStr != null) {

@@ -44,7 +44,6 @@ public class DeleteRecipeServlet extends HttpServlet {
 		if(LoginInfo != null) {
 			id = LoginInfo.getUid();
 		}
-		System.out.println(rnoInt);
 		//로그인 기능 완료되면 삭제!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		if(id == null) {
 			id = "admin";

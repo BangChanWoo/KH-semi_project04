@@ -35,7 +35,7 @@
 	String id = (String)request.getSession().getAttribute("id");
 	Recipe vo = (Recipe)request.getAttribute("vo");
 	int rno = (int)request.getAttribute("rno");
-
+	
 	ArrayList<Ingredient> ingreList = (ArrayList<Ingredient>)request.getAttribute("ingreList");
 	ArrayList<RecipeSteps> stepList = (ArrayList<RecipeSteps>)request.getAttribute("stepList");
 	ArrayList<Recipe> commentList = (ArrayList<Recipe>)request.getAttribute("commentList");

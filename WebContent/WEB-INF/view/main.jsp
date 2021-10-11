@@ -1,3 +1,6 @@
+<%@page import="recipe.model.vo.Recipe"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="user.vo.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -10,9 +13,7 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_footer.css" /><!-- footer css -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/main.css"/>
 <title>밥도둑_메인</title>
-<%
-	String msg = (String)request.getAttribute("msg");
-%>
+<% String msg = (String)request.getAttribute("msg");%>
 <script type="text/javascript">
     <%if(msg != null){%>
     	alert("<%=msg%>");
@@ -21,12 +22,15 @@
 </head>
 <body>
 <%
+	User LoginInfo = (User)request.getSession().getAttribute("loginInfo");
+	String id = null;
+	if(LoginInfo != null){
+		id = LoginInfo.getUid();
+	}
 	
+	ArrayList<Recipe> recommendList = (ArrayList<Recipe>)request.getAttribute("recommendList");
 %>
 	<%@ include file="riceThief_header.jsp" %>
-	<%
-		session.getAttribute("sessionID");
-	%>
 	<hr>
 	<main>
         <div class="slideContainer">
@@ -56,13 +60,13 @@
         <div class="ctMargin">
             <h2 class="title-font">추천 레시피</h2>
             <div id="recommendRecipe">
-                <!--여기 java에서 for문으로 사진 <5 으로 5개까지 데이터 들고옴-->
-                <!--일단 structure-->
-                <img src="./css/alt.JPG" class="recommendImg" alt="추천 레시피">
-                <img src="./css/alt.JPG" class="recommendImg" alt="추천 레시피">
-                <img src="./css/alt.JPG" class="recommendImg" alt="추천 레시피">
-                <img src="./css/alt.JPG" class="recommendImg" alt="추천 레시피">
-                <img src="./css/alt.JPG" class="recommendImg" alt="추천 레시피">
+                <%for(Recipe recVo : recommendList){ %>
+                <div class="recommendImgWrap">
+                	<a href="selectrecipe?rno=<%=recVo.getRecipe_no()%>"><img src="<%=recVo.getRec_img()%>" class="recommendImg" alt="추천 레시피"></a>
+                	<a href="selectrecipe?rno=<%=recVo.getRecipe_no()%>"><%=recVo.getRec_title()%></a><br>
+                	<i class="fas fa-heart"></i> <%=recVo.getLikeCnt()%>
+                </div>
+                <%} %>
             </div>
         </div>
         <div id="popularRecipeContainer" class="ctMargin">

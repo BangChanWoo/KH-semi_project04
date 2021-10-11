@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import ingredient.vo.Ingredient;
@@ -28,7 +29,6 @@ public class RecipeDao {
 		try {
 			//레시피
 			ps = conn.prepareStatement(recipeInsert);
-			System.out.println(recipeVo.getUid());
 			ps.setString(1, recipeVo.getUid());
 			ps.setString(2, recipeVo.getRec_img());
 			ps.setString(3, recipeVo.getRec_title());
@@ -309,11 +309,17 @@ public class RecipeDao {
 	//delete
 	public int deleteRecipe(Connection conn, int rno) {
 		int result = -1;
+		String deleteLikeQuery = "delete from interest_recipe where recipe_no like ?";
 		String deleteStepQuery = "delete from recipe_steps where recipe_no like ?";
 		String deleteIngreQuery = "delete from ingredient where recipe_no like ?";
 		String deleteQuery = "delete from recipe where recipe_no like ?";
 		PreparedStatement ps = null;
 		try {
+			ps = conn.prepareStatement(deleteLikeQuery);
+			ps.setInt(1, rno);
+			result = ps.executeUpdate();
+			JdbcTemplate.close(ps);
+			
 			ps = conn.prepareStatement(deleteStepQuery);
 			ps.setInt(1, rno);
 			result = ps.executeUpdate();
@@ -397,5 +403,40 @@ public class RecipeDao {
 			JdbcTemplate.close(ps);
 		}
 		return result;
+	}
+	//main page
+	public ArrayList<Recipe> recommendRecipe(Connection conn) {
+		ArrayList<Recipe> volist = null;
+		Statement st = null;
+		ResultSet rs = null;
+		String recommendQuery = "select * from (select rownum rnum, t1.cnt, t1.rec_title, t1.recipe_no, t1.rec_img"
+				+ " from (select count(ir.inter_no) cnt, r.rec_title, r.recipe_no, r.rec_img"
+				+ " from recipe r left join interest_recipe ir"
+				+ " on r.recipe_no = ir.recipe_no"
+				+ " group by r.rec_title, r.recipe_no, r.rec_img"
+				+ " order by cnt desc) t1)t2"
+				+ " where t2.rnum between 1 and 5";
+		
+		try {
+			st = conn.createStatement();
+			rs = st.executeQuery(recommendQuery);
+			
+			volist = new ArrayList<Recipe>();
+			while(rs.next()) {
+				Recipe vo = new Recipe();
+				vo.setRecipe_no(rs.getInt("recipe_no"));
+				vo.setRec_img(rs.getString("rec_img"));
+				vo.setRec_title(rs.getString("rec_title"));
+				vo.setLikeCnt(rs.getInt("cnt"));
+				volist.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(st);
+		}
+		return volist;
 	}
 }

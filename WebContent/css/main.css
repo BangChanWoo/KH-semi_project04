@@ -79,12 +79,24 @@ main{
 #recommendRecipe{
     width: 100%;
     display: flex;
+    flex-wrap: nowrap;
     justify-content: left;
     margin-bottom: 5rem;
 }
-.recommendImg{
-    width: 18%;
+.recommendImgWrap{
+	width: 18%;
     margin: 1%;
+}
+.recommendImgWrap a{
+	text-decoration: none;
+	color: black;
+	font-size: 1.3rem;
+}
+.recommendImg{
+	width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 5px;
 }
 .recommendImg:hover{
 	-webkit-transform: scale(1.03);

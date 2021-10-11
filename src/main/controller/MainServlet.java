@@ -2,12 +2,16 @@ package main.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import recipe.model.service.RecipeService;
+import recipe.model.vo.Recipe;
 
 /**
  * Servlet implementation class MainServlet
@@ -33,7 +37,10 @@ public class MainServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String msg = request.getParameter("msg");
-
+		
+		ArrayList<Recipe> recommendList = new RecipeService().recommendRecipe();
+		
+		request.setAttribute("recommendList", recommendList);
 		request.setAttribute("msg", msg);
 		request.getRequestDispatcher("./WEB-INF/view/main.jsp").forward(request, response);
 	}

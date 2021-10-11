@@ -96,4 +96,12 @@ public class RecipeService {
 		JdbcTemplate.close(conn);
 		return result;
 	}
+	//recommend recipe
+	public ArrayList<Recipe> recommendRecipe() {
+		ArrayList<Recipe> volist = null;
+		Connection conn = JdbcTemplate.getConnection();
+		volist = new RecipeDao().recommendRecipe(conn);
+		JdbcTemplate.close(conn);
+		return volist;
+	}
 }

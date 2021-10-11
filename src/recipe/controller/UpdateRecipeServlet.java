@@ -1,6 +1,7 @@
 package recipe.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletContext;
@@ -162,12 +163,17 @@ public class UpdateRecipeServlet extends HttpServlet {
 			result = new RecipeService().updateRecipe(recipeVo, IngreList, stepList);
 		}
 		
+		PrintWriter out = response.getWriter();
 		if(result > 0) {
+			request.setAttribute("func", "recipeUpdate");
 			request.setAttribute("msg", "변경 성공");
-			request.getRequestDispatcher("selectrecipe?rno="+rno).forward(request, response);
+			request.setAttribute("rno", rno);
+			request.getRequestDispatcher("/WEB-INF/view/resultAlert.jsp").forward(request, response);
 		}else {
+			request.setAttribute("func", "recipeUpdate");
 			request.setAttribute("msg", "변경 실패");
-			request.getRequestDispatcher("selectrecipe?rno="+rno).forward(request, response);
+			request.setAttribute("rno", rno);
+			request.getRequestDispatcher("/WEB-INF/view/resultAlert.jsp").forward(request, response);
 		}
 	}
 

@@ -15,6 +15,8 @@ public class Recipe {
 	private String rec_video;    // 동영상
 	private int rec_cate_no;  // 카테고리 번호
 	private Date rec_write_date; // 작성시간
+	
+	private int likeCnt;
 
 	public Recipe() {}
 	//read
@@ -61,6 +63,13 @@ public class Recipe {
 		this.info_level=info_level;
 		this.rec_video=rec_video;
 		this.rec_cate_no=rec_cate_no;
+	}
+	//recommend list
+	public Recipe(String rec_img, String rec_title, int recipe_no, int likeCnt) {
+		this.rec_img = rec_img;
+		this.rec_title = rec_title;
+		this.recipe_no = recipe_no;
+		this.setLikeCnt(likeCnt);
 	}
 
 	public int getRecipe_no() {
@@ -158,7 +167,15 @@ public class Recipe {
 	public void setRec_write_date(Date rec_write_date) {
 		this.rec_write_date = rec_write_date;
 	}
-
+	
+	public int getLikeCnt() {
+		return likeCnt;
+	}
+	
+	public void setLikeCnt(int likeCnt) {
+		this.likeCnt = likeCnt;
+	}
+	
 	@Override
 	public String toString() {
 		return "Recipe [recipe_no=" + recipe_no + ", uid=" + uid + ", rec_img=" + rec_img + ", rec_title=" + rec_title
@@ -166,5 +183,4 @@ public class Recipe {
 				+ ", info_time=" + info_time + ", info_level=" + info_level + ", rec_video=" + rec_video
 				+ ", rec_cate_no=" + rec_cate_no + ", rec_write_date=" + rec_write_date + "]";
 	}
-	
 }

@@ -21,9 +21,12 @@
 </head>
 <body>
 <%
-	session.getAttribute("sessionId");
+	
 %>
 	<%@ include file="riceThief_header.jsp" %>
+	<%
+		session.getAttribute("sessionID");
+	%>
 	<hr>
 	<main>
         <div class="slideContainer">

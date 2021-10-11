@@ -23,10 +23,10 @@ public class UserService {
 		close(conn);
 		return result;
 	}
-	public int loginUser(String uid,String pw) {
+	public int loginUser(String uid,String pw,String nickname) {
 		int result=-1;
 	Connection conn=getConnection();
-	result=new UserDao().loginUser(conn, uid, pw);
+	result=new UserDao().loginUser(conn,uid,pw,nickname);
 	if(result > 0) {
 		commit(conn); 
 	}else {
@@ -35,7 +35,12 @@ public class UserService {
 	close(conn);
 	return result;
 	}
-	
+	public User dupIdCheck(String uid) {
+		Connection conn=getConnection();
+		 User u=new UserDao().dupIdCheck(conn, uid);
+		 close(conn);
+		 return u;
+	}
 	
 	
 }

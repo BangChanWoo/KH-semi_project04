@@ -33,13 +33,13 @@ public class UserDao {
 		 return result;
 	}
 	
-	public int loginUser(Connection conn,String uid,String pw) {
+	public int loginUser(Connection conn,String uid,String pw,String nickname) {
 		int result=-1;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 //		String sql="SELECT * FROM member WHERE ID = ? AND PASSWD = ?";
 		StringBuffer sql = new StringBuffer();
-		sql.append("SELECT pw").append(" FROM member").append(" WHERE ID = ?");
+		sql.append("SELECT pw,nickname").append(" FROM member").append(" WHERE ID = ?");
 		try {
 			pstmt=conn.prepareStatement(sql.toString());
 			pstmt.setString(1, uid);
@@ -59,19 +59,16 @@ public class UserDao {
 		}
 		return result;
 	}
-	public int dupIdCheck(Connection conn,String uid) {
-		int result=0;
+	
+	public User dupIdCheck(Connection conn,String uid) {
+		User u=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="select count(*) from member where id=?";
+		String sql="select * from member where id=?";
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, uid);
 			rs=pstmt.executeQuery();
-			
-			if(rs.next()) {
-				result=rs.getInt(1);
-			}
 			
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -79,8 +76,7 @@ public class UserDao {
 			close(rs);
 			close(pstmt);
 		}
-		return result;
+		return u;
 	}
-	
 	
 }

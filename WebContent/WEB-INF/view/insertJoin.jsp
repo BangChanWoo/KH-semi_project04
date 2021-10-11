@@ -15,7 +15,7 @@
             text-align: center;
         }
         #id{
-            margin-left: 55px;
+            margin-left: 10px;
         }
         .in{
             margin: 7px;
@@ -30,7 +30,6 @@
 <script>
     window.addEventListener("load",ck);
         function ck(){
-            document.getElementById("idckbtn").addEventListener("click",ckid);
             document.getElementById("joinbtn").addEventListener("click",joinsubmit);
         }
 
@@ -66,7 +65,7 @@
 </head>
 <body>
 	<header>
-        <%@ include file="riceThief_header.jsp" %>
+        <%@ include file="riceThief_header.jsp"%>
         <hr>
     </header>
 <section>
@@ -75,16 +74,11 @@
         <h1>회원가입</h1>
         </div>
         <br>
-        <form action="/joinuser" method="POST">
+        <form action="joinuser" method="POST">
             <div class="filedlable"><label class="io1">아이디</label></div>
             <div class="formlable"><input type="text" id="id" name="id" class="in" placeholder="아이디를 입력해주세요(6~16자).">
-                <button id="idckbtn">중복확인</button>
             </div>
-            <c:if test="${ result == 0}">
-			<script>
-			alert("아이디가 중복됩니다.");
-			</script>
-</c:if>
+            
            
             <div class="filedlable"><label >비밀번호</label></div>
             <div class="formlable"><input type="password" id="pw" name="pw" class="in" placeholder="비밀번호를 입력해주세요(6~16자)."></div>

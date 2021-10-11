@@ -29,7 +29,18 @@ public class JoinUserServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-	
+    /**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		
+		request.getRequestDispatcher("./WEB-INF/view/insertJoin.jsp").forward(request, response);
+		
+		
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -67,15 +78,15 @@ public class JoinUserServlet extends HttpServlet {
 		
 		int result=new UserService().insertUser(uservo);
 		
-		if(result==1) {
+		if(result>0) {
 			request.setAttribute("result",result);
 			HttpSession session=request.getSession();
 			session.setAttribute("sessionID", uid);
-			RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/main.jsp");
+			RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/view/main.jsp");
 			rd.forward(request, response);
 		}else {
-			request.setAttribute("result", 0);
-			RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/insertJoin.jsp");
+			request.setAttribute("result", result);
+			RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/view/insertJoin.jsp");
 			rd.forward(request, response);	
 		}
 		

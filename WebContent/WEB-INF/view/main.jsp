@@ -26,6 +26,7 @@
 	<%@ include file="riceThief_header.jsp" %>
 	<%
 		session.getAttribute("sessionID");
+		session.getAttribute("sessionnick");
 	%>
 	<hr>
 	<main>

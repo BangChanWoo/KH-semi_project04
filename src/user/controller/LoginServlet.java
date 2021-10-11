@@ -55,14 +55,16 @@ public class LoginServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		String uid = request.getParameter("uid");
 		String pw = request.getParameter("pw");
+		String nickname=request.getParameter("nickname");
 		
 		
-		int result = new UserService().loginUser(uid, pw);
+		int result = new UserService().loginUser(uid, pw,nickname);
 
 		if (result==1) {
 			request.setAttribute("result", result);
 			HttpSession session=request.getSession();
 			session.setAttribute("sessionID", uid);
+			session.setAttribute("nickname", nickname);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/main.jsp");
 			rd.forward(request, response);
 //			response.sendRedirect("/WEB-INF/view/main.jsp"); 

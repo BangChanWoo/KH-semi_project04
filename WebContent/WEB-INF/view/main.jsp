@@ -56,11 +56,14 @@
         <div class="ctMargin">
             <h2 class="title-font">추천 레시피</h2>
             <div id="recommendRecipe">
-                <%for(Recipe recVo : recommendList){ %>
+                <% int recCnt = 0;
+                for(;recCnt<recommendList.size(); recCnt++){ %>
                 <div class="recommendImgWrap">
-                	<a href="selectrecipe?rno=<%=recVo.getRecipe_no()%>"><img src="<%=recVo.getRec_img()%>" class="recommendImg" alt="추천 레시피"></a>
-                	<a href="selectrecipe?rno=<%=recVo.getRecipe_no()%>"><%=recVo.getRec_title()%></a><br>
-                	<i class="fas fa-heart"></i> <%=recVo.getLikeCnt()%>
+                	<img src="<%=recommendList.get(recCnt).getRec_img()%>" class="recommendImg" alt="추천 레시피">
+                	<div class="recommendImgContent">
+	                	<p><a href="selectrecipe?rno=<%=recommendList.get(recCnt).getRecipe_no()%>"><%=recommendList.get(recCnt).getRec_title()%></a></p>
+	                	<i class="fas fa-heart"></i> <%=recommendList.get(recCnt).getLikeCnt()%>
+                	</div>
                 </div>
                 <%} %>
             </div>

@@ -6,8 +6,8 @@
     font-style: normal;
 }
 @font-face {
-    font-family: 'Cafe24Oneprettynight';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff') format('woff');
+    font-family: 'RIDIBatang';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -15,8 +15,7 @@
 * {
     padding: 0;
     margin: 0;
-    font-family: 'Cafe24Oneprettynight';
-    font-weight: bold;
+    font-family: 'RIDIBatang';
 }
 body{
     background-color: white;

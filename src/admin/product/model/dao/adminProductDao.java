@@ -22,12 +22,9 @@ public class adminProductDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String productInsert="insert into productpost"
-				+ "values(pro_no.NEXTVAL,?,?,?,?,?,?,sysdate)";
-		String optionInsert="insert into product_option"
-				+ "values(pro_option_no.NEXTVAL,?,pro_no.CURRVAL)";
-		String imgInsert="insert into product_img"
-				+ "values(pro_content_no.NEXTVAL,?,pro_no.CURRVAL)";
+		String productInsert="insert into productpost values(pro_no.NEXTVAL,?,?,?,?,?,?,sysdate)";
+		String optionInsert="insert into product_option values(pro_option_no.NEXTVAL,?,pro_no.CURRVAL)";
+		String imgInsert="insert into product_img values(pro_content_no.NEXTVAL,pro_no.CURRVAL, ?)";
 		try {
 			pstmt=conn.prepareStatement(productInsert);
 			pstmt.setInt(1, productVo.getPro_cate_no());
@@ -42,12 +39,14 @@ public class adminProductDao {
 			for(int i=0; i<ProductOption.size();i++) {
 				pstmt = conn.prepareStatement(optionInsert);
 				pstmt.setString(1,ProductOption.get(i).getPro_option_content());
+				result = pstmt.executeUpdate();
 			}
 			JdbcTemplate.close(pstmt);
 			
 			for(int i=0; i<ProductImg.size();i++) {
 				pstmt = conn.prepareStatement(imgInsert);
 				pstmt.setString(1,ProductImg.get(i).getPro_content_img());
+				result = pstmt.executeUpdate();
 			}
 			JdbcTemplate.close(pstmt);
 			

@@ -206,7 +206,7 @@
 		</div>
 
 	</main>
-	</hr>
+	
 	<%@ include file="riceThief_footer.jsp" %>
 	<script>
 	$(".info_btn").click(function(){ 	
@@ -229,7 +229,7 @@
         //openWin.document.getElementById("cInput").value = document.getElementById(".info_btn").value;
 
 	}
-
+	</script>
 
 
 </body>

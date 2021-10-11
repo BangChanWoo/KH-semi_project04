@@ -10,9 +10,17 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_footer.css" /><!-- footer css -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/main.css"/>
 <title>밥도둑_관리자 메인</title>
+<%
+	String msg = (String)request.getAttribute("msg");
+%>
+<script type="text/javascript">
+    <%if(msg != null){%>
+    	alert("<%=msg%>");
+    <%}%>
+</script>
 </head>
 <body>
-<%@ include file="riceThief_header.jsp" %>
+<%@ include file="riceThief_adminHeader.jsp" %>
 	<hr>
 	<main>
         <div class="slideContainer">

@@ -26,7 +26,7 @@
 	<hr>
 	<main>
 	<h2 align = center>상품 등록</h2>
-		<form method="post" action="insertrecipe.kh" enctype="multipart/form-data" id="header">
+		<form method="post" action="insertproduct" enctype="multipart/form-data" id="header">
 			<div id="header">
 				<div id="titleImgContainer">
 					<p align="center">상품 대표 사진</p>
@@ -44,7 +44,7 @@
 						<h3>상품 옵션</h3>
 						<div id="productOption">
 							<label>상품 이름</label> 
-							<input type="text" name="productOptionName" id="productOptionName_1" required="required" placeholder=" 예) 등심 140g "> 
+							<input type="text" name="productOptionName_1" id="productOptionName_1" required="required" placeholder=" 예) 등심 140g "> 
 							<label>상품 가격</label> 
 							<input type="text" name="productOptionPrice" id="productOptionPrice_1" required="required" placeholder=" 예) 8900 ">
 							<!--<input name="addButton" type="button" style="cursor: hand" value="추가" id="btn_txtAdd"> <br>-->
@@ -94,8 +94,7 @@
 			</div>
 		</form>
 	</main>
-	<hr class="clear">
-    <%@ include file="riceThief_footer.jsp" %>
+    <!-- <%@ include file="riceThief_footer.jsp" %> -->
 		<script>
 		//배송비 
 			$('.fee_value').on('click', function() {
@@ -120,10 +119,10 @@
 			$('#btn_txtAdd').on('click', function() {
 				proOptNameId++;
 		    	proOptPriceId++;
-		    	$("#productContainer").append("<label>상품 이름</label> <input type='text' name='productOptionName_"+proOptNameId+"' id='productOptionName_'"+proOptNameId+"required='required' placeholder=' 예) 등심 140g'><br>");
+		    	$("#productContainer").append("<label>상품 이름</label> <input type='text' name='productOptionName_"+proOptNameId+"' id='productOptionName_"+proOptNameId+"'required='required' placeholder=' 예) 등심 140g'><br>");
 				//$("#productContainer").append("<label> 상품 가격</label> <input type='text' name='productOptionPrice_"+proOptPriceId+"' id='productOptionPrice_'"+proOptPriceId+"required='required' placeholder=' 예) 8900'><br>");
-		    	
 				$("#optionCount").val(proOptNameId);
+				console.log(proOptNameId);
 			});
 			
 			//상품 상세 설명 
@@ -137,6 +136,7 @@
         		stepImgId++;
         		$('#productDetailExplane').append('<div id="stepImgContainer"><img src="./css/alt.JPG" name="stepImg_'+stepId+'" id="stepImg_'+stepId+'" alt="상품 상세 정보 순서"> <input type="file" name="uploadStepImg_'+stepId+'" required="required"></div>');
         		$("#stepCount").val(stepId);
+        		console.log(stepId);
         	});
 			
 		    $('#uploadTitleImg').change(function(){
@@ -170,7 +170,6 @@
 	        	}
 	        }
 		</script>
-		
-
-</body>
+		</body>
 </html>
+

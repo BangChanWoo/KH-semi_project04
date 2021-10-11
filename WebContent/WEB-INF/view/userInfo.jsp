@@ -78,7 +78,7 @@
 	<script>
 	$(".update_btn").click(function(){
 		alert("수정 성공");
-		RequestDispatcher rd = request.getRequestDispatcher("adminMemberManagement.jsp"); //중요한 메소드!
+		RequestDispatcher rd = request.getRequestDispatcher("adminMemberManagement"); //중요한 메소드!
 		rd.forward(request, response);
 	});
 

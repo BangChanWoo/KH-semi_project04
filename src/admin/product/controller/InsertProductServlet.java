@@ -40,6 +40,12 @@ public class InsertProductServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("./WEB-INF/view/productInsert.jsp").forward(request, response);
+	}
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		User memberLoginInfo = (User)request.getSession().getAttribute("memberLoginInfo");
@@ -98,17 +104,19 @@ public class InsertProductServlet extends HttpServlet {
 		//상품 옵션
 		ArrayList<ProductOption> ProductOption = new ArrayList<ProductOption>();
 		String optionName = null;
-		String optionUnit = null;
-		//proOptNameId
+				
 		String optionCountStr=multi.getParameter("optionCount");
 		int optionCount =0;
 		if(optionCountStr != null) {
 			optionCount= Integer.parseInt(optionCountStr);
+			System.out.println("왜안돼?"+optionCount);
 		}
-		for(int i=0; i<=optionCount; i++) {
+		for(int i=1; i<=optionCount; i++) {
 			ProductOption optionVo = new ProductOption(optionName);
 			optionVo.setPro_option_content(multi.getParameter("productOptionName_"+i));
 			ProductOption.add(optionVo);
+			System.out.println("productOptionName_"+i);
+			System.out.println("옵션"+optionVo);
 		}
 		
 		ArrayList<ProductImg> ProductImg = new ArrayList<ProductImg>();
@@ -119,32 +127,27 @@ public class InsertProductServlet extends HttpServlet {
 		if(stepCount != null) {
 			stepCnt = Integer.parseInt(stepCount);
 		}
-		for(int i=0;i<=stepCnt;i++) {
+		for(int i=1;i<=stepCnt;i++) {
 			ProductImg imgVo = new ProductImg(stepImg);
 			imgVo.setPro_content_img("upload/" +multi.getFilesystemName("uploadStepImg_"+ i));
 			ProductImg.add(imgVo);
+			System.out.println("이미지"+imgVo);
 		}
 		int result = new adminProductService().insertProduct(productVo, ProductOption, ProductImg);
 		
+		System.out.println(result);
 		if(result > 0) {
 			request.setAttribute("msg", "레시피 게시글 작성을 성공했습니다.");
-			request.getRequestDispatcher("main").forward(request, response);
+			request.getRequestDispatcher("adminMain").forward(request, response);
 		}else {
 			request.setAttribute("msg", "레시피 게시글 작성을 실패했습니다.");
-			request.getRequestDispatcher("main").forward(request, response);
+			request.getRequestDispatcher("adminMain").forward(request, response);
 		}
 		
 		
 		
-		request.getRequestDispatcher("./WEB-INF/view/productInsert.jsp").forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		///WEB-INF/view
 	}
 
 }

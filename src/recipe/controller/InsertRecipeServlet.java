@@ -133,7 +133,6 @@ public class InsertRecipeServlet extends HttpServlet {
 		
 		
 		int result = new RecipeService().insertRecipe(recipeVo, IngreList, stepList);
-		
 		if(result > 0) {
 			request.setAttribute("msg", "레시피 게시글 작성을 성공했습니다.");
 			request.getRequestDispatcher("main").forward(request, response);
@@ -141,10 +140,6 @@ public class InsertRecipeServlet extends HttpServlet {
 			request.setAttribute("msg", "레시피 게시글 작성을 실패했습니다.");
 			request.getRequestDispatcher("main").forward(request, response);
 		}
-		
-		
-		//request.setAttribute("rno", rno);
-		//request.getRequestDispatcher("./recipedetail?rno="+rno).forward(request, response);
 	}
 
 }

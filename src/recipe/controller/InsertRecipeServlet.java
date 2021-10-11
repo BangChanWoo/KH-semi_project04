@@ -37,9 +37,9 @@ public class InsertRecipeServlet extends HttpServlet {
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
@@ -144,14 +144,6 @@ public class InsertRecipeServlet extends HttpServlet {
 		
 		//request.setAttribute("rno", rno);
 		//request.getRequestDispatcher("./recipedetail?rno="+rno).forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

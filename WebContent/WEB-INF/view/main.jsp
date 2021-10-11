@@ -22,13 +22,9 @@
 </head>
 <body>
 <%
-	User LoginInfo = (User)request.getSession().getAttribute("loginInfo");
-	String id = null;
-	if(LoginInfo != null){
-		id = LoginInfo.getUid();
-	}
-	
 	ArrayList<Recipe> recommendList = (ArrayList<Recipe>)request.getAttribute("recommendList");
+	session.getAttribute("sessionID");
+	session.getAttribute("sessionNickname");
 %>
 	<%@ include file="riceThief_header.jsp" %>
 	<hr>

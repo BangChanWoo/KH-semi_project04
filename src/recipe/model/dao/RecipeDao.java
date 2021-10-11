@@ -21,11 +21,11 @@ public class RecipeDao {
 		ResultSet rs = null;
 	
 		String recipeInsert = "insert into recipe"
-					+ " values(rec_seq_no.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate)";
+					+ " values(recipe_no.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate)";
 		String ingreInsert = "insert into ingredient"
-				+ " values(ingre_seq_no.NEXTVAL, ?, ?, rec_seq_no.CURRVAL)";
+				+ " values(ingre_no.NEXTVAL, ?, ?, rec_seq_no.CURRVAL)";
 		String stepInsert = "insert into recipe_steps"
-				+ " values(step_seq_no.NEXTVAL, ?, ?, rec_seq_no.CURRVAL)";
+				+ " values(step_no.NEXTVAL, ?, ?, rec_seq_no.CURRVAL)";
 		try {
 			//레시피
 			ps = conn.prepareStatement(recipeInsert);
@@ -233,9 +233,9 @@ public class RecipeDao {
 		String updateStepQuery = "update recipe_steps set step_content = ?, step_img = ? where recipe_no like ? and step_no like ?";
 		
 		String ingreInsert = "insert into ingredient"
-				+ " values(ingre_seq_no.NEXTVAL, ?, ?, ?)";
+				+ " values(ingre_no.NEXTVAL, ?, ?, ?)";
 		String stepInsert = "insert into recipe_steps"
-				+ " values(step_seq_no.NEXTVAL, ?, ?, ?)";
+				+ " values(step_no.NEXTVAL, ?, ?, ?)";
 		
 		PreparedStatement ps = null;
 		try {
@@ -371,7 +371,7 @@ public class RecipeDao {
 		int result = -1;
 		PreparedStatement ps = null;
 	
-		String likeInsertQuery = "insert into interest_recipe values(inter_seq_no.NEXTVAL, ?, sysdate, ?)";
+		String likeInsertQuery = "insert into interest_recipe values(inter_no.NEXTVAL, ?, sysdate, ?)";
 		try {
 			ps = conn.prepareStatement(likeInsertQuery);
 			ps.setString(1, id);

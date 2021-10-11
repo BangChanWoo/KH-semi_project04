@@ -33,25 +33,30 @@ public class UserDao {
 		 return result;
 	}
 	
-	public User loginUser(Connection conn,String uid,String pw) {
-		User u=null;
+	public int loginUser(Connection conn,String uid,String pw) {
+		int result=-1;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		
-		String sql="select *from member where memeber where id=? and pw=?";
-			try {
-				pstmt=conn.prepareStatement(sql);
-				pstmt.setString(1, uid);
-				pstmt.setString(2, pw);
-				rs=pstmt.executeQuery();
-		
-			}catch(Exception e) {
-				e.printStackTrace();
-			}finally {
-				close(rs);
-				close(pstmt);
+		String sql="SELECT * FROM TEST_MEMBER WHERE ID = ? AND PASSWD = ?";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, uid);
+			pstmt.setString(2, pw);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				if(rs.getString("uid").equals(uid) && rs.getString("pw").equals(pw)) {
+					return 1;
+				}else {
+					return 0;
+				}
 			}
-		return u;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
 	}
 	public int dupIdCheck(Connection conn,String uid) {
 		int result=0;

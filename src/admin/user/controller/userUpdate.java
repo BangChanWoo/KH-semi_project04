@@ -68,11 +68,14 @@ public class userUpdate extends HttpServlet {
 		System.out.println("끝");
 		int result = new adminUserService().updateUser(pw, uname, nickname, age, gender, email,  phone, address, point, kind, uid);
 		if(result==1) {
-			System.out.println("수정성공");
+			request.setAttribute("msg", "회원 수정 성공");
+			//request.getRequestDispatcher("adminMemberManagement").forward(request, response);
 		}
 		else {
-			System.out.println("수정 실패");
+			request.setAttribute("msg", "회원 수정 실패");
+			//request.getRequestDispatcher("adminMemberManagement").forward(request, response);
 		}
+		
 		request.getRequestDispatcher("./WEB-INF/view/userInfo.jsp").forward(request, response);
 	}
 

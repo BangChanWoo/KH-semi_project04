@@ -26,20 +26,17 @@
 	<hr>
 	<main>
 	<h2 align = center>상품 등록</h2>
-		<form method="post" action="#" enctype="multipart/form-data">
+		<form method="post" action="insertproduct" enctype="multipart/form-data" id="header">
 			<div id="header">
 				<div id="titleImgContainer">
 					<p align="center">상품 대표 사진</p>
-					<img id="titleImg" src="./css/alt.JPG"> <input type="file"
-						name="uploadTitleImg" id="uploadTitleImg" class="hidden_input"
-						accept="image/jpeg, image/jpg, image/png" required="required">
+					<img id="titleImg" src="./css/alt.JPG"> <input type="file"name="uploadTitleImg" id="uploadTitleImg" class="hidden_input" accept="image/jpeg, image/jpg, image/png" required="required">
 					
 				</div>
 				<div id="txtContainer">
-					<br> <label>상품 제목</label> <input type="text"
-						name="productTitle" id="productTitle" required="required"
-						placeholder=" 예) 수제 치즈 폭탄 돈까스 "> <br> <br> <label>상품
-						소개</label>
+					<br> <label>상품 제목</label> 
+					<input type="text" name="productTitle" id="productTitle" required="required" placeholder=" 예) 수제 치즈 폭탄 돈까스 "> <br> <br> 
+					<label>상품 소개</label>
 					<textarea name="productIntro" id="productIntro" required="required"
 						placeholder=" 예) 국내산 한돈을 사용한 치즈 폭탄 돈까스!"></textarea>
 					<br> <br>
@@ -47,7 +44,7 @@
 						<h3>상품 옵션</h3>
 						<div id="productOption">
 							<label>상품 이름</label> 
-							<input type="text" name="productOptionName" id="productOptionName_1" required="required" placeholder=" 예) 등심 140g "> 
+							<input type="text" name="productOptionName_1" id="productOptionName_1" required="required" placeholder=" 예) 등심 140g "> 
 							<label>상품 가격</label> 
 							<input type="text" name="productOptionPrice" id="productOptionPrice_1" required="required" placeholder=" 예) 8900 ">
 							<!--<input name="addButton" type="button" style="cursor: hand" value="추가" id="btn_txtAdd"> <br>-->
@@ -63,11 +60,12 @@
 						<option value="6006">냉동면류/냉동밥</option>
 						<option value="6007">양념육/해물요리</option>
 						<option value="6008">샐러드/도시락</option>
-					</select> <br> <br> <label><input type="radio" name="fee"
-						value="pay" class="fee_value"> 유료 배송</label> <label><input
-						type="radio" name="fee" value="free" class="fee_value"> 무료
-						배송</label> <br> <label>배송비</label><input type="text" name="feeText"
-						class="feeText">
+					</select> <br> <br> 
+					<label>유료 배송</label> 
+					<input type="radio" name="fee"value="pay" class="fee_value"> 
+					<label>무료배송</label>
+					<input type="radio" name="fee" value="free" class="fee_value">  <br> 
+					<label>배송비</label><input type="text" name="feeText" class="feeText">
 
 				</div>
 			</div>
@@ -96,8 +94,7 @@
 			</div>
 		</form>
 	</main>
-	<hr class="clear">
-    <%@ include file="riceThief_footer.jsp" %>
+    <!-- <%@ include file="riceThief_footer.jsp" %> -->
 		<script>
 		//배송비 
 			$('.fee_value').on('click', function() {
@@ -122,10 +119,10 @@
 			$('#btn_txtAdd').on('click', function() {
 				proOptNameId++;
 		    	proOptPriceId++;
-		    	$("#productContainer").append("<label>상품 이름</label> <input type='text' name='productOptionName_"+proOptNameId+"' id='productOptionName_'"+proOptNameId+"required='required' placeholder=' 예) 등심 140g'>");
-				$("#productContainer").append("<label> 상품 가격</label> <input type='text' name='productOptionPrice_"+proOptPriceId+"' id='productOptionPrice_'"+proOptPriceId+"required='required' placeholder=' 예) 8900'><br>");
-		    	
+		    	$("#productContainer").append("<label>상품 이름</label> <input type='text' name='productOptionName_"+proOptNameId+"' id='productOptionName_"+proOptNameId+"'required='required' placeholder=' 예) 등심 140g'><br>");
+				//$("#productContainer").append("<label> 상품 가격</label> <input type='text' name='productOptionPrice_"+proOptPriceId+"' id='productOptionPrice_'"+proOptPriceId+"required='required' placeholder=' 예) 8900'><br>");
 				$("#optionCount").val(proOptNameId);
+				console.log(proOptNameId);
 			});
 			
 			//상품 상세 설명 
@@ -139,6 +136,7 @@
         		stepImgId++;
         		$('#productDetailExplane').append('<div id="stepImgContainer"><img src="./css/alt.JPG" name="stepImg_'+stepId+'" id="stepImg_'+stepId+'" alt="상품 상세 정보 순서"> <input type="file" name="uploadStepImg_'+stepId+'" required="required"></div>');
         		$("#stepCount").val(stepId);
+        		console.log(stepId);
         	});
 			
 		    $('#uploadTitleImg').change(function(){
@@ -172,7 +170,6 @@
 	        	}
 	        }
 		</script>
-		
-
-</body>
+		</body>
 </html>
+

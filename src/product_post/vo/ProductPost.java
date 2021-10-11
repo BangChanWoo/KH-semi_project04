@@ -25,6 +25,15 @@ public ProductPost(int pro_no,String pro_img,String pro_title,int pro_pirce,Date
 		this.pro_delivery_fee=pro_delivery_fee;
 		this.pro_cate_no=pro_cate_no;
 	}
+//상품등록
+public ProductPost(int pro_cate_no, String pro_title, String pro_img, int pro_pirce, int pro_delivery_fee, int pro_stock) {
+	this.pro_cate_no=pro_cate_no;
+	this.pro_title=pro_title;
+	this.pro_img=pro_img;
+	this.pro_pirce=pro_pirce;
+	this.pro_delivery_fee=pro_delivery_fee;
+	this.pro_stock=pro_stock;
+}
 public int getPro_no() {
 	return pro_no;
 }

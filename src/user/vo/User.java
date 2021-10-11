@@ -19,6 +19,11 @@ public class User {
 	public User() {
 		
 	}
+	public User(String uid,String pw,String nickname) {
+		this.uid=uid;
+		this.pw=pw;
+		this.nickname=nickname;
+	}
 
 public User(String uid,String pw,String uname,String nickname,int age,char gender,String email,String phone,String address,int point) {
 		this.uid=uid;

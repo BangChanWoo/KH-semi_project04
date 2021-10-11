@@ -13,6 +13,9 @@ public ProductImg(int pro_content_no,int pro_no,String pro_content_img) {
 		this.pro_no=pro_no;
 		this.pro_content_img=pro_content_img;
 	}
+public ProductImg(String pro_content_img) {
+	this.pro_content_img=pro_content_img;
+}
 public int getPro_content_no() {
 	return pro_content_no;
 }

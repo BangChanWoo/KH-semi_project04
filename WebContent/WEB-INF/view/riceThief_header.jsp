@@ -7,16 +7,14 @@
 		<a href="./main"><img src="./css/밥도둑 로고.png" id="logoImg"></a>
         <div id="headerBtn">
         	<a href="#" id="searchBtn"><i class="fas fa-search"></i></a>
-        	<c:choose>
-        	<c:when test="${not empty sessionID}">
-        	<a href="#"> <i class="far fa-user"></i> ${sessionID} 님</a>
-			<button onclick="location.href='logout'">로그아웃</button>
-        	</c:when>
-        	<c:when test="${empty sessionID}">
-        	<button id="loginBtn" class="headerBtnStyle" onclick="location.href='login'">로그인</button>
+        	<c:if test="${ empty sessionID }">
+        		<button id="loginBtn" class="headerBtnStyle" onclick="location.href='login'">로그인</button>
         	<button id="enrollBtn" class="headerBtnStyle" onclick="location.href='joinuser'">회원가입</button>
-        	</c:when>
-        	</c:choose>
+        	</c:if>
+        	<c:if test="${not empty sessionID }">
+        	${sessionID}님 
+        		<button onclick="location.href='logout'">로그아웃</button>
+        	</c:if>
         	<button id="serviceBtn" class="headerBtnStyle">고객센터</button> 
         </div>
         <nav>

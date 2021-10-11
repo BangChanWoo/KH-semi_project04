@@ -13,7 +13,6 @@
 			<button onclick="location.href='logout'">로그아웃</button>
         	</c:when>
         	<c:when test="${empty sessionID}">
-        	<a href="login">로그인</a>
         	<button id="loginBtn" class="headerBtnStyle" onclick="location.href='login'">로그인</button>
         	<button id="enrollBtn" class="headerBtnStyle" onclick="location.href='joinuser'">회원가입</button>
         	</c:when>

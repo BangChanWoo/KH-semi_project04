@@ -114,9 +114,8 @@
         </div>
         <div id="detailCommentContainer">
             <h2>댓글 남기기</h2>
-			<form method="get" action="#" id="commentFrm">
-                <input type="hidden" name="bno" readonly>
-                <input type="hidden" name="comment"  value="comment" readonly>
+			<form method="post" action="insertcomment" id="commentFrm">
+                <input type="hidden" name="rno" readonly>
                 <textarea name="content" id="commentInput" required="required"></textarea>
 				<button type="submit" id="commentSubmitBtn">등록</button>
 			</form>

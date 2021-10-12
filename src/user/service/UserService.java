@@ -41,6 +41,11 @@ public class UserService {
 		 close(conn);
 		 return u;
 	}
-	
+	public User findId(String name,String phone) {
+		Connection conn=getConnection();
+		User u=new UserDao().findId(conn,name,phone);
+		close(conn);
+		return u;
+	}
 	
 }

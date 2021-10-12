@@ -69,6 +69,10 @@ public class UserDao {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, uid);
 			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				u=new User();
+				u.setUid(rs.getString("uid"));
+			}
 			
 		}catch(Exception e) {
 			e.printStackTrace();

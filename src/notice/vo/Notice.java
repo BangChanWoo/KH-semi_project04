@@ -10,6 +10,7 @@ public class Notice {
 	private String notice_video; //동영상
 	private String notice_img; //사진
 	private Date notice_time; //작성시간
+	private String notice_cate_no; //카테고리 번호
 	
 	public Notice() {
 	}
@@ -17,10 +18,17 @@ public class Notice {
 		this.notice_num=notice_num;
 		this.uid=uid;
 		this.notice_title=notice_title;
-		this. notice_content= notice_content;
+		this.notice_content= notice_content;
 		this.notice_video=notice_video;
 		this.notice_img=notice_img;
 		this.notice_time=notice_time;
+		this.notice_cate_no=notice_cate_no;
+	}
+	public String getNotice_cate_no() {
+		return notice_cate_no;
+	}
+	public void setNotice_cate_no(String notice_cate_no) {
+		this.notice_cate_no = notice_cate_no;
 	}
 	public int getNotice_num() {
 		return notice_num;
@@ -68,7 +76,8 @@ public class Notice {
 	public String toString() {
 		return "Notice [notice_num=" + notice_num + ", uid=" + uid + ", notice_title=" + notice_title
 				+ ", notice_content=" + notice_content + ", notice_video=" + notice_video + ", notice_img=" + notice_img
-				+ ", notice_time=" + notice_time + "]";
+				+ ", notice_time=" + notice_time + ", notice_cate_no=" + notice_cate_no + "]";
 	}
+	
 	
 }

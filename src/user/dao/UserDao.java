@@ -82,5 +82,28 @@ public class UserDao {
 		}
 		return u;
 	}
+	public User findId(Connection conn,String uname,String phone) {
+		User u=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="select id from member where name=? and  phone=? ";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, uname);
+			pstmt.setString(2, phone);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				u=new User();
+				u.setUid(rs.getString("uid"));
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return u;
+	}
 	
 }

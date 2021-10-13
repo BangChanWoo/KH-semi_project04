@@ -12,6 +12,9 @@
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <script src="https://kit.fontawesome.com/616f27e0c4.js" crossorigin="anonymous"></script>
+<!-- jquery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/basic.css" />  <!-- 공통 css -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_header.css" /> <!-- header css -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_footer.css" /><!-- footer css -->
@@ -28,8 +31,6 @@
 </head>
 <body>
 <%
-	session.getAttribute("sessionID");
-	session.getAttribute("sessionNickname");
 	Recipe vo = (Recipe)request.getAttribute("vo");
 	int rno = (int)request.getAttribute("rno");
 	
@@ -50,12 +51,12 @@
             <a href="#" onclick="deleteAlert()" id="deleteRecipe"><i class="fas fa-trash-alt"></i></a>
             </c:if>
             <c:if test="${not empty sessionID}">
-            <c:if test="${like == 'yes'}">
-            	<a href="likeornot?like=yes&rno=<%=rno%>" id="likeRecipe"><i class="fas fa-heart"></i></a>
-            </c:if>
-            <c:if test="${like == null}">
-            	<a href="likeornot?rno=<%=rno%>" id="likeRecipe"><i class="far fa-heart"></i></a>
-            </c:if>
+	            <c:if test="${like == 'yes'}">
+	            	<a href="likeornot?like=yes&rno=<%=rno%>" id="likeRecipe"><i class="fas fa-heart"></i></a>
+	            </c:if>
+	            <c:if test="${like == null}">
+	            	<a href="likeornot?rno=<%=rno%>" id="likeRecipe"><i class="far fa-heart"></i></a>
+	            </c:if>
             </c:if>
             <a href="#" onclick="recipeShare()" id="shareRecipe"><i class="fas fa-share-square"></i></a>
         </div>
@@ -133,9 +134,17 @@
                 	<hr class="clear">
                     <div class="commentUser">
                         <i class="far fa-comment"></i>
-                        <p><%=cm.getUid() %></p>
+                        <p><%=cm.getUid()%></p>
                     </div>
                     <p class="commentContent"><%=cm.getCom_content()%></p>
+                    <c:set var="getId" value="<%=cm.getUid() %>"/>
+                    <c:if test="${sessionID == getId or sessionID == 'admin'}">
+		            <a href="updatecomment?comno=<%=cm.getComment_no()%>"><i class="fas fa-edit"></i></a>
+		            <a href="#" onclick="deleteCommentAlert(<%=cm.getComment_no()%>)"><i class="fas fa-trash-alt"></i></a>
+		            </c:if>
+		            <c:if test="${sessionID == vo.getUid() or sessionID == 'admin'}">
+		            	<p><a href="#" id="recommentToggle"><i class="fas fa-comment"></i> 답글쓰기</a></p>
+		            </c:if>
                 </li>
                 <%} %>
             </ul>
@@ -159,12 +168,32 @@
 	function deleteAlert(){
 		if (confirm("정말 게시글을 삭제하시겠습니까?") == true){
 			//확인 버튼을 눌렀을 때 실행 할 코드
-			location.href = "deleterecipe?rno=<%=rno%>&writer=<%=vo.getUid()%>"
+			location.href = "deleterecipe?rno=<%=rno%>&writer=<%=vo.getUid()%>";
 			return true;
 		}else{   
 			alert("게시글 삭제를 취소하였습니다.")
 			return false;
 		}
+	}
+	function deleteCommentAlert(comno){
+		if (confirm("정말 댓글을 삭제하시겠습니까?") == true){
+			//확인 버튼을 눌렀을 때 실행 할 코드
+			location.href = "deletecomment?rno=<%=rno%>&comno="+comno;
+			return true;
+		}else{   
+			alert("게시글 댓글 삭제를 취소하였습니다.")
+			return false;
+		}
+	}
+	$('#recommentToggle').click(function(e){ e.preventDefault(); });
+	$('#recommentToggle').click(recomment());
+	function recomment(){
+		$("#detailCommentContainer ul li").append("<br><hr style='border: solid 1px #9a7b6c'><h4>답글 남기기</h4>"
+		+"<form method='post' action='insertcomment' id='commentFrm'>"
+		+"<input type='hidden' name='rno' value='<%=rno%>' readonly='readonly'>"
+		+"<textarea name='commentInput' id='commentInput' required='required'></textarea>"
+		+"<button type='submit' id='commentSubmitBtn'>등록</button>"
+		+"</form>")
 	}
 	function recipeShare(){
 		var url = '';

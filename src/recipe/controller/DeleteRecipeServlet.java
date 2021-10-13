@@ -33,14 +33,13 @@ public class DeleteRecipeServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
-		String rno = request.getParameter("rno");
-		int rnoInt = 0;
-		if(rno != null) {
-			rnoInt = Integer.parseInt(rno);  //눌려진 페이지
+		String rnoStr = request.getParameter("rno");
+		int rno = 0;
+		if(rnoStr != null) {
+			rno = Integer.parseInt(rnoStr);  //눌려진 페이지
 		}
-		String id = (String)request.getSession().getAttribute("sessionID");
 		
-		int result = new RecipeService().deleteRecipe(rnoInt);
+		int result = new RecipeService().deleteRecipe(rno);
 		
 		if(result > 0) {
 			request.setAttribute("rno", rno);
@@ -54,13 +53,4 @@ public class DeleteRecipeServlet extends HttpServlet {
 			request.getRequestDispatcher("./WEB-INF/view/resultAlert.jsp").forward(request, response);
 		}
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }

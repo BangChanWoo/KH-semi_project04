@@ -6,6 +6,9 @@ main{
 h2{
 	font-size: 2.2rem;
 }
+a{
+	color: #9a7b6c;
+}
 #detailImgContainer{
     position: relative;
     width: 35rem;

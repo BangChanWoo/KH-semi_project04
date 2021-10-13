@@ -122,6 +122,5 @@ public class SelectRecipeServlet extends HttpServlet {
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
 		request.getRequestDispatcher("./WEB-INF/view/recipeDetail.jsp").forward(request, response);
-		
 	}
 }

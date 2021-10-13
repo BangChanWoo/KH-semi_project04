@@ -92,4 +92,39 @@ public class CommentDao {
 		}
 		return volist;
 	}
+	//update
+	public int updateComment(Connection conn, Comment vo) {
+		int result = -1;
+		String updateQuery = "update recipe_comment set com_content = ? where comment_no like ?";
+		PreparedStatement ps = null;
+		try {
+			ps = conn.prepareStatement(updateQuery);
+			ps.setString(1, vo.getCom_content());
+			ps.setInt(2, vo.getComment_no());
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("연결 실패");
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(ps);
+		}
+		return result;
+	}
+	//delete
+	public int deleteComment(Connection conn, int comno) {
+		int result = -1;
+		String deleteQuery = "delete from recipe_comment where comment_no like ?";
+		PreparedStatement ps = null;
+		try {
+			ps = conn.prepareStatement(deleteQuery);
+			ps.setInt(1, comno);
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("연결 실패");
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(ps);
+		}
+		return result;
+	}
 }

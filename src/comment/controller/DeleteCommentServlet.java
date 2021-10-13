@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import comment.service.CommentService;
+import recipe.model.service.RecipeService;
+
 /**
  * Servlet implementation class DeleteCommentServlet
  */
@@ -26,8 +29,29 @@ public class DeleteCommentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html; charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		
+		String rnoStr = request.getParameter("rno");
+		int rno = 0;
+		if(rnoStr != null) {
+			rno = Integer.parseInt(rnoStr);  //눌려진 페이지
+		}
+		
+		String comnoStr = request.getParameter("comno");
+		int comno = 0;
+		if(comnoStr != null) {
+			comno = Integer.parseInt(comnoStr);  //눌려진 페이지
+		}
+		
+		int result = new CommentService().deleteComment(comno);
+		
+		if(result > 0) {
+			response.sendRedirect("selectrecipe?rno="+rno);
+		}else {
+			response.sendRedirect("selectrecipe?rno="+rno);
+		}
 	}
 
 	/**

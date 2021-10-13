@@ -28,6 +28,10 @@ hr{
 button{
 	cursor: pointer;
 }
+a{
+	text-decoration: none;
+	color: black;
+}
 /*기본적인것들*/
 .selectLinkColor{
     color: #9a7b6c;

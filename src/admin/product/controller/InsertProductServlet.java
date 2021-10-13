@@ -138,10 +138,10 @@ public class InsertProductServlet extends HttpServlet {
 		System.out.println(result);
 		if(result > 0) {
 			request.setAttribute("msg", "레시피 게시글 작성을 성공했습니다.");
-			request.getRequestDispatcher("adminMain").forward(request, response);
+			request.getRequestDispatcher("adminMainServlet").forward(request, response);
 		}else {
 			request.setAttribute("msg", "레시피 게시글 작성을 실패했습니다.");
-			request.getRequestDispatcher("adminMain").forward(request, response);
+			request.getRequestDispatcher("adminMainServlet").forward(request, response);
 		}
 		
 		

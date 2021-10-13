@@ -13,6 +13,8 @@ public ProductOption(int pro_option_no,int pro_no,String pro_option_content) {
 		this.pro_no=pro_no;
 		this.pro_option_content=pro_option_content;
 	}
+
+
 public ProductOption(String pro_option_content) {
 	this.pro_option_content=pro_option_content;
 }

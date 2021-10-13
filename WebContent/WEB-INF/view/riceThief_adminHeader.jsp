@@ -1,18 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <header>
 	<div>
 		<a href="main.jsp"><img src="./css/밥도둑 로고.png" id="logoImg"></a>
         <div id="headerBtn">
         	<a href="#" id="searchBtn"><i class="fas fa-search"></i></a>
-        	<button id="loginBtn" class="headerBtnStyle">로그인</button>
-        	<button id="enrollBtn" class="headerBtnStyle">회원가입</button>
-        	<button id="serviceBtn" class="headerBtnStyle">고객센터</button>
+        	<c:choose>
+        	<c:when test="${not empty sessionID}">
+        	<a href="#"> <i class="far fa-user"></i> ${sessionID} 님</a>
+			<button class="headerBtnStyle" onclick="location.href='logout'">로그아웃</button>
+        	</c:when>
+        	<c:when test="${empty sessionID}">
+        	<button id="loginBtn" class="headerBtnStyle" onclick="location.href='login'">로그인</button>
+        	<button id="enrollBtn" class="headerBtnStyle" onclick="location.href='joinuser'">회원가입</button>
+        	</c:when>
+        	</c:choose>
+        	<button id="serviceBtn" class="headerBtnStyle">고객센터</button> 
         </div>
         <nav>
         	<ul>
-        		<li id="navRecipe"><a href="recipeCategory.jsp">레시피</a></li>
-        		<li id="navStore"><a href="#">스토어</a></li>
-        		<li id="navUser_admin"><a href="#">회원관리</a></li>
+        		<li id="navRecipe"><a href="recipeboard">레시피</a></li>
+        		<li id="navStore"><a href="productboard">스토어</a></li>
+        		<li id="navUser_admin"><a href="SelectUserServlet">회원관리</a></li>
         		<li id="navSale_admin"><a href="#">매출관리</a></li>
         		<li id="navService_admin"><a href="#">고객센터</a></li>
         	</ul>

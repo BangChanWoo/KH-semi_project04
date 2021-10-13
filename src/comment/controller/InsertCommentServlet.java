@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import comment.service.CommentService;
+import comment.vo.Comment;
+
 /**
  * Servlet implementation class InsertCommentServlet
  */
@@ -37,7 +40,16 @@ public class InsertCommentServlet extends HttpServlet {
 		}
 		String commentInput = request.getParameter("commentInput");
 		
+		String id = (String)request.getSession().getAttribute("sessionID");
+
+		Comment vo = new Comment(rno, id, commentInput);
+		int result = new CommentService().insertComment(vo);
 		
+		if(result > 0) {
+			response.sendRedirect("selectrecipe?rno="+rno);
+		}else {
+			response.sendRedirect("selectrecipe?rno="+rno);
+		}
 	}
 
 }

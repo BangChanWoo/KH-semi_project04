@@ -17,6 +17,11 @@ public class Comment {
 		this.savedate = savedate;
 		this.com_content = com_content;
 	}
+	public Comment(int recipe_no,String uid,String com_content) {
+		this.recipe_no = recipe_no;
+		this.uid = uid;
+		this.com_content = com_content;
+	}
 	public int getRecipe_no() {
 		return recipe_no;
 	}

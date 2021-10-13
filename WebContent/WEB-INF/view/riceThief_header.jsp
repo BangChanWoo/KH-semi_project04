@@ -9,7 +9,7 @@
         	<a href="#" id="searchBtn"><i class="fas fa-search"></i></a>
         	<c:choose>
         	<c:when test="${not empty sessionID}">
-        	<a href="#"> <i class="far fa-user"></i> ${sessionID} 님</a>
+        	<a href="#"> <i class="far fa-user"></i> ${sessionNickname} 님</a>
 			<button class="headerBtnStyle" onclick="location.href='logout'">로그아웃</button>
         	</c:when>
         	<c:when test="${empty sessionID}">

@@ -161,7 +161,7 @@ h2{
     clear: both;
     list-style-type: none;
     width: 90%;
-    margin: auto;
+    margin: 4rem auto 0 auto;
 }
 .commentUser{
     float: left;
@@ -187,7 +187,7 @@ h2{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     gap: 0.5rem;
-    margin: 4rem auto 6rem;
+    margin: 4rem auto 4rem;
 }
 .pageBtn{
     border: 0;

@@ -28,6 +28,8 @@
 </head>
 <body>
 <%
+	session.getAttribute("sessionID");
+	session.getAttribute("sessionNickname");
 	Recipe vo = (Recipe)request.getAttribute("vo");
 	int rno = (int)request.getAttribute("rno");
 	
@@ -117,12 +119,14 @@
             </ul>
         </div>
         <div id="detailCommentContainer">
+            <c:if test="${not empty sessionID}">
             <h2>댓글 남기기</h2>
 			<form method="post" action="insertcomment" id="commentFrm">
-                <input type="hidden" name="rno" readonly>
-                <textarea name="content" id="commentInput" required="required"></textarea>
+                <input type="hidden" name="rno" value="<%=rno%>" readonly="readonly">
+                <textarea name="commentInput" id="commentInput" required="required"></textarea>
 				<button type="submit" id="commentSubmitBtn">등록</button>
 			</form>
+            </c:if>
             <ul>
                 <%for(Comment cm : commentList){ %>
                 <li>

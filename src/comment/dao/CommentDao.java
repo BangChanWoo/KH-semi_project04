@@ -6,9 +6,37 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import comment.vo.Comment;
+import ingredient.vo.Ingredient;
+import recipe.model.vo.Recipe;
+import recipe_steps.vo.RecipeSteps;
 import riceThief.common.JdbcTemplate;
 
 public class CommentDao {
+	public CommentDao() {}
+	
+	public int insertComment(Connection conn, Comment vo) {
+		int result = -1;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+	
+		String commentInsert = "insert into recipe_comment(comment_no, recipe_no, id, com_content)"
+					+ " values(comment_no.NEXTVAL, ?, ?, ?)";
+		try {
+			ps = conn.prepareStatement(commentInsert);
+			ps.setInt(1, vo.getRecipe_no());
+			ps.setString(2, vo.getUid());
+			ps.setString(3, vo.getCom_content());
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			//-1
+			System.out.println("연결 실패");
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(ps);
+		}
+		return result;
+	}
 	public int getCommentCount(Connection conn, int rno) {
 		int result = 0;
 		String countAllQuery = "select count(comment_no) from recipe_comment where recipe_no like ?";

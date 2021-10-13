@@ -84,7 +84,7 @@ public class SelectRecipeServlet extends HttpServlet {
 			currentPage = Integer.parseInt(pageNum);
 		}
 		rCount = new CommentService().getCommentCount(rno);
-		System.out.println(rCount);
+
 		pageCount = (rCount/PAGE_SIZE) + (rCount%PAGE_SIZE == 0 ? 0 : 1);
 
 		startRnum = (currentPage - 1) * PAGE_SIZE + 1;

@@ -9,8 +9,19 @@
         	<a href="#" id="searchBtn"><i class="fas fa-search"></i></a>
         	<c:choose>
         	<c:when test="${not empty sessionID}">
-        	<a href="#"> <i class="far fa-user"></i> ${sessionNickname} 님</a>
+        	<a href="#"> <i class="far fa-user"></i> ${sessionNickName} 님</a>
+        	
 			<button class="headerBtnStyle" onclick="location.href='logout'">로그아웃</button>
+			<div class="dropdown">
+				<button onclick="myFunction()" class="dropbtn">마이페이지</button>
+				<div id="myDropdown" class="dropdown-content">
+					<a href="#">정보수정</a>
+					<a href="#">장바구니</a>
+					<a href="#">결제내역</a>
+					<a href="#">1:1문의</a>
+					<!--마이페이지메뉴 //TODO  -->
+				</div>
+			</div>
         	</c:when>
         	<c:when test="${empty sessionID}">
         	<button id="loginBtn" class="headerBtnStyle" onclick="location.href='login'">로그인</button>

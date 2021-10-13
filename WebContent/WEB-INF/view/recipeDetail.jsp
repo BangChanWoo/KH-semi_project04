@@ -124,6 +124,7 @@
             <h2>댓글 남기기</h2>
 			<form method="post" action="insertcomment" id="commentFrm">
                 <input type="hidden" name="rno" value="<%=rno%>" readonly="readonly">
+                <input type='hidden' name='level' value='0' readonly='readonly'>
                 <textarea name="commentInput" id="commentInput" required="required"></textarea>
 				<button type="submit" id="commentSubmitBtn">등록</button>
 			</form>
@@ -131,24 +132,54 @@
             <ul>
                 <%for(Comment cm : commentList){ %>
                 <li>
-                	<hr class="clear">
-                    <div class="commentUser">
-                        <i class="far fa-comment"></i>
-                        <p><%=cm.getUid()%></p>
+                	<%if(cm.getCom_level() == 0){ %>
+                	<div>
+	                	<hr class="clear" style="margin-top:1rem">
+	                    <div class="commentUser">
+	                        <i class="far fa-comment"></i>
+	                        <p><%=cm.getUid()%></p>
+	                    </div>
+	                    <p class="commentContent"><%=cm.getCom_content()%></p>
                     </div>
-                    <p class="commentContent"><%=cm.getCom_content()%></p>
                     <c:set var="getId" value="<%=cm.getUid() %>"/>
-                    <c:if test="${sessionID == getId or sessionID == 'admin'}">
+		            <c:if test="${sessionID == getId or sessionID == 'admin'}">
 		            <a href="updatecomment?comno=<%=cm.getComment_no()%>"><i class="fas fa-edit"></i></a>
 		            <a href="#" onclick="deleteCommentAlert(<%=cm.getComment_no()%>)"><i class="fas fa-trash-alt"></i></a>
 		            </c:if>
 		            <c:if test="${sessionID == vo.getUid() or sessionID == 'admin'}">
-		            	<p><a href="#" id="recommentToggle"><i class="fas fa-comment"></i> 답글쓰기</a></p>
+		            	<p><a href="#" onclick="recomment('recomField_<%=cm.getComment_no()%>')" class="recommentToggle"><i class="fas fa-comment"></i> 답글쓰기</a></p>
 		            </c:if>
+		            <div id="recomField_<%=cm.getComment_no()%>" style="display: none;">
+		            	<hr class="clear">
+			            <form method='post' action='insertcomment' id='commentFrm'>
+			            <input type='hidden' name='rno' value='<%=rno%>' readonly='readonly'>
+			            <input type='hidden' name='level' value='1' readonly='readonly'>
+			            <input type='hidden' name='origin' value='<%=cm.getComment_no()%>' readonly='readonly'>
+			            <textarea name='commentInput' id='commentInput' required='required'></textarea>
+			            <button type='submit' id='commentSubmitBtn'>등록</button>
+			            </form>
+		            </div>
+                    
+		            <% } %>
+		            <%if(cm.getCom_level() == 1){ %>
+		            <div class="recommentStyle">
+	                    <div class="commentUser">
+	                        <i class="fas fa-comment"></i>
+	                        <p><%=cm.getUid()%></p>
+	                    </div>
+	                    <p class="commentContent"><%=cm.getCom_content()%></p>
+	                    <c:set var="getId" value="<%=cm.getUid() %>"/>
+			            <c:if test="${sessionID == getId or sessionID == 'admin'}">
+			            <a href="updatecomment?comno=<%=cm.getComment_no()%>"><i class="fas fa-edit"></i></a>
+			            <a href="#" onclick="deleteCommentAlert(<%=cm.getComment_no()%>)"><i class="fas fa-trash-alt"></i></a>
+			            </c:if>
+	                    <hr class="clear">
+	                </div>
+		            <%} %>
                 </li>
                 <%} %>
             </ul>
-            <hr class="clear" style="border: 0">
+            <hr class="clear" style="border: 0;">
             <div id="pageBtnAll">
 	        	<%if(startPage > 1){%>
 	            <a class="pageBtn" href="selectrecipe?rno=<%=rno%>&pagenum=<%=startPage-1%>"><i class="fas fa-chevron-left"></i></a>
@@ -185,15 +216,9 @@
 			return false;
 		}
 	}
-	$('#recommentToggle').click(function(e){ e.preventDefault(); });
-	$('#recommentToggle').click(recomment());
-	function recomment(){
-		$("#detailCommentContainer ul li").append("<br><hr style='border: solid 1px #9a7b6c'><h4>답글 남기기</h4>"
-		+"<form method='post' action='insertcomment' id='commentFrm'>"
-		+"<input type='hidden' name='rno' value='<%=rno%>' readonly='readonly'>"
-		+"<textarea name='commentInput' id='commentInput' required='required'></textarea>"
-		+"<button type='submit' id='commentSubmitBtn'>등록</button>"
-		+"</form>")
+	$('.recommentToggle').click(function(e){ e.preventDefault(); });
+	function recomment(id){
+		$("#"+id).toggle();
 	}
 	function recipeShare(){
 		var url = '';

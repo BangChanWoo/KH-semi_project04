@@ -38,11 +38,22 @@ public class InsertCommentServlet extends HttpServlet {
 		if(rnoStr != null) {
 			rno = Integer.parseInt(rnoStr);
 		}
+		String levelStr = request.getParameter("level");
+		int level = 0;
+		if(levelStr != null) {
+			level = Integer.parseInt(levelStr);
+		}
+		String originStr = request.getParameter("origin");
+		int origin = 0;
+		if(originStr != null) {
+			origin = Integer.parseInt(originStr);
+		}
+		
 		String commentInput = request.getParameter("commentInput");
 		
 		String id = (String)request.getSession().getAttribute("sessionID");
 
-		Comment vo = new Comment(rno, id, commentInput);
+		Comment vo = new Comment(rno, id, level, origin, commentInput);
 		int result = new CommentService().insertComment(vo);
 		
 		if(result > 0) {

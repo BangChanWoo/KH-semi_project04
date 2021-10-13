@@ -184,6 +184,13 @@ a{
     clear: both;
     border: solid 1px #CFB9AF;
 }
+.recommentStyle{
+	clear:both;
+	width: 80%;
+	margin: auto;
+	background-color: #f8f3ef;
+}
+
 #pageBtnAll{
     width: 13rem;
     height: 2rem;

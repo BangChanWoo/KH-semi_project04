@@ -19,13 +19,25 @@ public class CommentDao {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 	
-		String commentInsert = "insert into recipe_comment(comment_no, recipe_no, id, com_content)"
-					+ " values(comment_no.NEXTVAL, ?, ?, ?)";
+		String commentInsert = "insert into recipe_comment(comment_no, recipe_no, id, com_level, com_origin, com_content)"
+					+ " values(comment_no.NEXTVAL, ?, ?, ?, comment_no.currval, ?)";
+		String recommentInsert = "insert into recipe_comment(comment_no, recipe_no, id, com_level, com_origin, com_content)"
+				+ " values(comment_no.NEXTVAL, ?, ?, ?, ?, ?)";
 		try {
-			ps = conn.prepareStatement(commentInsert);
-			ps.setInt(1, vo.getRecipe_no());
-			ps.setString(2, vo.getUid());
-			ps.setString(3, vo.getCom_content());
+			if(vo.getCom_origin() == 0) {
+				ps = conn.prepareStatement(commentInsert);
+				ps.setInt(1, vo.getRecipe_no());
+				ps.setString(2, vo.getUid());
+				ps.setInt(3, vo.getCom_level());
+				ps.setString(4, vo.getCom_content());
+			}else {
+				ps = conn.prepareStatement(recommentInsert);
+				ps.setInt(1, vo.getRecipe_no());
+				ps.setString(2, vo.getUid());
+				ps.setInt(3, vo.getCom_level());
+				ps.setInt(4, vo.getCom_origin());
+				ps.setString(5, vo.getCom_content());
+			}
 			result = ps.executeUpdate();
 		} catch (Exception e) {
 			//-1
@@ -64,7 +76,7 @@ public class CommentDao {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String selectAllquery = "select t3.*"
-				+ " from (select rownum r, t2.* from (select t1.* from recipe_comment t1 where recipe_no like ? order by comment_no desc) t2) t3"
+				+ " from (select rownum r, t2.* from (select t1.* from recipe_comment t1 where recipe_no like ? order by com_origin desc, com_level asc) t2) t3"
 				+ " where t3.r between ? and ?";
 		try {
 			ps = conn.prepareStatement(selectAllquery);
@@ -79,6 +91,8 @@ public class CommentDao {
 				vo.setComment_no(rs.getInt("comment_no"));
 				vo.setRecipe_no(rs.getInt("recipe_no"));
 				vo.setUid(rs.getString("id"));
+				vo.setCom_level(rs.getInt("com_level"));
+				vo.setCom_origin(rs.getInt("com_origin"));
 				vo.setSavedate(rs.getDate("com_date"));
 				vo.setCom_content(rs.getString("com_content"));
 				volist.add(vo);

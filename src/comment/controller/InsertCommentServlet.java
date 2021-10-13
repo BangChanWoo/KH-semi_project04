@@ -1,4 +1,4 @@
-package recipe.comment.controller;
+package comment.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

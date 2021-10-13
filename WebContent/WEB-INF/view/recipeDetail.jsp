@@ -1,3 +1,4 @@
+<%@page import="comment.vo.Comment"%>
 <%@page import="recipe_steps.vo.RecipeSteps"%>
 <%@page import="ingredient.vo.Ingredient"%>
 <%@page import="java.util.ArrayList"%>
@@ -32,7 +33,10 @@
 	
 	ArrayList<Ingredient> ingreList = (ArrayList<Ingredient>)request.getAttribute("ingreList");
 	ArrayList<RecipeSteps> stepList = (ArrayList<RecipeSteps>)request.getAttribute("stepList");
-	ArrayList<Recipe> commentList = (ArrayList<Recipe>)request.getAttribute("commentList");
+	ArrayList<Comment> commentList = (ArrayList<Comment>)request.getAttribute("commentList");
+	int startPage = (int)request.getAttribute("startPage");
+	int endPage = (int)request.getAttribute("endPage");
+	int pageCount = (int)request.getAttribute("pageCount");
 %>
 	<%@ include file="riceThief_header.jsp" %>
 	<hr>
@@ -120,33 +124,29 @@
 				<button type="submit" id="commentSubmitBtn">등록</button>
 			</form>
             <ul>
-                <hr>
+                <%for(Comment cm : commentList){ %>
                 <li>
-                <hr class="clear">
+                	<hr class="clear">
                     <div class="commentUser">
                         <i class="far fa-comment"></i>
-                        <p>user1</p>
+                        <p><%=cm.getUid() %></p>
                     </div>
-                    <p class="commentContent">댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용</p>
+                    <p class="commentContent"><%=cm.getCom_content()%></p>
                 </li>
-                <hr class="clear">
-                <li>
-                    <div class="commentUser">
-                        <i class="far fa-comment"></i>
-                        <p>user1</p>
-                    </div>
-                    <p class="commentContent">댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용</p>
-                </li>
-                <hr class="clear">
-                <li>
-                    <div class="commentUser">
-                        <i class="far fa-comment"></i>
-                        <p>user1</p>
-                    </div>
-                    <p class="commentContent">댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용</p>
-                </li>
-                <hr class="clear">
+                <%} %>
             </ul>
+            <hr class="clear" style="border: 0">
+            <div id="pageBtnAll">
+	        	<%if(startPage > 1){%>
+	            <a class="pageBtn" href="selectrecipe?rno=<%=rno%>&pagenum=<%=startPage-1%>"><i class="fas fa-chevron-left"></i></a>
+	            <%} %>
+	            <%for (int i = startPage; i <= endPage; i++) {%>
+	            <a id="pageBtn_<%=i%>" class="pageBtn" href="selectrecipe?rno=<%=rno%>&pagenum=<%=i%>"><%=i%></a>
+	            <%} %>
+	            <%if(endPage < pageCount){%>
+	            <a class="pageBtn" href="selectrecipe?rno=<%=rno%>&pagenum=<%=endPage+1%>"><i class="fas fa-chevron-right"></i></a>
+	            <%} %>
+	        </div>
         </div>
     </main>
     <hr>

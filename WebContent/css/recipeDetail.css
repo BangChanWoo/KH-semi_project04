@@ -139,6 +139,8 @@ h2{
     border-radius: 5px;
 }
 #commentFrm{
+	float:left;
+	width: 100%;
     margin: 1rem 0 1rem 7rem;
 }
 #commentInput{
@@ -178,4 +180,25 @@ h2{
 .clear{
     clear: both;
     border: solid 1px #CFB9AF;
+}
+#pageBtnAll{
+    width: 13rem;
+    height: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 0.5rem;
+    margin: 4rem auto 6rem;
+}
+.pageBtn{
+    border: 0;
+    border-radius: 5px;
+    background-color: #CFB9AF;
+    text-align: center;
+    line-height: 2rem;
+    text-decoration: none;
+    color: black;
+    font-size: 1.3rem;
+}
+.pageBtn:hover{
+    background-color: #9a7b6c;
 }

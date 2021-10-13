@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import comment.service.CommentService;
+import comment.vo.Comment;
 import ingredient.vo.Ingredient;
 import recipe.model.service.RecipeService;
 import recipe.model.vo.Recipe;
@@ -54,15 +56,7 @@ public class SelectRecipeServlet extends HttpServlet {
 		if(rnoStr != null) {
 			rno = Integer.parseInt(rnoStr);
 		}
-		User LoginInfo = (User)request.getSession().getAttribute("LoginInfo");
-		String id = null;
-		if(LoginInfo != null) {
-			id = LoginInfo.getUid();
-		}
-		//로그인 기능 완료되면 삭제!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		if(id == null) {
-			id = "kyy806";
-		}
+		String id = (String)request.getSession().getAttribute("sessionID");
 				
 		int result = new RecipeService().likeRead(rno, id);
 		//게시글 한개 정보
@@ -75,9 +69,43 @@ public class SelectRecipeServlet extends HttpServlet {
 		ArrayList<RecipeSteps> stepList = new RecipeService().stepList(rno);
 		
 		//게시글에 달린 댓글 list
-		//ArrayList<Recipe> commentList = new RecipeService().commentList(rno);
+		final int PAGE_SIZE = 5;  //한페이지당 글 수 
+		final int PAGE_BLOCK = 3;  //한화면에 나타날 페이지 링크 수
+		int rCount = 0;  //총 글수
+		int pageCount = 0;  //총페이지 수 
+		int startPage = 1;  //화면에 나타날 시작페이지
+		int endPage = 1;  //화면에 나타날 마지막페이지
+		int currentPage =1;  //눌려진 페이지
+		int startRnum = 1; //화면에 나타날 글 번호
+		int endRnum = 1; //화면에 나타날 글 번호
 		
-		System.out.println(result);
+		String pageNum = request.getParameter("pagenum");
+		if(pageNum != null) {
+			currentPage = Integer.parseInt(pageNum);
+		}
+		rCount = new CommentService().getCommentCount(rno);
+		System.out.println(rCount);
+		pageCount = (rCount/PAGE_SIZE) + (rCount%PAGE_SIZE == 0 ? 0 : 1);
+
+		startRnum = (currentPage - 1) * PAGE_SIZE + 1;
+		endRnum = startRnum + PAGE_SIZE -1;
+		if(endRnum > rCount) {
+			endRnum = rCount;
+		}
+		
+		if(currentPage%PAGE_BLOCK == 0) {
+			startPage = (currentPage/PAGE_BLOCK - 1) *PAGE_BLOCK + 1;
+		}else {
+			startPage = (currentPage/PAGE_BLOCK) *PAGE_BLOCK + 1;
+		}
+		
+		endPage = startPage + PAGE_BLOCK - 1;
+		if(endPage > pageCount) {
+			endPage = pageCount;
+		}
+		
+		ArrayList<Comment> commentList = new CommentService().commentList(rno, startRnum, endRnum);
+		
 		if(result > 0) {
 			request.setAttribute("like", "yes");
 		}else {
@@ -89,7 +117,10 @@ public class SelectRecipeServlet extends HttpServlet {
 		request.setAttribute("ingreList", ingreList);
 		request.setAttribute("stepList", stepList);
 		request.setAttribute("msg", msgTxt);
-		//request.setAttribute("commentList", commentList);
+		request.setAttribute("commentList", commentList);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("pageCount", pageCount);
 		request.getRequestDispatcher("./WEB-INF/view/recipeDetail.jsp").forward(request, response);
 		
 	}

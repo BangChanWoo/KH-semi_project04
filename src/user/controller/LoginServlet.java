@@ -27,22 +27,23 @@ public class LoginServlet extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		
+
 		String msg = request.getParameter("msg");
 
 		request.setAttribute("msg", msg);
 		request.getRequestDispatcher("./WEB-INF/view/login.jsp").forward(request, response);
-		
-		
-	}
 
+	}
 
 	/**
 	 * 
@@ -55,30 +56,26 @@ public class LoginServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		String uid = request.getParameter("uid");
 		String pw = request.getParameter("pw");
-		String nickname=request.getParameter("nickname");
-		
-		
-		int result = new UserService().loginUser(uid, pw,nickname);
 
-		if (result==1) {
+		int result = new UserService().loginUser(uid, pw);
+
+		if (result == 1) {
 			request.setAttribute("result", result);
-			HttpSession session=request.getSession();
+			User vo = new UserService().getNick(uid);
+
+			HttpSession session = request.getSession();
 			session.setAttribute("sessionID", uid);
-			session.setAttribute("sessionNickname", nickname);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/main.jsp");
+			session.setAttribute("sessionNickname", vo.getNickname());
+			RequestDispatcher rd = request.getRequestDispatcher("main");// 이거 변경
 			rd.forward(request, response);
-//			response.sendRedirect("/WEB-INF/view/main.jsp"); 
-			
-		}
-		else {
+//	         response.sendRedirect("/WEB-INF/view/main.jsp"); 
+
+		} else {
 			request.setAttribute("result", result);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/login.jsp");
 			request.setAttribute("msg", "로그인 실패했습니다.");
-			
+
 			rd.forward(request, response);
 		}
-
-		
-
 	}
 }

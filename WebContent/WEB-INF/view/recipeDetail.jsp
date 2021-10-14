@@ -143,8 +143,18 @@
                     </div>
                     <c:set var="getId" value="<%=cm.getUid() %>"/>
 		            <c:if test="${sessionID == getId or sessionID == 'admin'}">
-		            <a href="updatecomment?comno=<%=cm.getComment_no()%>"><i class="fas fa-edit"></i></a>
+		            <a href="#" onclick="updateCommentToggle('recomUpdate_<%=cm.getComment_no()%>')" class="updateToggle"><i class="fas fa-edit"></i></a>
 		            <a href="#" onclick="deleteCommentAlert(<%=cm.getComment_no()%>)"><i class="fas fa-trash-alt"></i></a>
+		            <div id="recomUpdate_<%=cm.getComment_no()%>" style="display: none;">
+			            	<hr class="clear">
+							<form method="post" action="updatecomment" id="comUpdateFrm">
+								<h4>댓글 수정하기</h4>
+								<input type="hidden" name="rno" value="<%=rno%>">
+								<input type="hidden" name="comno" value="<%=cm.getComment_no()%>">
+								<textarea name='commentInput'><%=cm.getCom_content()%></textarea>
+								<button type="submit">수정</button>
+							</form>
+			            </div>
 		            </c:if>
 		            <c:if test="${sessionID == vo.getUid() or sessionID == 'admin'}">
 		            	<p><a href="#" onclick="recomment('recomField_<%=cm.getComment_no()%>')" class="recommentToggle"><i class="fas fa-comment"></i> 답글쓰기</a></p>
@@ -152,11 +162,11 @@
 		            <div id="recomField_<%=cm.getComment_no()%>" style="display: none;">
 		            	<hr class="clear">
 			            <form method='post' action='insertcomment' id='commentFrm'>
-			            <input type='hidden' name='rno' value='<%=rno%>' readonly='readonly'>
-			            <input type='hidden' name='level' value='1' readonly='readonly'>
-			            <input type='hidden' name='origin' value='<%=cm.getComment_no()%>' readonly='readonly'>
-			            <textarea name='commentInput' id='commentInput' required='required'></textarea>
-			            <button type='submit' id='commentSubmitBtn'>등록</button>
+				            <input type='hidden' name='rno' value='<%=rno%>' readonly='readonly'>
+				            <input type='hidden' name='level' value='1' readonly='readonly'>
+				            <input type='hidden' name='origin' value='<%=cm.getComment_no()%>' readonly='readonly'>
+				            <textarea name='commentInput' id='commentInput' required='required'></textarea>
+				            <button type='submit' id='commentSubmitBtn'>등록</button>
 			            </form>
 		            </div>
                     
@@ -170,8 +180,18 @@
 	                    <p class="commentContent"><%=cm.getCom_content()%></p>
 	                    <c:set var="getId" value="<%=cm.getUid() %>"/>
 			            <c:if test="${sessionID == getId or sessionID == 'admin'}">
-			            <a href="updatecomment?comno=<%=cm.getComment_no()%>"><i class="fas fa-edit"></i></a>
+			            <a href="#" onclick="updateCommentToggle('recomUpdate_<%=cm.getComment_no()%>')" class="updateToggle"><i class="fas fa-edit"></i></a>
 			            <a href="#" onclick="deleteCommentAlert(<%=cm.getComment_no()%>)"><i class="fas fa-trash-alt"></i></a>
+			            <div id="recomUpdate_<%=cm.getComment_no()%>" style="display: none;">
+			            	<hr class="clear">
+							<form method="post" action="updatecomment" id="comUpdateFrm">
+								<h4>댓글 수정하기</h4>
+								<input type="hidden" name="rno" value="<%=rno%>">
+								<input type="hidden" name="comno" value="<%=cm.getComment_no()%>">
+								<textarea name='commentInput'><%=cm.getCom_content()%></textarea>
+								<button type="submit">수정</button>
+							</form>
+			            </div>
 			            </c:if>
 	                    <hr class="clear">
 	                </div>
@@ -218,6 +238,10 @@
 	}
 	$('.recommentToggle').click(function(e){ e.preventDefault(); });
 	function recomment(id){
+		$("#"+id).toggle();
+	}
+	$('.updateToggle').click(function(e){ e.preventDefault(); });
+	function updateCommentToggle(id){
 		$("#"+id).toggle();
 	}
 	function recipeShare(){

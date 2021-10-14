@@ -28,6 +28,10 @@ public class Comment {
 		this.com_origin = com_origin;
 		this.com_content = com_content;
 	}
+	public Comment(int comment_no, String com_content) {
+		this.comment_no = comment_no;
+		this.com_content = com_content;
+	}
 	public int getRecipe_no() {
 		return recipe_no;
 	}

@@ -28,6 +28,13 @@ public class CommentService {
 		JdbcTemplate.close(conn);
 		return volist;
 	}
+	public Comment commentUpdateGet(int comno) {
+		Comment vo = null;
+		Connection conn = JdbcTemplate.getConnection();
+		vo = new CommentDao().commentUpdateGet(conn, comno);
+		JdbcTemplate.close(conn);
+		return vo;
+	}
 	//update
 	public int updateComment(Comment vo) {
 		int result = -1;

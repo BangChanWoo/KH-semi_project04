@@ -9,6 +9,17 @@ h2{
 a{
 	color: #9a7b6c;
 }
+textarea{
+	font-size: 1.2rem;
+}
+button{
+	background-color: #9a7b6c;
+	border: 0;
+	border-radius: 7px;
+}
+button:hover{
+	background-color: #CFB9AF;
+}
 #detailImgContainer{
     position: relative;
     width: 35rem;
@@ -190,7 +201,24 @@ a{
 	margin: auto;
 	background-color: #f8f3ef;
 }
-
+#comUpdateFrm{
+	float:left;
+	width: 100%;
+    margin: 1rem 0 1rem 7rem;
+}
+#comUpdateFrm textarea{
+	float: left;
+    width: 50%;
+    height: 4rem;
+    margin: 1rem 1rem 4rem 0;
+}
+#comUpdateFrm button{
+	float: left;
+    font-size: 1rem;
+    width: 5rem;
+    height: 2.5rem;
+    margin: 1rem 0 4rem 1rem;
+}
 #pageBtnAll{
     width: 13rem;
     height: 2rem;

@@ -106,6 +106,30 @@ public class CommentDao {
 		}
 		return volist;
 	}
+	public Comment commentUpdateGet(Connection conn, int comno) {
+		Comment vo = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String getComment = "select * from recipe_comment where comment_no like ?";
+		try {
+			ps = conn.prepareStatement(getComment);
+			ps.setInt(1, comno);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				vo = new Comment();
+				vo.setComment_no(rs.getInt("comment_no"));
+				vo.setCom_content(rs.getString("com_content"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(ps);
+		}
+		return vo;
+	}
 	//update
 	public int updateComment(Connection conn, Comment vo) {
 		int result = -1;

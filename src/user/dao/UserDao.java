@@ -33,32 +33,50 @@ public class UserDao {
 		 return result;
 	}
 	
-	public int loginUser(Connection conn,String uid,String pw,String nickname) {
-		int result=-1;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-//		String sql="SELECT * FROM member WHERE ID = ? AND PASSWD = ?";
-		StringBuffer sql = new StringBuffer();
-		sql.append("SELECT pw,nickname").append(" FROM member").append(" WHERE ID = ?");
-		try {
-			pstmt=conn.prepareStatement(sql.toString());
-			pstmt.setString(1, uid);
-			rs=pstmt.executeQuery();
-			if(rs.next()) {
-				if(rs.getString("pw").equals(pw)) {
-					return 1;
-				}else {
-					return 0;
-				}
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}
-		return result;
-	}
+	public User getNick(Connection conn, String id) {
+	      PreparedStatement ps = null;
+	      ResultSet rs = null;
+	      User vo = null;
+	      String query = "select nickname from member where id like ?";
+	      try {
+	         ps = conn.prepareStatement(query);
+	         ps.setString(1, id);
+	         rs = ps.executeQuery();
+	         
+	         vo = new User();
+	         if(rs.next()) {
+	            vo.setNickname(rs.getString("nickname"));
+	         }
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	         System.out.println(e.getMessage());
+	      } finally {
+	         close(rs);
+	         close(ps);
+	      }
+	      return vo;
+	   }
+	   public int loginUser(Connection conn,String uid,String pw) {
+	      int result=-1;
+	      PreparedStatement pstmt=null;
+	      ResultSet rs=null;
+	      String sql="select * from member where id = ? and pw = ?";
+	      try {
+	         pstmt=conn.prepareStatement(sql.toString());
+	         pstmt.setString(1, uid);
+	         pstmt.setString(2, pw);
+	         rs=pstmt.executeQuery();
+	         if(rs.next()) {
+	            result = 1; //로그인 성공하면 1, 못찾으면 -1
+	         }
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	      }finally {
+	         close(rs);
+	         close(pstmt);
+	      }
+	      return result;
+	   }
 	
 	public User dupIdCheck(Connection conn,String uid) {
 		User u=null;
@@ -86,7 +104,7 @@ public class UserDao {
 		User u=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String sql="select id from member where name=? and  phone=? ";
+		String sql="select id from member where uname=? and  phone=? ";
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, uname);
@@ -104,6 +122,43 @@ public class UserDao {
 			close(pstmt);
 		}
 		return u;
+	}
+	public int deleteUser(Connection conn,String uid) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		String sql="delete from member where id=?";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, uid);
+			result=pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public int updateUser(Connection conn,User u) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		String sql="update member set pw=?,uname=?,nickname=?,emai=?,phone=?,address=?,gender=?,age=?";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1,u.getUid());
+			pstmt.setString(2,u.getPw());
+			pstmt.setString(3,u.getUname());
+			pstmt.setString(4,u.getNickname());
+			pstmt.setString(5,u.getEmail());
+			pstmt.setString(6,u.getPhone());
+			pstmt.setString(7,u.getAddress());
+			pstmt.setString(8, String.valueOf(u.getGender()));
+			pstmt.setInt(1,u.getAge());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 }

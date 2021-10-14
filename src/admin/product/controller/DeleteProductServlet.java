@@ -55,6 +55,7 @@ public class DeleteProductServlet extends HttpServlet {
 		}
 		if(result > 0) {
 			//request.setAttribute("msg", "레시피 게시글 삭제에 성공했습니다.");
+			System.out.println("삭제 성공");
 			request.getRequestDispatcher("adminMainServlet").forward(request, response);
 		}else {
 			request.setAttribute("msg", "레시피 게시글 삭제에 실패했습니다.");

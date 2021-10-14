@@ -9,12 +9,62 @@ import ingredient.vo.Ingredient;
 import product_img.vo.ProductImg;
 import product_option.vo.ProductOption;
 import product_post.vo.ProductPost;
+import recipe.model.vo.Recipe;
+import recipe_steps.vo.RecipeSteps;
 import riceThief.common.JdbcTemplate;
 
 public class ProductDao {
 
 	public ProductDao() {}
 
+	public int insertProduct(Connection conn, ProductPost productVo, ArrayList<ProductOption> optionList, ArrayList<ProductImg> proImgList) {
+		int result = -1;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+	
+		String productInsert = "insert into product_post"
+					+ " values(pro_no.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate)";
+		String optionInsert = "insert into product_option"
+				+ " values(pro_option_no.NEXTVAL, ?, ?, pro_no.CURRVAL)";
+		String proImgInsert = "insert into recipe_steps"
+				+ " values(pro__no.NEXTVAL, ?, ?, recipe_no.CURRVAL)";
+		try {
+			//상품 조회
+			ps = conn.prepareStatement(productInsert);
+			ps.setString(1, productVo.getPro_img());
+			ps.setString(2, productVo.getPro_title());
+			ps.setInt(3, productVo.getPro_price());
+			ps.setInt(4, productVo.getPro_delivery_fee());
+			ps.setInt(5, productVo.getPro_cate_no());
+			result = ps.executeUpdate();
+			JdbcTemplate.close(ps);
+			
+			//상품 옵션
+			for(int i=0; i<optionList.size(); i++) {
+				ps = conn.prepareStatement(optionInsert);
+				ps.setString(1, optionList.get(i).getPro_option_content());
+				result = ps.executeUpdate();
+			}
+			
+			JdbcTemplate.close(ps);
+			
+			//상품 상세이미지
+			for(int i=0; i<proImgList.size(); i++) {
+				ps = conn.prepareStatement(proImgInsert);
+				ps.setString(1, proImgList.get(i).getPro_content_img());
+				result = ps.executeUpdate();
+			}
+		} catch (Exception e) {
+			//-1
+			System.out.println("연결 실패");
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(ps);
+		}
+		return result;
+	}
+	
 	public int getProductCount(Connection conn, int catenum) {
 		int result = 0;
 		String countAllQuery = "select count(pro_no) from productpost";
@@ -73,7 +123,7 @@ public class ProductDao {
 				vo.setPro_no(rs.getInt("pro_no"));
 				vo.setPro_img(rs.getString("pro_img"));
 				vo.setPro_title(rs.getString("pro_title"));
-				vo.setPro_pirce(rs.getInt("pro_pirce"));
+				vo.setPro_price(rs.getInt("pro_price"));
 				volist.add(vo);
 			}
 		} catch (Exception e) {
@@ -138,13 +188,13 @@ public class ProductDao {
 		return volist;
 	}
 	
-	// 더 작업해야하는 것 : 상품 상세조회, 후기(리뷰) 
+	// 더 작업해야하는 것 :  후기(리뷰) 
 	
-	/*public product_post productDetailList(Connection conn, int rno) {
+	public ProductPost productDetailList(Connection conn, int rno) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Recipe vo = new Recipe();
-		String query = "select * from recipe where recipe_no like ?";
+		ProductPost vo = new ProductPost();
+		String query = "select * from product_post where pro_no like ?";
 		try {
 			ps = conn.prepareStatement(query);
 			ps.setInt(1, rno);
@@ -152,7 +202,6 @@ public class ProductDao {
 			
 			while(rs.next()) {
 				vo.setPro_no(rs.getInt("pro_no"));
-				vo.setUid(rs.getString("id"));
 				vo.setPro_img(rs.getString("pro_img"));
 				vo.setPro_title(rs.getString("pro_title"));
 				vo.setPro_cate_no(rs.getInt("pro_cate_no"));
@@ -165,9 +214,72 @@ public class ProductDao {
 			JdbcTemplate.close(ps);
 		}
 		return vo; 
-	}
+}
 	
-	*/
+	//like read (재확인 필요 부분)
+		public int likeRead(Connection conn, int rno, String id) {
+			int result = -1;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			
+			String likeInsertQuery = "select count(inter_no) from interest_product_post where pro_no like ? and id like ?";
+			try {
+				ps = conn.prepareStatement(likeInsertQuery);
+				ps.setInt(1, rno);
+				ps.setString(2, id);
+				rs = ps.executeQuery();
+				
+				if(rs.next()) {
+					result = rs.getInt(1);
+				}
+			} catch (Exception e) {
+				System.out.println("연결 실패");
+				e.printStackTrace();
+			} finally {
+				JdbcTemplate.close(rs);
+				JdbcTemplate.close(ps);
+			}
+			return result;
+		}
+		//like create
+		public int likeCreate(Connection conn, int rno, String id) {
+			int result = -1;
+			PreparedStatement ps = null;
+		
+			String likeInsertQuery = "insert into interest_product_post values(inter_no.NEXTVAL, ?, sysdate, ?)";
+			try {
+				ps = conn.prepareStatement(likeInsertQuery);
+				ps.setString(1, id);
+				ps.setInt(2, rno);
+				result = ps.executeUpdate();
+			} catch (Exception e) {
+				System.out.println("연결 실패");
+				e.printStackTrace();
+			} finally {
+				JdbcTemplate.close(ps);
+			}
+			return result;
+		}
+		//like delete
+		public int likeDelete(Connection conn, int rno, String id) {
+			int result = -1;
+			PreparedStatement ps = null;
+		
+			String likeDeleteQuery = "delete from interest_product_post where pro_no like ? and id like ?";
+			try {
+				ps = conn.prepareStatement(likeDeleteQuery);
+				ps.setInt(1, rno);
+				ps.setString(2, id);
+				result = ps.executeUpdate();
+			} catch (Exception e) {
+				System.out.println("연결 실패");
+				e.printStackTrace();
+			} finally {
+				JdbcTemplate.close(ps);
+			}
+			return result;
+		}
+
 
 
 }

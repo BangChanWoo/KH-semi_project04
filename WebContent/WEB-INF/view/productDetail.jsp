@@ -19,13 +19,17 @@
 </head>
 <body>
 <%
-	User memberLoginInfo = (User)request.getSession().getAttribute("loginInfo");
+	//To-do : 로그인해야지만 장바구&바로구매 연결
+	
+	/* User memberLoginInfo = (User)request.getSession().getAttribute("loginInfo");
 	String id = null;
 	if(memberLoginInfo != null){
 		id = memberLoginInfo.getUid();
 	}
+	*/
+	
 	ProductPost vo = (ProductPost)request.getAttribute("vo");
-	int rno = (int)request.getAttribute("rno");
+	int rno = (int)request.getAttribute("rno"); 
 
 %>
 	<%@ include file="riceThief_header.jsp" %>
@@ -41,7 +45,7 @@
      	    <h2 id="detailTitle" class="categoryProductTitle"><%=vo.getPro_title()%></h2>
      	</div>
      	<div>
-     	    <h3 id="detailPrice" class="categoryProductPrice"><%=vo.getPro_pirce()%></h3>
+     	    <h3 id="detailPrice" class="categoryProductPrice"><%=vo.getPro_price()%></h3>
      	       
             <c:if test="${not empty id}">
             <a href="#" id="likeProduct"><i class="far fa-heart"></i></a>

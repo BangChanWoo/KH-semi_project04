@@ -23,10 +23,17 @@ public class UserService {
 		close(conn);
 		return result;
 	}
-	public int loginUser(String uid,String pw,String nickname) {
+	public User getNick(String id) {
+	      Connection conn = getConnection();
+	      User vo = new UserDao().getNick(conn, id);
+	      close(conn);
+	      return vo;
+	   }
+	  
+	public int loginUser(String uid,String pw) {
 		int result=-1;
 	Connection conn=getConnection();
-	result=new UserDao().loginUser(conn,uid,pw,nickname);
+	result=new UserDao().loginUser(conn,uid,pw);
 	if(result > 0) {
 		commit(conn); 
 	}else {
@@ -41,11 +48,31 @@ public class UserService {
 		 close(conn);
 		 return u;
 	}
-	public User findId(String name,String phone) {
+	public User findId(String uname,String phone) {
 		Connection conn=getConnection();
-		User u=new UserDao().findId(conn,name,phone);
+		User u=new UserDao().findId(conn,uname,phone);
 		close(conn);
 		return u;
 	}
-	
+	public int deleteUser(String uid) {
+		Connection conn=getConnection();
+		int result=new UserDao().deleteUser(conn, uid);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		return result;
+	}
+	public int update(User u) {
+		Connection conn=getConnection();
+		UserDao dao=new UserDao();
+		int result=dao.updateUser(conn, u);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		return result;
+	}
 }

@@ -100,13 +100,22 @@ public class RecipeDao {
 		ArrayList<Recipe> volist = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String selectAllQuery = "select t2.recipe_no, t2.rec_img, t2.rec_title"
-				+ " from (select ROWNUM r, t1.* from recipe t1 order by recipe_no desc) t2"
-				+ " where t2.r between ? and ?";
+		String selectAllQuery = "select * from (select rownum rnum, t1.cnt, t1.rec_title, t1.recipe_no, t1.rec_img, t1.rec_write_date"
+				+ " from (select count(ir.inter_no) cnt, r.rec_title, r.recipe_no, r.rec_img, r.rec_write_date"
+				+ " from recipe r left join interest_recipe ir"
+				+ " on r.recipe_no = ir.recipe_no"
+				+ " group by r.rec_title, r.recipe_no, r.rec_img, r.rec_write_date"
+				+ " order by cnt desc, r.rec_write_date desc) t1)t2"
+				+ " where t2.rnum between ? and ?";
 		
-		String selectCateQuery = "select t2.recipe_no, t2.rec_img, t2.rec_title"
-				+ " from (select ROWNUM r, t1.* from recipe t1 where t1.rec_cate_no like ? order by recipe_no desc) t2"
-				+ " where t2.r between ? and ?";
+		String selectCateQuery = "select * from (select rownum rnum, t1.cnt, t1.rec_title, t1.recipe_no, t1.rec_img, t1.rec_write_date"
+				+ " from (select count(ir.inter_no) cnt, r.rec_title, r.recipe_no, r.rec_img, r.rec_write_date"
+				+ " from recipe r left join interest_recipe ir"
+				+ " on r.recipe_no = ir.recipe_no"
+				+ " where r.rec_cate_no like ?"
+				+ " group by r.rec_title, r.recipe_no, r.rec_img, r.rec_write_date"
+				+ " order by cnt desc, r.rec_write_date desc) t1)t2"
+				+ " where t2.rnum between ? and ?";
 		try {
 			if(catenum == 0) {
 				ps = conn.prepareStatement(selectAllQuery);

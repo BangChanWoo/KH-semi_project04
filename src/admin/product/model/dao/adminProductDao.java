@@ -30,7 +30,7 @@ public class adminProductDao {
 			pstmt.setInt(1, productVo.getPro_cate_no());
 			pstmt.setString(2, productVo.getPro_title());
 			pstmt.setString(3, productVo.getPro_img());
-			pstmt.setInt(4, productVo.getPro_pirce());
+			pstmt.setInt(4, productVo.getPro_price());
 			pstmt.setInt(5, productVo.getPro_delivery_fee());
 			pstmt.setInt(6, productVo.getPro_stock());
 			result = pstmt.executeUpdate();
@@ -76,7 +76,7 @@ public class adminProductDao {
 			pstmt.setInt(1, productVo.getPro_cate_no());
 			pstmt.setString(2, productVo.getPro_title());
 			pstmt.setString(3, productVo.getPro_img());
-			pstmt.setInt(4, productVo.getPro_pirce());
+			pstmt.setInt(4, productVo.getPro_price());
 			pstmt.setInt(5, productVo.getPro_delivery_fee());
 			pstmt.setInt(6, productVo.getPro_stock());
 			pstmt.setInt(7, productVo.getPro_no());
@@ -146,7 +146,7 @@ public class adminProductDao {
 				vo.setPro_cate_no(rset.getInt("pro_cate_no"));
 				vo.setPro_title(rset.getString("pro_title"));
 				vo.setPro_img(rset.getString("pro_img"));
-				vo.setPro_pirce(rset.getInt("pro_price"));
+				vo.setPro_price(rset.getInt("pro_price"));
 				vo.setPro_delivery_fee(rset.getInt("pro_delivery_fee"));
 				vo.setPro_stock(rset.getInt("pro_stock"));
 			}

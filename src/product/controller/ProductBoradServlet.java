@@ -11,8 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import product.service.ProductService;
 import product_post.vo.ProductPost;
-import recipe.model.service.RecipeService;
-import recipe.model.vo.Recipe;
+
 
 /**
  * Servlet implementation class ProductBoradServlet
@@ -57,7 +56,7 @@ public class ProductBoradServlet extends HttpServlet {
 		if(pageNum != null) {
 			currentPage = Integer.parseInt(pageNum);
 		}
-		rCount = new RecipeService().getRecipeCount(catenum);
+		rCount = new ProductService().getProductCount(catenum);
 		
 		pageCount = (rCount/PAGE_SIZE) + (rCount%PAGE_SIZE == 0 ? 0 : 1);
 
@@ -83,7 +82,7 @@ public class ProductBoradServlet extends HttpServlet {
 		ArrayList<ProductPost> volist = new ProductService().productList(startRnum, endRnum, catenum);
 
 		//Data 전달을 위해서 request에 셋
-		request.setAttribute("productPostVolist", volist);
+		request.setAttribute("productVolist", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);

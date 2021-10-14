@@ -80,7 +80,7 @@
 							<%} } %>
 
 							<label>상품 가격</label> 
-							<input type="text" name="productOptionPrice" id="productOptionPrice_1" required="required" placeholder=" 예) 8900 " value="<%=vo.getPro_pirce()%>">
+							<input type="text" name="productOptionPrice" id="productOptionPrice_1" required="required" placeholder=" 예) 8900 " value="<%=vo.getPro_price()%>">
 							<!--<input name="addButton" type="button" style="cursor: hand" value="추가" id="btn_txtAdd"> <br>-->
 						</div>
 						<a href='#' id='btn_txtAdd'><i class='fas fa-plus-circle'></i></a><br>

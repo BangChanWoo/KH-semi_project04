@@ -5,12 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import ingredient.vo.Ingredient;
 import product_img.vo.ProductImg;
 import product_option.vo.ProductOption;
 import product_post.vo.ProductPost;
-import recipe.model.vo.Recipe;
-import recipe_steps.vo.RecipeSteps;
 import riceThief.common.JdbcTemplate;
 
 public class ProductDao {
@@ -98,11 +95,11 @@ public class ProductDao {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String selectAllQuery = "select t2.pro_no, t2.pro_img, t2.pro_title, t2.pro_price"
-				+ " from (select ROWNUM r, t1.* from productpost t1 order by pro_no desc) t2"
+				+ " from (select ROWNUM r, t1.* from product_post t1 order by pro_no desc) t2"
 				+ " where t2.r between ? and ?";
 		
 		String selectCateQuery = "select t2.pro_no, t2.pro_img, t2.pro_title, t2.pro_price"
-				+ " from (select ROWNUM r, t1.* from productpost t1 where t1.pro_cate_no like ? order by pro_no desc) t2"
+				+ " from (select ROWNUM r, t1.* from product_post t1 where t1.pro_cate_no like ? order by pro_no desc) t2"
 				+ " where t2.r between ? and ?";
 		try {
 			if(catenum == 0) {

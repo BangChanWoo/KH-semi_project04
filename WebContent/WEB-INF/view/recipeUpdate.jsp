@@ -19,7 +19,7 @@
 <!-- jquery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<title>밥도둑_게시글 수정</title>
+<title>밥도둑_게시글 작성</title>
 </head>
 <body>
 <%

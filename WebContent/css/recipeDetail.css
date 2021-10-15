@@ -191,6 +191,10 @@ button:hover{
     width: 70%;
     margin: 1rem 0;
 }
+.clear{
+    clear: both;
+    border: solid 1px #CFB9AF;
+}
 .recommentStyle{
 	clear:both;
 	width: 80%;
@@ -235,8 +239,4 @@ button:hover{
 }
 .pageBtn:hover{
     background-color: #9a7b6c;
-}
-.clear{
-    clear: both;
-    border: solid 1px #CFB9AF;
 }

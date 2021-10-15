@@ -49,6 +49,8 @@
             <a href="recipeboard?catenum=<%=62%>" id="62" class="categoryBtn">기타</a>
         </div>
         <div>
+            <!--여기 java에서 for문으로 사진 <5 으로 5개까지 데이터 들고옴-->
+            <!--일단 structure-->
             <div class="imgCenter">
 	            <%if(volist != null){
 	            	for(Recipe vo : volist){ %>

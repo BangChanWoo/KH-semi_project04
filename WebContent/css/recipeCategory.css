@@ -100,7 +100,7 @@ main h2{
     .categoryBtn:first-child, .categoryBtn:nth-child(7), .categoryBtn:nth-child(13){border-left: solid 1px black;}
     .categoryBtn:nth-last-child(-n+6){border-bottom: solid 1px black;}
     .imgCenter{
-        grid-template-columns: 32.6% 32.6% 32.6%;
+        grid-template-columns: 1fr 1fr 1fr;
     }
 }
 /*태블릿 pc*/
@@ -111,7 +111,7 @@ main h2{
     .categoryBtn:first-child, .categoryBtn:nth-child(10){border-left: solid 1px black;}
     .categoryBtn:nth-last-child(-n+9){border-bottom: solid 1px black;}
     .imgCenter{
-        grid-template-columns: 24.5% 24.5% 24.5% 24.5%;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 }
 /*데스크탑*/
@@ -122,6 +122,6 @@ main h2{
     .categoryBtn:first-child, .categoryBtn:nth-child(10){border-left: solid 1px black;}
     .categoryBtn:nth-last-child(-n+9){border-bottom: solid 1px black;}
     .imgCenter{
-        grid-template-columns: 18.4% 18.4% 18.4% 18.4% 18.4%;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     }
 } 

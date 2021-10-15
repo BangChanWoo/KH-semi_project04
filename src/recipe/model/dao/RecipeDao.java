@@ -418,11 +418,12 @@ public class RecipeDao {
 		ArrayList<Recipe> volist = null;
 		Statement st = null;
 		ResultSet rs = null;
-		String recommendQuery = "select * from (select rownum rnum, t1.cnt, t1.rec_title, t1.recipe_no, t1.rec_img"
-				+ " from (select count(ir.inter_no) cnt, r.rec_title, r.recipe_no, r.rec_img"
-				+ " from recipe r left join interest_recipe ir"
-				+ " on r.recipe_no = ir.recipe_no"
-				+ " group by r.rec_title, r.recipe_no, r.rec_img"
+		String recommendQuery = "select t2.*"
+				+ " from (select rownum rnum, t1.*"
+				+ " from (select count(rc.recipe_no) cnt, r.recipe_no, r.rec_title, r.rec_img"
+				+ " from recipe r left join recipe_comment rc"
+				+ " on r.recipe_no = rc.recipe_no"
+				+ " group by r.recipe_no, r.rec_title, r.rec_img"
 				+ " order by cnt desc) t1)t2"
 				+ " where t2.rnum between 1 and 5";
 		

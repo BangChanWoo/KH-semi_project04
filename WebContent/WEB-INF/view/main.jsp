@@ -63,7 +63,7 @@
                 	<img src="<%=recommendList.get(recCnt).getRec_img()%>" class="recommendImg" alt="추천 레시피">
                 	<div class="recommendImgContent">
 	                	<p><a href="selectrecipe?rno=<%=recommendList.get(recCnt).getRecipe_no()%>"><%=recommendList.get(recCnt).getRec_title()%></a></p>
-	                	<i class="fas fa-heart"></i> <%=recommendList.get(recCnt).getLikeCnt()%>
+	                	<i class="fas fa-comment"></i> <%=recommendList.get(recCnt).getLikeCnt()%>
                 	</div>
                 </div>
                 <%} %>

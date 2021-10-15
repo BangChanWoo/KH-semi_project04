@@ -119,6 +119,7 @@
             <%} } %>
             </ul>
         </div>
+        <c:if test="${not empty commentList or not empty sessionID}">
         <div id="detailCommentContainer">
             <c:if test="${not empty sessionID}">
             <h2>댓글 남기기</h2>
@@ -212,8 +213,9 @@
 	            <%} %>
 	        </div>
         </div>
+        </c:if>
     </main>
-    <hr>
+    <hr class="clear">
     <%@ include file="riceThief_footer.jsp" %>
     <script type="text/javascript">
 	function deleteAlert(){

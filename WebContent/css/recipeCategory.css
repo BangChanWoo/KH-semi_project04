@@ -122,6 +122,6 @@ main h2{
     .categoryBtn:first-child, .categoryBtn:nth-child(10){border-left: solid 1px black;}
     .categoryBtn:nth-last-child(-n+9){border-bottom: solid 1px black;}
     .imgCenter{
-        rid-template-columns: 18.4% 18.4% 18.4% 18.4% 18.4%;
+        grid-template-columns: 18.4% 18.4% 18.4% 18.4% 18.4%;
     }
 } 

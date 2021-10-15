@@ -132,8 +132,8 @@
             <input type="hidden" name="stepCount" id="stepCount" readonly value="1">
 			
 			<div class="btnContainer">
-				<button type="submit" id="saveBtn" class="productBtn"onclick="updateproduct">수정</button>
-				<button type="submit" id="deleteBtn" class="productBtn"onclick="deleteproduct">삭제</button>
+				<button type="submit" id="saveBtn" class="productBtn">수정</button>
+				
 				<button type="button" id="cancleBtn" class="productBtn" onclick="location.href='main?msg=게시글 작성을 취소하였습니다.'">취소</button>
 			</div>
 		</form>

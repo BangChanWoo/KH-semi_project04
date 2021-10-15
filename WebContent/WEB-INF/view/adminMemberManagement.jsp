@@ -46,7 +46,7 @@
 <title>관리자_회원관리</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <body>
-	<%@ include file="riceThief_header.jsp" %>
+	<%@ include file="riceThief_adminHeader.jsp" %>
 	<hr>
 	<main>
 		<h2>회원관리</h2>

@@ -6,10 +6,10 @@
 	<div>
 		<a href="./main"><img src="./css/밥도둑 로고.png" id="logoImg"></a>
         <div id="headerBtn">
-        	<a href="#" id="searchBtn"><i class="fas fa-search"></i></a>
+        	<a href="search" id="searchBtn"><i class="fas fa-search"></i></a>
         	<c:choose>
         	<c:when test="${not empty sessionID}">
-        	<a href="#"> <i class="far fa-user"></i> ${sessionNickName} 님</a>
+        	<a href="#"> <i class="far fa-user"></i> ${sessionNickname} 님</a>
         	
 			<button class="headerBtnStyle" onclick="location.href='logout'">로그아웃</button>
 			<div class="dropdown">

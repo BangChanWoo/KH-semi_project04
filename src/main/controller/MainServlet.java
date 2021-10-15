@@ -39,8 +39,10 @@ public class MainServlet extends HttpServlet {
 		String msg = request.getParameter("msg");
 		
 		ArrayList<Recipe> recommendList = new RecipeService().recommendRecipe();
+		ArrayList<Recipe> popularRecipe = new RecipeService().popularRecipe();
 		
 		request.setAttribute("recommendList", recommendList);
+		request.setAttribute("popularRecipe", popularRecipe);
 		request.setAttribute("msg", msg);
 		request.getRequestDispatcher("./WEB-INF/view/main.jsp").forward(request, response);
 	}

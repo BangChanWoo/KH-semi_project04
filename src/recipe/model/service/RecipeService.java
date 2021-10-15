@@ -104,4 +104,12 @@ public class RecipeService {
 		JdbcTemplate.close(conn);
 		return volist;
 	}
+	//popular recipe
+	public ArrayList<Recipe> popularRecipe() {
+		ArrayList<Recipe> volist = null;
+		Connection conn = JdbcTemplate.getConnection();
+		volist = new RecipeDao().popularRecipe(conn);
+		JdbcTemplate.close(conn);
+		return volist;
+	}
 }

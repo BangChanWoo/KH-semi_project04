@@ -23,6 +23,7 @@
 <body>
 <%
 	ArrayList<Recipe> recommendList = (ArrayList<Recipe>)request.getAttribute("recommendList");
+	ArrayList<Recipe> popularRecipe = (ArrayList<Recipe>)request.getAttribute("popularRecipe");
 	session.getAttribute("sessionID");
 	session.getAttribute("sessionNickname");
 %>
@@ -71,7 +72,15 @@
         <div id="popularRecipeContainer" class="ctMargin">
             <h2 class="title-font">인기 레시피</h2>
             <div id="popularRecipe">
-                <img src="./css/alt.JPG" class="popularImg" alt="추천 레시피">
+             <% int recPCnt = 0;
+             for(;recPCnt<popularRecipe.size(); recPCnt++){ %>
+                <a href="selectrecipe?rno=<%=popularRecipe.get(recPCnt).getRecipe_no()%>"><img src="<%=popularRecipe.get(recPCnt).getRec_img()%>" class="popularImg" alt="추천 레시피"></a>
+                <div class="prInfo">
+                	<p><%=recPCnt+1%></p>
+                	<p class="prTitle"><a href="selectrecipe?rno=<%=popularRecipe.get(recPCnt).getRecipe_no()%>"><%=popularRecipe.get(recPCnt).getRec_title()%></a></p>
+                	<p><i class="fas fa-heart"></i> <%=popularRecipe.get(recPCnt).getLikeCnt()%></p>
+                </div>
+            <%} %>
             </div>
         </div>
         <div class="ctMargin">

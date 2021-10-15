@@ -448,4 +448,38 @@ public class RecipeDao {
 		}
 		return volist;
 	}
+	public ArrayList<Recipe> popularRecipe(Connection conn) {
+		ArrayList<Recipe> volist = null;
+		Statement st = null;
+		ResultSet rs = null;
+		String recommendQuery = "select * from (select rownum rnum, t1.cnt, t1.rec_title, t1.recipe_no, t1.rec_img"
+				+ " from (select count(ir.inter_no) cnt, r.rec_title, r.recipe_no, r.rec_img"
+				+ " from recipe r left join interest_recipe ir"
+				+ " on r.recipe_no = ir.recipe_no"
+				+ " group by r.rec_title, r.recipe_no, r.rec_img"
+				+ " order by cnt desc) t1)t2"
+				+ " where t2.rnum between 1 and 9";
+		
+		try {
+			st = conn.createStatement();
+			rs = st.executeQuery(recommendQuery);
+			
+			volist = new ArrayList<Recipe>();
+			while(rs.next()) {
+				Recipe vo = new Recipe();
+				vo.setRecipe_no(rs.getInt("recipe_no"));
+				vo.setRec_img(rs.getString("rec_img"));
+				vo.setRec_title(rs.getString("rec_title"));
+				vo.setLikeCnt(rs.getInt("cnt"));
+				volist.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(st);
+		}
+		return volist;
+	}
 }

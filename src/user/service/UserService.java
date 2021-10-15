@@ -64,10 +64,10 @@ public class UserService {
 		}
 		return result;
 	}
-	public int update(User u) {
+	public int updateUser(User u) {
 		Connection conn=getConnection();
 		UserDao dao=new UserDao();
-		int result=dao.updateUser(conn, u);
+		int result=dao.updateUser(conn,u);
 		if(result>0) {
 			commit(conn);
 		}else {
@@ -75,4 +75,11 @@ public class UserService {
 		}
 		return result;
 	}
+	public User getUserInfo(String uid) {
+		Connection conn=getConnection();
+		UserDao dao=new UserDao();
+		User vo=dao.getUserInfo(conn,uid);
+		return vo;
+	}
+	
 }

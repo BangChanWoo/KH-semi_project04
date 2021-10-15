@@ -13,59 +13,11 @@ import riceThief.common.JdbcTemplate;
 public class ProductDao {
 
 	public ProductDao() {}
-
-	public int insertProduct(Connection conn, ProductPost productVo, ArrayList<ProductOption> optionList, ArrayList<ProductImg> proImgList) {
-		int result = -1;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-	
-		String productInsert = "insert into product_post"
-					+ " values(pro_no.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate)";
-		String optionInsert = "insert into product_option"
-				+ " values(pro_option_no.NEXTVAL, ?, ?, pro_no.CURRVAL)";
-		String proImgInsert = "insert into recipe_steps"
-				+ " values(pro__no.NEXTVAL, ?, ?, recipe_no.CURRVAL)";
-		try {
-			//상품 조회
-			ps = conn.prepareStatement(productInsert);
-			ps.setString(1, productVo.getPro_img());
-			ps.setString(2, productVo.getPro_title());
-			ps.setInt(3, productVo.getPro_price());
-			ps.setInt(4, productVo.getPro_delivery_fee());
-			ps.setInt(5, productVo.getPro_cate_no());
-			result = ps.executeUpdate();
-			JdbcTemplate.close(ps);
-			
-			//상품 옵션
-			for(int i=0; i<optionList.size(); i++) {
-				ps = conn.prepareStatement(optionInsert);
-				ps.setString(1, optionList.get(i).getPro_option_content());
-				result = ps.executeUpdate();
-			}
-			
-			JdbcTemplate.close(ps);
-			
-			//상품 상세이미지
-			for(int i=0; i<proImgList.size(); i++) {
-				ps = conn.prepareStatement(proImgInsert);
-				ps.setString(1, proImgList.get(i).getPro_content_img());
-				result = ps.executeUpdate();
-			}
-		} catch (Exception e) {
-			//-1
-			System.out.println("연결 실패");
-			e.printStackTrace();
-		} finally {
-			JdbcTemplate.close(rs);
-			JdbcTemplate.close(ps);
-		}
-		return result;
-	}
 	
 	public int getProductCount(Connection conn, int catenum) {
 		int result = 0;
-		String countAllQuery = "select count(pro_no) from productpost";
-		String countCateQuery = "select count(pro_no) from productpost where pro_cate_no like ?";
+		String countAllQuery = "select count(pro_no) from product_post";
+		String countCateQuery = "select count(pro_no) from product_post where pro_cate_no like ?";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
@@ -201,6 +153,7 @@ public class ProductDao {
 				vo.setPro_no(rs.getInt("pro_no"));
 				vo.setPro_img(rs.getString("pro_img"));
 				vo.setPro_title(rs.getString("pro_title"));
+				vo.setPro_price(rs.getInt("pro_price"));
 				vo.setPro_cate_no(rs.getInt("pro_cate_no"));
 			}
 		} catch (Exception e) {

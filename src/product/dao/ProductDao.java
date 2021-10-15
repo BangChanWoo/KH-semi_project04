@@ -14,7 +14,7 @@ public class ProductDao {
 
 	public ProductDao() {}
 
-/*	public int insertProduct(Connection conn, ProductPost productVo, ArrayList<ProductOption> optionList, ArrayList<ProductImg> proImgList) {
+	public int insertProduct(Connection conn, ProductPost productVo, ArrayList<ProductOption> optionList, ArrayList<ProductImg> proImgList) {
 		int result = -1;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -60,12 +60,12 @@ public class ProductDao {
 			JdbcTemplate.close(ps);
 		}
 		return result;
-	} */
+	}
 	
 	public int getProductCount(Connection conn, int catenum) {
 		int result = 0;
-		String countAllQuery = "select count(pro_no) from product_post";
-		String countCateQuery = "select count(pro_no) from product_post where pro_cate_no like ?";
+		String countAllQuery = "select count(pro_no) from productpost";
+		String countCateQuery = "select count(pro_no) from productpost where pro_cate_no like ?";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
@@ -101,7 +101,6 @@ public class ProductDao {
 		String selectCateQuery = "select t2.pro_no, t2.pro_img, t2.pro_title, t2.pro_price"
 				+ " from (select ROWNUM r, t1.* from product_post t1 where t1.pro_cate_no like ? order by pro_no desc) t2"
 				+ " where t2.r between ? and ?";
-		
 		try {
 			if(catenum == 0) {
 				ps = conn.prepareStatement(selectAllQuery);
@@ -202,7 +201,6 @@ public class ProductDao {
 				vo.setPro_no(rs.getInt("pro_no"));
 				vo.setPro_img(rs.getString("pro_img"));
 				vo.setPro_title(rs.getString("pro_title"));
-				vo.setPro_price(rs.getInt("pro_price"));
 				vo.setPro_cate_no(rs.getInt("pro_cate_no"));
 			}
 		} catch (Exception e) {

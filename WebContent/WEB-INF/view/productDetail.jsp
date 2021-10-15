@@ -11,13 +11,11 @@
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <script src="https://kit.fontawesome.com/616f27e0c4.js" crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jquery -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/basic.css" />  <!-- 공통 css -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_header.css" /> <!-- header css -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_footer.css" /><!-- footer css -->
-
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/productDetail.css"/>
 <title>밥도둑_스토어 상품 상세조회</title>
-
 </head>
 <body>
 <%
@@ -32,23 +30,13 @@
 	
 	ProductPost vo = (ProductPost)request.getAttribute("vo");
 	int rno = (int)request.getAttribute("rno"); 
-	
-	ArrayList<ProductOption> optionList = (ArrayList<ProductOption>)request.getAttribute("optionList");
-	ArrayList<ProductImg> proImgList = (ArrayList<ProductImg>)request.getAttribute("proImgList");
-	
-	//리뷰&후기
-	//ArrayList<Comment> commentList = (ArrayList<Comment>)request.getAttribute("commentList");
-
-	int startPage = (int)request.getAttribute("startPage");
-	int endPage = (int)request.getAttribute("endPage");
-	int pageCount = (int)request.getAttribute("pageCount");
 
 %>
 	<%@ include file="riceThief_header.jsp" %>
 	<hr>
     <main>
         <div id="detailImgContainer">
-            <img src="<%=vo.getPro_img()%>" id="titleImg" alt="상품 대표 사진">
+            <img src="<%=vo.getPro_img() %>" id="titleImg" alt="상품 대표 사진">
         </div>
         
         <!-- 화면구현 순서 : 상품명/가격(옆에 : 좋아요/공유)/별점/배송비/옵션/옵션이름/수량 (옆에: 가격)/ 밑줄/ 상품금액 / 합계금액 / 장바구니 버튼, 바로구매 버튼  -->
@@ -72,7 +60,7 @@
  	    </div>
  	    
        
-     </main>
+     
     <%@ include file="riceThief_footer.jsp" %>
 </body>
 </html>

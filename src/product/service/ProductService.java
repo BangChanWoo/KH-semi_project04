@@ -12,7 +12,7 @@ import riceThief.common.JdbcTemplate;
 public class ProductService {
 
 	//create
-	/*public int insertProduct(ProductPost productVo, ArrayList<ProductOption> optionList, ArrayList<ProductImg> proImgList) {
+	public int insertProduct(ProductPost productVo, ArrayList<ProductOption> optionList, ArrayList<ProductImg> proImgList) {
 		int result =-1;
 		Connection conn = JdbcTemplate.getConnection();
 			
@@ -20,7 +20,7 @@ public class ProductService {
 				
 		JdbcTemplate.close(conn);
 		return result;	
-	}*/
+	}
 	
 	public int getProductCount(int catenum) {
 		int result = 0;

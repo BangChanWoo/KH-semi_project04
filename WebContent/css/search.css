@@ -8,29 +8,60 @@ main h2{
     text-align: center;
     font-size: 2rem;
 }
-#categoryBtnAll{
-    width: 85%;
-    margin: 4rem auto;
-    display: grid;
+#searchContainer{
+	position: relative;
+    width: 20%;
+	margin: 3rem auto;
+	text-align: center;
 }
-.categoryBtn{
-    height: 3rem;
-    border-radius: unset;
-    border: 0;
-    border-top: solid 1px black;
-    border-right: solid 1px black;
-    background-color: white;
-    font-size: 1.2rem;
-    
-    text-align: center;
-    padding: 2rem 0 0 0;
-    text-decoration: none;
-    color: black;
+#searchFrm{
+	display: grid;
+	grid-template-columns: 80% 20%;
 }
-.categoryBtn:hover{
-    background-color: #CFB9AF;
+#searchField{
+	font-size: 1.2rem;
+}
+#searchBtn{
+	font-size: 1.2rem;
+	line-height: 1.4rem;
+}
+
+input[type="radio"] {display: none;}
+.tab_item {display: none;}
+#rd_recipe:checked ~ #recipeList {display: block;}
+#rd_store:checked ~ #storeList {display: block;}
+
+#searchCateBtn{
+}
+#searchFrm label{
+	background-color: black;
+	color: white;
+}
+
+#recipeBtn{
+	border: solid 1px black;
+	border-radius: 7px 0 0 7px;
+	background-color: black;
+    color: white;
+    padding: 0.3rem 0.7rem;
+    float: right;
+}
+#storeBtn{
+	border: solid 1px black;
+	border-left: 0;
+	border-radius: 0 7px 7px 0;
+	background-color: black;
+    color: white;
+    padding: 0.3rem 0.7rem;
+    float: right;
+}
+#rd_recipe:checked ~ #recipeBtn {background-color: white; color: black;}
+#rd_store:checked ~ #storeBtn {background-color: white; color: black;}
+#searchFrm i{
+	margin: 0 0.5rem;
 }
 .imgCenter{
+	clear: both;
     width: 100%;
     margin: auto;
     display: grid;
@@ -88,40 +119,25 @@ main h2{
     color: black;
     font-size: 1.3rem;
 }
-.pageBtn:hover{
-    background-color: #9a7b6c;
+.clear{
+    clear: both;
 }
 /*responsive*/
 /*스마트폰*/
 @media screen and (max-width:  767px){
-    #categoryBtnAll{
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    }
-    .categoryBtn:first-child, .categoryBtn:nth-child(7), .categoryBtn:nth-child(13){border-left: solid 1px black;}
-    .categoryBtn:nth-last-child(-n+6){border-bottom: solid 1px black;}
     .imgCenter{
         grid-template-columns: 32.6% 32.6% 32.6%;
     }
 }
 /*태블릿 pc*/
 @media screen and (min-width:  768px) and (max-width: 959px){
-    #categoryBtnAll{
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    }
-    .categoryBtn:first-child, .categoryBtn:nth-child(10){border-left: solid 1px black;}
-    .categoryBtn:nth-last-child(-n+9){border-bottom: solid 1px black;}
     .imgCenter{
         grid-template-columns: 24.5% 24.5% 24.5% 24.5%;
     }
 }
 /*데스크탑*/
 @media screen and (min-width:  960px){
-    #categoryBtnAll{
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    }
-    .categoryBtn:first-child, .categoryBtn:nth-child(10){border-left: solid 1px black;}
-    .categoryBtn:nth-last-child(-n+9){border-bottom: solid 1px black;}
     .imgCenter{
-        rid-template-columns: 18.4% 18.4% 18.4% 18.4% 18.4%;
+        grid-template-columns: 18.4% 18.4% 18.4% 18.4% 18.4%;
     }
 } 

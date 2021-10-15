@@ -24,6 +24,15 @@ public class User {
 		this.pw=pw;
 		this.nickname=nickname;
 	}
+	public User(String pw,String uname,String nickname,String email,String phone,String address,int age) {
+		this.pw=pw;
+		this.uname=uname;
+		this.nickname=nickname;
+		this.email=email;
+		this.phone=phone;
+		this.address=address;
+		this.age=age;
+	}
 
 public User(String uid,String pw,String uname,String nickname,int age,char gender,String email,String phone,String address,int point) {
 		this.uid=uid;
@@ -53,6 +62,18 @@ public User(String uid,String pw,String uname,String nickname,int age,char gende
 	}
 
 
+public User(String uid, String pw, String uname, String nickname, String email, String phone,String address, char gender,
+		int age) {
+	this.uid=uid;
+	this.pw=pw;
+	this.uname=uname;
+	this.nickname=nickname;
+	this.age=age;
+	this.gender=gender;
+	this.email=email;
+	this.phone=phone;
+	this.address=address;
+}
 @Override
 public String toString() {
 	return "User [uid=" + uid + ", pw=" + pw + ", uname=" + uname + ", nickname=" + nickname + ", age=" + age

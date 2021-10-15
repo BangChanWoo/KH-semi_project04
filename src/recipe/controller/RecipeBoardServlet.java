@@ -78,7 +78,6 @@ public class RecipeBoardServlet extends HttpServlet {
 		
 		ArrayList<Recipe> volist = new RecipeService().recipeList(startRnum, endRnum, catenum);
 
-		//Data 전달을 위해서 request에 셋
 		request.setAttribute("recipeVoList", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);

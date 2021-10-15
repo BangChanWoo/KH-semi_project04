@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import user.service.UserService;
 import user.vo.User;
@@ -20,7 +19,6 @@ import user.vo.User;
 @WebServlet("/updateuser")
 public class UpdateUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private User u;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -39,42 +37,17 @@ public class UpdateUserServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		String uid = (String)request.getSession().getAttribute("sessionID");
-		User vo = new UserService().getUserInfo(uid);
-		request.setAttribute("user", vo);
-		request.getRequestDispatcher("/WEB-INF/view/UpdateUser.jsp").forward(request, response);
+
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/view/updateUser.jsp");
+		rd.forward(request, response);
 
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request,response);
 
-		String uid = request.getParameter("uid");
-		String pw = request.getParameter("pw");
-		String uname = request.getParameter("uname");
-		String nickname = request.getParameter("nickname");
-		String email = request.getParameter("email");
-		String phone = request.getParameter("phone");
-		String address=request.getParameter("address");
-		int age =Integer.parseInt(request.getParameter("age"));
-
-				User uservo=new User(pw,uname,nickname,email,phone,address,age);
-		 int result=new UserService().updateUser(uservo);
-		 
-		if (result > 0) {
-			request.getSession().setAttribute("sessionID",uid);
-//			response.sendRedirect("main");
-			request.getRequestDispatcher("/WEB-INF/view/main.jsp").forward(request,response);
-		} else {
-			request.setAttribute("msg", "정보변경실패");
-			request.getRequestDispatcher("WEB-INF/view/UpdateUser.jsp");
-		}
-
-	}
+}
 }

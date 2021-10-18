@@ -1,3 +1,7 @@
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/basic.css" />  <!-- 공통 css -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_header.css" /> <!-- header css -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_footer.css" /><!-- footer css -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/productCategory.css"/>
 <%@page import="product_post.vo.ProductPost"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -8,10 +12,6 @@
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <script src="https://kit.fontawesome.com/616f27e0c4.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/basic.css" />  <!-- 공통 css -->
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_header.css" /> <!-- header css -->
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_footer.css" /><!-- footer css -->
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/productCategory.css"/>
 <title>밥도둑_스토어 카테고리</title>
 </head>
 <body>

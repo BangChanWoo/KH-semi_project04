@@ -1,3 +1,7 @@
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/basic.css" />  <!-- 공통 css -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_header.css" /> <!-- header css -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_footer.css" /><!-- footer css -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/productDetail.css"/>
 <%@page import="product_post.vo.ProductPost"%>
 <%@page import="product_img.vo.ProductImg"%>
 <%@page import="product_option.vo.ProductOption"%>
@@ -12,10 +16,6 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <script src="https://kit.fontawesome.com/616f27e0c4.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jquery -->
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/basic.css" />  <!-- 공통 css -->
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_header.css" /> <!-- header css -->
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_footer.css" /><!-- footer css -->
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/productDetail.css"/>
 <title>밥도둑_스토어 상품 상세조회</title>
 </head>
 <body>
@@ -72,18 +72,13 @@
   				<%} } %>
   				</select>
   			</form>
-  				
-            <div class="dropdown"><span>선택 옵션</span>
-            
-  			<div class="dropdown-content"></div></div>
   			
-	   <div id="detailOptionContainer">
-            <%if(optionList != null){
-            	for(ProductOption opt : optionList){ %>
-            	<p><%=opt.getPro_option_content() %></p>
-            	<p><%=opt.getPro_option_no() %></p>
-            <%} } %>
-            </div>
+  			<div id="selectedOption">
+  			
+  				
+            
+  			
+	  
         </div>  			
         
         	<h2>총 상품 금액<%=vo.getPro_price() %></h2>
@@ -93,9 +88,9 @@
        		<button>바로 구매</button>
        		
        	<div id="productExplain">
+       		<h2>상품 상세정보</h2>
        		<%if(proImgList != null){
 	            for(int i=0; i<proImgList.size(); i++){%>
-       		<h2>상품 상세정보</h2>
        		<img src="<%=proImgList.get(i).getPro_content_img()%>" id="proExplainImg" alt="상품 상세설명">
        		<%} } %>
        	</div>

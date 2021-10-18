@@ -58,6 +58,9 @@ public class LoginServlet extends HttpServlet {
 		String pw = request.getParameter("pw");
 
 		int result = new UserService().loginUser(uid, pw);
+			
+		 	
+		
 
 		if (result == 1) {
 			request.setAttribute("result", result);
@@ -69,8 +72,16 @@ public class LoginServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("main");// 이거 변경
 			rd.forward(request, response);
 //	         response.sendRedirect("/WEB-INF/view/main.jsp"); 
+		} else if(result==2) {
+			User vo = new UserService().getNick(uid);
 
-		} else {
+			HttpSession session = request.getSession();
+			session.setAttribute("sessionID", uid);
+			session.setAttribute("sessionNickname", vo.getNickname());
+			RequestDispatcher rd = request.getRequestDispatcher("adminMainServlet");
+			rd.forward(request, response);
+		}
+		else {
 			request.setAttribute("result", result);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/login.jsp");
 			request.setAttribute("msg", "로그인 실패했습니다.");

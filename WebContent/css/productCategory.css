@@ -64,7 +64,7 @@ main h2 {
 .categoryProductPrice {
   width: 100%;
   margin: 3% 0 40% 0;
-  font-size: 0.9rem;
+  font-size: 1.0rem;
   overflow-y: hidden;
   text-overflow: ellipsis;
 }

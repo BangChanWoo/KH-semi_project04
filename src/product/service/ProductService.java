@@ -26,7 +26,6 @@ public class ProductService {
 		JdbcTemplate.close(conn);
 		return volist;
 	}
-
 	
 	public ProductPost productDetailList(int rno) {
 		Connection conn = JdbcTemplate.getConnection();

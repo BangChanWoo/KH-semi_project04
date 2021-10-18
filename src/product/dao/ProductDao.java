@@ -89,7 +89,7 @@ public class ProductDao {
 		ArrayList<ProductOption> volist = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String selectIngreQuery = "select pro_option_content from product_option where pro_no like ? order by pro_option_no";
+		String selectIngreQuery = "select pro_option_no, pro_option_content from product_option where pro_no like ? order by pro_option_no";
 		try {
 			ps = conn.prepareStatement(selectIngreQuery);
 			ps.setInt(1, rno);
@@ -98,6 +98,7 @@ public class ProductDao {
 			volist = new ArrayList<ProductOption>();
 			while(rs.next()) {
 				ProductOption vo = new ProductOption();
+				vo.setPro_option_no(rs.getInt("pro_option_no"));
 				vo.setPro_option_content(rs.getString("pro_option_content"));
 				volist.add(vo);
 			}
@@ -115,7 +116,7 @@ public class ProductDao {
 		ArrayList<ProductImg> volist = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String selectIngreQuery = "select pro_content_img from product_img where pro_no like ? order by pro_content_no";
+		String selectIngreQuery = "select pro_content_no, pro_content_img from product_img where pro_no like ? order by pro_content_no";
 		try {
 			ps = conn.prepareStatement(selectIngreQuery);
 			ps.setInt(1, rno);
@@ -124,6 +125,7 @@ public class ProductDao {
 			volist = new ArrayList<ProductImg>();
 			while(rs.next()) {
 				ProductImg vo = new ProductImg();
+				vo.setPro_content_no(rs.getInt("pro_content_no"));
 				vo.setPro_content_img(rs.getString("pro_content_img"));
 				volist.add(vo);
 			}

@@ -7,19 +7,51 @@ main{
 h2{
 	font-size: 2.2rem;
 }
+a{
+	color: #9a7b6c;
+}
+textarea{
+	font-size: 1.2rem;
+}
+button{
+	background-color: #9a7b6c;
+	border: 0;
+	border-radius: 7px;
+}
+button:hover{
+	background-color: #CFB9AF;
+}
 #detailImgContainer{
     position: relative;
     width: 35em;
     margin: 5em auto;
     text-align: left;
 }
-#likeProduct{
-    color: #9a7b6c;
-    font-size: 2em;
-    position: absolute;
-    bottom: 1.5em;
-    right: -1.3em;
-    display: block;
+#titleImg{
+    width: 100%;
+    aspect-ratio: 8/7;
+    object-fit: cover;
+    margin: 2% 0;
+    border-radius: 10px;
+}
+#detailTitleContainer{
+    width: 70%;
+    margin: 0 auto 4rem auto;
+}
+#detailTitle{
+    margin: 1em;
+    font-size: 1.2rem;
+}
+#detailPriceContainer{
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    text-align: left;
+}
+#detailPrice{
+	margin: 1rem;
+    font-size: 1.4rem;
+    line-height: 2rem;
 }
 #shareProduct{
     color: #9a7b6c;
@@ -31,12 +63,4 @@ h2{
 }
 #likeRecipe:hover, #shareRecipe:hover{
     color: #CFB9AF;
-}
-#detailTitleContainer{
-    width: 35em;
-    margin: 0 auto 4em auto;
-}
-#detailTitle{
-    margin: 1em;
-    font-size: 2.2rem;
 }

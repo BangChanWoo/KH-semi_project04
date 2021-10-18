@@ -42,27 +42,66 @@
             <img src="<%=vo.getPro_img()%>" id="titleImg" alt="상품 대표 사진">
         </div>
         
-        <!-- 화면구현 순서 : 상품명/가격(옆에 : 좋아요/공유)/별점/배송비/옵션/옵션이름/수량 (옆에: 가격)/ 밑줄/ 상품금액 / 합계금액 / 장바구니 버튼, 바로구매 버튼  -->
         
-        <div>
+        <div id="detailContainer">
+        	<div id="detailTitleContainer">
      	    <h2 id="detailTitle" class="categoryProductTitle"><%=vo.getPro_title()%></h2>
-     	</div>
-     	<div>
-     	    <h3 id="detailPrice" class="categoryProductPrice"><%=vo.getPro_price()%></h3>
-     	       
-            <c:if test="${not empty id}">
-            <a href="#" id="likeProduct"><i class="far fa-heart"></i></a>
-            </c:if>
-            <a href="#" id="shareProduct"><i class="fas fa-share-square"></i></a> 	    
- 	    </div>
- 	    <div>
- 	    	<!-- 별점 -->
- 	    </div>
- 	    <div>
- 	    	<!-- 배송비 -->
- 	    </div>
- 	    
-       
+     		
+     		<div id="detailPriceContainer">
+     	    <h3 id="detailPrice" class="categoryProductPrice"><%=vo.getPro_price()%>원</h3>
+     	    </div>
+            <c:if test="${not empty sessionID}">
+	            <c:if test="${like == 'yes'}">
+	            	<a href="likeornot?like=yes&rno=<%=rno%>" id="likeProduct"><i class="fas fa-heart"></i></a>
+	            </c:if>
+	            <c:if test="${like == null}">
+	            	<a href="likeornot?rno=<%=rno%>" id="likeProduct"><i class="far fa-heart"></i></a>
+	            </c:if>
+	      	</c:if>
+	             <a href="#" onclick="productShare()" id="shareProduct"><i class="fas fa-share-square"></i></a>
+        	<h3 id="deilveryFee">배송비 <%=vo.getPro_delivery_fee()%>원 </h3>
+        	
+        	<form action="#">
+  				<label for="productOption"></label>
+  				<select id="option">
+  				<%if(optionList != null){
+  					for(int i=0; i<optionList.size(); i++){ %>
+  				<option>
+  					<%=optionList.get(i).getPro_option_content()%>
+  				</option>
+  				<%} } %>
+  				</select>
+  			</form>
+  				
+            <div class="dropdown"><span>선택 옵션</span>
+            
+  			<div class="dropdown-content"></div></div>
+  			
+	   <div id="detailOptionContainer">
+            <%if(optionList != null){
+            	for(ProductOption opt : optionList){ %>
+            	<p><%=opt.getPro_option_content() %></p>
+            	<p><%=opt.getPro_option_no() %></p>
+            <%} } %>
+            </div>
+        </div>  			
+        
+        	<h2>총 상품 금액<%=vo.getPro_price() %></h2>
+        	<h2>총 합계 금액<%=vo.getPro_price() + vo.getPro_delivery_fee() %></h2>
+  			
+       		<button type="submit">장바구니 담기</button>
+       		<button>바로 구매</button>
+       		
+       	<div id="productExplain">
+       		<%if(proImgList != null){
+	            for(int i=0; i<proImgList.size(); i++){%>
+       		<h2>상품 상세정보</h2>
+       		<img src="<%=proImgList.get(i).getPro_content_img()%>" id="proExplainImg" alt="상품 상세설명">
+       		<%} } %>
+       	</div>
+       	
+       	<!-- 후기 --> 
+       	      	
      </main>
     <%@ include file="riceThief_footer.jsp" %>
 </body>

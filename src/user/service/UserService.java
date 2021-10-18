@@ -54,6 +54,12 @@ public class UserService {
 		close(conn);
 		return u;
 	}
+	public User findPw(String uid,String uname,String phone) {
+		Connection conn=getConnection();
+		User u=new UserDao().findPw(conn,uid,uname,phone);
+		close(conn);
+		return u;
+	}
 	public int deleteUser(String uid) {
 		Connection conn=getConnection();
 		int result=new UserDao().deleteUser(conn, uid);

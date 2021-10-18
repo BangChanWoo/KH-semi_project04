@@ -14,7 +14,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- XMLHttpRequest 모듈 로딩 -->
-<script type="text/javascript" src="/KH-semi_project04/WebContent/js"></script> 
+<script type="text/javascript" src="/WebContent/js"></script> 
 
 <!-- title -->
 <title>Insert title here</title>

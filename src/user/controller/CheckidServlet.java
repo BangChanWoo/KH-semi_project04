@@ -1,11 +1,14 @@
 package user.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 /**
  * Servlet implementation class CheckidServlet
@@ -30,7 +33,7 @@ public class CheckidServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		request.getRequestDispatcher("./WEB-INF/view/findId.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/findId.jsp").forward(request, response);
 	}
 
 	/**
@@ -38,8 +41,17 @@ public class CheckidServlet extends HttpServlet {
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+//		response.setContentType("text/html; charset=UTF-8");
+//		response.setCharacterEncoding("UTF-8");
+//		request.setCharacterEncoding("UTF-8");
+//		String uname=request.getParameter("uname");
+//		String phone=request.getParameter("phone");
+//		
+//		User u=new UserService().findId(uname, phone);
+//		if(u!=null) {
+//			RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/view/findId.jsp");
+//			rd.forward(request, response);
+//		}
+			}
 
 }

@@ -199,4 +199,38 @@ public class MainDao {
 		}
 		return volist;
 	}
+	public ArrayList<ProductPost> popularProduct(Connection conn) {
+		ArrayList<ProductPost> volist = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String selectAllQuery = "select * from (select rownum rnum, t1.cnt, t1.pro_title, t1.pro_no, t1.pro_img, t1.pro_date"
+				+ " from (select count(ir.inter_no) cnt, p.pro_title, p.pro_no, p.pro_img, p.rec_write_date"
+				+ " from product_post p left join interest_recipe ir"
+				+ " on p.pro_no = ir.pro_no"
+				+ " group by p.pro_title, p.pro_no, p.pro_img, p.pro_date"
+				+ " order by cnt desc, p.pro_date desc) t1)t2"
+				+ " where t2.rnum between 1 and 20";
+		//보관 없는 동안 사용
+		String query = "select * from product_post where pro_no between 1 and 4 order by pro_date desc";
+		try {
+			ps = conn.prepareStatement(query);
+			rs = ps.executeQuery();
+			
+			volist = new ArrayList<ProductPost>();
+			while(rs.next()) {
+				ProductPost vo = new ProductPost();
+				vo.setPro_no(rs.getInt("pro_no"));
+				vo.setPro_img(rs.getString("pro_img"));
+				vo.setPro_title(rs.getString("pro_title"));
+				volist.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(ps);
+		}
+		return volist;
+	}
 }

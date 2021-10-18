@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import main.service.MainService;
+import product_post.vo.ProductPost;
 import recipe.model.service.RecipeService;
 import recipe.model.vo.Recipe;
 
@@ -40,9 +42,11 @@ public class MainServlet extends HttpServlet {
 		
 		ArrayList<Recipe> recommendList = new RecipeService().recommendRecipe();
 		ArrayList<Recipe> popularRecipe = new RecipeService().popularRecipe();
-		
+		ArrayList<ProductPost> popularProduct = new MainService().popularProduct();
+
 		request.setAttribute("recommendList", recommendList);
 		request.setAttribute("popularRecipe", popularRecipe);
+		request.setAttribute("popularProduct", popularProduct);
 		request.setAttribute("msg", msg);
 		request.getRequestDispatcher("./WEB-INF/view/main.jsp").forward(request, response);
 	}

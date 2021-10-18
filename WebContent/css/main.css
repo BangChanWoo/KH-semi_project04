@@ -156,7 +156,7 @@ main{
 	object-fit: cover;
 	margin: 1rem 0;
 }
-.popularImg:hover{
+.popularImg:hover, .rightImg:hover, #leftImg:hover{
 	-webkit-transform: scale(1.03);
 	transform: scale(1.03);
 	box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
@@ -182,6 +182,56 @@ main{
 }
 #ctMargin{
 	clear: both;
+}
+#popularProduct{
+	width: 50%;
+	margin: auto;
+	display: grid;
+	grid-template-columns: 60% 40%;
+	gap: 0 2rem;
+}
+#leftContent{
+	grid-row: 1 / 4;
+	width: 80%;
+	margin: auto;
+}
+#leftImg{
+	width: 100%;
+	aspect-ratio: 1;
+	object-fit: cover;
+    border-radius: 5px;
+}
+.rightContent{
+	width: 100%;
+	margin: 0.7rem auto;
+	display: grid;
+	grid-template-columns: 50% 50%;
+	gap: 0 1rem;
+}
+.rightContainer{
+	grid-row: 1 / 3;
+	width: 100%;
+}
+.rightImg{
+	width: 100%;
+	aspect-ratio: 1;
+	object-fit: cover;
+    border-radius: 5px;
+}
+.proTitle{
+	width: 100%;
+    font-size: 1rem;
+    display: inline-block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: normal;
+	line-height: 1.4rem;
+	height: 2.7rem;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	margin: 5% 0;
 }
 /*responsive*/
 /*스마트폰*/

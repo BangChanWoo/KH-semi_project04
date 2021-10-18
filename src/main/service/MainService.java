@@ -53,4 +53,11 @@ public class MainService {
 		JdbcTemplate.close(conn);
 		return volist;
 	}
+	public ArrayList<ProductPost> popularProduct() {
+		ArrayList<ProductPost> volist = null;
+		Connection conn = JdbcTemplate.getConnection();
+		volist = new MainDao().popularProduct(conn);
+		JdbcTemplate.close(conn);
+		return volist;
+	}
 }

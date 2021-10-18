@@ -42,6 +42,7 @@ public class UserService {
 	close(conn);
 	return result;
 	}
+	
 	public User dupIdCheck(String uid) {
 		Connection conn=getConnection();
 		 User u=new UserDao().dupIdCheck(conn, uid);

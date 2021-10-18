@@ -33,7 +33,6 @@ public class likeFuncServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		//이 servlet은 레시피 보관 화면을 보여줌
 		
 		String id = (String)request.getSession().getAttribute("sessionID");
 		

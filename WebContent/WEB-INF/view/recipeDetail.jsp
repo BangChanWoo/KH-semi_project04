@@ -18,6 +18,8 @@
 <script src="https://kit.fontawesome.com/616f27e0c4.js" crossorigin="anonymous"></script>
 <!-- jquery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- ajax -->
+<script type="text/javascript" src="/WebContent/js"></script> 
 
 <title>밥도둑_레시피 상세조회</title>
 <%

@@ -35,15 +35,7 @@ public class likeFuncServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		//이 servlet은 레시피 보관 화면을 보여줌
 		
-		User LoginInfo = (User)request.getSession().getAttribute("LoginInfo");
-		String id = null;
-		if(LoginInfo != null) {
-			id = LoginInfo.getUid();
-		}
-		//로그인 기능 완료되면 삭제!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		if(id == null) {
-			id = "kyy806";
-		}
+		String id = (String)request.getSession().getAttribute("sessionID");
 		
 		String rno = request.getParameter("rno");
 		int rnoInt = 0;

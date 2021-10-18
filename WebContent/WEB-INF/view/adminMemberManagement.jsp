@@ -1,3 +1,11 @@
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/basic.css" />
+<!-- 공통 css -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_header.css" />
+<!-- header css -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_footer.css" />
+<!-- footer css -->
+<!--<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/recipeCategory.css" />-->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/userlist.css" />
 <%@page import="java.util.ArrayList"%>
 <%@page import="user.vo.*"%>
 <%@page import="admin.user.*"%>
@@ -6,6 +14,7 @@
 <% 
 	ArrayList<User> volist = (ArrayList<User>) request.getAttribute("adminUserList");
 	ArrayList<User> volist1 = (ArrayList<User>) request.getAttribute("adminUserList1");
+	ArrayList<User> volist3 = (ArrayList<User>) request.getAttribute("getUserId");
 	//ArrayList<User> volist2 = (ArrayList<User>) request.getAttribute("getUserAge");
 	int startPage = (int) request.getAttribute("startPage");
 	int endPage = (int) request.getAttribute("endPage");
@@ -20,6 +29,8 @@
 	int age55 = (int) request.getAttribute("age55");
 	int age66 = (int) request.getAttribute("age66");
 	int age00 = (int) request.getAttribute("age00");
+	String id = (String) request.getAttribute("id");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -29,19 +40,7 @@
 <script src="https://kit.fontawesome.com/616f27e0c4.js"
 	crossorigin="anonymous"></script>
 
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath() %>/css/basic.css" />
-<!-- 공통 css -->
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath() %>/css/riceThief_header.css" />
-<!-- header css -->
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath() %>/css/riceThief_footer.css" />
-<!-- footer css -->
-<!--<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath() %>/css/recipeCategory.css" />-->
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/userlist.css" />
+
 
 <title>관리자_회원관리</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -50,12 +49,12 @@
 	<hr>
 	<main>
 		<h2>회원관리</h2>
+		<form method="get" action="userInfo">
 		<div class='right-box'>
-			<input type="text" placeholder="사용자 아이디 입력">
-			<button id="btnSearch">검색</button>
+			<input type="text" name = "id" id="name1" placeholder="사용자 아이디 입력">
+			<input type="submit" id="user_search"value="검색" >
 		</div>
-
-
+		</form>
 		<div class="board_list_wrap">
 			<table class="board_list">
 				<caption>회원 목록</caption>
@@ -83,7 +82,7 @@
 
 						<td><%=bCount1 - bCount%></td>
 						<form method="get" action="userInfo" >
-							<td><button type="submit" class="info_btn" name="id" value="<%=vo.getUid()%>"><%=vo.getUid()%></button></td>
+							<td><button type="submit" class="info_btn" name="id" value="<%=vo.getUid()%>" id="name2"><%=vo.getUid()%></button></td>
 						</form>
 
 						<!--<td><button type="submit" id="info_btn" onclick="javascript:location.href='./userInfo.jsp?type=<%=vo.getUid()%>'" ><%=vo.getUid()%></button></td>-->
@@ -99,9 +98,9 @@
 					%>
 				</tbody>
 			</table>
-
 			<div class="paging">
-				<a href="#" class="bt">첫 페이지</a> <a href="#" class="bt">이전 페이지</a>
+				<a href="#" class="bt">첫 페이지</a> 
+				<a href="#" class="bt">이전 페이지</a>
 				<%
 					if (startPage > 1) {
 				%>
@@ -126,7 +125,6 @@
 				%>
 				<a href="#" class="bt">다음 페이지</a> <a href="#" class="bt">마지막 페이지</a>
 			</div>
-
 		</div>
 		<div class="gender">
 			<table class="gender_table">
@@ -160,7 +158,6 @@
 			<table class="age_group_table">
 				<thead>
 					<tr>
-
 						<th></th>
 						<th>10대</th>
 						<th>20대</th>
@@ -206,29 +203,12 @@
 		</div>
 
 	</main>
-	
+	<footer>
 	<%@ include file="riceThief_footer.jsp" %>
+	</footer>
 	<script>
-	$(".info_btn").click(function(){ 	
-			var str = ""
-			var tdArr = new Array();	// 배열 선언
-			var tr = $(this);
-			var td = tr.children();
-			console.log(" id : "+tr.text());
-			window.open("userInfo.jsp?type="+tr.text(), "a", "width=400, height=300, left=100, top=50");
-			
-		// 반복문을 이용해서 배열에 값을 담아 사용할 수 도 있다.
-	});
 	
 	
-	function popup(){
-		window.open("userInfo.jsp", "a", "width=400, height=300, left=100, top=50");
-		//window.name = "parentForm";
-            // window.open("open할 window", "자식창 이름", "팝업창 옵션");
-        //openWin = window.open("userInfo.jsp", "childForm", "width=570, height=350, resizable = no, scrollbars = no");
-        //openWin.document.getElementById("cInput").value = document.getElementById(".info_btn").value;
-
-	}
 	</script>
 
 

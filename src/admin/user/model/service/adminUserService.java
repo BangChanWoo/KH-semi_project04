@@ -33,6 +33,14 @@ public class adminUserService {
 		return volist;
 	}
 	
+	public ArrayList<User> getUserId() { //나이 갖고오기
+		ArrayList<User> volist = null;
+		Connection conn = JdbcTemplate.getConnection();
+		volist = new adminUserDao().getUserId(conn);
+		JdbcTemplate.close(conn);
+		return volist;
+	}
+	
 	public int getUserCount() {
 		int result = 0;
 		Connection conn = JdbcTemplate.getConnection();
@@ -61,6 +69,7 @@ public class adminUserService {
 	}
 	public int deleteUser(String id) {
 		int result = 0;
+		System.out.println("삭제진입2");
 		Connection conn = JdbcTemplate.getConnection();
 		result= new adminUserDao().deleteUser(conn, id);
 		JdbcTemplate.close(conn);

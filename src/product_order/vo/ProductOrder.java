@@ -6,10 +6,12 @@ public class ProductOrder {
 	private char order_status; //처리상태
 	private int order_no; //주문 번호
 	private int pro_no; //상품 번호
-
+	//테스트
+	
 	public ProductOrder() {
 	
 	}
+	
 	public ProductOrder(int order_detail_num,int order_count,char order_status,int order_no,int pro_no) {
 		this.order_detail_num=order_detail_num;
 		this.order_count=order_count;
@@ -17,6 +19,8 @@ public class ProductOrder {
 		this.order_no=order_no;
 		this.pro_no=pro_no;
 	}
+	
+	
 	public int getOrder_detail_num() {
 		return order_detail_num;
 	}
@@ -47,10 +51,12 @@ public class ProductOrder {
 	public void setPro_no(int pro_no) {
 		this.pro_no = pro_no;
 	}
+
 	@Override
 	public String toString() {
 		return "ProductOrder [order_detail_num=" + order_detail_num + ", order_count=" + order_count + ", order_status="
 				+ order_status + ", order_no=" + order_no + ", pro_no=" + pro_no + "]";
 	}
+	
 
 }

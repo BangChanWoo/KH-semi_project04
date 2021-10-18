@@ -29,7 +29,7 @@ public class userDelete extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		System.out.println("삭제진입");
 		String uid = request.getParameter("id");
@@ -37,21 +37,21 @@ public class userDelete extends HttpServlet {
 		int result= new adminUserService().deleteUser(uid);
 		if(result==1) {
 			request.setAttribute("msg", "회원 삭제 성공");
-			request.getRequestDispatcher("adminmain").forward(request, response);
+			request.getRequestDispatcher("SelectUserServlet").forward(request, response);
 		}
 		else {
+			System.out.println("삭제 실패"+result);
 			request.setAttribute("msg", "회원 삭제 실패");
-			request.getRequestDispatcher("adminmain").forward(request, response);
+			request.getRequestDispatcher("SelectUserServlet").forward(request, response);
 		}
-		request.getRequestDispatcher("./WEB-INF/view/userInfo.jsp").forward(request, response);
+		//request.getRequestDispatcher("./WEB-INF/view/adminUserDelete.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
 	}
 
 }

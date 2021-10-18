@@ -1,6 +1,7 @@
 package admin.user.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -18,25 +19,27 @@ import user.vo.User;
 @WebServlet("/userInfo")
 public class userInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public userInfoServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public userInfoServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		System.out.println("asdasd");
 		String uid = request.getParameter("id");
 		System.out.println("요청한 입력 데이터 : id = " + uid);
-		
+
 //		String pw=request.getParameter("pw"); 
 //		String uname=request.getParameter("uname");  
 //		String nickname=request.getParameter("nickname"); 
@@ -46,37 +49,49 @@ public class userInfoServlet extends HttpServlet {
 //		String address=request.getParameter("address"); 
 //		int point=Integer.parseInt(request.getParameter("point"));
 //		String kind=request.getParameter("kind"); 
-		
-		
+
 		ArrayList<User> volist1 = new adminUserService().adminUserList(uid);
+		System.out.println("------------------"+volist1);
 //		int result=0;
+		if(volist1.equals("['']")) {
+			System.out.println("어레이리스트 공백");
+//			샌드리다이렉트 포워드로 
+		//	response.sendRedirect(SelectUserServlet);
+		}
 //		
 //		result = new adminUserService().updateUser(pw, uname, nickname, age, gender, phone, address, point, kind, uid);
+
+		if (volist1 != null) {
+			System.out.println(volist1.isEmpty()+"+++++");
+			System.out.println("------------null아님");
+			System.out.println(volist1);
+			for (User vo : volist1) { 
+				System.out.println(vo.getUid());
+				System.out.println(vo.getPw());
+				System.out.println(vo.getUname());
+				System.out.println(vo.getJoin_date());
+			}
+		}
 		
-		
-		
-		
-		
-//		if(volist1 != null) {
-//			System.out.println("null아님");
-//			for (User vo : volist1) {
-//				System.out.println(vo.getUid());
-//				System.out.println(vo.getPw());
-//				System.out.println(vo.getUname());
-//				System.out.println(vo.getJoin_date());
-//				}
-//			}
-		
-		
-		
-		request.setAttribute("adminUserList1", volist1);
-		request.getRequestDispatcher("./WEB-INF/view/userInfo.jsp").forward(request, response);
+		if(volist1.isEmpty()==true) {
+			System.out.println("44444망4444망");
+			//String a="asd";
+			//request.setAttribute("a",a);
+			request.getRequestDispatcher("./SelectUserServlet").forward(request, response);
+		}
+		else {
+			request.setAttribute("adminUserList1", volist1);
+			request.getRequestDispatcher("./WEB-INF/view/userInfo.jsp").forward(request, response);
+			
+		}
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

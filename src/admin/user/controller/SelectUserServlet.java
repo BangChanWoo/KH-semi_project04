@@ -34,11 +34,14 @@ public class SelectUserServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		
+		//임시
+		
 		
 		//PrintWriter out = response.getWriter();
-		
 		
 		final int PAGE_SIZE = 5;   // 한 페이지 당 글수
 		final int PAGE_BLOCK = 3;   // 한 화면에 나타날 페이지 링크 수
@@ -57,7 +60,6 @@ public class SelectUserServlet extends HttpServlet {
 		bCount = new adminUserService().getUserCount();
 		System.out.println("test : "+bCount);
 		
-		
 		// 총 페이지수 = (총글개수 / 페이지당글수) + (총글개수에서 페이지당글수로 나눈 나머지가 0이 아니라면 페이지개수를 1 증가)
 		pageCount = (bCount / PAGE_SIZE) + (bCount % PAGE_SIZE == 0 ? 0 : 1);
 		//rownum 조건 계산
@@ -73,6 +75,12 @@ public class SelectUserServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK -1; 
 		if(endPage > pageCount) endPage=pageCount;
 		
+		// 사용자 검색
+		
+//		System.out.println("-----------------------------------"+search_id);
+//		ArrayList<User> volist3 = new adminUserService().adminUserList(search_id);
+		
+		
 		int genderCount = new adminUserService().getGenderCount();
 		System.out.println("남성 수 : " + genderCount);
 		
@@ -81,6 +89,7 @@ public class SelectUserServlet extends HttpServlet {
 		String uid="admin";
 		ArrayList<User> volist = new adminUserService().adminUserList(startRnum,endRnum);
 		
+		ArrayList<User> volist3 = new adminUserService().getUserId();
 		
 		ArrayList<User> volist1 = new adminUserService().adminUserList(uid);
 		ArrayList<User> volist2 = new adminUserService().getUserAge();
@@ -126,7 +135,6 @@ public class SelectUserServlet extends HttpServlet {
 						age0++;
 						break;
 					}
-
 				}
 				
 			}
@@ -140,9 +148,30 @@ public class SelectUserServlet extends HttpServlet {
 		}
 		
 		//TODO
+		//if() {}
+		
+//		String a = (String) request.getAttribute("a");
+//		if(a == null) {
+//			System.out.println("ㄴㄴㄴㄴ");
+//		}
+//		else {
+//			System.out.println("00000");
+//			PrintWriter out = response.getWriter();
+//			
+//			response.setContentType("text/html; charset=utf-8");
+//			
+//			out.println("<script language='javascript'>");
+//			out.println("alert('없다없다요');");
+//			out.println("</script>");
+//			out.flush();
+//		}
+		
+	
 		request.setAttribute("adminUserList", volist);
 		request.setAttribute("adminUserList1", volist1);
+//		request.setAttribute("adminUserList3", volist3);
 		//request.setAttribute("getUserAge", volist2);
+		request.setAttribute("getUserId", volist3);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);

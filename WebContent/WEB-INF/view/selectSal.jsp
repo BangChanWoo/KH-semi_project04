@@ -1,3 +1,9 @@
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/basic.css" />
+<!-- 공통 css -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/riceThief_header.css" />
+<!-- header css -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/riceThief_footer.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/adminSal.css" />
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -8,16 +14,7 @@
 <script src="https://kit.fontawesome.com/616f27e0c4.js"
 	crossorigin="anonymous"></script>
 
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/basic.css" />
-<!-- 공통 css -->
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/riceThief_header.css" />
-<!-- header css -->
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/riceThief_footer.css" />
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/adminSal.css" />
+
 
 <title>매출</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -133,7 +130,9 @@
 							var asd = year+"/"+month+"/"+day;
 							
 							var chooseDay=asd.substr(2,9);
-							document.getElementById("data").innerHTML=chooseDay;
+							document.getElementById("year").innerHTML=year;
+							document.getElementById("month").innerHTML=month;
+							document.getElementById("date").innerHTML=chooseDay;
 						}
 					}
 
@@ -149,7 +148,9 @@
 							var asd = year+"/"+month+"/"+day;
 							
 							var chooseDay=asd.substr(2,9);
-							document.getElementById("data").innerHTML=chooseDay;
+							document.getElementById("year").innerHTML=year;
+							document.getElementById("month").innerHTML=month;
+							document.getElementById("date").innerHTML=chooseDay;
 						}
 					}
 
@@ -176,8 +177,10 @@
 							console.log(chooseDay);
 							id=daySale
 							
-							$("#daySale").append(chooseDay);
-							document.getElementById("data").innerHTML=chooseDay;
+							//$("#daySale").append(chooseDay);
+							document.getElementById("year").innerHTML=year;
+							document.getElementById("month").innerHTML=month;
+							document.getElementById("date").innerHTML=chooseDay;
 						}
 					}
 
@@ -188,11 +191,14 @@
 						column.style.cursor = "pointer";
 						column.onclick = function() {
 							calendarChoiceDay(this);
+							
 							var year= date.getFullYear();
 							var month=today.getMonth()+1
 							var asd = year+"/"+month+"/"+day;
 							var chooseDay=asd.substr(2,9);
-							document.getElementById("data").innerHTML=chooseDay;
+							document.getElementById("year").innerHTML=year;
+							document.getElementById("month").innerHTML=month;
+							document.getElementById("date").innerHTML=chooseDay;
 						}
 					}
 				}
@@ -208,7 +214,9 @@
 							var month=today.getMonth()+1
 							var asd = year+"/"+month+"/"+day;
 							var chooseDay=asd.substr(2,9);
-							document.getElementById("data").innerHTML=chooseDay;
+							document.getElementById("year").innerHTML=year;
+							document.getElementById("month").innerHTML=month;
+							document.getElementById("date").innerHTML=chooseDay;
 						}
 						
 					}
@@ -226,7 +234,9 @@
 						var month=today.getMonth()+1
 						var asd = year+"/"+month+"/"+day;
 						var chooseDay=asd.substr(2,9);
-						document.getElementById("data").innerHTML=chooseDay;
+						document.getElementById("year").innerHTML=year;
+						document.getElementById("month").innerHTML=month;
+						document.getElementById("date").innerHTML=chooseDay;
 					}
 				}
 			}
@@ -242,7 +252,10 @@
 						var month=today.getMonth()+1
 						var asd = year+"/"+month+"/"+day;
 						var chooseDay=asd.substr(2,9);
-						document.getElementById("data").innerHTML=chooseDay;
+						document.getElementById("year").innerHTML=year;
+						document.getElementById("month").innerHTML=month;
+						
+						document.getElementById("date").innerHTML=chooseDay;
 					}
 				}
 			}
@@ -310,7 +323,12 @@
 	
 		<div class="sal">
 			<h3>매출조회</h3>
-			<div id="data"></div>
+			
+			<div id="year"></div><br>
+			
+			<div id="month"></div><br>
+			<div id="date"></div><br>
+			
 			<label>일 매출 : </label> 
 			<input type="text"  id="daySale" readonly><br> 
 			<label>월 매출 : </label> 

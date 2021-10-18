@@ -78,6 +78,31 @@ public class adminUserDao {
 		return volist;
 	}
 	
+	public ArrayList<User> getUserId(Connection conn) {
+		// TODO Auto-generated method stub
+		ArrayList<User> volist = null;
+		String sql = "select uid from member";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<User>();
+			while(rset.next()) {
+				User vo = new User();
+				vo.setUid(rset.getString("uid"));
+				volist.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);
+		}
+		return volist;
+	}
+	
 
 	public ArrayList<User> adminUserList(Connection conn, int start, int end){
 		ArrayList<User> volist = null;
@@ -182,12 +207,15 @@ public class adminUserDao {
 			pstmt.setString(11, id);
 			
 			result = pstmt.executeUpdate();
+			JdbcTemplate.close(pstmt);
 			if(result > 0) {
 				System.out.println("수정 성공");
 				result=1;
+				JdbcTemplate.close(pstmt);
 			} else {
 				System.out.println("수정 실패");
 				result=0;
+				JdbcTemplate.close(pstmt);
 			}
 					
 		} catch (Exception e) {
@@ -197,18 +225,28 @@ public class adminUserDao {
 	}
 	
 	public int deleteUser(Connection conn, String id) {
+		System.out.println("삭제진입3");
+		System.out.println(id);
 		int result= -1;
 		String sql = "delete from member where id=?";
+		PreparedStatement pstmt=null;
 		try {
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+			System.out.println("삭제진입4");
+			pstmt = conn.prepareStatement(sql);
+			System.out.println("삭제진입5");
 			pstmt.setString(1,id);
-			result = pstmt.executeUpdate();     // 위 연결된 곳으로 insert/delete/update query 문을 날려줌
+			System.out.println("삭제진입6");
+			result = pstmt.executeUpdate(); 
+			System.out.println("삭제진입7");
+			JdbcTemplate.close(pstmt);// 위 연결된 곳으로 insert/delete/update query 문을 날려줌
 			if(result > 0) {
 				System.out.println("삭제 성공");
 				result=1;
+				JdbcTemplate.close(pstmt);
 			} else {
 				System.out.println("삭제 실패");
 				result=0;
+				JdbcTemplate.close(pstmt);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

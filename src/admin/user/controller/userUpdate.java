@@ -30,63 +30,40 @@ public class userUpdate extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
+
+		request.getRequestDispatcher("./WEB-INF/view/userInfo.jsp").forward(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 		System.out.println("수정 진입");
-				
+
 		String uid = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		String uname = request.getParameter("uname");
 		String nickname = request.getParameter("nickname");
 		int age = Integer.parseInt(request.getParameter("age"));
-		//
-		System.out.println(age);
 		char gender = request.getParameter("gender").charAt(0);
-		
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
 		String address = request.getParameter("address");
-		int point =Integer.parseInt(request.getParameter("point"));
+		int point = Integer.parseInt(request.getParameter("point"));
 		char kind = request.getParameter("type").charAt(0);
-		
-		
-		System.out.println("잘 갖고오는지 확인------");
-		System.out.println(pw);
-		System.out.println(uname);
-		System.out.println(nickname);
-		System.out.println(age);
-		System.out.println(gender);
-		System.out.println(email);
-		System.out.println(phone);
-		System.out.println(address);
-		System.out.println(point);
-		System.out.println(kind);
-		
-		System.out.println(uid);
-		
-		System.out.println("끝");
-		int result = new adminUserService().updateUser(pw, uname, nickname, age, gender, email,  phone, address, point, kind, uid);
-		if(result==1) {
-			request.setAttribute("msg", "회원 수정 성공");
-			//request.getRequestDispatcher("adminMemberManagement").forward(request, response);
-		}
-		else {
-			request.setAttribute("msg", "회원 수정 실패");
-			//request.getRequestDispatcher("adminMemberManagement").forward(request, response);
-		}
-		
-		request.getRequestDispatcher("./WEB-INF/view/userInfo.jsp").forward(request, response);
-	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		int result = new adminUserService().updateUser(pw, uname, nickname, age, gender, email, phone, address, point, kind, uid);
+		System.out.println(result + "------------------------------------------------------------------");
+		if (result == 1) {
+			request.setAttribute("msg", "회원 수정 성공");
+			request.getRequestDispatcher("SelectUserServlet").forward(request, response);
+		} else {
+			request.setAttribute("msg", "회원 수정 실패");
+			request.getRequestDispatcher("SelectUserServlet").forward(request, response);
+		}
 	}
 
 }

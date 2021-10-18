@@ -1,10 +1,8 @@
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath() %>/css/basic.css" />
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath() %>/css/riceThief_header.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/basic.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_header.css" />
 <!-- header css -->
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath() %>/css/riceThief_footer.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_footer.css" />
+<!-- footer css -->
 <%@page import="java.util.ArrayList"%>
 <%@page import="user.vo.*"%>
 <%@page import="admin.user.*"%>
@@ -20,7 +18,6 @@
 <script src="https://kit.fontawesome.com/616f27e0c4.js"
 	crossorigin="anonymous"></script>
 
-<!-- footer css -->
 <%ArrayList<User> volist1 = (ArrayList<User>) request.getAttribute("adminUserList1");
 %>
 <title>사용자 상세정보</title>
@@ -57,13 +54,13 @@ body {
 							
 						%>
 
-	<form method="post" action="userUpdate">
+	<form method="post" action="userDelete">
 
 		<div class="filedlable">
 			<label class="io1">아이디</label>
 		</div>
 		<div class="formlable">
-			<input type="text" name="id" id="id" value="<%=vo.getUid() %>" readonly>
+			<input type="text" name="id" value="<%=vo.getUid() %>" readonly>
 		</div>
 
 		<div class="filedlable">
@@ -142,32 +139,16 @@ body {
 		<div class="formlable">
 			<input type="text" name="type" value="<%=vo.getType() %>">
 		</div>
-		
-		
-	
-			<!-- <input type="button" value="삭제" class="delete_btn" > -->
-			<div class="btnContainer">
-	<input type="submit" value="확인" class="update_btn"> 
-	
-	<input type="submit" value="삭제" class="delete_btn" onclick="SelectUserServlet">
-		
-	
-	</div>
-		
+		<%} }%>
+		<div class="btnContainer">
+			<input type="submit" value="확인" class="update_btn"> <input
+				type="submit" value="삭제" class="delete_btn" onclick="userDelete">
+		</div>
 	</form>
-	
-	<%} }%>
 	<footer>
 		<hr>
 		<%@ include file="riceThief_footer.jsp"%>
 	</footer>
 
-<script>
-
-$(".delete_btn").click(function(){
-	var a = document.getElementById("id");
-	console.log(a);
-})
-</script>
 </body>
 </html>

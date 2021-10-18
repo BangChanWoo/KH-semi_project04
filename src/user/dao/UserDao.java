@@ -4,6 +4,7 @@ import java.sql.Connection;
 import static riceThief.common.JdbcTemplate.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 import user.vo.User;
 
@@ -63,13 +64,17 @@ public class UserDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "select * from member where id = ? and pw = ?";
+		
 		try {
-			pstmt = conn.prepareStatement(sql.toString());
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, uid);
 			pstmt.setString(2, pw);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				result = 1; // 로그인 성공하면 1, 못찾으면 -1
+				if(uid.equals("admin") && pw.equals("admin")) {
+					result=2;
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -79,6 +84,7 @@ public class UserDao {
 		}
 		return result;
 	}
+	
 
 	public User dupIdCheck(Connection conn, String uid) {
 		User u = null;

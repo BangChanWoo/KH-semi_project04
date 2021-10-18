@@ -113,9 +113,33 @@ public class UserDao {
 			pstmt.setString(1, uname);
 			pstmt.setString(2, phone);
 			rs = pstmt.executeQuery();
+			u = new User();
 			if (rs.next()) {
-				u = new User();
 				u.setUid(rs.getString("uid"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return u;
+	}
+	public User findPw(Connection conn,String uid,String uname,String phone) {
+		User u=null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select pw from member where id=? and uname=? and  phone=? ";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, uid);
+			pstmt.setString(2, uname);
+			pstmt.setString(3, phone);
+			rs = pstmt.executeQuery();
+			u = new User();
+			if (rs.next()) {
+				u.setPw(rs.getString("pw"));
 			}
 
 		} catch (Exception e) {

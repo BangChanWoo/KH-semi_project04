@@ -1,10 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/css/basic.css" />
 <!-- 공통 css -->
@@ -13,6 +6,14 @@
 <!-- header css -->
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/css/riceThief_footer.css" />
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
 <!-- footer css -->
 <title>로그인</title>
 <style>
@@ -31,6 +32,9 @@ body {
 
 .vv {
 	margin-left: 20px;
+}
+#ckid{
+	margin-left:30px;
 }
 </style>
 <script src="https://kit.fontawesome.com/616f27e0c4.js"
@@ -56,15 +60,21 @@ body {
 
 				<br>
 
-				<button id="ckid">
+				<!-- <button id="ckid" onclick="location.href='checkid'">
 					아이디 찾기
 				</button>
 				<button id="ckpw">
 					비밀번호 찾기
-				</button>
+				</button> -->
 			</div>
 
 		</form>
+		<button id="ckid" onclick="location.href='checkid'">
+					아이디 찾기
+				</button>
+				<button id="ckpw" onclick="location.href='checkpw'">
+					비밀번호 찾기
+				</button>
 
 
 	</section>

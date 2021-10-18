@@ -1,3 +1,11 @@
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/basic.css" />
+<!-- 공통 css -->
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/riceThief_header.css" />
+<!-- header css -->
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/riceThief_footer.css" />
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -6,9 +14,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/basic.css" />
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_header.css" /> <!-- header css -->
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_footer.css" /><!-- footer css -->
+
 <title>회원가입</title>
 <style>
         body{

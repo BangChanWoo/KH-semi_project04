@@ -1,3 +1,11 @@
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/basic.css" />
+<!-- 공통 css -->
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/riceThief_header.css" />
+<!-- header css -->
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/riceThief_footer.css" />
 <%@page import="user.vo.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -8,15 +16,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/css/basic.css" />
-<!-- 공통 css -->
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/riceThief_header.css" />
-<!-- header css -->
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/riceThief_footer.css" />
-<!-- footer css -->
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/main.css" />
+
 <title>회원 정보 수정</title>
 </head>
 <body>

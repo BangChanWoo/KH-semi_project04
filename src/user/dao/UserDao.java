@@ -186,7 +186,7 @@ public class UserDao {
 			pstmt.setString(4, u.getEmail());
 			pstmt.setString(5, u.getPhone());
 			pstmt.setString(6, u.getAddress());
-			pstmt.setInt(7, u.getAge());
+			pstmt.setString(7, String.valueOf(u.getAge()));
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

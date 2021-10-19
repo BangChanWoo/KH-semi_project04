@@ -15,9 +15,10 @@
 			<div class="dropdown">
 				<button onclick="myFunction()" class="dropbtn">마이페이지</button>
 				<div id="myDropdown" class="dropdown-content">
-					<a onclick="location.href='updateuser'">정보수정</a>
+					<a onclick="location.href='updateuser'">나의 회원정보</a>
 					<a href="#">장바구니</a>
 					<a href="#">결제내역</a>
+					<a href="likeview">관심 레시피</a>
 					<a href="#">1:1문의</a>
 					<!--마이페이지메뉴 //TODO  -->
 				</div>

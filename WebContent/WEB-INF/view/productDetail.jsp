@@ -41,24 +41,14 @@
         <div id="detailImgContainer">
             <img src="<%=vo.getPro_img()%>" id="titleImg" alt="상품 대표 사진">
         </div>
-        
-        
         <div id="detailContainer">
         	<div id="detailTitleContainer">
-     	    <h2 id="detailTitle" class="categoryProductTitle"><%=vo.getPro_title()%></h2>
-     		
+	     	    <h2 id="detailTitle" class="categoryProductTitle"><%=vo.getPro_title()%></h2>
      		<div id="detailPriceContainer">
-     	    <h3 id="detailPrice" class="categoryProductPrice"><%=vo.getPro_price()%>원</h3>
+    	 	    <h3 id="detailPrice" class="categoryProductPrice"><%=vo.getPro_price()%>원</h3>
      	    </div>
-            <c:if test="${not empty sessionID}">
-	            <c:if test="${like == 'yes'}">
-	            	<a href="likeornot?like=yes&rno=<%=rno%>" id="likeProduct"><i class="fas fa-heart"></i></a>
-	            </c:if>
-	            <c:if test="${like == null}">
-	            	<a href="likeornot?rno=<%=rno%>" id="likeProduct"><i class="far fa-heart"></i></a>
-	            </c:if>
-	      	</c:if>
-	             <a href="#" onclick="productShare()" id="shareProduct"><i class="fas fa-share-square"></i></a>
+            <a href="#" onclick="productShare()" id="shareProduct"><i class="fas fa-share-square"></i></a>
+        	
         	<h3 id="deilveryFee">배송비 <%=vo.getPro_delivery_fee()%>원 </h3>
         	
         	<form action="#">
@@ -74,13 +64,8 @@
   			</form>
   			
   			<div id="selectedOption">
-  			
-  				
-            
-  			
-	  
-        </div>  			
-        
+  			</div>  			
+     
         	<h2>총 상품 금액<%=vo.getPro_price() %></h2>
         	<h2>총 합계 금액<%=vo.getPro_price() + vo.getPro_delivery_fee() %></h2>
   			
@@ -95,8 +80,9 @@
        		<%} } %>
        	</div>
        	
-       	<!-- 후기 --> 
-       	      	
+       	<div id="review">
+       		<h2>후기</h2>
+		</div>       	      	
      </main>
     <%@ include file="riceThief_footer.jsp" %>
 </body>

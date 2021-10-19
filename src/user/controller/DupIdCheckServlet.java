@@ -1,6 +1,7 @@
 package user.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -28,28 +29,27 @@ public class DupIdCheckServlet extends HttpServlet {
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		String uid=request.getParameter("id");
-		UserService uservice=new UserService();
-		User u=uservice.dupIdCheck(uid);
-		if(u==null) {
-			request.setAttribute("result", true);
-		}else {
-			request.setAttribute("result", false);
-		}
-		request.setAttribute("id", uid);
-		RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/view/dupIdCheck.jsp");
-		rd.forward(request, response);
-	}
-
-	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request,response);
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out=response.getWriter();
+		
+		String uid=request.getParameter("uid");
+		UserService uservice=new UserService();
+		User u=uservice.dupIdCheck(uid);
+		
+		if(uid.equals(u.getUid())) {
+			out.print("true");
+		}else {
+			out.print("false");
+		}
+		
+		
+//		RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/view/insertJoin.jsp");
+//		rd.forward(request, response);
 	}
+	
 
 }

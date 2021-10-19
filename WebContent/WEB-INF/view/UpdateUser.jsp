@@ -28,7 +28,7 @@
 		<br>
 		<h1 class="line">회원 정보 수정</h1>
 		<br>
-		<form method="post" action="/updateuser">
+		<form method="post" action="updateuser">
 			<table class="line">
 				<tr>
 					<td>아이디</td>
@@ -69,7 +69,7 @@
 				</tr>
 				<tr>
 					<td>나이</td>
-					<td><input type="number" id="agenum" name="age" class="in" min="12" max="99" step="1" name="age" value="<%=user.getAge() %>"></td>
+					<td><input type="number" id="agenum" name="age" class="in" min="12" max="99" step="1"  value="<%=user.getAge() %>"></td>
 				</tr>
 			</table>
 			<button type="submit" id="updateuserbtn" class="line">수정확인</button>

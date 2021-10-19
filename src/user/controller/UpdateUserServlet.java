@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
+
 
 import user.service.UserService;
 import user.vo.User;
@@ -20,7 +20,7 @@ import user.vo.User;
 @WebServlet("/updateuser")
 public class UpdateUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private User u;
+	
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -62,15 +62,15 @@ public class UpdateUserServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
 		String address=request.getParameter("address");
-		int age =Integer.parseInt(request.getParameter("age"));
+		String age=request.getParameter("age");
 
-				User uservo=new User(pw,uname,nickname,email,phone,address,age);
+				User uservo=new User(pw,uname,nickname,email,phone,address,Integer.parseInt(age));
 		 int result=new UserService().updateUser(uservo);
 		 
 		if (result > 0) {
 			request.getSession().setAttribute("sessionID",uid);
 //			response.sendRedirect("main");
-			request.getRequestDispatcher("/WEB-INF/view/main.jsp").forward(request,response);
+			request.getRequestDispatcher("main").forward(request,response);
 		} else {
 			request.setAttribute("msg", "정보변경실패");
 			request.getRequestDispatcher("WEB-INF/view/UpdateUser.jsp");

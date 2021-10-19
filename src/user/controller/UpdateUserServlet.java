@@ -20,7 +20,7 @@ import user.vo.User;
 @WebServlet("/updateuser")
 public class UpdateUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -64,7 +64,7 @@ public class UpdateUserServlet extends HttpServlet {
 		String address=request.getParameter("address");
 		String age=request.getParameter("age");
 
-				User uservo=new User(pw,uname,nickname,email,phone,address,Integer.parseInt(age));
+		User uservo=new User(pw,uname,nickname,email,phone,address,Integer.parseInt(age));
 		 int result=new UserService().updateUser(uservo);
 		 
 		if (result > 0) {

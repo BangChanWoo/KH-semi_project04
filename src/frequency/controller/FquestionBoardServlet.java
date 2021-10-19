@@ -1,4 +1,4 @@
-package notice.controller;
+package frequency.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import notice.service.NoticeService;
-import notice.vo.Notice;
+import frequency.service.*;
+import frequency.vo.Fquestion;
 
 /**
- * Servlet implementation class NoticeServlet
+ * Servlet implementation class FqeustionBoardServlet
  */
-@WebServlet("/usernotice")
-public class NoticeViewServlet extends HttpServlet {
+@WebServlet("/FquestionBoardServlet")
+public class FquestionBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeViewServlet() {
+    public FquestionBoardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,28 +41,28 @@ public class NoticeViewServlet extends HttpServlet {
 			catenum = Integer.parseInt(catenumStr);
 		}
 		
-		final int PAGE_SIZE = 10;  //한페이지당 글 수 
+		final int PAGE_SIZE = 20;  //한페이지당 글 수 
 		final int PAGE_BLOCK = 5;  //한화면에 나타날 페이지 링크 수
-		int nCount = 0;  //총 글수
+		int rCount = 0;  //총 글수
 		int pageCount = 0;  //총페이지 수 
 		int startPage = 1;  //화면에 나타날 시작페이지
 		int endPage = 1;  //화면에 나타날 마지막페이지
 		int currentPage =1;  //눌려진 페이지
-		int startNnum = 1; //화면에 나타날 글 번호
-		int endNnum = 1; //화면에 나타날 글 번호
+		int startRnum = 1; //화면에 나타날 글 번호
+		int endRnum = 1; //화면에 나타날 글 번호
 		
 		String pageNum = request.getParameter("pagenum");
 		if(pageNum != null) {
 			currentPage = Integer.parseInt(pageNum);
 		}
-		nCount = new NoticeService().getNoticeCount(catenum);
+		rCount = new FrequencyService().getFquestionCount(catenum);
 		
-		pageCount = (nCount/PAGE_SIZE) + (nCount%PAGE_SIZE == 0 ? 0 : 1);
+		pageCount = (rCount/PAGE_SIZE) + (rCount%PAGE_SIZE == 0 ? 0 : 1);
 
-		startNnum = (currentPage - 1) * PAGE_SIZE + 1;
-		endNnum = startNnum + PAGE_SIZE -1;
-		if(endNnum > nCount) {
-			endNnum = nCount;
+		startRnum = (currentPage - 1) * PAGE_SIZE + 1;
+		endRnum = startRnum + PAGE_SIZE -1;
+		if(endRnum > rCount) {
+			endRnum = rCount;
 		}
 		
 		if(currentPage%PAGE_BLOCK == 0) {
@@ -76,24 +76,15 @@ public class NoticeViewServlet extends HttpServlet {
 			endPage = pageCount;
 		}
 		
-		ArrayList<Notice> volist = new NoticeService().noticeList(startNnum, endNnum, catenum);
+		ArrayList<Fquestion> volist = new FrequencyService().FquestionList(startRnum, endRnum, catenum);
 
-		
-		request.setAttribute("noticeVoList", volist);
+		request.setAttribute("fquestionVoList", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("catenum", catenum);
-
-		request.getRequestDispatcher("./WEB-INF/view/noticeCategory.jsp").forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+//TODO
+		request.getRequestDispatcher("./WEB-INF/view/recipeCategory.jsp").forward(request, response);
 	}
 
 }

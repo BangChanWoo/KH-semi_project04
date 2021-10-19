@@ -3,114 +3,157 @@ package frequency.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
-import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
-
-import frequency.vo.FrequencyQuestion;
+import frequency.vo.Fquestion;
 import riceThief.common.JdbcTemplate;
 
 public class FrequencyDao {
+	public FrequencyDao() {}
 	
-	public FrequencyQuestion FQuestionlist(Connection conn, int fqno) {
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		FrequencyQuestion fq = new FrequencyQuestion();
-		
-		String fquestionView = "";
-		
-		
-		try {  
-			ps = conn.prepareStatement(fquestionView);
-			ps.setInt(1, fqno);
-			rs = ps.executeQuery();
-			if(rs!=null) {
-				while(rs.next()) {
-					fq.setF_question_num(rs.getInt("f_question_num"));
-					fq.setUid(rs.getString("uid"));
-					fq.setF_question_title(rs.getString("f_question_title"));
-					fq.setF_question_content(rs.getString("f_question_content"));	
-					fq.setF_question_cate(rs.getString("f_question_cate"));	
-				}
-			}
-		}catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-		}finally {
-			JdbcTemplate.close(rs);
-			JdbcTemplate.close(ps);
-		}
-		return fq;
-	}
-	public FrequencyQuestion viewFQuestion(int fqno) {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		
-		FrequencyQuestion fq = new FrequencyQuestion();
-		String fquestionView = "";
-		
-		try {
-			ps = con.prepareStatement(fquestionView);
-			ps.setInt(1, fqno);
-			rs = ps.executeQuery();
-			if(rs!=null &rs.next()) {
-				
-				fq.setF_question_num(rs.getInt("f_question_num"));
-				fq.setUid(rs.getString("uid"));
-				fq.setF_question_title(rs.getString("f_question_title"));
-				fq.setF_question_content(rs.getString("f_question_content"));	
-				fq.setF_question_cate(rs.getString("f_question_cate"));	
-			}
-		}catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("자주묻는질문 글보기 데이터 처리중 오류발생");
-			
-		}finally {
-			JdbcTemplate.close(rs);
-			JdbcTemplate.close(ps);
-		}
-		return fq;
-	}
-	public int updateF_Question(Connection con, String FquestionVo) {
-		int result = 0;
-		String fquestionUpdate = "";
-		PreparedStatement ps = null;
-		
-		try {
-			ps = con.prepareStatement(fquestionUpdate);
-//TODO
-//			ps.setInt(1, FquestionVo.getF_question_num());
-//			ps.setString(2, FquestionVo.getF_question_title());
-//			ps.setString(3, FquestionVo.getStringFquestion_content());
-//			ps.setString(4, FquestionVo.getF_Question_cate());
-			
-			result = ps.executeUpdate();
-			JdbcTemplate.close(ps);
-			
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			JdbcTemplate.close(ps);
-		}
-		return result;
-	}
-	public int deleteF_Question(Connection con, int f_question_num) {
+	public int insertFquestion(Connection conn, int fquestionVo) {
 		int result = -1;
 		PreparedStatement ps = null;
-		String fquestionDelete = "";
+		ResultSet rs = null;
+	
+		String FQuestionInsert = "insert into fquestion"
+					+ " values(fquestion_no.NEXTVAL, ?, ?, ?, ?, ?)";
 		
 		try {
-			ps = con.prepareStatement(fquestionDelete);
-			ps.setInt(1, f_question_num);
+			ps = conn.prepareStatement(FQuestionInsert);
+			ps.setInt(1, rs.getInt("fquestion_no"));
+			ps.setString(2, rs.getString("Uid"));
+			ps.setString(3, rs.getString("fquestion_title"));
+			ps.setString(4, rs.getString("getfquestion_content"));
+			ps.setString(5, rs.getString("getfquestion_cate"));
+			
 			result = ps.executeUpdate();
-		}catch(Exception e) {
+		} catch (Exception e) {
+		
 			System.out.println("연결 실패");
 			e.printStackTrace();
-		}finally {
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(ps);
+		
+		}
+		return result;
+	}
+			
+		
+	
+	public int getFquestionCount(Connection conn, int catenum) {
+		int result = 0;
+		String countAllQuery = "select count(Fquestion_no) from Fquestion";
+		String countCateQuery = "select count(Fquestion_no) from Fquestion where fquestion_cate_no like ?";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			if(catenum == 0) {
+				ps = conn.prepareStatement(countAllQuery);
+			}else {
+				ps = conn.prepareStatement(countCateQuery);
+				ps.setInt(1, catenum);
+			}
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			
+			System.out.println("연결 실패");
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rs);
 			JdbcTemplate.close(ps);
 		}
 		return result;
 	}
+	public ArrayList<Fquestion> fquestionList(Connection conn, int start , int end, int catenum) {
+		ArrayList<Fquestion> volist = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		//TODO
+		String selectAllQuery = "";
+		
+		String selectCateQuery = "";
+		try {
+			if(catenum == 0) {
+				ps = conn.prepareStatement(selectAllQuery);
+				ps.setInt(1, start);
+				ps.setInt(2, end);
+			}else {
+				ps = conn.prepareStatement(selectCateQuery);
+				ps.setInt(1, catenum);
+				ps.setInt(2, start);
+				ps.setInt(3, end);
+			}
+			rs = ps.executeQuery();
+			
+			volist = new ArrayList<Fquestion>();
+			while(rs.next()) {
+				
+				Fquestion vo = new Fquestion();
+				vo.setfquestion_no(rs.getInt("fquestion_no"));
+				vo.setfquestion_content(rs.getString("fquestion_content"));
+				vo.setfquestion_title(rs.getString("fquestion_title"));
+				volist.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(ps);
+		}
+		return volist;
+	}
+	
+	//update
+	public int updateFquestion(Connection conn, Fquestion fquestionVo) {
+		int result = -1;
+		String updateQuery = "update Fquestion set fquestion_title = ?, fquestion_content = ?, fquestion_cate_no = ? where fquestion_no like ?";
+		
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+		try {
+			ps = conn.prepareStatement(updateQuery);
+			ps.setString(1, rs.getString("frequestion_title"));
+			ps.setString(2, rs.getString("frequestion_content"));		
+			ps.setInt(3, rs.getInt("frequestion_cate_no"));
+			ps.setInt(4, rs.getInt("frequestion_no"));
+			result = ps.executeUpdate();
+			JdbcTemplate.close(ps);		
+		} catch (Exception e) {
+			System.out.println("연결 실패");
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(ps);
+		}
+		return result;
+	}
+	
+	public int deleteFquestion(Connection conn, int fqno) {
+		int result = -1;
+		String deleteQuery = "delete from Fquestion where fquestion_no like ?";
+		PreparedStatement ps = null;
+		try {
+			ps = conn.prepareStatement(deleteQuery);
+			ps.setInt(1, fqno);
+			result = ps.executeUpdate();
+			JdbcTemplate.close(ps);
+			
+			
+		} catch (Exception e) {
+			System.out.println("연결 실패");
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(ps);
+		}
+		return result;
+	}
+	
+	
 	
 }

@@ -121,97 +121,93 @@ public class NoticeDao {
 	
 	
 // TODO : 관리자모드에서 다시해야함	
-//	public Notice viewNotice(int nno) {
-//		Connection con = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		
-//		Notice vo = new Notice();
-//		String noticeView = " select no, title, content, "
-//				+ "to_char(startDate,'yyyy.mm.dd') startDate, "
-//				+ "to_char(endDate,'yyyy.mm.dd') endDate, "
-//				+ "to_char(writeDate,'yyyy.mm.dd') writeDate, "
-//				+ "to_char(updateDate,'yyyy.mm.dd') updateDate, "
-//		+ "from image where no=?";
-//		
-//		try {
-//			pstmt = con.prepareStatement(noticeView);
-//			pstmt.setInt(1,nno);
-//			rs = pstmt.executeQuery();
-//			if(rs!=null&rs.next()) {
-//	
-//				
-//				vo.setUid(rs.getString("uid"));
-//				vo.setNotice_num(rs.getInt("notice_num"));
-//				vo.setNotice_title(rs.getString("notice_title"));
-//				vo.setNotice_time(rs.getDate("notice_time"));
-//				vo.setNotice_content(rs.getString("notice_content"));
-//				vo.setNotice_video(rs.getString("notice_video"));
-//				vo.setNotice_img(rs.getString("notice_img"));
-//			}
-//			
-//		}catch (Exception e) {
-//			e.printStackTrace();
-//			System.out.println("공지 글보기 데이터 처리중 db오류 발생");
-//			
-//		}finally {
-//			JdbcTemplate.close(rs);
-//			JdbcTemplate.close(pstmt);
-//		}
-//		return vo;
-//	}
-//	
+	public Notice viewNotice(int nno) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		Notice vo = new Notice();
+		String noticeView = " select no, title, content, "
+				+ "to_char(startDate,'yyyy.mm.dd') startDate, "
+				+ "to_char(endDate,'yyyy.mm.dd') endDate, "
+				+ "to_char(writeDate,'yyyy.mm.dd') writeDate, "
+				+ "to_char(updateDate,'yyyy.mm.dd') updateDate, "
+		+ "from image where no=?";
+		
+		try {
+			pstmt = con.prepareStatement(noticeView);
+			pstmt.setInt(1,nno);
+			rs = pstmt.executeQuery();
+			if(rs!=null&rs.next()) {
 	
+				
+				vo.setUid(rs.getString("uid"));
+				vo.setNotice_num(rs.getInt("notice_num"));
+				vo.setNotice_title(rs.getString("notice_title"));
+				vo.setNotice_time(rs.getDate("notice_time"));
+				vo.setNotice_content(rs.getString("notice_content"));
+				vo.setNotice_video(rs.getString("notice_video"));
+				vo.setNotice_img(rs.getString("notice_img"));
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("공지 글보기 데이터 처리중 db오류 발생");
+			
+		}finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(pstmt);
+		}
+		return vo;
+	}
 	
-	
-	
-//	public int updateNotice(Connection con, Notice NoticeVo) {
-//		int result = 0;
-//		String updateNotice = " ";
-//		PreparedStatement pstmt = null;
-//		
-//		try {
-//			pstmt = con.prepareStatement(updateNotice);
-//			pstmt.setInt(1, NoticeVo.getNotice_num());
-//			pstmt.setString(2, NoticeVo.getNotice_title());			
-//			pstmt.setString(3, NoticeVo.getNotice_content());
-//			pstmt.setDate(4, NoticeVo.getNotice_time());
-//			pstmt.setString(5, NoticeVo.getNotice_img());
-//			pstmt.setString(6, NoticeVo.getNotice_video());
-//			
-//			result = pstmt.executeUpdate();
-//			JdbcTemplate.close(pstmt);
-//			System.out.println("NOTICEDAO.update() :글수정");
-//			
-//			
-//		}catch (Exception e) {
-//			e.printStackTrace();
-//			System.out.println("공지 글쓰기 데이터 처리중 db오류 발생");
-//			
-//		}finally {
-//			JdbcTemplate.close(pstmt);
-//		}
-//		return result;
-//	}
-//	public int deleteNotice(Connection con, int nno){
-//		int result = 0;
-//		PreparedStatement pstmt = null;
-//		String DeleteNotice = "delete from Notice where notice_num like ?";
-//		
-//		try {
-//			pstmt=con.prepareStatement(DeleteNotice);
-//			pstmt.setInt(1,nno);
-//			result = pstmt.executeUpdate();
-//			
-//			
-//		}catch (Exception e) {
-//			e.printStackTrace();
-//			System.out.println("공지글삭제 처리중 db오류 발생");
-//			
-//		}finally {
-//			JdbcTemplate.close(pstmt);
-//		}
-//		return result;
-//	}
+	public int updateNotice(Connection con, Notice NoticeVo) {
+		int result = 0;
+		String updateNotice = " ";
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = con.prepareStatement(updateNotice);
+			pstmt.setInt(1, NoticeVo.getNotice_num());
+			pstmt.setString(2, NoticeVo.getNotice_title());			
+			pstmt.setString(3, NoticeVo.getNotice_content());
+			pstmt.setDate(4, NoticeVo.getNotice_time());
+			pstmt.setString(5, NoticeVo.getNotice_img());
+			pstmt.setString(6, NoticeVo.getNotice_video());
+			
+			result = pstmt.executeUpdate();
+			JdbcTemplate.close(pstmt);
+			System.out.println("NOTICEDAO.update() :글수정");
+			
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("공지 글쓰기 데이터 처리중 db오류 발생");
+			
+		}finally {
+			JdbcTemplate.close(pstmt);
+		}
+		return result;
+	}
+	public int deleteNotice(Connection con, int nno){
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String DeleteNotice = "delete from Notice where notice_num like ?";
+		
+		try {
+			pstmt=con.prepareStatement(DeleteNotice);
+			pstmt.setInt(1,nno);
+			result = pstmt.executeUpdate();
+			
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("공지글삭제 처리중 db오류 발생");
+			
+		}finally {
+			JdbcTemplate.close(pstmt);
+		}
+		return result;
+	}
 		
 }

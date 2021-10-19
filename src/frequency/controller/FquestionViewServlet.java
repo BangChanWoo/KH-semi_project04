@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class FrequencyUpdateServlet
+ * Servlet implementation class FrequencyView
  */
-@WebServlet("/FrequencyUpdateServlet")
-public class FrequencyUpdateServlet extends HttpServlet {
+@WebServlet("/FrequencyView")
+public class FquestionViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FrequencyUpdateServlet() {
+    public FquestionViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +26,18 @@ public class FrequencyUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html; charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		
+		String fqno = request.getParameter("fqno");
+		int fqnoInt = 0;
+		if(fqno != null) {
+			fqnoInt = Integer.parseInt(fqno);  //눌려진 페이지
+		}
+		
+		request.setAttribute("fquestion", "yes");
+		request.getRequestDispatcher("fquestion?fqno="+fqnoInt).forward(request, response);
 	}
 
 	/**

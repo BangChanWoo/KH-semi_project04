@@ -8,7 +8,7 @@ import question.vo.Question;
 import riceThief.common.JdbcTemplate;
 
 public class QuestionService {
-	public ArrayList<Question> QuestionList(int start , int end, int catenum) {
+	public ArrayList<Question> questionList(int start , int end, int catenum) {
 		ArrayList<Question> volist = null;
 		Connection conn = JdbcTemplate.getConnection();
 		volist = new QuestionDao().questionList(conn, start, end, catenum);

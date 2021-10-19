@@ -78,8 +78,9 @@ public class QuestionBoardServlet extends HttpServlet {
 		
 		
 		
-		ArrayList<Question> volist = new QuestionService().QuestionList(startRnum, endRnum, catenum);
-
+		ArrayList<Question> volist = new QuestionService().questionList(startRnum, endRnum, catenum);
+		System.out.println("questionList: "+ volist);
+		
 		//Data 전달을 위해서 request에 셋
 		request.setAttribute("questionVolist", volist);
 		request.setAttribute("startPage", startPage);
@@ -87,7 +88,7 @@ public class QuestionBoardServlet extends HttpServlet {
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("catenum", catenum);
 
-		request.getRequestDispatcher("./WEB-INF/view/questionCategory.jsp").forward(request, response);
+		request.getRequestDispatcher("./WEB-INF/view/fquestionCategory.jsp").forward(request, response);
 	}
 
 	/**

@@ -3,7 +3,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="notice.vo.Notice" %>
 <%
-    ArrayList<Notice> volist = (ArrayList<Notice>) request.getAttribute("volist");
+    Notice noticeVo = (Notice) request.getAttribute("noticeVo");
 %>
 <!DOCTYPE html>
 <html>
@@ -35,25 +35,23 @@
             <td>작성일자</td>
         </tr>
         <%
-            if (volist.size() > 0) {
-                for (int i = 0; i < volist.size(); i++) {
+            if (noticeVo != null) {
         %>
-        <tr onclick="ShowDetail(<%=volist.get(i).getNotice_num()%>)">
+        <tr onclick="ShowDetail(<%=noticeVo.getNotice_num()%>)">
             <td>
-            	<%=volist.get(i).getNotice_num()%>
+            	<%=noticeVo.getNotice_num()%>
             </td>
             <td>
-                <%=volist.get(i).getNotice_title()%>
+                <%=noticeVo.getNotice_title()%>
             </td>
             <td>
-                <%=volist.get(i).getNotice_content()%>
+                <%=noticeVo.getNotice_content()%>
             </td>
             <td>
-                <%=volist.get(i).getNotice_time()%>
+                <%=noticeVo.getNotice_time()%>
             </td>
         </tr>
         <%
-            }
         } else {	
         %>
         <tr>
@@ -63,10 +61,10 @@
             }
         %>
     </table>
-    <button onclick="location.ahref='list.do'">게시물목록보기</button>
+    <button onclick="location.href='usernotice'">게시물목록보기</button>
     <br/>
     <br/>
-    <button onclick="location.href='main.jsp'">홈으로 이동</button>
+    <button onclick="location.href='main'">홈으로 이동</button>
 </div>
 
 </body>

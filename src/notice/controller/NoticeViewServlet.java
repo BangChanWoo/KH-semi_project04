@@ -35,12 +35,6 @@ public class NoticeViewServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
-		String catenumStr = request.getParameter("catenum");
-		int catenum = 0;
-		if(catenumStr != null) {
-			catenum = Integer.parseInt(catenumStr);
-		}
-		
 		final int PAGE_SIZE = 10;  //한페이지당 글 수 
 		final int PAGE_BLOCK = 5;  //한화면에 나타날 페이지 링크 수
 		int nCount = 0;  //총 글수
@@ -55,8 +49,8 @@ public class NoticeViewServlet extends HttpServlet {
 		if(pageNum != null) {
 			currentPage = Integer.parseInt(pageNum);
 		}
-		nCount = new NoticeService().getNoticeCount(catenum);
-		
+		nCount = new NoticeService().getNoticeCount();
+		System.out.println("nCount:"+ nCount);
 		pageCount = (nCount/PAGE_SIZE) + (nCount%PAGE_SIZE == 0 ? 0 : 1);
 
 		startNnum = (currentPage - 1) * PAGE_SIZE + 1;
@@ -75,17 +69,17 @@ public class NoticeViewServlet extends HttpServlet {
 		if(endPage > pageCount) {
 			endPage = pageCount;
 		}
-		
-		ArrayList<Notice> volist = new NoticeService().noticeList(startNnum, endNnum, catenum);
+		System.out.println(endNnum);
+		ArrayList<Notice> volist = new NoticeService().noticeList(startNnum, endNnum);
 
+		System.out.println("noticeList:"+ volist);
 		
 		request.setAttribute("noticeVoList", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
-		request.setAttribute("catenum", catenum);
 
-		request.getRequestDispatcher("./WEB-INF/view/noticeCategory.jsp").forward(request, response);
+		request.getRequestDispatcher("./WEB-INF/view/notice_main.jsp").forward(request, response);
 	}
 
 	/**

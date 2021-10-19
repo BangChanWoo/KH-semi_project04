@@ -12,18 +12,18 @@ import riceThief.common.JdbcTemplate;
 
 public class NoticeService {
 	
-	public ArrayList<Notice> noticeList(int start , int end, int catenum) {
+	public ArrayList<Notice> noticeList(int start , int end) {
 		ArrayList<Notice> volist = null;
 		Connection conn = JdbcTemplate.getConnection();
-		volist= new NoticeDao().noticeList(conn, start, end, catenum);
+		volist= new NoticeDao().noticeList(conn, start, end);
 		JdbcTemplate.close(conn);
 		return volist;
 	}
 	
-	public int getNoticeCount(int catenum) {
+	public int getNoticeCount() {
 		int result = 0;
 		Connection conn = JdbcTemplate.getConnection();
-		result = new NoticeDao().getNoticeCount(conn, catenum);
+		result = new NoticeDao().getNoticeCount(conn);
 		return result;
 	}
 	

@@ -1,0 +1,106 @@
+main{
+    width: 100%;
+    margin: auto;
+    position: relative;
+}
+main h2{
+    margin: 3.5rem 0;
+    text-align: center;
+    font-size: 2rem;
+}
+table {
+    border-collapse: collapse;
+}
+caption {
+    display: none;
+}
+#NoticeBtn {
+	position: relative;
+	left: 18%;
+    width: 15rem;
+    text-align: center;
+}
+#FquestionBtn {
+	position: relative;
+	left: 18%;
+    width: 15rem;
+    text-align: center;
+}
+#QuestionBtn {
+	position: relative;
+	left: 18%;
+    width: 15rem;
+    text-align: center;
+}
+/* #cateBtnAll{
+    width: 85%;
+    margin: 4rem auto;
+    display: grid;
+} */
+.cateBtn{
+    height: 3rem;
+    border-radius: unset;
+    border: 0;
+    border-top: solid 1px black;
+    border-right: solid 1px black;
+    background-color: white;
+    font-size: 1.2rem;
+    
+    text-align: center;
+    padding: 2rem 0 0 0;
+    text-decoration: none;
+    color: black;
+}
+.cateBtn:hover{
+    background-color: #CFB9AF;
+}
+.notice_row {
+    padding: 50px;
+}
+
+.notice_board {
+    width: 100%;
+    border-top: 1rem solid #CFB9AF;
+}
+
+.notice_board tr {
+    border-bottom: 1px solid #ccc;
+}
+.noticeCenter{
+	
+}
+.notice_board tr {
+    border-bottom: 1px solid #ccc;
+}
+
+.notice board th,
+.notice board td {
+    padding: 10rem;
+    font-size: 14rem;
+}
+
+.notice_board td {
+    text-align: center;
+}
+
+#pageBtnAll{
+    width: 18rem;
+    height: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 0.5rem;
+    margin: 4rem auto 6rem;
+}
+.pageBtn{
+    border: 0;
+    border-radius: 5px;
+    background-color: #CFB9AF;
+    text-align: center;
+    line-height: 2rem;
+    text-decoration: none;
+    color: black;
+    font-size: 1.3rem;    
+}
+.pageBtn:hover{
+    background-color: #9a7b6c;
+}

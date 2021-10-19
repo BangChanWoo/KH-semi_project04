@@ -62,14 +62,10 @@
 					<td>주소</td>
 					<td><input type="text" name="address" value="<%=user.getAddress() %>"></td>
 				</tr>
-				<tr>
-					<td>성별</td>
-					<td><input type="radio" name="gender" value="<%=user.getGender() %>">남자
-						<input type="radio" name="gender" value="<%=user.getGender() %>">여자</td>
-				</tr>
+		
 				<tr>
 					<td>나이</td>
-					<td><input type="number" id="agenum" name="age" class="in" min="12" max="99" step="1"  value="<%=user.getAge() %>"></td>
+					<td><input type="number" id="agenum" name="age" class="in" min="12" max="99" step="1" name="age" value="<%=user.getAge() %>"></td>
 				</tr>
 			</table>
 			<button type="submit" id="updateuserbtn" class="line">수정확인</button>

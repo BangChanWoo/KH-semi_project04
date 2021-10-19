@@ -142,18 +142,12 @@ body {
 		<div class="formlable">
 			<input type="text" name="type" value="<%=vo.getType() %>">
 		</div>
-		
-		
-	
 			<!-- <input type="button" value="삭제" class="delete_btn" > -->
 			<div class="btnContainer">
 	<input type="submit" value="확인" class="update_btn"> 
 	
 	<input type="submit" value="삭제" class="delete_btn" onclick="SelectUserServlet">
-		
-	
 	</div>
-		
 	</form>
 	
 	<%} }%>

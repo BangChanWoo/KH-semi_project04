@@ -2,17 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <header>
 	<div>
-		<a href="main.jsp"><img src="./css/밥도둑 로고.png" id="logoImg"></a>
+		<a href="./adminMainServlet"><img src="./css/밥도둑 로고.png" id="logoImg"></a>
         <div id="headerBtn">
         	<a href="#" id="searchBtn"><i class="fas fa-search"></i></a>
         	<c:choose>
         	<c:when test="${not empty sessionID}">
         	<a href="#"> <i class="far fa-user"></i> ${sessionID} 님</a>
 			<button class="headerBtnStyle" onclick="location.href='logout'">로그아웃</button>
-        	</c:when>
-        	<c:when test="${empty sessionID}">
-        	<button id="loginBtn" class="headerBtnStyle" onclick="location.href='login'">로그인</button>
-        	<button id="enrollBtn" class="headerBtnStyle" onclick="location.href='joinuser'">회원가입</button>
         	</c:when>
         	</c:choose>
         	<button id="serviceBtn" class="headerBtnStyle">고객센터</button> 

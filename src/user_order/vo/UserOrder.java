@@ -4,17 +4,17 @@ import java.sql.Date;
 
 public class UserOrder {
 	private int order_no; //주문번호
-	private Date order_date; //주문날짜
+	private String order_date; //주문날짜
 	private String address; //배송지주소
 	private String receiver_name; //수령자 이름
-	private  String receiver_phone; //수령자 전화번호
+	private String receiver_phone; //수령자 전화번호
 	private String uid; //아이디
 
 	public UserOrder() {
 
 	}
 
-	public UserOrder(int order_no,Date order_date,String address,String receiver_name,String receiver_phone,String uid) {
+	public UserOrder(int order_no,String order_date,String address,String receiver_name,String receiver_phone,String uid) {
 		this.order_no=order_no;
 		this.order_date=order_date;
 		this.address=address;
@@ -31,11 +31,11 @@ public class UserOrder {
 		this.order_no = order_no;
 	}
 
-	public Date getOrder_date() {
+	public String getOrder_date() {
 		return order_date;
 	}
 
-	public void setOrder_date(Date order_date) {
+	public void setOrder_date(String order_date) {
 		this.order_date = order_date;
 	}
 
@@ -76,6 +76,8 @@ public class UserOrder {
 		return "UserOrder [order_no=" + order_no + ", order_date=" + order_date + ", address=" + address
 				+ ", receiver_name=" + receiver_name + ", receiver_phone=" + receiver_phone + ", uid=" + uid + "]";
 	}
+
+	
 	
 
 }

@@ -63,8 +63,6 @@ public class userInfoServlet extends HttpServlet {
 
 		if (volist1 != null) {
 			System.out.println(volist1.isEmpty()+"+++++");
-			System.out.println("------------null아님");
-			System.out.println(volist1);
 			for (User vo : volist1) { 
 				System.out.println(vo.getUid());
 				System.out.println(vo.getPw());

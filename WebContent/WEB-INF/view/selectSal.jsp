@@ -4,8 +4,22 @@
 <!-- header css -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/riceThief_footer.css" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/adminSal.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/userlist.css" />
+<%@page import="java.util.ArrayList"%>
+<%@page import="admin.sal.vo.*"%>
+<%@page import="admin.sal.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+	<%
+	ArrayList<sale> volist = (ArrayList<sale>) request.getAttribute("salList");
+	
+	int startPage = (int) request.getAttribute("startPage");
+	int endPage = (int) request.getAttribute("endPage");
+	int pageCount = (int) request.getAttribute("pageCount");
+	int bCount = (int) request.getAttribute("bCount");
+	
+	%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -133,6 +147,11 @@
 							document.getElementById("year").innerHTML=year;
 							document.getElementById("month").innerHTML=month;
 							document.getElementById("date").innerHTML=chooseDay;
+							
+							document.getElementById("daySale").innerHTML="<label>일 매출 : <label><input type='text' value='"+chooseDay+"'>";
+							document.getElementById("monthSale").innerHTML="<label>월 매출 : <label><input type='text' value='"+chooseDay+"'>";
+							document.getElementById("yearSale").innerHTML="<label>년 매출 : <label><input type='text' value='"+chooseDay+"'>";
+							document.getElementById("totalSale").innerHTML="<label>총 매출 : <label><input type='text' value='"+chooseDay+"'>";
 						}
 					}
 
@@ -151,6 +170,11 @@
 							document.getElementById("year").innerHTML=year;
 							document.getElementById("month").innerHTML=month;
 							document.getElementById("date").innerHTML=chooseDay;
+							
+							document.getElementById("daySale").innerHTML="<label>일 매출 : <label><input type='text' value='"+chooseDay+"'>";
+							document.getElementById("monthSale").innerHTML="<label>월 매출 : <label><input type='text' value='"+chooseDay+"'>";
+							document.getElementById("yearSale").innerHTML="<label>년 매출 : <label><input type='text' value='"+chooseDay+"'>";
+							document.getElementById("totalSale").innerHTML="<label>총 매출 : <label><input type='text' value='"+chooseDay+"'>";
 						}
 					}
 
@@ -175,12 +199,29 @@
 							// 선택날짜 yy/mm/dd 형식 문자열
 							var chooseDay=asd.substr(2,9);
 							console.log(chooseDay);
-							id=daySale
+							var dayPrice = 0;
+							<% 
+							if(volist != null){
+								for (sale vo : volist){
+									
+							%>
 							
+							
+							var dbDay=<%=vo.getOrder_date()%>
+							console.log(typeof dbDay);
+							dayPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;
+							<%
+								}}
+							%>
 							//$("#daySale").append(chooseDay);
 							document.getElementById("year").innerHTML=year;
 							document.getElementById("month").innerHTML=month;
 							document.getElementById("date").innerHTML=chooseDay;
+							
+							document.getElementById("daySale").innerHTML="<label>일 매출 : <label><input type='text' value='"+dbDay+'원'+"'>";
+							document.getElementById("monthSale").innerHTML="<label>월 매출 : <label><input type='text' value='"+chooseDay+"'>";
+							document.getElementById("yearSale").innerHTML="<label>년 매출 : <label><input type='text' value='"+chooseDay+"'>";
+							document.getElementById("totalSale").innerHTML="<label>총 매출 : <label><input type='text' value='"+chooseDay+"'>";
 						}
 					}
 
@@ -199,6 +240,11 @@
 							document.getElementById("year").innerHTML=year;
 							document.getElementById("month").innerHTML=month;
 							document.getElementById("date").innerHTML=chooseDay;
+							
+							document.getElementById("daySale").innerHTML="<label>일 매출 : <label><input type='text' value='"+chooseDay+"'>";
+							document.getElementById("monthSale").innerHTML="<label>월 매출 : <label><input type='text' value='"+chooseDay+"'>";
+							document.getElementById("yearSale").innerHTML="<label>년 매출 : <label><input type='text' value='"+chooseDay+"'>";
+							document.getElementById("totalSale").innerHTML="<label>총 매출 : <label><input type='text' value='"+chooseDay+"'>";
 						}
 					}
 				}
@@ -217,6 +263,11 @@
 							document.getElementById("year").innerHTML=year;
 							document.getElementById("month").innerHTML=month;
 							document.getElementById("date").innerHTML=chooseDay;
+							
+							document.getElementById("daySale").innerHTML="<label>일 매출 : <label><input type='text' value='"+chooseDay+"'>";
+							document.getElementById("monthSale").innerHTML="<label>월 매출 : <label><input type='text' value='"+chooseDay+"'>";
+							document.getElementById("yearSale").innerHTML="<label>년 매출 : <label><input type='text' value='"+chooseDay+"'>";
+							document.getElementById("totalSale").innerHTML="<label>총 매출 : <label><input type='text' value='"+chooseDay+"'>";
 						}
 						
 					}
@@ -237,6 +288,11 @@
 						document.getElementById("year").innerHTML=year;
 						document.getElementById("month").innerHTML=month;
 						document.getElementById("date").innerHTML=chooseDay;
+						
+						document.getElementById("daySale").innerHTML="<label>일 매출 : <label><input type='text' value='"+chooseDay+"'>";
+						document.getElementById("monthSale").innerHTML="<label>월 매출 : <label><input type='text' value='"+chooseDay+"'>";
+						document.getElementById("yearSale").innerHTML="<label>년 매출 : <label><input type='text' value='"+chooseDay+"'>";
+						document.getElementById("totalSale").innerHTML="<label>총 매출 : <label><input type='text' value='"+chooseDay+"'>";
 					}
 				}
 			}
@@ -254,8 +310,12 @@
 						var chooseDay=asd.substr(2,9);
 						document.getElementById("year").innerHTML=year;
 						document.getElementById("month").innerHTML=month;
-						
 						document.getElementById("date").innerHTML=chooseDay;
+						
+						document.getElementById("daySale").innerHTML="<label>일 매출 : <label><input type='text' value='"+chooseDay+"'>";
+						document.getElementById("monthSale").innerHTML="<label>월 매출 : <label><input type='text' value='"+chooseDay+"'>";
+						document.getElementById("yearSale").innerHTML="<label>년 매출 : <label><input type='text' value='"+chooseDay+"'>";
+						document.getElementById("totalSale").innerHTML="<label>총 매출 : <label><input type='text' value='"+chooseDay+"'>";
 					}
 				}
 			}
@@ -324,35 +384,73 @@
 		<div class="sal">
 			<h3>매출조회</h3>
 			
-			<div id="year"></div><br>
-			
-			<div id="month"></div><br>
+			<div id="year"></div>
+			<div id="month"></div>
 			<div id="date"></div><br>
 			
-			<label>일 매출 : </label> 
-			<input type="text"  id="daySale" readonly><br> 
-			<label>월 매출 : </label> 
-			<input type="text" value="원" id="monthSale" readonly><br> 
-			<label>년 매출 : </label> 
-			<input type="text" value="원" id="yearSale" readonly><br>
-			<label>총 매출 : </label> 
-			<input type="text" value="원" id="totalSale" readonly><br>
+			
+			<div id="daySale"></div>
+			<!-- <input type="text"  id="daySale" readonly><br>  --> 
+			<div id="monthSale"></div>
+			<div id="yearSale"></div>
+			<div id="totalSale"></div>
 		</div>
 		
 	</div>
 	<h2>주문 승인 목록</h2>
 	<div class="board_list_wrap">
 			<table class="board_list">
-			<thead>
+				<thead>
 					<tr>
-						<th>날짜<th>
+						<th>날짜</th>
 						<th>판매 상품</th>
 						<th>구매자 아이디</th>
 						<th>가격</th>
 						<th>승인처리상태</th>
 					</tr>
 				</thead>
+				<tbody>
+					<tr>
+						<% 
+						if(volist != null){
+							for (sale vo : volist){
+						%>
+						<td><%=vo.getOrder_date() %></td>
+						<td><%=vo.getPro_no() %></td>
+						<td><%=vo.getReceiver_name() %></td>
+						<td><%=vo.getPro_price()*vo.getOrder_count() %></td>
+						<td><%=vo.getOrder_status()%></td>
+						<%} } %>
+					</tr>
+				</tbody>
 			</table>
+			<div class="paging">
+				<a href="#" class="bt">첫 페이지</a> 
+				<a href="#" class="bt">이전 페이지</a>
+				<%
+					if (startPage > 1) {
+				%>
+				<a href="./selectsals?pagenum=<%=startPage - 1%>"
+					class="num on"></a>
+				<%
+					}
+				%>
+				<%
+					for (int i = startPage; i <= endPage; i++) {
+				%>
+				<a href="./selectsals?pagenum=<%=i%>" class="num"><%=i%></a>
+				<%
+					}
+				%>
+				<%
+					if (endPage < pageCount) {
+				%>
+				<a href="./selectsals?pagenum=<%=endPage + 1%>" class="num"></a>
+				<%
+					}
+				%>
+				<a href="#" class="bt">다음 페이지</a> <a href="#" class="bt">마지막 페이지</a>
+			</div>
 		</div>
 	</main>
 	<%@ include file="riceThief_footer.jsp" %>

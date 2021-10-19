@@ -82,10 +82,10 @@ public class SelectUserServlet extends HttpServlet {
 		
 		
 		int genderCount = new adminUserService().getGenderCount();
-		System.out.println("남성 수 : " + genderCount);
-		
-		System.out.println(startRnum);
-		System.out.println(endRnum);
+//		System.out.println("남성 수 : " + genderCount);
+//		
+//		System.out.println(startRnum);
+//		System.out.println(endRnum);
 		String uid="admin";
 		ArrayList<User> volist = new adminUserService().adminUserList(startRnum,endRnum);
 		

@@ -36,44 +36,34 @@ public class InsertCommentServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 
-		JSONObject jobj = new JSONObject();
-		try {
-			String rnoStr = request.getParameter("rno");
-			int rno = 0;
-			if(rnoStr != null) {
-				rno = Integer.parseInt(rnoStr);
-			}
-			String levelStr = request.getParameter("level");
-			int level = 0;
-			if(levelStr != null) {
-				level = Integer.parseInt(levelStr);
-			}
-			String originStr = request.getParameter("origin");
-			int origin = 0;
-			if(originStr != null) {
-				origin = Integer.parseInt(originStr);
-			}
-			String commentInput = request.getParameter("commentInput");
-			
-			String id = (String)request.getSession().getAttribute("sessionID");
+		String rnoStr = request.getParameter("rno");
+		int rno = 0;
+		if(rnoStr != null) {
+			rno = Integer.parseInt(rnoStr);
+		}
+		String levelStr = request.getParameter("level");
+		int level = 0;
+		if(levelStr != null) {
+			level = Integer.parseInt(levelStr);
+		}
+		String originStr = request.getParameter("origin");
+		int origin = 0;
+		if(originStr != null) {
+			origin = Integer.parseInt(originStr);
+		}
 
-			Comment vo = new Comment(rno, id, level, origin, commentInput);
-			int result = new CommentService().insertComment(vo);
-			
-			if(result > 0) {
-				jobj.put("result","0으로는 나눌 수 없습니다.");
-				response.sendRedirect("selectrecipe?rno="+rno);
-			}else {
-				response.sendRedirect("selectrecipe?rno="+rno);
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		} finally {
-		PrintWriter out = response.getWriter();
-		 out.print(jobj.toJSONString()); // JSON객체의 toString() 메소드를 사용하여 응답값 전달
-		 out.flush();
-		 out.close();
-		 } 
+		String commentInput = request.getParameter("commentInput");
+
+		String id = (String)request.getSession().getAttribute("sessionID");
+
+		Comment vo = new Comment(rno, id, level, origin, commentInput);
+		int result = new CommentService().insertComment(vo);
+
+		if(result > 0) {
+			response.sendRedirect("selectrecipe?rno="+rno);
+		}else {
+			response.sendRedirect("selectrecipe?rno="+rno);
+		}
 	}
 
 }

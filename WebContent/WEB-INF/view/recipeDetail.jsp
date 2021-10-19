@@ -125,11 +125,11 @@
         <div id="detailCommentContainer">
             <c:if test="${not empty sessionID}">
             <h2>댓글 남기기</h2>
-			<form id="commentFrm">
+			<form id="commentFrm" method="post" action="insertcomment">
                 <input type="hidden" name="rno" id="rno" value="<%=rno%>" readonly="readonly">
                 <input type='hidden' name='level' id='level' value='0' readonly='readonly'>
                 <textarea name="commentInput" id="commentInput" required="required"></textarea>
-				<button type="button" id="commentSubmitBtn">등록</button>
+				<button type="submit" id="commentSubmitBtn">등록</button>
 			</form>
             </c:if>
             <ul>
@@ -258,65 +258,6 @@
 		document.execCommand("copy");
 		document.body.removeChild(textarea);
 		alert("URL이 복사되었습니다.")
-	}
-	
-	$("#commentSubmitBtn").on('click', function(){
-		var rno = $("#rno").val();
-		var level = $("#level").val();
-		var commentInput = $("#commentInput").val();
-		
-		var query = "rno=" + rno + "&level=" + level;
-		query += "&commentInput=" + commentInput;
-		
-		$.ajax({ // JQuery 를 통한 ajax 호출 방식 사용
-			type : "POST",
-			url : "insertcomment",
-			data : query,
-			dataType : "json", // 전달받을 객체는 JSON 이다.
-			success : function(data) {
-				$("#rno").val("");
-				$("#level").val("");
-				$("#commentInput").val("");
-			},
-			error : function(e) {
-			 	alert(e.responseText);
-			} 
-		});
-	});
-	function getComment() {
-		var getCom = "rno=" + rno + "&level=" + level;
-		getCom += "&commentInput=" + commentInput;
-		
-		$.ajax({
-			type: "GET",
-			url: "readcomment",
-			data : getCom,
-			dataType: "json",
-			success: function(xmlDoc) {
-				// 코드확인
-				var code=$(xmlDoc).find("code").text();
-				if (code=="success") { 
-					// data를 배열로 저장 >> 이때 꼮꼮 JSON객체로 변환처리해줘야함미덩 [object객체로 인식!]
-					var commentArray=JSON.parse($(xmlDoc).find("data").text());
-					
-					// 댓글 출력목록의 초기화
-					$("#comment_list").children().remove();
-					
-					// 반복지시자 이용하여 출력 >> [object객체로 인식!하니까 $넣어서 접근하는고얌]
-					$(commentArray).each(function() {
-						// 수정을 위해 각각의 div에 고유값인 id를 부여 >> 이때 num활용
-						// 삭제를 위해 num부여 >> 이때도 num활용
-						$("#comment_list").append("<div id='comment_"+this.num+"' class='comment' num='"+this.num+"'><b>["+this.writer+"]</b><br>"+this.content.replace(/\n/g, "<br>")+"<br>("+this.writeDate+")<br><button>수정</button>&nbsp;<button>삭제</button></div>");
-					});
-				} else { 
-					var message=$(xmlDoc).find("message").text();
-					$("#comment_list").html("<div class='no_comment'>"+message+"</div>");
-				}
-			},
-			error: function(xhr) {
-				alert("ERROR CODE : "+xhr.status);
-			}
-		});
 	}
 </script>
 </body>

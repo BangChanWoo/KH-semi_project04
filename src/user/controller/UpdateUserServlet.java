@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import javax.websocket.Session;
 
 import user.service.UserService;
 import user.vo.User;
@@ -20,7 +20,7 @@ import user.vo.User;
 @WebServlet("/updateuser")
 public class UpdateUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private User u;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -62,9 +62,9 @@ public class UpdateUserServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
 		String address=request.getParameter("address");
-		String age=request.getParameter("age");
+		int age =Integer.parseInt(request.getParameter("age"));
 
-		User uservo=new User(pw,uname,nickname,email,phone,address,Integer.parseInt(age));
+				User uservo=new User(pw,uname,nickname,email,phone,address,age);
 		 int result=new UserService().updateUser(uservo);
 		 
 		if (result > 0) {

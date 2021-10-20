@@ -211,7 +211,7 @@ public class MainDao {
 				+ " order by cnt desc, p.pro_date desc) t1)t2"
 				+ " where t2.rnum between 1 and 20";
 		//보관 없는 동안 사용
-		String query = "select t1.* from (select rownum r, po.* from productpost po order by pro_date desc) t1"
+		String query = "select t1.* from (select rownum r, po.* from product_post po order by pro_date desc) t1"
 				+ " where t1.r between 1 and 4";
 		try {
 			ps = conn.prepareStatement(query);

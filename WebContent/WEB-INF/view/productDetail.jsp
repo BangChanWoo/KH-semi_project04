@@ -55,7 +55,7 @@
         	
         	<form action="#">
   				<label for="productOption"></label>
-  				<select id="option">
+  				<select id="option" onchange="handleOnChange(this)">
   				<% if(optionList != null){
   					for(int i=0; i<optionList.size(); i++){ %>
   				<option>
@@ -64,8 +64,15 @@
   				<%} } %>
   				</select>
   			</form>
-  			
-  			<div id="selectedOption">
+  			<div id="selectedContainer">
+  				<div id="selectedOption">
+  				</div>
+  				<div id="selectStock">
+  					
+                </div>
+				
+
+  				</div>
   			</div>  			     	 
      	   </div>
      	<hr>
@@ -78,7 +85,7 @@
        		<button>바로 구매</button>
        	</div>
        	</div>	
-       		
+       		 
        		
        	<div id="productExplain">
        		<h2 id="expTxt">상품 상세정보</h2>
@@ -95,5 +102,16 @@
 		</div>       	      	
      </main>
     <%@ include file="riceThief_footer.jsp" %>
+    <script type="text/javascript">
+    function handleOnChange(e) {
+    	  // 선택된 데이터의 텍스트값 가져오기
+    	  const value = e.value;
+    	  
+    	  // 선택한 옵션 텍스트 출력
+    	  document.getElementById("selectedOption").innerText
+    	    = value;
+    	}
+
+    </script>
 </body>
 </html>

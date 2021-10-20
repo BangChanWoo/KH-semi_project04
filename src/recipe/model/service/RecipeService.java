@@ -108,4 +108,12 @@ public class RecipeService {
 		JdbcTemplate.close(conn);
 		return volist;
 	}
+	//관심 recipe
+		public ArrayList<Recipe> interRecList(int rno, String id) {
+			ArrayList<Recipe> volist = null;
+			Connection conn = JdbcTemplate.getConnection();
+			volist = new RecipeDao().interRecList(conn, rno, id);
+			JdbcTemplate.close(conn);
+			return volist;
+		}
 }

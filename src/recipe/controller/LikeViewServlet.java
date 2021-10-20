@@ -1,11 +1,16 @@
 package recipe.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import recipe.model.service.RecipeService;
+import recipe.model.vo.Recipe;
 
 
 /**
@@ -32,13 +37,20 @@ public class LikeViewServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		//이 servlet은 레시피 보관 화면을 보여줌
 		
-		String rno = request.getParameter("rno");
-		int rnoInt = 0;
-		if(rno != null) {
-			rnoInt = Integer.parseInt(rno);  //눌려진 페이지
+		String rnoStr = request.getParameter("rno");
+		int rno = 0;
+		if(rnoStr != null) {
+			rno = Integer.parseInt(rnoStr);
 		}
+
+		String id = (String)request.getSession().getAttribute("sessionID");
 		
+		
+		ArrayList<Recipe> interRecipe = new RecipeService().interRecList(rno, id);
+
+		request.setAttribute("interRecipe", interRecipe);
 		request.setAttribute("like", "yes");
+		
 		request.getRequestDispatcher("./WEB-INF/view/likeRecipe.jsp").forward(request, response);
 	
 	}

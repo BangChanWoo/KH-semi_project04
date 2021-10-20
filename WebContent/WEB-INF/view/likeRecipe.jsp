@@ -16,9 +16,12 @@
 </head>
 <body>
 <%
+	session.getAttribute("sessionID");
+	session.getAttribute("sessionNickname");
 	Recipe vo = (Recipe)request.getAttribute("vo");
 	int rno = (int)request.getAttribute("rno");
-
+	ArrayList<Recipe> interRecList = (ArrayList<Recipe>)request.getAttribute("interRecipe");
+	for(int i=0; i<interRecList.size(); i++){
 %>
 	
 	<%@ include file="riceThief_header.jsp" %>
@@ -26,12 +29,21 @@
     <main>
         <h2>관심 레시피</h2>
 			<div class="imgCenter">
-            <img src="<%=%>" id="titleImg" alt="레시피 대표 사진">
+			<%if(interRecList != null){
+	            	for(Recipe co : interRecList){ %>
+			 <div>
+                    <a href="selectrecipe?rno=<%=interRecList.get(i).getRecipe_no()%>"><img src="<%=interRecList.get(i).getRec_img() %>" class="categoryImg" alt="추천 레시피"></a>
+                    <div class="categoryRecipeTitle"><a href="selectrecipe?rno=<%=interRecList.get(i).getRecipe_no()%>"><%=interRecList.get(i).getRec_title() %></a></div>
+                </div>
+	            <% } }%>
+            </div>
+		
+	<%
+		}
+	%>
 			 
 			 
-			 
-			 
-	      	</div>		
+	
     </main>
     <hr>
 	<%@ include file="riceThief_footer.jsp" %>    

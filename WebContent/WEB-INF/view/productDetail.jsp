@@ -38,12 +38,14 @@
 	<%@ include file="riceThief_header.jsp" %>
 	<hr>
     <main>
+      <div id="contentContainer">
         <div id="detailImgContainer">
             <img src="<%=vo.getPro_img()%>" id="titleImg" alt="상품 대표 사진">
         </div>
         <div id="detailContainer">
         	<div id="detailTitleContainer">
 	     	    <h2 id="detailTitle" class="categoryProductTitle"><%=vo.getPro_title()%></h2>
+     		</div>
      		<div id="detailPriceContainer">
     	 	    <h3 id="detailPrice" class="categoryProductPrice"><%=vo.getPro_price()%>원</h3>
      	    </div>
@@ -54,7 +56,7 @@
         	<form action="#">
   				<label for="productOption"></label>
   				<select id="option">
-  				<%if(optionList != null){
+  				<% if(optionList != null){
   					for(int i=0; i<optionList.size(); i++){ %>
   				<option>
   					<%=optionList.get(i).getPro_option_content()%>
@@ -64,20 +66,28 @@
   			</form>
   			
   			<div id="selectedOption">
-  			</div>  			
-     
-        	<h2>총 상품 금액<%=vo.getPro_price() %></h2>
-        	<h2>총 합계 금액<%=vo.getPro_price() + vo.getPro_delivery_fee() %></h2>
-  			
-       		<button type="submit">장바구니 담기</button>
+  			</div>  			     	 
+     	   </div>
+     	<hr>
+     	<div id="acount">	
+        	<p id="allPro">총 상품 금액 : <%=vo.getPro_price()%>원<p>
+        	<p id="totalPro">총 합계 금액 : <%=vo.getPro_price() + vo.getPro_delivery_fee() %>원</p>
+  		</div>	
+  		<div id="proBtn">
+       		<button>장바구니 담기</button>
        		<button>바로 구매</button>
+       	</div>
+       	</div>	
+       		
        		
        	<div id="productExplain">
-       		<h2>상품 상세정보</h2>
+       		<h2 id="expTxt">상품 상세정보</h2>
+       		<div id="proExplainImg">
        		<%if(proImgList != null){
 	            for(int i=0; i<proImgList.size(); i++){%>
-       		<img src="<%=proImgList.get(i).getPro_content_img()%>" id="proExplainImg" alt="상품 상세설명">
+       		<img src="<%=proImgList.get(i).getPro_content_img()%>" id="explainImg" alt="상품 상세설명">
        		<%} } %>
+       		</div>
        	</div>
        	
        	<div id="review">

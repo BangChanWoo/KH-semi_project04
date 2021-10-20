@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 /**
  * Servlet implementation class LikeViewServlet
  */
@@ -30,6 +31,7 @@ public class LikeViewServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		//이 servlet은 레시피 보관 화면을 보여줌
+		
 		String rno = request.getParameter("rno");
 		int rnoInt = 0;
 		if(rno != null) {
@@ -37,15 +39,9 @@ public class LikeViewServlet extends HttpServlet {
 		}
 		
 		request.setAttribute("like", "yes");
-		request.getRequestDispatcher("recipedetail?rno="+rnoInt).forward(request, response);
+		request.getRequestDispatcher("./WEB-INF/view/likeRecipe.jsp").forward(request, response);
+	
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
+	
 }

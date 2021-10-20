@@ -1,0 +1,92 @@
+main{
+	width: 80%;
+	margin: auto;
+}
+h2{
+	text-align: center;
+	margin: 3rem auto;
+}
+button{
+	border: 0;
+	padding: 0.3rem;
+	background-color: #ebded4;
+	border-radius: 5px;
+	margin: 0.2rem 0.3rem;
+	font-size: 0.9rem;
+}
+#orderSelect{
+	float: right;
+	font-size: 1rem;
+	padding: 0.3rem;
+	margin: 1rem;
+}
+#orderTable{
+	clear: both;
+	width: 100%;
+	margin: 3rem auto;
+	border-collapse: collapse;
+}
+th{
+	background-color: #cfb9af;
+	padding: 1rem;
+	font-size: 1rem;
+}
+th:first-child{
+	border-radius: 7px 0 0 7px;
+}
+th:last-child{
+	border-radius: 0 7px 7px 0;
+}
+td{
+	text-align: center;
+	padding: 1rem;
+	font-size: 1rem;
+}
+.proContent{
+	display: grid;
+	grid-template-columns: 40% 60%;
+	gap: 0 1rem;
+}
+.proContent img{
+	width: 100%;
+	aspect-ratio: 1;
+	object-fit: cover;
+	
+}
+.proContent a{
+	width: 100%;
+    margin: 3% 0 40% 0;
+    font-size: 1rem;
+    display: inline-block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: normal;
+	line-height: 1;
+	height: 2rem;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	border-radius: 5px;
+}
+#pageBtnAll{
+    width: 18rem;
+    height: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 0.5rem;
+    margin: 4rem auto 6rem;
+}
+.pageBtn{
+    border: 0;
+    border-radius: 5px;
+    background-color: #CFB9AF;
+    text-align: center;
+    line-height: 2rem;
+    text-decoration: none;
+    color: black;
+    font-size: 1.3rem;
+}
+.pageBtn:hover{
+    background-color: #9a7b6c;
+}

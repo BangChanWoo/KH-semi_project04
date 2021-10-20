@@ -14,18 +14,14 @@ public class RecipeService {
 	public int insertRecipe(Recipe recipeVo, ArrayList<Ingredient> IngreList, ArrayList<RecipeSteps> stepList) {
 		int result =-1;
 		Connection conn = JdbcTemplate.getConnection();
-			
 		result = new RecipeDao().insertRecipe(conn, recipeVo, IngreList, stepList);
-				
 		JdbcTemplate.close(conn);
 		return result;	
 	}
 	public int getRecipeCount(int catenum) {
 		int result = 0;
 		Connection conn = JdbcTemplate.getConnection();
-			
 		result = new RecipeDao().getRecipeCount(conn, catenum);
-			
 		return result;
 	}
 	public ArrayList<Recipe> recipeList(int start , int end, int catenum) {

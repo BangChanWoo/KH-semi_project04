@@ -36,19 +36,19 @@ public class likeFuncServlet extends HttpServlet {
 		
 		String id = (String)request.getSession().getAttribute("sessionID");
 		
-		String rno = request.getParameter("rno");
-		int rnoInt = 0;
-		if(rno != null) {
-			rnoInt = Integer.parseInt(rno);  //눌려진 페이지
+		String rnoStr = request.getParameter("rno");
+		int rno = 0;
+		if(rnoStr != null) {
+			rno = Integer.parseInt(rnoStr);
 		}
 		
 		String like = request.getParameter("like");
 		int result = 0;
 		if(like == null) {
-			result = new RecipeService().likeCreate(rnoInt, id);
+			result = new RecipeService().likeCreate(rno, id);
 		}else if(like.equals("yes")){
-			result = new RecipeService().likeDelete(rnoInt, id);
+			result = new RecipeService().likeDelete(rno, id);
 		}
-		response.sendRedirect("selectrecipe?rno="+rnoInt);
+		response.sendRedirect("selectrecipe?rno="+rno);
 	}
 }

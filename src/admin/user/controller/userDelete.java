@@ -32,7 +32,7 @@ public class userDelete extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		System.out.println("삭제진입");
-		String uid = request.getParameter("id");
+		String uid = request.getParameter("delBtn");
 		System.out.println(uid);
 		int result= new adminUserService().deleteUser(uid);
 		if(result==1) {

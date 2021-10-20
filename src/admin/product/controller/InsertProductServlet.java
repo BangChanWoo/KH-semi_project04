@@ -85,12 +85,21 @@ public class InsertProductServlet extends HttpServlet {
 		if(cateListStr != null) {
 			cateList=Integer.parseInt(cateListStr);
 		}
+		else {
+			System.out.println("상품 번호 못받아옴!!!!!!!!!!!!!++++++++++++++++++++++++++++++++++++++++");
+		}
+		System.out.println("상품 번호 : " + cateList);
 		String feeTextStr=multi.getParameter("feeText");
 		int feeText=0;
 		if(feeTextStr != null) {
 			feeText= Integer.parseInt(feeTextStr);
 		}
-		int productStock=100;
+		
+		String productStock=multi.getParameter("productStock");
+		int productStockInt=0;
+		if(productStock != null) {
+			productStockInt = Integer.parseInt(productStock);
+		}
 		String productOptionPriceStr=multi.getParameter("productOptionPrice");
 		
 		int productOptionPrice=0;
@@ -98,7 +107,7 @@ public class InsertProductServlet extends HttpServlet {
 			productOptionPrice=Integer.parseInt(productOptionPriceStr);
 		}
 		
-		ProductPost productVo = new ProductPost(cateList, productTitle, uploadTitleImg,  productOptionPrice,  feeText, productStock);
+		ProductPost productVo = new ProductPost(uploadTitleImg,productTitle, productOptionPrice, productStockInt,feeText,cateList);
 		
 		
 		//상품 옵션

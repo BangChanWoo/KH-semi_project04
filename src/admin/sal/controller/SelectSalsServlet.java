@@ -46,14 +46,15 @@ public class SelectSalsServlet extends HttpServlet {
 		int currentPage = 1;
 		int startRnum = 1; // 화면에 글
 		int endRnum = 1; // 화면에 글
+		char order_status_salList = 'N';
 		char order_status = 'N';
-		//char order_status = 'N';
+		char order_status_calendar = 'Y';
 		String pageNum = request.getParameter("pagenum");
 
 		if (pageNum != null) { // 눌려진 페이지가 있음.
 			currentPage = Integer.parseInt(pageNum); // 눌려진 페이지
 		}
-
+		
 		bCount = new adminSalService().getSalCount(order_status);
 		System.out.println(bCount);
 
@@ -74,19 +75,23 @@ public class SelectSalsServlet extends HttpServlet {
 		if (endPage > pageCount)
 			endPage = pageCount;
 
-		ArrayList<sale> volist = new adminSalService().salList(order_status);
+		ArrayList<sale> volist = new adminSalService().salList(order_status_salList);
 		if (volist != null) {
 			for (sale vo : volist) {
 				System.out.println(vo.getOrder_count());
 				System.out.println(vo.getOrder_status());
 				System.out.println(vo.getPro_no());
 				System.out.println(vo.getPro_price());
-				System.out.println(vo.getReceiver_name());
+				System.out.println(vo.getId());
 				System.out.println(vo.getOrder_date());
+				System.out.println(vo.getOrder_detail_no());
 				System.out.println("날짜 타입"+vo.getOrder_date().getClass());
 			}
 		}
+		ArrayList<sale> volist1 = new adminSalService().salList(order_status_calendar);
+		
 		request.setAttribute("salList", volist);
+		request.setAttribute("salCal", volist1);
 		
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);

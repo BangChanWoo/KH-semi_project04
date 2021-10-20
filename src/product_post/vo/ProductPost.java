@@ -26,7 +26,7 @@ public ProductPost(int pro_no,String pro_img,String pro_title,int pro_price,Date
 		this.pro_cate_no=pro_cate_no;
 	}
 //상품등록
-public ProductPost(int pro_cate_no, String pro_title, String pro_img, int pro_price, int pro_delivery_fee, int pro_stock) {
+public ProductPost(String pro_img, String pro_title, int pro_price, int pro_stock, int pro_delivery_fee, int pro_cate_no) {
 	this.pro_cate_no=pro_cate_no;
 	this.pro_title=pro_title;
 	this.pro_img=pro_img;

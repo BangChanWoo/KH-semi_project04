@@ -207,7 +207,7 @@ public class adminUserDao {
 			pstmt.setString(11, id);
 			
 			result = pstmt.executeUpdate();
-			JdbcTemplate.close(pstmt);
+			
 			if(result > 0) {
 				System.out.println("수정 성공");
 				result=1;

@@ -23,4 +23,12 @@ public class adminSalService {
 		JdbcTemplate.close(conn);
 		return result;
 	}
+	
+	public int updateOrder(int order_detail_no) {
+		int result=-1;
+		Connection conn = JdbcTemplate.getConnection();
+		result = new adminSalDao().updateOrder(conn, order_detail_no);
+		JdbcTemplate.close(conn);
+		return result;
+	}
 }

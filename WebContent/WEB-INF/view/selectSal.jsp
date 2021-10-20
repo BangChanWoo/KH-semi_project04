@@ -13,7 +13,7 @@
 	
 	<%
 	ArrayList<sale> volist = (ArrayList<sale>) request.getAttribute("salList");
-	
+	ArrayList<sale> volist1 = (ArrayList<sale>) request.getAttribute("salCal");
 	int startPage = (int) request.getAttribute("startPage");
 	int endPage = (int) request.getAttribute("endPage");
 	int pageCount = (int) request.getAttribute("pageCount");
@@ -141,17 +141,57 @@
 							
 							var year= date.getFullYear();
 							var month=date.getMonth()+1
-							var asd = year+"/"+month+"/"+day;
+							var asd = year+"-"+month+"-"+day;
 							
+							// 선택날짜 yy-mm-dd 형식 문자열
 							var chooseDay=asd.substr(2,9);
+							var chooseMonth=asd.substr(2,5);
+							var chooseyear=year-2000;
+							console.log(chooseDay);
+							console.log(chooseMonth);
+							console.log(chooseyear);
+							var dayPrice = 0;
+							var monthPrice = 0;
+							var yearPrice = 0;
+							var totalPrice = 0;
+							<% 
+							if(volist1 != null){
+								for (sale vo : volist1){
+									
+							%>
+							var dbDay="<%=vo.getOrder_date()%>";
+							if(dbDay==chooseDay){
+								dayPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;
+							}
+						
+							var dbMonth = dbDay.substr(0,5);
+							console.log(">>>>>>>>>>>>"+dbMonth)
+							if(dbMonth ==chooseMonth)
+								monthPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;
+							
+							var dbYear = dbMonth.substr(0,2);
+							console.log(dbYear);
+							console.log("클릭 연도" + chooseyear);
+							if(dbYear ==chooseyear)
+								yearPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;
+								
+							
+							if(dbDay!=null){
+								totalPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;	
+							}
+							
+							<%
+								}}
+							%>
+							//$("#daySale").append(chooseDay);
 							document.getElementById("year").innerHTML=year;
 							document.getElementById("month").innerHTML=month;
 							document.getElementById("date").innerHTML=chooseDay;
 							
-							document.getElementById("daySale").innerHTML="<label>일 매출 : <label><input type='text' value='"+chooseDay+"'>";
-							document.getElementById("monthSale").innerHTML="<label>월 매출 : <label><input type='text' value='"+chooseDay+"'>";
-							document.getElementById("yearSale").innerHTML="<label>년 매출 : <label><input type='text' value='"+chooseDay+"'>";
-							document.getElementById("totalSale").innerHTML="<label>총 매출 : <label><input type='text' value='"+chooseDay+"'>";
+							document.getElementById("daySale").innerHTML="<label>일 매출 : <label><input type='text' value='"+dayPrice+'원'+"'>";
+							document.getElementById("monthSale").innerHTML="<label>월 매출 : <label><input type='text' value='"+monthPrice+'원'+"'>";
+							document.getElementById("yearSale").innerHTML="<label>년 매출 : <label><input type='text' value='"+yearPrice+'원'+"'>";
+							document.getElementById("totalSale").innerHTML="<label>총 매출 : <label><input type='text' value='"+totalPrice+'원'+"'>";
 						}
 					}
 
@@ -164,17 +204,56 @@
 							console.log("이후");
 							var year= date.getFullYear();
 							var month=date.getMonth()+1
-							var asd = year+"/"+month+"/"+day;
+							var asd = year+"-"+month+"-"+day;
 							
+							// 선택날짜 yy-mm-dd 형식 문자열
 							var chooseDay=asd.substr(2,9);
+							var chooseMonth=asd.substr(2,5);
+							var chooseyear=year-2000;
+							console.log(chooseDay);
+							console.log(chooseMonth);
+							console.log(chooseyear);
+							var dayPrice = 0;
+							var monthPrice = 0;
+							var yearPrice = 0;
+							var totalPrice = 0;
+							<% 
+							if(volist1 != null){
+								for (sale vo : volist1){
+									
+							%>
+							var dbDay="<%=vo.getOrder_date()%>";
+							if(dbDay==chooseDay){
+								dayPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;
+							}
+						
+							var dbMonth = dbDay.substr(0,5);
+							if(dbMonth ==chooseMonth)
+								monthPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;
+							
+							var dbYear = dbMonth.substr(0,2);
+							console.log(dbYear);
+							console.log("클릭 연도" + chooseyear);
+							if(dbYear ==chooseyear)
+								yearPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;
+								
+							
+							if(dbDay!=null){
+								totalPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;	
+							}
+							
+							<%
+								}}
+							%>
+							//$("#daySale").append(chooseDay);
 							document.getElementById("year").innerHTML=year;
 							document.getElementById("month").innerHTML=month;
 							document.getElementById("date").innerHTML=chooseDay;
 							
-							document.getElementById("daySale").innerHTML="<label>일 매출 : <label><input type='text' value='"+chooseDay+"'>";
-							document.getElementById("monthSale").innerHTML="<label>월 매출 : <label><input type='text' value='"+chooseDay+"'>";
-							document.getElementById("yearSale").innerHTML="<label>년 매출 : <label><input type='text' value='"+chooseDay+"'>";
-							document.getElementById("totalSale").innerHTML="<label>총 매출 : <label><input type='text' value='"+chooseDay+"'>";
+							document.getElementById("daySale").innerHTML="<label>일 매출 : <label><input type='text' value='"+dayPrice+'원'+"'>";
+							document.getElementById("monthSale").innerHTML="<label>월 매출 : <label><input type='text' value='"+monthPrice+'원'+"'>";
+							document.getElementById("yearSale").innerHTML="<label>년 매출 : <label><input type='text' value='"+yearPrice+'원'+"'>";
+							document.getElementById("totalSale").innerHTML="<label>총 매출 : <label><input type='text' value='"+totalPrice+'원'+"'>";
 						}
 					}
 
@@ -193,23 +272,45 @@
 							var day = date.getDate();
 							console.log(year-2000);
 							
-							var asd = year+"/"+month+"/"+day;
+							var asd = year+"-"+month+"-"+day;
 							console.log(asd);
 							
-							// 선택날짜 yy/mm/dd 형식 문자열
+							// 선택날짜 yy-mm-dd 형식 문자열
 							var chooseDay=asd.substr(2,9);
+							var chooseMonth=asd.substr(2,5);
+							var chooseyear=year-2000;
 							console.log(chooseDay);
+							console.log(chooseMonth);
+							console.log(chooseyear);
 							var dayPrice = 0;
+							var monthPrice = 0;
+							var yearPrice = 0;
+							var totalPrice = 0;
 							<% 
-							if(volist != null){
-								for (sale vo : volist){
+							if(volist1 != null){
+								for (sale vo : volist1){
 									
 							%>
+							var dbDay="<%=vo.getOrder_date()%>";
+							if(dbDay==chooseDay){
+								dayPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;
+							}
+						
+							var dbMonth = dbDay.substr(0,5);
+							if(dbMonth ==chooseMonth)
+								monthPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;
 							
+							var dbYear = dbMonth.substr(0,2);
+							console.log(dbYear);
+							console.log("클릭 연도" + chooseyear);
+							if(dbYear ==chooseyear)
+								yearPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;
+								
 							
-							var dbDay=<%=vo.getOrder_date()%>
-							console.log(typeof dbDay);
-							dayPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;
+							if(dbDay!=null){
+								totalPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;	
+							}
+							
 							<%
 								}}
 							%>
@@ -218,10 +319,10 @@
 							document.getElementById("month").innerHTML=month;
 							document.getElementById("date").innerHTML=chooseDay;
 							
-							document.getElementById("daySale").innerHTML="<label>일 매출 : <label><input type='text' value='"+dbDay+'원'+"'>";
-							document.getElementById("monthSale").innerHTML="<label>월 매출 : <label><input type='text' value='"+chooseDay+"'>";
-							document.getElementById("yearSale").innerHTML="<label>년 매출 : <label><input type='text' value='"+chooseDay+"'>";
-							document.getElementById("totalSale").innerHTML="<label>총 매출 : <label><input type='text' value='"+chooseDay+"'>";
+							document.getElementById("daySale").innerHTML="<label>일 매출 : <label><input type='text' value='"+dayPrice+'원'+"'>";
+							document.getElementById("monthSale").innerHTML="<label>월 매출 : <label><input type='text' value='"+monthPrice+'원'+"'>";
+							document.getElementById("yearSale").innerHTML="<label>년 매출 : <label><input type='text' value='"+yearPrice+'원'+"'>";
+							document.getElementById("totalSale").innerHTML="<label>총 매출 : <label><input type='text' value='"+totalPrice+'원'+"'>";
 						}
 					}
 
@@ -235,16 +336,55 @@
 							
 							var year= date.getFullYear();
 							var month=today.getMonth()+1
-							var asd = year+"/"+month+"/"+day;
+							var asd = year+"-"+month+"-"+day;
+							// 선택날짜 yy-mm-dd 형식 문자열
 							var chooseDay=asd.substr(2,9);
+							var chooseMonth=asd.substr(2,5);
+							var chooseyear=year-2000;
+							console.log(chooseDay);
+							console.log(chooseMonth);
+							console.log(chooseyear);
+							var dayPrice = 0;
+							var monthPrice = 0;
+							var yearPrice = 0;
+							var totalPrice = 0;
+							<% 
+							if(volist1 != null){
+								for (sale vo : volist1){
+									
+							%>
+							var dbDay="<%=vo.getOrder_date()%>";
+							if(dbDay==chooseDay){
+								dayPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;
+							}
+						
+							var dbMonth = dbDay.substr(0,5);
+							if(dbMonth ==chooseMonth)
+								monthPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;
+							
+							var dbYear = dbMonth.substr(0,2);
+							console.log(dbYear);
+							console.log("클릭 연도" + chooseyear);
+							if(dbYear ==chooseyear)
+								yearPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;
+								
+							
+							if(dbDay!=null){
+								totalPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;	
+							}
+							
+							<%
+								}}
+							%>
+							//$("#daySale").append(chooseDay);
 							document.getElementById("year").innerHTML=year;
 							document.getElementById("month").innerHTML=month;
 							document.getElementById("date").innerHTML=chooseDay;
 							
-							document.getElementById("daySale").innerHTML="<label>일 매출 : <label><input type='text' value='"+chooseDay+"'>";
-							document.getElementById("monthSale").innerHTML="<label>월 매출 : <label><input type='text' value='"+chooseDay+"'>";
-							document.getElementById("yearSale").innerHTML="<label>년 매출 : <label><input type='text' value='"+chooseDay+"'>";
-							document.getElementById("totalSale").innerHTML="<label>총 매출 : <label><input type='text' value='"+chooseDay+"'>";
+							document.getElementById("daySale").innerHTML="<label>일 매출 : <label><input type='text' value='"+dayPrice+'원'+"'>";
+							document.getElementById("monthSale").innerHTML="<label>월 매출 : <label><input type='text' value='"+monthPrice+'원'+"'>";
+							document.getElementById("yearSale").innerHTML="<label>년 매출 : <label><input type='text' value='"+yearPrice+'원'+"'>";
+							document.getElementById("totalSale").innerHTML="<label>총 매출 : <label><input type='text' value='"+totalPrice+'원'+"'>";
 						}
 					}
 				}
@@ -258,16 +398,57 @@
 							calendarChoiceDay(this);
 							var year= date.getFullYear();
 							var month=today.getMonth()+1
-							var asd = year+"/"+month+"/"+day;
+							var asd = year+"-"+month+"-"+day;
+							
+							// 선택날짜 yy-mm-dd 형식 문자열
 							var chooseDay=asd.substr(2,9);
+							var chooseMonth=asd.substr(2,5);
+							var chooseyear=year-2000;
+							console.log(chooseDay);
+							console.log(chooseMonth);
+							console.log(chooseyear);
+							var dayPrice = 0;
+							var monthPrice = 0;
+							var yearPrice = 0;
+							var totalPrice = 0;
+							<% 
+							if(volist1 != null){
+								for (sale vo : volist1){
+									
+							%>
+							var dbDay="<%=vo.getOrder_date()%>";
+							if(dbDay==chooseDay){
+								dayPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;
+							}
+						
+							var dbMonth = dbDay.substr(0,5);
+							console.log(">>>>>>>>>>>>"+dbMonth)
+							if(dbMonth ==chooseMonth)
+								monthPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;
+							
+							var dbYear = dbMonth.substr(0,2);
+							console.log(dbYear);
+							console.log("클릭 연도" + chooseyear);
+							if(dbYear ==chooseyear)
+								yearPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;
+								
+							
+							if(dbDay!=null){
+								totalPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;	
+							}
+							
+							<%
+								}}
+							%>
+							//$("#daySale").append(chooseDay);
 							document.getElementById("year").innerHTML=year;
 							document.getElementById("month").innerHTML=month;
 							document.getElementById("date").innerHTML=chooseDay;
 							
-							document.getElementById("daySale").innerHTML="<label>일 매출 : <label><input type='text' value='"+chooseDay+"'>";
-							document.getElementById("monthSale").innerHTML="<label>월 매출 : <label><input type='text' value='"+chooseDay+"'>";
-							document.getElementById("yearSale").innerHTML="<label>년 매출 : <label><input type='text' value='"+chooseDay+"'>";
-							document.getElementById("totalSale").innerHTML="<label>총 매출 : <label><input type='text' value='"+chooseDay+"'>";
+							document.getElementById("daySale").innerHTML="<label>일 매출 : <label><input type='text' value='"+dayPrice+'원'+"'>";
+							document.getElementById("monthSale").innerHTML="<label>월 매출 : <label><input type='text' value='"+monthPrice+'원'+"'>";
+							document.getElementById("yearSale").innerHTML="<label>년 매출 : <label><input type='text' value='"+yearPrice+'원'+"'>";
+							document.getElementById("totalSale").innerHTML="<label>총 매출 : <label><input type='text' value='"+totalPrice+'원'+"'>";
 						}
 						
 					}
@@ -283,16 +464,57 @@
 						calendarChoiceDay(this);
 						var year= today.getFullYear();
 						var month=today.getMonth()+1
-						var asd = year+"/"+month+"/"+day;
+						var asd = year+"-"+month+"-"+day;
+						
+						// 선택날짜 yy-mm-dd 형식 문자열
 						var chooseDay=asd.substr(2,9);
+						var chooseMonth=asd.substr(2,5);
+						var chooseyear=year-2000;
+						console.log(chooseDay);
+						console.log(chooseMonth);
+						console.log(chooseyear);
+						var dayPrice = 0;
+						var monthPrice = 0;
+						var yearPrice = 0;
+						var totalPrice = 0;
+						<% 
+						if(volist1 != null){
+							for (sale vo : volist1){
+								
+						%>
+						var dbDay="<%=vo.getOrder_date()%>";
+						if(dbDay==chooseDay){
+							dayPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;
+						}
+					
+						var dbMonth = dbDay.substr(0,5);
+						console.log(">>>>>>>>>>>>"+dbMonth)
+						if(dbMonth ==chooseMonth)
+							monthPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;
+						
+						var dbYear = dbMonth.substr(0,2);
+						console.log(dbYear);
+						console.log("클릭 연도" + chooseyear);
+						if(dbYear ==chooseyear)
+							yearPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;
+							
+						
+						if(dbDay!=null){
+							totalPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;	
+						}
+						
+						<%
+							}}
+						%>
+						//$("#daySale").append(chooseDay);
 						document.getElementById("year").innerHTML=year;
 						document.getElementById("month").innerHTML=month;
 						document.getElementById("date").innerHTML=chooseDay;
 						
-						document.getElementById("daySale").innerHTML="<label>일 매출 : <label><input type='text' value='"+chooseDay+"'>";
-						document.getElementById("monthSale").innerHTML="<label>월 매출 : <label><input type='text' value='"+chooseDay+"'>";
-						document.getElementById("yearSale").innerHTML="<label>년 매출 : <label><input type='text' value='"+chooseDay+"'>";
-						document.getElementById("totalSale").innerHTML="<label>총 매출 : <label><input type='text' value='"+chooseDay+"'>";
+						document.getElementById("daySale").innerHTML="<label>일 매출 : <label><input type='text' value='"+dayPrice+'원'+"'>";
+						document.getElementById("monthSale").innerHTML="<label>월 매출 : <label><input type='text' value='"+monthPrice+'원'+"'>";
+						document.getElementById("yearSale").innerHTML="<label>년 매출 : <label><input type='text' value='"+yearPrice+'원'+"'>";
+						document.getElementById("totalSale").innerHTML="<label>총 매출 : <label><input type='text' value='"+totalPrice+'원'+"'>";
 					}
 				}
 			}
@@ -306,16 +528,57 @@
 						calendarChoiceDay(this);
 						var year= today.getFullYear();
 						var month=today.getMonth()+1
-						var asd = year+"/"+month+"/"+day;
+						var asd = year+"-"+month+"-"+day;
+						
+						// 선택날짜 yy-mm-dd 형식 문자열
 						var chooseDay=asd.substr(2,9);
+						var chooseMonth=asd.substr(2,5);
+						var chooseyear=year-2000;
+						console.log(chooseDay);
+						console.log(chooseMonth);
+						console.log(chooseyear);
+						var dayPrice = 0;
+						var monthPrice = 0;
+						var yearPrice = 0;
+						var totalPrice = 0;
+						<% 
+						if(volist1 != null){
+							for (sale vo : volist1){
+								
+						%>
+						var dbDay="<%=vo.getOrder_date()%>";
+						if(dbDay==chooseDay){
+							dayPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;
+						}
+					
+						var dbMonth = dbDay.substr(0,5);
+						console.log(">>>>>>>>>>>>"+dbMonth)
+						if(dbMonth ==chooseMonth)
+							monthPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;
+						
+						var dbYear = dbMonth.substr(0,2);
+						console.log(dbYear);
+						console.log("클릭 연도" + chooseyear);
+						if(dbYear ==chooseyear)
+							yearPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;
+							
+						
+						if(dbDay!=null){
+							totalPrice += <%=(vo.getPro_price()*vo.getOrder_count())%>;	
+						}
+						
+						<%
+							}}
+						%>
+						//$("#daySale").append(chooseDay);
 						document.getElementById("year").innerHTML=year;
 						document.getElementById("month").innerHTML=month;
 						document.getElementById("date").innerHTML=chooseDay;
 						
-						document.getElementById("daySale").innerHTML="<label>일 매출 : <label><input type='text' value='"+chooseDay+"'>";
-						document.getElementById("monthSale").innerHTML="<label>월 매출 : <label><input type='text' value='"+chooseDay+"'>";
-						document.getElementById("yearSale").innerHTML="<label>년 매출 : <label><input type='text' value='"+chooseDay+"'>";
-						document.getElementById("totalSale").innerHTML="<label>총 매출 : <label><input type='text' value='"+chooseDay+"'>";
+						document.getElementById("daySale").innerHTML="<label>일 매출 : <label><input type='text' value='"+dayPrice+'원'+"'>";
+						document.getElementById("monthSale").innerHTML="<label>월 매출 : <label><input type='text' value='"+monthPrice+'원'+"'>";
+						document.getElementById("yearSale").innerHTML="<label>년 매출 : <label><input type='text' value='"+yearPrice+'원'+"'>";
+						document.getElementById("totalSale").innerHTML="<label>총 매출 : <label><input type='text' value='"+totalPrice+'원'+"'>";
 					}
 				}
 			}
@@ -377,10 +640,11 @@
 					</tr>
 				</thead>
 				<tbody></tbody>
+				
 			</table>
 			</div>
 		</div>
-	
+		
 		<div class="sal">
 			<h3>매출조회</h3>
 			
@@ -399,6 +663,7 @@
 	</div>
 	<h2>주문 승인 목록</h2>
 	<div class="board_list_wrap">
+	<form method="get" action="UpdateSalsServlet" >
 			<table class="board_list">
 				<thead>
 					<tr>
@@ -417,13 +682,18 @@
 						%>
 						<td><%=vo.getOrder_date() %></td>
 						<td><%=vo.getPro_no() %></td>
-						<td><%=vo.getReceiver_name() %></td>
+						<td><%=vo.getId()%></td>
 						<td><%=vo.getPro_price()*vo.getOrder_count() %></td>
-						<td><%=vo.getOrder_status()%></td>
-						<%} } %>
+						<!-- <td><%=vo.getOrder_status()%></td> -->
+						<!-- <input type="hidden" > -->
+						<td>[[ <%=vo.getOrder_detail_no()%> ]]
+						<button type="submit" class="info_btn"name="order_no" value="<%=vo.getOrder_detail_no()%>" ><%=vo.getOrder_status()%></button></td>
+						
 					</tr>
+					<%} } %>
 				</tbody>
 			</table>
+			</form>
 			<div class="paging">
 				<a href="#" class="bt">첫 페이지</a> 
 				<a href="#" class="bt">이전 페이지</a>

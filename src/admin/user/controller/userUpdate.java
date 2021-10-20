@@ -54,7 +54,10 @@ public class userUpdate extends HttpServlet {
 		String address = request.getParameter("address");
 		int point = Integer.parseInt(request.getParameter("point"));
 		char kind = request.getParameter("type").charAt(0);
-
+		
+		String cdBtn = request.getParameter("cdBtn");
+		System.out.println(cdBtn);
+		//if(cdBtn=="확인") {}
 		int result = new adminUserService().updateUser(pw, uname, nickname, age, gender, email, phone, address, point, kind, uid);
 		System.out.println(result + "------------------------------------------------------------------");
 		if (result == 1) {

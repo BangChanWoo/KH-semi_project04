@@ -22,17 +22,19 @@ public class adminProductDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String productInsert="insert into productpost values(pro_no.NEXTVAL,?,?,?,?,?,?,sysdate)";
+		String productInsert="insert into product_post values(pro_no.NEXTVAL,?,?,?,sysdate,?,?,?)";
 		String optionInsert="insert into product_option values(pro_option_no.NEXTVAL,?,pro_no.CURRVAL)";
-		String imgInsert="insert into product_img values(pro_content_no.NEXTVAL, ?,pro_no.CURRVAL)";
+		String imgInsert="insert into product_img values(pro_content_no.NEXTVAL,pro_no.CURRVAL,?)";
 		try {
 			pstmt=conn.prepareStatement(productInsert);
-			pstmt.setInt(1, productVo.getPro_cate_no());
+			
+			pstmt.setString(1, productVo.getPro_img());
 			pstmt.setString(2, productVo.getPro_title());
-			pstmt.setString(3, productVo.getPro_img());
-			pstmt.setInt(4, productVo.getPro_price());
+			pstmt.setInt(3, productVo.getPro_price());
+			pstmt.setInt(4, productVo.getPro_stock());
 			pstmt.setInt(5, productVo.getPro_delivery_fee());
-			pstmt.setInt(6, productVo.getPro_stock());
+			pstmt.setInt(6, productVo.getPro_cate_no());
+			
 			result = pstmt.executeUpdate();
 			JdbcTemplate.close(pstmt);
 			
@@ -61,7 +63,7 @@ public class adminProductDao {
 	
 	public int updateProduct(Connection conn, ProductPost productVo, ArrayList<ProductOption> ProductOption, ArrayList<ProductImg> ProductImg) {
 		int result=-1;
-		String updateProduct ="update productpost set pro_cate_no=?, pro_title=?, pro_img=?, pro_price=?, pro_delivery_fee=?, pro_stock=?  where pro_no like ? ";
+		String updateProduct ="update product_post set pro_cate_no=?, pro_title=?, pro_img=?, pro_price=?, pro_delivery_fee=?, pro_stock=?  where pro_no like ? ";
 		String updateOption = "update product_option set pro_option_content=? where pro_no like ? and pro_option_no like ?";
 		String updateImg="update product_img set pro_content_img=? where pro_no like ? and pro_content_no like ?";
 		
@@ -137,7 +139,7 @@ public class adminProductDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ProductPost vo = new ProductPost();
-		String query="select * from productpost where pro_no like ?";
+		String query="select * from product_post where pro_no like ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, pro_no);
@@ -272,7 +274,7 @@ public class adminProductDao {
 		int result=0;
 		String deleteOptionQuery="delete from product_option where pro_no like ?";
 		String deleteImgQuery="delete from product_img where pro_no like ?";
-		String deleteProductQuery="delete from productpost where pro_no like ?";
+		String deleteProductQuery="delete from product_post where pro_no like ?";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt=conn.prepareStatement(deleteOptionQuery);

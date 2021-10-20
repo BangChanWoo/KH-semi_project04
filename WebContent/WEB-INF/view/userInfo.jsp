@@ -144,12 +144,16 @@ body {
 		</div>
 			<!-- <input type="button" value="삭제" class="delete_btn" > -->
 			<div class="btnContainer">
-	<input type="submit" value="확인" class="update_btn"> 
+	<input type="submit" value="확인" name = "cdBtn" class="update_btn"> 
 	
-	<input type="submit" value="삭제" class="delete_btn" onclick="SelectUserServlet">
+	
 	</div>
 	</form>
-	
+	<!-- <input type="submit" value="삭제" name = "cdBtn" class="delete_btn" > -->
+	<form method="get" action="userDelete">
+		<input type="hidden" name="delBtn" value="<%=vo.getUid()%>">
+		<input type="submit" value="삭제" >
+	</form>
 	<%} }%>
 	<footer>
 		<hr>

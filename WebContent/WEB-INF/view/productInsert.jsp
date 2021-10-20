@@ -37,9 +37,8 @@
 				<div id="txtContainer">
 					<br> <label>상품 제목</label> 
 					<input type="text" name="productTitle" id="productTitle" required="required" placeholder=" 예) 수제 치즈 폭탄 돈까스 "> <br> <br> 
-					<label>상품 소개</label>
-					<textarea name="productIntro" id="productIntro" required="required"
-						placeholder=" 예) 국내산 한돈을 사용한 치즈 폭탄 돈까스!"></textarea>
+					<label>상품 수량</label>
+					<input type="text" name="productStock" id="productStock" required="required" placeholder=" 예) 100 "> 
 					<br> <br>
 					<div id="productContainer">
 						<h3>상품 옵션</h3>

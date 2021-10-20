@@ -32,6 +32,14 @@ public class FrequencyService {
 		JdbcTemplate.close(conn);
 		return volist;
 	}
+	
+	public Fquestion fquestionDetailList(int fno) {
+		Connection conn = JdbcTemplate.getConnection();
+		Fquestion vo = new Fquestion();
+		vo = new FrequencyDao().fquestionDetailList(conn, fno);
+		JdbcTemplate.close(conn);
+		return vo;
+	}
 
 	//update
 	public int updateFquestion(Fquestion FquestionVo) {

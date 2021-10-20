@@ -15,7 +15,7 @@ import notice.vo.Notice;
 /**
  * Servlet implementation class NoticeServlet
  */
-@WebServlet("/NoticeDetailViewServlet")
+@WebServlet("/userdetailnotice")
 public class NoticeDetailViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,6 +31,7 @@ public class NoticeDetailViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 		response.setContentType("text/html; charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
@@ -46,8 +47,8 @@ public class NoticeDetailViewServlet extends HttpServlet {
 
 		System.out.println("noticeList:"+ vo);
 		
-		request.setAttribute("noticeVo", vo);
-
+		request.setAttribute("vo", vo);	
+		request.setAttribute("notice_num", notice_num);	
 		request.getRequestDispatcher("./WEB-INF/view/notice_detail.jsp").forward(request, response);
 	}
 

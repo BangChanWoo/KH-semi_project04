@@ -1,71 +1,67 @@
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/basic.css" />  <!-- 공통 css -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_header.css" /> <!-- header css -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_footer.css" /><!-- footer css -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/noticeboard.css" />
+<%@page import="java.util.List"%>
+<%@page import="notice.dao.NoticeDao"%>
+<%@page import="notice.vo.Notice"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="notice.vo.Notice" %>
-<%
-    Notice noticeVo = (Notice) request.getAttribute("noticeVo");
-%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-  <script type="text/javascript">
-        function ShowDetail(notice_num) {
-            location.href = "detail.do?num=" + notice_num;
-        }
-
-        $(document).ready(function () {
-            $('tr').hover(function () {
-                $(this).css('color', 'blue');
-            }, function () {
-                $(this).css('color', 'black');
-            });
-        });
-    </script>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<script src="https://kit.fontawesome.com/616f27e0c4.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="./js/mypage.js"></script> 
+<title>밥도둑 공지detailviewpage</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<%
+	String msg = (String)request.getAttribute("msg");
+%>
+<script type="text/javascript">
+    <%if(msg != null){%>
+    	alert("<%=msg%>");
+    <%}%>
+</script>
+  
 </head>
 <body>
-<div id="table">
-    <table>
+<% 
+Notice vo = (Notice)request.getAttribute("vo");
+	int notice_num = (int)request.getAttribute("notice_num"); 
+
+
+%>
+	<%@ include file="riceThief_header.jsp" %>
+	<hr>
+    <main>
+	<div class="detailnotice">
+		<table class="detailnotice_board">
+			<caption>공지사항 상세목록</caption>
+			<thead>
+				<tr>
+				<th>공지번호</th>
+				<th>공지명</th>
+				<th>공지날짜</th>
+				<th>공지내용</th>
+				</tr>
+				</thead>
+				<tbody>
         <tr>
-            <td>글번호</td>
-            <td>글제목</td>
-            <td>글내용</td>
-            <td>작성자</td>
-            <td>작성일자</td>
-        </tr>
-        <%
-            if (noticeVo != null) {
-        %>
-        <tr onclick="ShowDetail(<%=noticeVo.getNotice_num()%>)">
-            <td>
-            	<%=noticeVo.getNotice_num()%>
-            </td>
-            <td>
-                <%=noticeVo.getNotice_title()%>
-            </td>
-            <td>
-                <%=noticeVo.getNotice_content()%>
-            </td>
-            <td>
-                <%=noticeVo.getNotice_time()%>
-            </td>
-        </tr>
-        <%
-        } else {	
-        %>
-        <tr>
-            <td colspan="5">게시글이 없습니다.</td>
-        </tr>
-        <%
-            }
-        %>
-    </table>
-    <button onclick="location.href='usernotice'">게시물목록보기</button>
-    <br/>
-    <br/>
-    <button onclick="location.href='main'">홈으로 이동</button>
+            <td><%=vo.getNotice_num()%></td>
+            <td><%=vo.getNotice_title()%></td>
+            <td><%=vo.getNotice_time()%></td>
+            <td><%=vo.getNotice_content()%></td>
+        </tr>		
+				</tbody>
+				
+		</table>					       
 </div>
+    <button onclick="location.href='usernotice'">게시물목록보기</button>   
+    <button onclick="location.href='main'">홈으로 이동</button>
+	<%@ include file="riceThief_footer.jsp" %>
 
 </body>
 </html>

@@ -15,7 +15,7 @@ import frequency.vo.Fquestion;
 /**
  * Servlet implementation class FqeustionBoardServlet
  */
-@WebServlet("/FquestionBoardServlet")
+@WebServlet("/fquestionboard")
 public class FquestionBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -77,14 +77,14 @@ public class FquestionBoardServlet extends HttpServlet {
 		}
 		
 		ArrayList<Fquestion> volist = new FrequencyService().FquestionList(startRnum, endRnum, catenum);
-
+		
 		request.setAttribute("fquestionVoList", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("catenum", catenum);
 //TODO
-		request.getRequestDispatcher("./WEB-INF/view/recipeCategory.jsp").forward(request, response);
+		request.getRequestDispatcher("./WEB-INF/view/fquestionboard.jsp").forward(request, response);
 	}
 
 }

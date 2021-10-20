@@ -32,6 +32,12 @@ caption {
     width: 15rem;
     text-align: center;
 }
+#fcateBtnAll{
+	position: relative;
+	left: 18%;
+    width: 15rem;
+    text-align: center;
+}
 /* #cateBtnAll{
     width: 85%;
     margin: 4rem auto;
@@ -54,26 +60,32 @@ caption {
 .cateBtn:hover{
     background-color: #CFB9AF;
 }
-.notice_row {
+.fquestion_row {
     padding: 50px;
 }
 
-.notice_board {
+.fquestion_board {
     width: 100%;
     border-top: 1rem solid #CFB9AF;
 }
 
-.notice_board tr {
+.fquestion_board tr {
+    border-bottom: 1px solid #ccc;
+}
+.noticeCenter{
+	
+}
+.fquestion_board tr {
     border-bottom: 1px solid #ccc;
 }
 
-.notice board th,
-.notice board td {
+.fquestion board th,
+.fquestion board td {
     padding: 10rem;
     font-size: 14rem;
 }
 
-.notice_board td {
+.fquestion_board td {
     text-align: center;
 }
 
@@ -98,20 +110,3 @@ caption {
 .pageBtn:hover{
     background-color: #9a7b6c;
 }
-.detailnotice board th,
-.detailnotice board td {
-    padding: 10rem;
-    font-size: 14rem;
-}
-
-.detailnotice_board td {
-    text-align: center;
-}
-.detailnotice_board tr {
-    border-bottom: 1px solid #ccc;
-}
-.detailnotice {
-    padding: 50px;
-}
-
-

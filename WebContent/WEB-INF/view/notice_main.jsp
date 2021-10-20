@@ -14,8 +14,7 @@
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <script src="https://kit.fontawesome.com/616f27e0c4.js" crossorigin="anonymous"></script>
-
-
+<script type="text/javascript" src="./js/mypage.js"></script>
 <title>밥도둑 공지사항</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -33,7 +32,7 @@
 	<main>
 		<h2>Notice</h2>
 		<button id="NoticeBtn" class="headerBtnStyle" onclick="location.href='usernotice'">공지사항</button>
-        <button id="FquestionBtn" class="headerBtnStyle" onclick="location.href='user'">자주묻는질문</button>       	
+        <button id="FquestionBtn" class="headerBtnStyle" onclick="location.href='fquestionboard'">자주묻는질문</button>       	
         <button id="QuestionBtn" class="headerBtnStyle">1대1문의</button>	
 		
 		
@@ -53,7 +52,7 @@
 					if(volist != null){
 							for(int i =0; i<volist.size(); i++){
 								%>
-								<tr onclick="javascript:location.href='NoticeDetailViewServlet?notice_num=<%=volist.get(i).getNotice_num() %>'">
+								<tr onclick="javascript:location.href='userdetailnotice?notice_num=<%=volist.get(i).getNotice_num() %>'">
 								<td><%=volist.get(i).getNotice_num() %></td>
 								<td><%=volist.get(i).getNotice_title() %></td>
 								<td><%=volist.get(i).getNotice_time() %></td>								

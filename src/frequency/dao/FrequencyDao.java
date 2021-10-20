@@ -25,8 +25,8 @@ public class FrequencyDao {
 			ps.setInt(1, rs.getInt("fquestion_no"));
 			ps.setString(2, rs.getString("Uid"));
 			ps.setString(3, rs.getString("fquestion_title"));
-			ps.setString(4, rs.getString("getfquestion_content"));
-			ps.setString(5, rs.getString("getfquestion_cate"));
+			ps.setString(4, rs.getString("fquestion_content"));
+			ps.setString(5, rs.getString("fquestion_cate"));
 			
 			result = ps.executeUpdate();
 		} catch (Exception e) {
@@ -45,8 +45,8 @@ public class FrequencyDao {
 	
 	public int getFquestionCount(Connection conn, int catenum) {
 		int result = 0;
-		String countAllQuery = "select count(Fquestion_no) from Fquestion";
-		String countCateQuery = "select count(Fquestion_no) from Fquestion where fquestion_cate_no like ?";
+		String countAllQuery = "select count(f_question_num) from frequency_question";
+		String countCateQuery = "select count(f_question_num) from frequency_question where f_question_cate like ?";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
@@ -75,9 +75,10 @@ public class FrequencyDao {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		//TODO
-		String selectAllQuery = "";
-		
-		String selectCateQuery = "";
+		String selectAllQuery =   "select * from (select rownum as rnum, t1.* "
+				+ " from (select * from frequency_question where order by f_question_num desc) t1 )"
+				+ " where rnum between ? and ?";
+		String selectCateQuery = "select * from (select rownum as rnum, t1.*  from (select * from frequency_question   where f_question_cate=?  order by f_question_num desc) t1 ) where rnum between ? and ?";
 		try {
 			if(catenum == 0) {
 				ps = conn.prepareStatement(selectAllQuery);
@@ -94,10 +95,11 @@ public class FrequencyDao {
 			volist = new ArrayList<Fquestion>();
 			while(rs.next()) {
 				
-				Fquestion vo = new Fquestion();
-				vo.setfquestion_no(rs.getInt("fquestion_no"));
-				vo.setfquestion_content(rs.getString("fquestion_content"));
-				vo.setfquestion_title(rs.getString("fquestion_title"));
+				Fquestion vo = new Fquestion();   
+				vo.setfquestion_no(rs.getInt("F_QUESTION_NUM"));
+				vo.setfquestion_title(rs.getString("F_QUESTION_TITLE"));
+				vo.setfquestion_content(rs.getString("F_QUESTION_CONTENT"));
+				vo.setfquestion_cate_no(rs.getString("F_QUESTION_CATE"));
 				volist.add(vo);
 			}
 		} catch (Exception e) {
@@ -107,7 +109,35 @@ public class FrequencyDao {
 			JdbcTemplate.close(rs);
 			JdbcTemplate.close(ps);
 		}
+		System.out.println("fquestionList volist:"+volist );
 		return volist;
+	}
+	
+	public Fquestion fquestionDetailList(Connection conn, int fno) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Fquestion vo = new Fquestion();
+		String query = "select * from frequency_question where f_question_num like ?";
+		try {
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, fno);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				vo.setfquestion_no(rs.getInt("F_QUESTION_NUM"));
+				vo.setUid(rs.getString("ID"));
+				vo.setfquestion_title(rs.getString("F_QUESTION_TITLE"));		
+				vo.setfquestion_cate_no(rs.getString("F_QUESTION_CATE"));
+			
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(ps);
+		}
+		return vo;
 	}
 	
 	//update

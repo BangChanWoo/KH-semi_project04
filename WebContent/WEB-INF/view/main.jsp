@@ -13,6 +13,7 @@
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <script src="https://kit.fontawesome.com/616f27e0c4.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="./js/mypage.js"></script> 
 <title>밥도둑_메인</title>
 <% String msg = (String)request.getAttribute("msg");%>
 <script type="text/javascript">
@@ -133,24 +134,6 @@
 	  }
 	  slides[slideIndex-1].style.display = "block";  
 	  dots[slideIndex-1].className += " active";
-	}
-	
-	function myFunction() {
-	    document.getElementById("myDropdown").classList.toggle("show");
-	}
-
-	window.onclick = function(event) {
-	  if (!event.target.matches('.dropbtn')) {
-
-	    var dropdowns = document.getElementsByClassName("dropdown-content");
-	    var i;
-	    for (i = 0; i < dropdowns.length; i++) {
-	      var openDropdown = dropdowns[i];
-	      if (openDropdown.classList.contains('show')) {
-	        openDropdown.classList.remove('show');
-	      }
-	    }
-	  }
 	}
 	</script>
 </body>

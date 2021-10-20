@@ -13,7 +13,7 @@
 
 <!-- jquery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+<script type="text/javascript" src="./js/mypage.js"></script> 
 <title>밥도둑_게시글 작성</title>
 </head>
 <body>

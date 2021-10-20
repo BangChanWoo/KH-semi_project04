@@ -13,6 +13,7 @@
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <script src="https://kit.fontawesome.com/616f27e0c4.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="./js/mypage.js"></script> 
 <title>밥도둑_검색</title>
 </head>
 <body>

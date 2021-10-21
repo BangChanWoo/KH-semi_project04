@@ -140,7 +140,8 @@
 				<th>주문상태</th>
 				<th>리뷰작성</th>
 			</tr>
-			<%for(ProductOrderDetailVo vo: orderList) {%>
+			<% if(orderList != null){
+			for(ProductOrderDetailVo vo: orderList) {%>
 			<tr class="removePart">
 				<td class="proContent"><img src="<%=vo.getPro_img()%>"><a href="selectproduct?rno=<%=vo.getPro_no()%>"><%=vo.getPro_title()%></a></td>
 				<td><%=vo.getOrder_date()%></td>
@@ -148,7 +149,10 @@
 				<td><%=vo.getOrder_state()%></td>
 				<td><button onclick="writeReview()">리뷰 작성</button><button onclick="location.href='#'">주문 취소</button></td>
 			</tr>
+			<%} }else if(orderList.isEmpty()){%>
+			<h2>결제 내역이 없습니다.</h2>
 			<%} %>
+			<h2><%=orderList %></h2>
 		</table>
 		<div id="pageBtnAll">
         <%if(startPage > 1){%>

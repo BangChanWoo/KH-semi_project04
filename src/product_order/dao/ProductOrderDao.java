@@ -11,20 +11,26 @@ import product_post.vo.ProductPost;
 import riceThief.common.JdbcTemplate;
 
 public class ProductOrderDao {
-	public int getOrderCount(Connection conn, int state) {
+	public int getOrderCount(Connection conn, int state, String id) {
 		int result = 0;
-		String countAllQuery = "select count(order_detail_no) from product_order";
-		String countReadyQuery = "select count(order_detail_no) from product_order where order_status like 'N'";
-		String countCompleteQuery = "select count(order_detail_no) from product_order where order_status like 'Y'";
+		String countAllQuery = "select count(order_detail_no) from product_order po join user_order uo"
+				+ " on po.order_no = uo.order_no where uo.id like ?";
+		String countReadyQuery = "select count(order_detail_no) from product_order po join user_order uo"
+				+ " on po.order_no = uo.order_no where uo.id like ? and order_status like 'N'";
+		String countCompleteQuery = "select count(order_detail_no) from product_order po join user_order uo"
+				+ " on po.order_no = uo.order_no where uo.id like ? and order_status like 'Y'";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
 			if(state == 0) {
 				ps = conn.prepareStatement(countAllQuery);
+				ps.setString(1, id);
 			}else if(state == 1) {
 				ps = conn.prepareStatement(countReadyQuery);
+				ps.setString(1, id);
 			}else if(state == 2) {
 				ps = conn.prepareStatement(countCompleteQuery);
+				ps.setString(1, id);
 			}
 			rs = ps.executeQuery();
 			if(rs.next()) {
@@ -40,7 +46,7 @@ public class ProductOrderDao {
 		}
 		return result;
 	}
-	public ArrayList<ProductOrderDetailVo> orderList(Connection conn, int start , int end, int state) {
+	public ArrayList<ProductOrderDetailVo> orderList(Connection conn, int start , int end, int state, String id) {
 		ArrayList<ProductOrderDetailVo> volist = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -50,6 +56,7 @@ public class ProductOrderDao {
 				+ " on pp.pro_no = po.pro_no"
 				+ " join user_order uo"
 				+ " on po.order_no = uo.order_no"
+				+ " where uo.id like ?"
 				+ " order by uo.order_date desc) t1)t2"
 				+ " where t2.rnum between ? and ?";
 		
@@ -59,7 +66,7 @@ public class ProductOrderDao {
 				+ " on pp.pro_no = po.pro_no"
 				+ " join user_order uo"
 				+ " on po.order_no = uo.order_no"
-				+ " where po.order_status like 'N'"
+				+ " where po.order_status like 'N' and uo.id like ?"
 				+ " order by uo.order_date desc) t1)t2"
 				+ " where t2.rnum between ? and ?";
 		
@@ -69,22 +76,25 @@ public class ProductOrderDao {
 				+ " on pp.pro_no = po.pro_no"
 				+ " join user_order uo"
 				+ " on po.order_no = uo.order_no"
-				+ " where po.order_status like 'Y'"
+				+ " where po.order_status like 'Y' and uo.id like ?"
 				+ " order by uo.order_date desc) t1)t2"
 				+ " where t2.rnum between ? and ?";
 		try {
 			if(state == 0) {
 				ps = conn.prepareStatement(selectAllQuery);
-				ps.setInt(1, start);
-				ps.setInt(2, end);
+				ps.setString(1, id);
+				ps.setInt(2, start);
+				ps.setInt(3, end);
 			}else if(state == 1){
 				ps = conn.prepareStatement(selectReadyQuery);
-				ps.setInt(1, start);
-				ps.setInt(2, end);
+				ps.setString(1, id);
+				ps.setInt(2, start);
+				ps.setInt(3, end);
 			}else if(state == 2) {
 				ps = conn.prepareStatement(selectCompleteQuery);
+				ps.setString(1, id);
 				ps.setInt(1, start);
-				ps.setInt(2, end);
+				ps.setInt(3, end);
 			}
 			rs = ps.executeQuery();
 			

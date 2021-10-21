@@ -41,6 +41,7 @@ public class OrderDetailServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
+		String id = (String)request.getSession().getAttribute("sessionID");
 		String stateStr = request.getParameter("state");
 		int state = 0;
 		if(stateStr != null) {
@@ -60,7 +61,7 @@ public class OrderDetailServlet extends HttpServlet {
 		if(pageNum != null) {
 			currentPage = Integer.parseInt(pageNum);
 		}
-		rCount = new ProductOrderService().getOrderCount(state);
+		rCount = new ProductOrderService().getOrderCount(state, id);
 		
 		pageCount = (rCount/PAGE_SIZE) + (rCount%PAGE_SIZE == 0 ? 0 : 1);
 
@@ -78,7 +79,7 @@ public class OrderDetailServlet extends HttpServlet {
 		if(endPage > pageCount) {
 			endPage = pageCount;
 		}
-		ArrayList<ProductOrderDetailVo> orderList = new ProductOrderService().orderList(startRnum, endRnum, state);
+		ArrayList<ProductOrderDetailVo> orderList = new ProductOrderService().orderList(startRnum, endRnum, state, id);
 		
 		PrintWriter out = response.getWriter();
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();

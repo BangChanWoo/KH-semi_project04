@@ -1,116 +1,134 @@
 @charset "UTF-8";
+
 #header {
-            width: 100%;
-            height: 30rem;
-            background-color: #EBDED4;
-        }
+	width: 100%;
+	overflow: hidden;
+	height: auto;
+	background-color: #EBDED4;
+}
+
 #productDetailExplane {
-            width: 100%;
-            height: 50rem;
-            background-color: white;
-        }
-        
-#titleImgContainer{
+	width: 100%;
+	overflow: hidden;
+	height: auto;
+	background-color: white;
+}
+
+#titleImgContainer {
 	border: 1px solid #EBDED4;
-	float:left;
-	width:33%;
-	margin : 10px 0px 10px 10px;
+	float: left;
+	width: 33%;
+	margin: 10px 0px 10px 10px;
 }
 
-#txtContainer{
-border: 1px solid #EBDED4;
-	float:left;
-	width:60%;
-	margin : 10px 0px 0px 10px;
+#txtContainer {
+	border: 1px solid #EBDED4;
+	float: left;
+	width: 60%;
+	margin: 10px 0px 0px 10px;
 }
-<!--#stepImgContainer{
-	
-	float:left;
-	width:33%;
-	margin : 10px 0px 10px 10px;
+
+<!--
+#stepImgContainer {
+	float: left;
+	width: 33%;
+	margin: 10px 0px 10px 10px;
 }
+
 -->
-
-#productTitle{
-width:300px;
-}
-#recipeTitle{
-width:300px;
-}
-#productIntro{
-width:300px;
-hight:200px;
-}
-#stepContainer{
-	width: 100%;
-    clear: both;
-    float: left;
-    margin: 3em auto;
-    padding: 2em;
-    border-radius: 5px;
-    background-color: #ebded4;
-}
-#step{
-	width: 100%;
-    list-style-type: none;
-    float: left;
-}
-#step li h2{
-    clear: both;
-    margin: 1em 1em 0.5em 1em;
+#productTitle {
+	width: 300px;
 }
 
-#stepContent{
-    width: 100%;
+#recipeTitle {
+	width: 300px;
 }
-#stepTxt{
-    float: left;
-    width: 60%;
-    margin: 2.5%;
-    font-size: 1.2em;
+
+#productIntro {
+	width: 300px;
+	hight: 200px;
 }
-textarea[id^="productContent"]{
-    width: 100%;
-    height: 5rem;
+
+#stepContainer {
+	width: 100%;
+	clear: both;
+	float: left;
+	margin: 3em auto;
+	padding: 2em;
+	border-radius: 5px;
+	background-color: #ebded4;
 }
-#stepImgContainer{
+
+#step {
+	width: 100%;
+	list-style-type: none;
+	float: left;
+}
+
+#step li h2 {
+	clear: both;
+	margin: 1em 1em 0.5em 1em;
+}
+
+#stepContent {
+	width: 100%;
+}
+
+#stepTxt {
+	float: left;
+	width: 60%;
+	margin: 2.5%;
+	font-size: 1.2em;
+}
+
+textarea[id^="productContent"] {
+	width: 100%;
+	height: 5rem;
+}
+
+#stepImgContainer {
 	float: center;
-    width: 30%;
-    margin: auto;
-    padding: 10px 10px 10px 10px;
+	width: 30%;
+	margin: auto;
+	padding: 10px 10px 10px 10px;
 }
-img[id^="stepImg"]{
-    width: 100%;
-    margin: 2.2%;
-    aspect-ratio: 8/7;
-    border: solid 1px #9a7b6c;
-    border-radius: 5px;
+
+img[id^="stepImg"] {
+	width: 100%;
+	margin: 2.2%;
+	aspect-ratio: 8/7;
+	border: solid 1px #9a7b6c;
+	border-radius: 5px;
 }
-#stepAdd{
+
+#stepAdd {
 	font-size: 2.5rem;
 	clear: both;
 	display: flex;
-    justify-content: center;
-    text-decoration: none;
-    color: #9a7b6c;
+	justify-content: center;
+	text-decoration: none;
+	color: #9a7b6c;
 }
-.btnContainer{
-    clear: both;
-    margin: 5rem;
-    text-align: center;
+
+.btnContainer {
+	clear: both;
+	margin: 5rem;
+	text-align: center;
 }
-.productBtn{
-    background-color: #CFB9AF;
-    border: 0;
-    border-radius: 5px;
-    font-size: 1.5rem;
-    margin: 0 1rem;
-    width: 4.5rem;
-    height: 3rem;
+
+.productBtn {
+	background-color: #CFB9AF;
+	border: 0;
+	border-radius: 5px;
+	font-size: 1.5rem;
+	margin: 1rem;
+	width: 4.5rem;
+	height: 3rem;
 }
-.productBtn:hover{
-    background-color: #9a7b6c;
-    -webkit-transform: scale(1.05);
+
+.productBtn:hover {
+	background-color: #9a7b6c;
+	-webkit-transform: scale(1.05);
 	transform: scale(1.05);
 	box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
 }

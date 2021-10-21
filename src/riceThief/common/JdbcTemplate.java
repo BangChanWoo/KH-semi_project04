@@ -19,7 +19,8 @@ public class JdbcTemplate {
 		try {
 			Context initContext = new InitialContext();
 			Context envContext = (Context)initContext.lookup("java:/comp/env");  //톰캣 resource 설정을 찾기. server.xml;, context.xml
-			DataSource ds = (DataSource)envContext.lookup("jdbc/mylocaloracle");
+			DataSource ds = (DataSource)envContext.lookup("jdbc/recipe04Local"); //local
+			//DataSource ds = (DataSource)envContext.lookup("jdbc/recipe04Dclass"); //학원서버
 			conn = ds.getConnection();
 			
 			if(conn!=null) System.out.println("연결성공");

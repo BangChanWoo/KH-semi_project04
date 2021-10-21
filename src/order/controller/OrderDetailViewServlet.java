@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import product_order.service.ProductOrderService;
-import product_order.vo.ProductOrder;
+import product_order_detail.vo.ProductOrderDetailVo;
 
 /**
  * Servlet implementation class OrderDetailViewServlet
@@ -42,7 +42,7 @@ public class OrderDetailViewServlet extends HttpServlet {
 			state = Integer.parseInt(stateStr);
 		}
 		final int PAGE_SIZE = 5;  //한페이지당 글 수 
-		final int PAGE_BLOCK = 5;  //한화면에 나타날 페이지 링크 수
+		final int PAGE_BLOCK = 3;  //한화면에 나타날 페이지 링크 수
 		int rCount = 0;  //총 글수
 		int pageCount = 0;  //총페이지 수 
 		int startPage = 1;  //화면에 나타날 시작페이지
@@ -75,7 +75,8 @@ public class OrderDetailViewServlet extends HttpServlet {
 		if(endPage > pageCount) {
 			endPage = pageCount;
 		}
-		ArrayList<ProductOrder> orderList = new ProductOrderService().orderList(startRnum, endRnum, state);
+		ArrayList<ProductOrderDetailVo> orderList = new ProductOrderService().orderList(startRnum, endRnum, state);
+		
 		
 		request.setAttribute("orderList", orderList);
 		request.setAttribute("startPage", startPage);

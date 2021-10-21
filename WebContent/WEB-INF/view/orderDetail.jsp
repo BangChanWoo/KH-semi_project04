@@ -1,5 +1,5 @@
+<%@page import="product_order_detail.vo.ProductOrderDetailVo"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="product_order.vo.ProductOrder"%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/basic.css" />  <!-- 공통 css -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_header.css" /> <!-- header css -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_footer.css" /><!-- footer css -->
@@ -23,14 +23,30 @@
 	<script type="text/javascript">
 		$(function(){
 			$('#orderSelect').change(function(){
+				var pagenum = 1;
+				$('.pageBtn').click(function () {
+					pagenum = $('.pageBtn').val();
+				})
+				console.log(pagenum);
 				if($('#orderSelect').val() == 0){
 					$.ajax({
 						type : "GET",
-				        url:"orderdetail",
-				        data: {state: "0"},
-				        dataType : "json",
+				        url:"orderdetail.do",
+				        data: {state: "0", pagenum : pagenum},
+				        dataType: "json",
 				        success : function(data){
-				        	alert(data.orderList);
+				        	$(".removePart").remove();
+				        	var html = "";
+				        	for(var i=0; i<data.length; i++){
+				        		html += "<tr class='removePart'>"
+								html += "<td class='proContent'><img src='"+data[i].pro_img+"'><a href='selectproduct?rno="+data[i].pro_no+"'>"+data[i].pro_title+"</a></td>"
+								html += "<td>"+data[i].order_date+"</td>"
+								html += "<td>"+data[i].pro_price+"("+data[i].order_count+")</td>"
+								html += "<td>"+data[i].order_state+"</td>"
+								html += "<td><button onclick='writeReview()'>리뷰 작성</button><button onclick=''>주문 취소</button></td>"
+								html += "</tr>";
+				        	}
+				        	$("#orderTable").append(html);
 				        },
 				        error : function(e) {
 				        	alert(e.responseText);
@@ -39,24 +55,46 @@
 				}else if($('#orderSelect').val() == 1){
 					$.ajax({
 						type : "GET",
-				        url:"orderdetail",
-				        data: {state: "1"},
-				        dataType : "json",
+				        url:"orderdetail.do",
+				        data: {state: "1", pagenum : pagenum},
+				        dataType: "json",
 				        success : function(data){
-				        	alert(data.orderList);
+				        	$(".removePart").remove()
+				        	var html = "";
+				        	for(var i=0; i<data.length; i++){
+				        		html += "<tr class='removePart'>"
+								html += "<td class='proContent'><img src='"+data[i].pro_img+"'><a href='selectproduct?rno="+data[i].pro_no+"'>"+data[i].pro_title+"</a></td>"
+								html += "<td>"+data[i].order_date+"</td>"
+								html += "<td>"+data[i].pro_price+"("+data[i].order_count+")</td>"
+								html += "<td>"+data[i].order_state+"</td>"
+								html += "<td><button onclick='writeReview()'>리뷰 작성</button><button onclick=''>주문 취소</button></td>"
+								html += "</tr>";
+				        	}
+				        	$("#orderTable").append(html);
 				        },
 				        error : function(e) {
-				        	alert("실패~");
+				        	alert(e.responseText);
 				        }
 				    });
 				}else if($('#orderSelect').val() == 2){
 					$.ajax({
 						type : "GET",
-				        url:"orderdetail",
-				        data: {state: "2"},
-				        dataType : "json",
+				        url:"orderdetail.do",
+				        data: {state: "2", pagenum : pagenum},
+				        dataType: "json",
 				        success : function(data){
-				        	alert(data.orderList);
+				        	$(".removePart").remove()
+				        	var html = "";
+				        	for(var i=0; i<data.length; i++){
+				        		html += "<tr class='removePart'>"
+								html += "<td class='proContent'><img src='"+data[i].pro_img+"'><a href='selectproduct?rno="+data[i].pro_no+"'>"+data[i].pro_title+"</a></td>"
+								html += "<td>"+data[i].order_date+"</td>"
+								html += "<td>"+data[i].pro_price+"("+data[i].order_count+")</td>"
+								html += "<td>"+data[i].order_state+"</td>"
+								html += "<td><button onclick='writeReview()'>리뷰 작성</button><button onclick=''>주문 취소</button></td>"
+								html += "</tr>";
+				        	}
+				        	$("#orderTable").append(html);
 				        },
 				        error : function(e) {
 				        	alert(e.responseText);
@@ -72,7 +110,7 @@
 	session.getAttribute("sessionID");
 	session.getAttribute("sessionNickname");
 	
-	ArrayList<ProductOrder> orderList = (ArrayList<ProductOrder>)request.getAttribute("orderList");
+	ArrayList<ProductOrderDetailVo> orderList = (ArrayList<ProductOrderDetailVo>)request.getAttribute("orderList");
 	int startPage = (int)request.getAttribute("startPage");
 	int endPage = (int)request.getAttribute("endPage");
 	int pageCount = (int)request.getAttribute("pageCount");
@@ -102,26 +140,25 @@
 				<th>주문상태</th>
 				<th>리뷰작성</th>
 			</tr>
-			<%for(ProductOrder vo: orderList) {%>
-			<tr>
-				<td class="proContent"><img src="./css/alt.JPG"><a href="#">제목제목제목제목제목제목제목제목</a></td>
-				<td>주문일자</td>
-				<td>주문금액(<%=vo.getOrder_count()%>)</td>
-				<td><%=vo.getOrder_status()%></td>
+			<%for(ProductOrderDetailVo vo: orderList) {%>
+			<tr class="removePart">
+				<td class="proContent"><img src="<%=vo.getPro_img()%>"><a href="selectproduct?rno=<%=vo.getPro_no()%>"><%=vo.getPro_title()%></a></td>
+				<td><%=vo.getOrder_date()%></td>
+				<td><%=vo.getPro_price()%>(<%=vo.getOrder_count()%>)</td>
+				<td><%=vo.getOrder_state()%></td>
 				<td><button onclick="writeReview()">리뷰 작성</button><button onclick="location.href='#'">주문 취소</button></td>
 			</tr>
 			<%} %>
 		</table>
-		<h2 id="result">아</h2>
 		<div id="pageBtnAll">
         <%if(startPage > 1){%>
-            <a class="pageBtn" href="orderdetail?pagenum=<%=startPage-1%>"><i class="fas fa-chevron-left"></i></a>
+            <a class="pageBtn" href="orderdetailview?pagenum=<%=startPage-1%>"><i class="fas fa-chevron-left"></i></a>
             <%} %>
             <%for (int i = startPage; i <= endPage; i++) {%>
-            <a id="pageBtn_<%=i%>" class="pageBtn" href="orderdetail?pagenum=<%=i%>"><%=i%></a>
+            <a id="pageBtn_<%=i%>" class="pageBtn" href="orderdetailview?pagenum=<%=i%>"><%=i%></a>
             <%} %>
             <%if(endPage < pageCount){%>
-            <a class="pageBtn" href="orderdetail?pagenum=<%=endPage+1%>"><i class="fas fa-chevron-right"></i></a>
+            <a class="pageBtn" href="orderdetailview?pagenum=<%=endPage+1%>"><i class="fas fa-chevron-right"></i></a>
         <%} %>
         </div>
 	</main>

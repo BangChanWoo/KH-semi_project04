@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import product_order.vo.ProductOrder;
+import product_order_detail.vo.ProductOrderDetailVo;
+import product_post.vo.ProductPost;
 import riceThief.common.JdbcTemplate;
 
 public class ProductOrderDao {
@@ -38,52 +40,64 @@ public class ProductOrderDao {
 		}
 		return result;
 	}
-	public ArrayList<ProductOrder> orderList(Connection conn, int start , int end, int state) {
-		ArrayList<ProductOrder> volist = null;
+	public ArrayList<ProductOrderDetailVo> orderList(Connection conn, int start , int end, int state) {
+		ArrayList<ProductOrderDetailVo> volist = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String selectAllQuery = "select t1.* from (select rownum r, po.*"
-				+ " from product_order po"
-				+ " order by po.order_detail_no desc) t1"
-				+ " where t1.r between ? and ?";
+		String selectAllQuery = "select * from (select rownum rnum, t1.*"
+				+ " from (select pp.pro_no, po.order_detail_no, pp.pro_title, pp.pro_img, uo.order_date, po.pro_price, po.order_count, po.order_status"
+				+ " from product_post pp join product_order po"
+				+ " on pp.pro_no = po.pro_no"
+				+ " join user_order uo"
+				+ " on po.order_no = uo.order_no"
+				+ " order by uo.order_date desc) t1)t2"
+				+ " where t2.rnum between ? and ?";
 		
-		String selectReadyQuery = "select t1.* from (select rownum r, po.*"
-				+ " from product_order po"
-				+ " where order_status like 'N'"
-				+ " order by po.order_detail_no desc) t1"
-				+ " where t1.r between ? and ?";
+		String selectReadyQuery = "select * from (select rownum rnum, t1.*"
+				+ " from (select pp.pro_no, po.order_detail_no, pp.pro_title, pp.pro_img, uo.order_date, po.pro_price, po.order_count, po.order_status"
+				+ " from product_post pp join product_order po"
+				+ " on pp.pro_no = po.pro_no"
+				+ " join user_order uo"
+				+ " on po.order_no = uo.order_no"
+				+ " where po.order_status like 'N'"
+				+ " order by uo.order_date desc) t1)t2"
+				+ " where t2.rnum between ? and ?";
 		
-		String selectCompleteQuery = "select t1.* from (select rownum r, po.*"
-				+ " from product_order po"
-				+ " where order_status like 'Y'"
-				+ " order by po.order_detail_no desc) t1"
-				+ " where t1.r between ? and ?";
+		String selectCompleteQuery = "select * from (select rownum rnum, t1.*"
+				+ " from (select pp.pro_no, po.order_detail_no, pp.pro_title, pp.pro_img, uo.order_date, po.pro_price, po.order_count, po.order_status"
+				+ " from product_post pp join product_order po"
+				+ " on pp.pro_no = po.pro_no"
+				+ " join user_order uo"
+				+ " on po.order_no = uo.order_no"
+				+ " where po.order_status like 'Y'"
+				+ " order by uo.order_date desc) t1)t2"
+				+ " where t2.rnum between ? and ?";
 		try {
 			if(state == 0) {
 				ps = conn.prepareStatement(selectAllQuery);
 				ps.setInt(1, start);
 				ps.setInt(2, end);
-				System.out.println(state);
 			}else if(state == 1){
 				ps = conn.prepareStatement(selectReadyQuery);
 				ps.setInt(1, start);
 				ps.setInt(2, end);
-				System.out.println(state);
 			}else if(state == 2) {
 				ps = conn.prepareStatement(selectCompleteQuery);
 				ps.setInt(1, start);
 				ps.setInt(2, end);
-				System.out.println(state);
 			}
 			rs = ps.executeQuery();
 			
-			volist = new ArrayList<ProductOrder>();
+			volist = new ArrayList<ProductOrderDetailVo>();
 			while(rs.next()) {
-				ProductOrder vo = new ProductOrder();
-				vo.setOrder_detail_num(rs.getInt("order_detail_no"));
-				vo.setOrder_count(rs.getInt("order_count"));
-				vo.setOrder_status(rs.getString("order_status").charAt(0));
+				ProductOrderDetailVo vo = new ProductOrderDetailVo();
 				vo.setPro_no(rs.getInt("pro_no"));
+				vo.setPro_img(rs.getString("pro_img"));
+				vo.setPro_title(rs.getString("pro_title"));
+				vo.setOrder_date(rs.getString("order_date"));
+				vo.setPro_price(rs.getInt("pro_price"));
+				vo.setOrder_count(rs.getInt("order_count"));
+				vo.setOrder_state(rs.getString("order_status").charAt(0));
 				volist.add(vo);
 			}
 		} catch (Exception e) {

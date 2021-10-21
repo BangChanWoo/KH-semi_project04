@@ -51,7 +51,7 @@ td{
 	width: 100%;
 	aspect-ratio: 1;
 	object-fit: cover;
-	
+	border-radius: 5px;
 }
 .proContent a{
 	width: 100%;
@@ -70,10 +70,10 @@ td{
 	border-radius: 5px;
 }
 #pageBtnAll{
-    width: 18rem;
+    width: 14rem;
     height: 2rem;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     gap: 0.5rem;
     margin: 4rem auto 6rem;
 }

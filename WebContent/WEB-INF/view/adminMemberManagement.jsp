@@ -45,6 +45,13 @@
 <title>관리자_회원관리</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <body>
+<script>
+var result33 = "${result33}";
+console.log(result33);
+if(result33 == "검색값없음"){
+	alert("일치된 사용자 없음");
+}
+</script>
 	<%@ include file="riceThief_adminHeader.jsp" %>
 	<hr>
 	<main>

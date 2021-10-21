@@ -82,9 +82,9 @@ public class JoinUserServlet extends HttpServlet {
 			request.setAttribute("result",result);
 			HttpSession session=request.getSession();
 			session.setAttribute("sessionID", uid);
-//			RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/view/main.jsp");
-//			rd.forward(request, response);
-			response.sendRedirect("main");
+			RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/view/login.jsp");
+			rd.forward(request, response);
+//			response.sendRedirect("main");
 		}else {
 			request.setAttribute("result", result);
 			RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/view/insertJoin.jsp");

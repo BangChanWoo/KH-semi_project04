@@ -70,6 +70,7 @@ public class userInfoServlet extends HttpServlet {
 		if(volist1.isEmpty()==true) {
 			System.out.println("44444망4444망");
 			//String a="asd";
+			request.setAttribute("result33", "검색값없음");
 			request.getRequestDispatcher("./SelectUserServlet").forward(request, response);
 		}
 		else {

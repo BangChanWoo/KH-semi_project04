@@ -163,6 +163,7 @@
     			email.classList.add('invalid');
     			email_check.innerHTML="올바른 이메일 주소를 입력하세요.";
     		}else{
+    			phone.classList.remove('invalid');
     			email_check.innerHTML="";
     		}
     	};
@@ -172,6 +173,7 @@
     			phone.classList.add('invalid');
     			phone_check.innerHTML="올바른 전화번호를 입력하세요.";
     		}else{
+    			phone.classList.remove('invalid');
     			phone_check.innerHTML="";
     		}
     	} ;

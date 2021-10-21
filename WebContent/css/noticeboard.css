@@ -99,17 +99,13 @@ caption {
     background-color: #9a7b6c;
 }
 .detailnotice board th,
-.detailnotice board td {
+.detailnotice board tr {
     padding: 10rem;
     font-size: 14rem;
+    width: 100%;
+    border-top: 1rem solid #CFB9AF;
 }
 
-.detailnotice_board td {
-    text-align: center;
-}
-.detailnotice_board tr {
-    border-bottom: 1px solid #ccc;
-}
 .detailnotice {
     padding: 50px;
 }

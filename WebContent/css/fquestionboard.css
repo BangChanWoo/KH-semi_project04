@@ -38,11 +38,11 @@ caption {
     width: 15rem;
     text-align: center;
 }
-/* #cateBtnAll{
-    width: 85%;
+#cateBtnAll{
+    width: 40%;
     margin: 4rem auto;
     display: grid;
-} */
+}
 .cateBtn{
     height: 3rem;
     border-radius: unset;

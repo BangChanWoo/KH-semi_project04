@@ -35,17 +35,7 @@
         <button id="FquestionBtn" class="headerBtnStyle" onclick="location.href='fquestionboard'">자주묻는질문</button>       	
         <button id="QuestionBtn" class="headerBtnStyle">1대1문의</button>	
  		
- 		<div id="fcateBtnAll">
-            <a href="fquestionboard?catenum=<%=0%>" id="0" class="categoryBtn">전체</a>
-            <a href="fquestionboard?catenum=<%=1%>" id="1" class="categoryBtn">주문결제</a>
-            <a href="fquestionboard?catenum=<%=2%>" id="2" class="categoryBtn">배송</a>
-            <a href="fquestionboard?catenum=<%=3%>" id="3" class="categoryBtn">취소/환불</a>
-            <a href="fquestionboard?catenum=<%=4%>" id="4" class="categoryBtn">반품/교환</a>
-            <a href="fquestionboard?catenum=<%=5%>" id="5" class="categoryBtn">쿠폰/포인트</a>
-            <a href="fquestionboard?catenum=<%=6%>" id="5" class="categoryBtn">회원문의</a>
-        </div>
-        
-        <!-- TODO -->
+ 		
         	<div class="fquestion_row">
         		<table class="fquestion_board">
         			<caption>자주묻는 질문목록</caption>
@@ -53,13 +43,13 @@
         					<tr>
         						<th>번호</th>
         						<th>제목</th>
-        						<th>작성자</th>
+        				
         					</tr>
         					</thead>
         					
         					<tbody>
-        						<%
-					if(volist != null){
+        					
+					<%if(volist != null){
 							for(int i =0; i<volist.size(); i++){
 								%>
 								<tr onclick="javascript:location.href='fquestiondetail?fquestion_no=<%=volist.get(i).getfquestion_no() %>'">
@@ -82,13 +72,13 @@
  
  <div id="pageBtnAll">
         <%if(startPage > 1){%>
-            <a class="pageBtn" href="usernotice?pagenum=<%=startPage-1%>"><i class="fas fa-chevron-left"></i></a>
+            <a class="pageBtn" href="fquestionboard?pagenum=<%=startPage-1%>"><i class="fas fa-chevron-left"></i></a>
             <%} %>
             <%for (int i = startPage; i <= endPage; i++) {%>
-            <a id="pageBtn_<%=i%>" class="pageBtn" href="usernotice?pagenum=<%=i%>"><%=i%></a>
+            <a id="pageBtn_<%=i%>" class="pageBtn" href="fquestionboard?pagenum=<%=i%>"><%=i%></a>
             <%} %>
             <%if(endPage < pageCount){%>
-            <a class="pageBtn" href="usernotice?pagenum=<%=endPage+1%>"><i class="fas fa-chevron-right"></i></a>
+            <a class="pageBtn" href="fquestionboard?pagenum=<%=endPage+1%>"><i class="fas fa-chevron-right"></i></a>
            <%} %>
         </div>
 	

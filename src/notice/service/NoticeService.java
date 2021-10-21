@@ -35,14 +35,22 @@ public class NoticeService {
 		return vo;
 	}
 	
-//	public int updateNotice(Notice NoticeVo) {
-//		int result =-1;
-//		Connection con = JdbcTemplate.getConnection();
-//			
-//		result = new NoticeDao().updateNotice(con, NoticeVo);				
-//		JdbcTemplate.close(con);
-//		return result;
-//	}
+	public int insertNotice(Notice NoticeVo) {
+		int result =-1;
+		Connection conn = JdbcTemplate.getConnection();
+			
+		result = new NoticeDao().insertNotice(conn, NoticeVo);				
+		JdbcTemplate.close(conn);
+		return result;
+	}
+	public int deleteNotice(int nno) {
+		int result = -1;
+		Connection conn = JdbcTemplate.getConnection();
+		result = new NoticeDao().deleteNotice(conn, nno);
+		JdbcTemplate.close(conn);
+		return result;
+		
+	}
 //	
 //	public Notice Noticelist(int nno) {
 //		Connection con = JdbcTemplate.getConnection();
@@ -60,12 +68,4 @@ public class NoticeService {
 //		return vo;
 //		 
 //}
-//	public int deleteNotice(int nno) {
-//		int result = -1;
-//		Connection con = JdbcTemplate.getConnection();
-//		result = new NoticeDao().deleteNotice(con, nno);
-//		JdbcTemplate.close(con);
-//		return result;
-//		
-//	}
 }

@@ -18,6 +18,15 @@
 	}else if("${func}" == "recipeDelete"){
 		alert("${msg}");
 		location.href = "recipeboard";
+	}else if("#{func}" == "commentInsert"){
+		alert("${msg}");
+		location.href = "selectrecipe?rno=${rno}";
+	}else if("#{func}" == "commentUpdate"){
+		alert("${msg}");
+		location.href = "selectrecipe?rno=${rno}";
+	}else if("#{func}" == "commentDelete"){
+		alert("${msg}");
+		location.href = "selectrecipe?rno=${rno}";
 	}
 </script>
 </body>

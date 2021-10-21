@@ -58,9 +58,15 @@ public class UpdateCommentServlet extends HttpServlet {
 		int result = new CommentService().updateComment(vo);
 		
 		if(result > 0) {
-			response.sendRedirect("selectrecipe?rno="+rno);
+			request.setAttribute("func", "commentUpdate");
+			request.setAttribute("msg", "변경 성공");
+			request.setAttribute("rno", rno);
+			request.getRequestDispatcher("./WEB-INF/view/resultAlert.jsp").forward(request, response);
 		}else {
-			response.sendRedirect("selectrecipe?rno="+rno);
+			request.setAttribute("func", "commentUpdate");
+			request.setAttribute("msg", "변경 실패");
+			request.setAttribute("rno", rno);
+			request.getRequestDispatcher("./WEB-INF/view/resultAlert.jsp").forward(request, response);
 		}
 	}
 }

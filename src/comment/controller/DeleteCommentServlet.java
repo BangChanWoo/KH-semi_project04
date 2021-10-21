@@ -48,9 +48,15 @@ public class DeleteCommentServlet extends HttpServlet {
 		int result = new CommentService().deleteComment(comno);
 		
 		if(result > 0) {
-			response.sendRedirect("selectrecipe?rno="+rno);
+			request.setAttribute("rno", rno);
+			request.setAttribute("func", "commentDelete");
+			request.setAttribute("msg", "댓글 삭제 성공");
+			request.getRequestDispatcher("./WEB-INF/view/resultAlert.jsp").forward(request, response);
 		}else {
-			response.sendRedirect("selectrecipe?rno="+rno);
+			request.setAttribute("rno", rno);
+			request.setAttribute("func", "commentDelete");
+			request.setAttribute("msg", "댓글 삭제 실패");
+			request.getRequestDispatcher("./WEB-INF/view/resultAlert.jsp").forward(request, response);
 		}
 	}
 

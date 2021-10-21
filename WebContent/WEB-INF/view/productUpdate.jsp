@@ -63,9 +63,8 @@
 				<div id="txtContainer">
 					<br> <label>상품 제목</label> 
 					<input type="text" name="productTitle" id="productTitle" required="required" placeholder=" 예) 수제 치즈 폭탄 돈까스 " value="<%=vo.getPro_title() %>"> <br> <br> 
-					<label>상품 소개</label>
-					<textarea name="productIntro" id="productIntro" required="required"
-						placeholder=" 예) 국내산 한돈을 사용한 치즈 폭탄 돈까스!"></textarea>
+					<label>상품 수량</label>
+					<input type="text" name="productStock" id="productStock" required="required" placeholder=" 예) 100 " value="<%=vo.getPro_stock() %>"> 
 					<br> <br>
 					<div id="productContainer">
 						<h3>상품 옵션</h3>
@@ -136,8 +135,13 @@
 				<button type="submit" id="saveBtn" class="productBtn">수정</button>
 				
 				<button type="button" id="cancleBtn" class="productBtn" onclick="location.href='main?msg=게시글 작성을 취소하였습니다.'">취소</button>
-			</div>
+			
 		</form>
+		<form method="get" action="deleteproduct" >
+			<input type="hidden" name="pro_no" value="<%=pro_no%>">
+			<button type="submit" id="saveBtn" class="productBtn">수정</button>
+		</form>
+		</div>
 	</main>
     <!-- <%@ include file="riceThief_footer.jsp" %> -->
 		<script>

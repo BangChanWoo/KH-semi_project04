@@ -119,8 +119,9 @@ public class adminProductDao {
 				}
 				else {
 					pstmt = conn.prepareStatement(imgInsert);
-					pstmt.setString(1,ProductImg.get(i).getPro_content_img());
-					pstmt.setInt(2, productVo.getPro_no());
+					pstmt.setInt(1, productVo.getPro_no());
+					pstmt.setString(2,ProductImg.get(i).getPro_content_img());
+					
 					result = pstmt.executeUpdate();
 					JdbcTemplate.close(pstmt);
 				}
@@ -272,21 +273,9 @@ public class adminProductDao {
 	}
 	public int deleteProduct(Connection conn, int pro_no) {
 		int result=0;
-		String deleteOptionQuery="delete from product_option where pro_no like ?";
-		String deleteImgQuery="delete from product_img where pro_no like ?";
 		String deleteProductQuery="delete from product_post where pro_no like ?";
 		PreparedStatement pstmt = null;
 		try {
-			pstmt=conn.prepareStatement(deleteOptionQuery);
-			pstmt.setInt(1, pro_no);
-			result=pstmt.executeUpdate();
-			JdbcTemplate.close(pstmt);
-			
-			pstmt=conn.prepareStatement(deleteImgQuery);
-			pstmt.setInt(1, pro_no);
-			result=pstmt.executeUpdate();
-			JdbcTemplate.close(pstmt);
-			
 			pstmt=conn.prepareStatement(deleteProductQuery);
 			pstmt.setInt(1, pro_no);
 			result=pstmt.executeUpdate();

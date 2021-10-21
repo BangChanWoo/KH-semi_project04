@@ -35,7 +35,7 @@ public class updateGetProductServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		String pro_noStr = request.getParameter("pro_no");
 		// 후에 지울 것-----------------------------------------------
-		int pro_no = 15;
+		int pro_no = 21;
 //		if(pro_noStr != null) {
 //			pro_no = Integer.parseInt(pro_noStr);
 //		}

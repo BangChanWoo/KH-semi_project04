@@ -143,22 +143,24 @@ public class NoticeDao {
 		return vo;
 	}
 
-	public int updateNotice(Connection con, Notice NoticeVo) {
-		int result = 0;
-		String updateNotice = " ";
-		PreparedStatement pstmt = null;
+	public int insertNotice(Connection conn, Notice noticeVo) {
+		int result = -1;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String noticeInsert = "insert into notice"
+				+ " values(notice_num.NEXTVAL, ?, ?, ?, ?, ?, sysdate)";
 
 		try {
-			pstmt = con.prepareStatement(updateNotice);
-			pstmt.setInt(1, NoticeVo.getNotice_num());
-			pstmt.setString(2, NoticeVo.getNotice_title());
-			pstmt.setString(3, NoticeVo.getNotice_content());
-			pstmt.setDate(4, NoticeVo.getNotice_time());
-			pstmt.setString(5, NoticeVo.getNotice_img());
-			pstmt.setString(6, NoticeVo.getNotice_video());
+			ps = conn.prepareStatement(noticeInsert);
+			ps.setString(1, noticeVo.getUid());
+			ps.setString(2, noticeVo.getNotice_title());
+			ps.setString(3, noticeVo.getNotice_content());
+			ps.setDate(4, noticeVo.getNotice_time());
+			ps.setInt(5, noticeVo.getNotice_num());
 
-			result = pstmt.executeUpdate();
-			JdbcTemplate.close(pstmt);
+			result = ps.executeUpdate();
+			JdbcTemplate.close(ps);
 			System.out.println("NOTICEDAO.update() :글수정");
 
 		} catch (Exception e) {
@@ -166,27 +168,27 @@ public class NoticeDao {
 			System.out.println("공지 글쓰기 데이터 처리중 db오류 발생");
 
 		} finally {
-			JdbcTemplate.close(pstmt);
+			JdbcTemplate.close(ps);
 		}
 		return result;
 	}
 
-	public int deleteNotice(Connection con, int nno) {
+	public int deleteNotice(Connection conn, int nno) {
 		int result = 0;
-		PreparedStatement pstmt = null;
+		PreparedStatement ps = null;
 		String DeleteNotice = "delete from Notice where notice_num like ?";
 
 		try {
-			pstmt = con.prepareStatement(DeleteNotice);
-			pstmt.setInt(1, nno);
-			result = pstmt.executeUpdate();
+			ps = conn.prepareStatement(DeleteNotice);
+			ps.setInt(1, nno);
+			result = ps.executeUpdate();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("공지글삭제 처리중 db오류 발생");
 
 		} finally {
-			JdbcTemplate.close(pstmt);
+			JdbcTemplate.close(ps);
 		}
 		return result;
 	}

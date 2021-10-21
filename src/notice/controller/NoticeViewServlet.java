@@ -71,7 +71,7 @@ public class NoticeViewServlet extends HttpServlet {
 		}
 		System.out.println(endNnum);
 		ArrayList<Notice> volist = new NoticeService().noticeList(startNnum, endNnum);
-
+		System.out.println("여기 들어오나? 2");
 		System.out.println("noticeList:"+ volist);
 		
 		request.setAttribute("noticeVoList", volist);

@@ -695,13 +695,11 @@
 			</table>
 			</form>
 			<div class="paging">
-				<a href="#" class="bt">첫 페이지</a> 
-				<a href="#" class="bt">이전 페이지</a>
+				
 				<%
 					if (startPage > 1) {
 				%>
-				<a href="./selectsals?pagenum=<%=startPage - 1%>"
-					class="num on"></a>
+				<a href="./SelectUserServlet?pagenum=<%=startPage - 1%>" class="num">이전</a>
 				<%
 					}
 				%>
@@ -715,11 +713,11 @@
 				<%
 					if (endPage < pageCount) {
 				%>
-				<a href="./selectsals?pagenum=<%=endPage + 1%>" class="num"></a>
+				<a href="./SelectUserServlet?pagenum=<%=endPage + 1%>" class="num">다음</a>
 				<%
 					}
 				%>
-				<a href="#" class="bt">다음 페이지</a> <a href="#" class="bt">마지막 페이지</a>
+				
 			</div>
 		</div>
 	</main>

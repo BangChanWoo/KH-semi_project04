@@ -14,9 +14,32 @@
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <script src="https://kit.fontawesome.com/616f27e0c4.js" crossorigin="anonymous"></script>
-<script type="text/javascript" src="./js/mypage.js"></script> 
-<title>밥도둑 공지detailviewpage</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="./js/mypage.js"></script> 
+<title>공지사항 읽기페이지</title>
+<style>
+body{
+            text-align: center;
+        }
+.detailnotice board th,
+.detailnotice board tr {
+    padding: 10rem;
+    font-size: 14rem;
+    width: 100%;
+    border-top: 1rem solid #CFB9AF;
+}
+.detailnotice {
+    padding: 50px;
+}
+table.detailnotice_board {
+	width: 80%;
+	text-align: center;
+	padding: 50px;
+	left: 20%
+	
+}
+
+</style>
 <%
 	String msg = (String)request.getAttribute("msg");
 %>
@@ -30,7 +53,7 @@
 <body>
 <% 
 Notice vo = (Notice)request.getAttribute("vo");
-	int notice_num = (int)request.getAttribute("notice_num"); 
+int notice_num = (int)request.getAttribute("notice_num"); 
 
 
 %>
@@ -43,19 +66,22 @@ Notice vo = (Notice)request.getAttribute("vo");
 			<thead>
 				<tr>
 				<th>공지번호</th>
-				<th>공지명</th>
-				<th>공지날짜</th>
-				<th>공지내용</th>
+				<th><%=vo.getNotice_num()%></th>
 				</tr>
-				</thead>
-				<tbody>
-        <tr>
-            <td><%=vo.getNotice_num()%></td>
-            <td><%=vo.getNotice_title()%></td>
-            <td><%=vo.getNotice_time()%></td>
-            <td><%=vo.getNotice_content()%></td>
-        </tr>		
-				</tbody>
+				<tr>
+				<th>공지제목</th>
+				<th><%=vo.getNotice_title()%></th>
+				</tr>
+				<tr>
+				<th>공지시간</th>
+				<th><%=vo.getNotice_time()%></th>
+				</tr>
+				<tr>
+				<th>공지내용</th>
+				<th><%=vo.getNotice_content()%></th>
+				</tr>
+        	
+			</thead>
 				
 		</table>					       
 </div>

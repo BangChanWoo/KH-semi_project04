@@ -35,11 +35,6 @@ public class FquestionBoardServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
-		String catenumStr = request.getParameter("catenum");
-		int catenum = 0;
-		if(catenumStr != null) {
-			catenum = Integer.parseInt(catenumStr);
-		}
 		
 		final int PAGE_SIZE = 20;  //한페이지당 글 수 
 		final int PAGE_BLOCK = 5;  //한화면에 나타날 페이지 링크 수
@@ -55,7 +50,7 @@ public class FquestionBoardServlet extends HttpServlet {
 		if(pageNum != null) {
 			currentPage = Integer.parseInt(pageNum);
 		}
-		rCount = new FrequencyService().getFquestionCount(catenum);
+		rCount = new FrequencyService().getFquestionCount();
 		
 		pageCount = (rCount/PAGE_SIZE) + (rCount%PAGE_SIZE == 0 ? 0 : 1);
 
@@ -76,13 +71,13 @@ public class FquestionBoardServlet extends HttpServlet {
 			endPage = pageCount;
 		}
 		
-		ArrayList<Fquestion> volist = new FrequencyService().FquestionList(startRnum, endRnum, catenum);
+		ArrayList<Fquestion> volist = new FrequencyService().FquestionList(startRnum, endRnum);
 		
 		request.setAttribute("fquestionVoList", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
-		request.setAttribute("catenum", catenum);
+		
 //TODO
 		request.getRequestDispatcher("./WEB-INF/view/fquestionboard.jsp").forward(request, response);
 	}

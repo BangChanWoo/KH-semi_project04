@@ -69,6 +69,7 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("sessionID", uid);
 			session.setAttribute("sessionNickname", vo.getNickname());
+			request.setAttribute("result", result);
 			RequestDispatcher rd = request.getRequestDispatcher("main");// 이거 변경
 			rd.forward(request, response);
 //	         response.sendRedirect("/WEB-INF/view/main.jsp"); 
@@ -78,14 +79,13 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("sessionID", uid);
 			session.setAttribute("sessionNickname", vo.getNickname());
+			request.setAttribute("result", result);
 			RequestDispatcher rd = request.getRequestDispatcher("adminMainServlet");
 			rd.forward(request, response);
 		}
 		else {
-			request.setAttribute("result", result);
+			request.setAttribute("result1", "로그인 실패했습니다.");
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/login.jsp");
-			request.setAttribute("msg", "로그인 실패했습니다.");
-
 			rd.forward(request, response);
 		}
 	}

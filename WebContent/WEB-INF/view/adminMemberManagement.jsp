@@ -30,6 +30,7 @@
 	int age66 = (int) request.getAttribute("age66");
 	int age00 = (int) request.getAttribute("age00");
 	String id = (String) request.getAttribute("id");
+	String searId = (String) request.getAttribute("searId");
 	
 %>
 <!DOCTYPE html>
@@ -37,8 +38,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<script src="https://kit.fontawesome.com/616f27e0c4.js"
-	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/616f27e0c4.js" crossorigin="anonymous"></script>
 
 
 
@@ -99,13 +99,12 @@
 				</tbody>
 			</table>
 			<div class="paging">
-				<a href="#" class="bt">첫 페이지</a> 
-				<a href="#" class="bt">이전 페이지</a>
+				<!-- <a href="#" class="bt">첫 페이지</a> --> 
+				<!-- <a href="#" class="bt">이전 페이지</a>  -->
 				<%
 					if (startPage > 1) {
 				%>
-				<a href="./SelectUserServlet?pagenum=<%=startPage - 1%>"
-					class="num on"></a>
+				<a href="./SelectUserServlet?pagenum=<%=startPage - 1%>" class="num">이전</a>
 				<%
 					}
 				%>
@@ -119,11 +118,11 @@
 				<%
 					if (endPage < pageCount) {
 				%>
-				<a href="./SelectUserServlet?pagenum=<%=endPage + 1%>" class="num"></a>
+				<a href="./SelectUserServlet?pagenum=<%=endPage + 1%>" class="num">다음</a>
 				<%
 					}
 				%>
-				<a href="#" class="bt">다음 페이지</a> <a href="#" class="bt">마지막 페이지</a>
+				<!-- <a href="#" class="bt">다음 페이지</a> <a href="#" class="bt">마지막 페이지</a> -->
 			</div>
 		</div>
 		<div class="gender">
@@ -206,11 +205,5 @@
 	<footer>
 	<%@ include file="riceThief_footer.jsp" %>
 	</footer>
-	<script>
-	
-	
-	</script>
-
-
 </body>
 </html>

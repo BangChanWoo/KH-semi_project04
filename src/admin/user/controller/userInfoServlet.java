@@ -39,7 +39,8 @@ public class userInfoServlet extends HttpServlet {
 		System.out.println("asdasd");
 		String uid = request.getParameter("id");
 		System.out.println("요청한 입력 데이터 : id = " + uid);
-
+		String searId = request.getParameter("name1");
+		System.out.println(searId);
 //		String pw=request.getParameter("pw"); 
 //		String uname=request.getParameter("uname");  
 //		String nickname=request.getParameter("nickname"); 
@@ -53,12 +54,7 @@ public class userInfoServlet extends HttpServlet {
 		ArrayList<User> volist1 = new adminUserService().adminUserList(uid);
 		System.out.println("------------------"+volist1);
 //		int result=0;
-		if(volist1.equals("['']")) {
-			System.out.println("어레이리스트 공백");
-//			샌드리다이렉트 포워드로 
-		//	response.sendRedirect(SelectUserServlet);
-		}
-//		
+		
 //		result = new adminUserService().updateUser(pw, uname, nickname, age, gender, phone, address, point, kind, uid);
 
 		if (volist1 != null) {
@@ -74,10 +70,10 @@ public class userInfoServlet extends HttpServlet {
 		if(volist1.isEmpty()==true) {
 			System.out.println("44444망4444망");
 			//String a="asd";
-			//request.setAttribute("a",a);
 			request.getRequestDispatcher("./SelectUserServlet").forward(request, response);
 		}
 		else {
+			
 			request.setAttribute("adminUserList1", volist1);
 			request.getRequestDispatcher("./WEB-INF/view/userInfo.jsp").forward(request, response);
 			

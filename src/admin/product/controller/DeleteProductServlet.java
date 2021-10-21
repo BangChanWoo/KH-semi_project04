@@ -35,6 +35,7 @@ public class DeleteProductServlet extends HttpServlet {
 		
 		String writer = request.getParameter("writer");
 		String pro_no = request.getParameter("pro_no");
+		System.out.println(pro_no);
 		int pro_noInt = 0;
 		if(pro_no != null) {
 			pro_noInt = Integer.parseInt(pro_no);  //눌려진 페이지
@@ -51,16 +52,19 @@ public class DeleteProductServlet extends HttpServlet {
 		}
 		int result = 0;
 		if(writer == id || id.equals("admin")) {
+			System.out.println(pro_noInt + "삭제 서블릿 불러오는 상품 번호" );
 			result = new adminProductService().deleteProduct(pro_noInt);
+			
+			if(result > 0) {
+				//request.setAttribute("msg", "레시피 게시글 삭제에 성공했습니다.");
+				System.out.println("삭제 성공");
+				request.getRequestDispatcher("adminMainServlet").forward(request, response);
+			}else {
+				request.setAttribute("msg", "레시피 게시글 삭제에 실패했습니다.");
+				request.getRequestDispatcher("adminMainServlet").forward(request, response);
+			}
 		}
-		if(result > 0) {
-			//request.setAttribute("msg", "레시피 게시글 삭제에 성공했습니다.");
-			System.out.println("삭제 성공");
-			request.getRequestDispatcher("adminMainServlet").forward(request, response);
-		}else {
-			request.setAttribute("msg", "레시피 게시글 삭제에 실패했습니다.");
-			request.getRequestDispatcher("adminMainServlet").forward(request, response);
-		}
+		
 	}
 
 	/**

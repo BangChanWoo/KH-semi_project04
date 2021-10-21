@@ -8,6 +8,7 @@
 	href="<%=request.getContextPath()%>/css/riceThief_footer.css" />
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -16,6 +17,7 @@
 
 <!-- footer css -->
 <title>로그인</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 body {
 	text-align: center;
@@ -37,10 +39,17 @@ body {
 	margin-left:30px;
 }
 </style>
-<script src="https://kit.fontawesome.com/616f27e0c4.js"
-	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/616f27e0c4.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
+<script>
+var result1 = "${result1}";
+console.log(result1);
+if(result1 == "로그인 실패했습니다."){
+	alert("로그인 실패");
+}
+</script>
 	<header>
 		<%@ include file="riceThief_header.jsp"%>
 		<hr>

@@ -108,7 +108,11 @@ public class UpdateProductServlet extends HttpServlet {
 		if (feeTextStr != null) {
 			feeText = Integer.parseInt(feeTextStr);
 		}
-		int productStock = 100;
+		String productStockStr= multi.getParameter("productStock");
+		int productStock = 0;
+		if(productStockStr != null) {
+			productStock = Integer.parseInt(productStockStr);
+		}
 		String productOptionPriceStr = multi.getParameter("productOptionPrice");
 
 		int productOptionPrice = 0;

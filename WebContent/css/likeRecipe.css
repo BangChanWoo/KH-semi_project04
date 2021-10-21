@@ -1,0 +1,93 @@
+main{
+    width: 100%;
+    margin: auto;
+    position: relative;
+}
+main h2{
+    margin: 3.5rem 0;
+    text-align: center;
+    font-size: 2rem;
+}
+.imgCenter{
+    width: 100%;
+    margin: auto;
+    display: grid;
+    gap: 0 2%;
+}
+.categoryImg{
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    margin: 2% 0;
+    border-radius: 5px;
+}
+.categoryImg:hover{
+	-webkit-transform: scale(1.03);
+	transform: scale(1.03);
+	box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+}
+.categoryRecipeTitle{
+	width: 100%;
+    margin: 3% 0 40% 0;
+    font-size: 1.2rem;
+    display: inline-block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: normal;
+	line-height: 1.2;
+	height: 3rem;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+.categoryRecipeTitle a{
+	text-decoration: none;
+    color: black;
+}
+.categoryRecipeTitle:hover{
+    color: #CFB9AF;
+}
+#pageBtnAll{
+    width: 18rem;
+    height: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 0.5rem;
+    margin: 4rem auto 6rem;
+}
+
+/*responsive*/
+/*스마트폰*/
+@media screen and (max-width:  767px){
+    #categoryBtnAll{
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+    .categoryBtn:first-child, .categoryBtn:nth-child(7), .categoryBtn:nth-child(13){border-left: solid 1px black;}
+    .categoryBtn:nth-last-child(-n+6){border-bottom: solid 1px black;}
+    .imgCenter{
+        grid-template-columns: 32.6% 32.6% 32.6%;
+    }
+}
+/*태블릿 pc*/
+@media screen and (min-width:  768px) and (max-width: 959px){
+    #categoryBtnAll{
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+    .categoryBtn:first-child, .categoryBtn:nth-child(10){border-left: solid 1px black;}
+    .categoryBtn:nth-last-child(-n+9){border-bottom: solid 1px black;}
+    .imgCenter{
+        grid-template-columns: 24.5% 24.5% 24.5% 24.5%;
+    }
+}
+/*데스크탑*/
+@media screen and (min-width:  960px){
+    #categoryBtnAll{
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+    .categoryBtn:first-child, .categoryBtn:nth-child(10){border-left: solid 1px black;}
+    .categoryBtn:nth-last-child(-n+9){border-bottom: solid 1px black;}
+    .imgCenter{
+        grid-template-columns: 18.4% 18.4% 18.4% 18.4% 18.4%;
+    }
+} 

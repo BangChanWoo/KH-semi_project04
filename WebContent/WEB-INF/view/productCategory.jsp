@@ -11,6 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1'>
+<script type="text/javascript" src="./js/mypage.js"></script>
 <script src="https://kit.fontawesome.com/616f27e0c4.js" crossorigin="anonymous"></script>
 <title>밥도둑_스토어 카테고리</title>
 </head>

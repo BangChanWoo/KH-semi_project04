@@ -37,7 +37,8 @@ public class LikeViewServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String id = (String)request.getSession().getAttribute("sessionID");
-		
+	
+
 		String rnoStr = request.getParameter("rno");
 		int rno = 0;
 		if(rnoStr != null) {

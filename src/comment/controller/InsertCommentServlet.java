@@ -1,6 +1,8 @@
 package comment.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,58 +10,60 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import comment.service.CommentService;
-import recipe.model.service.RecipeService;
+import comment.vo.Comment;
+import org.json.simple.JSONObject;
 
 /**
- * Servlet implementation class DeleteCommentServlet
+ * Servlet implementation class InsertCommentServlet
  */
-@WebServlet("/deletecomment")
-public class DeleteCommentServlet extends HttpServlet {
+@WebServlet("/insertcomment")
+public class InsertCommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteCommentServlet() {
+    public InsertCommentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		
+
 		String rnoStr = request.getParameter("rno");
 		int rno = 0;
 		if(rnoStr != null) {
-			rno = Integer.parseInt(rnoStr);  //눌려진 페이지
+			rno = Integer.parseInt(rnoStr);
 		}
-		
-		String comnoStr = request.getParameter("comno");
-		int comno = 0;
-		if(comnoStr != null) {
-			comno = Integer.parseInt(comnoStr);  //눌려진 페이지
+		String levelStr = request.getParameter("level");
+		int level = 0;
+		if(levelStr != null) {
+			level = Integer.parseInt(levelStr);
 		}
-		
-		int result = new CommentService().deleteComment(comno);
-		
+		String originStr = request.getParameter("origin");
+		int origin = 0;
+		if(originStr != null) {
+			origin = Integer.parseInt(originStr);
+		}
+
+		String commentInput = request.getParameter("commentInput");
+
+		String id = (String)request.getSession().getAttribute("sessionID");
+
+		Comment vo = new Comment(rno, id, level, origin, commentInput);
+		int result = new CommentService().insertComment(vo);
+
 		if(result > 0) {
 			response.sendRedirect("selectrecipe?rno="+rno);
 		}else {
 			response.sendRedirect("selectrecipe?rno="+rno);
 		}
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

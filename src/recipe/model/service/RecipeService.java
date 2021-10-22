@@ -116,4 +116,12 @@ public class RecipeService {
 			JdbcTemplate.close(conn);
 			return volist;
 		}
+	//관리자 페이지 레시피 조회
+		public Recipe recipeTitleList(String rec_title) {
+			Recipe vo = new Recipe();
+			Connection conn = JdbcTemplate.getConnection();
+			vo = new RecipeDao().recipeTitleList(conn, rec_title);
+			JdbcTemplate.close(conn);
+			return vo;
+		}
 }

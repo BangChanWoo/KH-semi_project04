@@ -58,9 +58,6 @@ public class LoginServlet extends HttpServlet {
 		String pw = request.getParameter("pw");
 
 		int result = new UserService().loginUser(uid, pw);
-			
-		 	
-		
 
 		if (result == 1) {
 			request.setAttribute("result", result);

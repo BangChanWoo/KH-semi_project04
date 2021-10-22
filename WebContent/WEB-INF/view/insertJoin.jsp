@@ -107,75 +107,93 @@
 				return false;
 			}
     		
-    		
-    		var re=/^[a-zA-Z0-9]{6,16}$/; //id,pw
-    		var re1=/^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/; //email
-    		var re2=/^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/; //phone
-	
-    		 if(!re.test(id)){
-    			alert("아이디 제대로 입력해주세요.");
-    			return false;
-    		}
-    		if(!re.test(pw)){
-    			alert("비밀번호 제대로 입력해주세요.");
-    			return false;
-    		}
-    		if(!re1.test(email)){
-    			alert("이메일 제대로 입력해주세요.");
-    			return false;
-    		}  
-    		if(!re2.test(phone)){
-    			alert("전화번호 제대로 입력해주세요.");
-    		}
     	};
     	id.onblur=function(){
-    		var id=$("#id").val();
-    		$.ajax({
-    			type:"post",
-    			url:"dupidcheck?uid"+id,
-    			data:{uid:id},
-    			success:function(result){
-    				if(result=="false"){
-    					$("#id_check").html("사용할 수 있는 아이디입니다.");
-    					$("#id_check").css({"color":"green"});
-    				}else{
-    					$("#id_check").html("사용할 수 없는 아이디입니다.");
-    				}
-    				}
-    			});
+    		var re=/^[a-zA-Z0-9]{6,16}$/; //id,pw
+    		if(re.test($("#id").val())==false){
+    			$("#id_check").html("사용할 수 없는 아이디입니다.");
+				$("#id_check").css({"color":"red"});
+    			alert("아이디 조건에 맞게 입력해주세요.");
+    		}
+    		else{
+    			var id=$("#id").val();
+        		console.log(id+"id체크")
+        		$.ajax({
+        			type:"post",
+        			url:"<%=request.getContextPath()%>/dupidcheck?uid="+id,
+        			data:{uid:id},
+        			success:function(result){
+        				if(result=="false"){
+        					$("#id_check").html("사용할 수 있는 아이디입니다.");
+        					$("#id_check").css({"color":"green"});
+        				}else{
+        					$("#id_check").html("사용할 수 없는 아이디입니다.");
+        					$("#id_check").css({"color":"red"});
+        				}
+        				}
+        			});
+    		}
+    		
     		};
     	
     	
     	repw.onblur=function(){
-    		var pw=document.getElementById("pw").value;
-    		var repw=document.getElementById("repw").value;
-    		if(pw!=repw){
-    			/* pw.classList.add('invalid'); */
-    			pw_check.innerHTML="비밀번호가 일치하지 않습니다.";
-    		}else{
-    			pw_check.innerHTML="";
+    		var re=/^[a-zA-Z0-9]{6,16}$/; //id,pw
+    		if(re.test($("#pw").val())==false){
+    			pw_check.innerHTML="비밀번호가 조건에 맞지 않습니다.";
+    			alert("비밀번호를 조건에 맞게 입력해주세요.");
     		}
+    		else{
+    			var pw=document.getElementById("pw").value;
+        		var repw=document.getElementById("repw").value;
+        		console.log(pw);
+        		console.log(repw);
+        		if(pw!=repw){
+        			pw_check.innerHTML="비밀번호가 일치하지 않습니다.";
+        		}else{
+        			pw_check.innerHTML="";
+        		}
+    		}
+    		
     	};
     	
     	
     	email.onblur=function(){
-    		if(!email.value.includes('@')){
+    		var re1=/^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/; //email
+    		if(re1.test($("#email").val())==false){
     			email.classList.add('invalid');
-    			email_check.innerHTML="올바른 이메일 주소를 입력하세요.";
-    		}else{
-    			phone.classList.remove('invalid');
-    			email_check.innerHTML="";
+    			email_check.innerHTML="이메일이 조건에 맞지 않습니다.";
+    			alert("이메일 주소를 조건에 맞게 입력해주세요.");
     		}
+    		else{
+    			if(!email.value.includes('@')){
+        			email.classList.add('invalid');
+        			email_check.innerHTML="올바른 이메일 주소를 입력하세요.";
+        		}else{
+        			email.classList.remove('invalid');
+        			email_check.innerHTML="";
+        		}
+    		}
+    		
     	};
     	
         phone.onblur=function(){
-    		if(!phone.value.includes('010')){
-    			phone.classList.add('invalid');
-    			phone_check.innerHTML="올바른 전화번호를 입력하세요.";
-    		}else{
-    			phone.classList.remove('invalid');
-    			phone_check.innerHTML="";
+        	var re2=/^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/; //phone
+        	if(re2.test($("#phone").val())==false){
+        		phone.classList.add('invalid');
+    			phone_check.innerHTML="전화번호가 조건에 맞지 않습니다.";
+    			alert("전화번호를 조건에 맞게 입력해주세요.");
     		}
+    		else{
+    			if(!phone.value.includes('010')){
+        			phone.classList.add('invalid');
+        			phone_check.innerHTML="올바른 전화번호를 입력하세요.";
+        		}else{
+        			phone.classList.remove('invalid');
+        			phone_check.innerHTML="";
+        		}
+    		}
+    		
     	} ;
     	
     </script>

@@ -5,6 +5,7 @@ import static riceThief.common.JdbcTemplate.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import user.vo.User;
 
@@ -86,18 +87,20 @@ public class UserDao {
 	}
 	
 
-	public User dupIdCheck(Connection conn, String uid) {
-		User u = null;
+	public ArrayList<User> dupIdCheck(Connection conn) {
+		ArrayList<User> idList = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from member where id=?";
+		String sql = "select id from member";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, uid);
+			
 			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				u = new User();
-				u.setUid(rs.getString("uid"));
+			idList = new ArrayList<User>();
+			while(rs.next()) {
+				User vo = new User();
+				vo.setUid(rs.getString("id"));
+				idList.add(vo);
 			}
 
 		} catch (Exception e) {
@@ -106,7 +109,7 @@ public class UserDao {
 			close(rs);
 			close(pstmt);
 		}
-		return u;
+		return idList;
 	}
 
 	public User findId(Connection conn, String uname, String phone) {

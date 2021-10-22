@@ -70,9 +70,10 @@
 				</div>
 			</div>
 			
-			<h2 align=center>상품 상세 설명</h2>
+			
 			
 				<div id="productDetailExplane" >
+				<h2 align=center>상품 상세 설명</h2>
 				<div  id="explane" align="center">
 					<div id="stepImgContainer">
 					<img src="./css/alt.JPG" name="stepImg_1" id="stepImg_1"alt="상품 상세 정보 순서"> 

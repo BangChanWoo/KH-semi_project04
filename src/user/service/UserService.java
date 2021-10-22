@@ -1,6 +1,8 @@
 package user.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+
 import static riceThief.common.JdbcTemplate.*;
 
 import user.dao.UserDao;
@@ -43,11 +45,12 @@ public class UserService {
 	return result;
 	}
 	
-	public User dupIdCheck(String uid) {
+	public ArrayList<User> dupIdCheck() {
+		ArrayList<User> idList=null;
 		Connection conn=getConnection();
-		 User u=new UserDao().dupIdCheck(conn, uid);
-		 close(conn);
-		 return u;
+		idList=new UserDao().dupIdCheck(conn);
+		close(conn);
+		return idList;
 	}
 	public User findId(String uname,String phone) {
 		Connection conn=getConnection();

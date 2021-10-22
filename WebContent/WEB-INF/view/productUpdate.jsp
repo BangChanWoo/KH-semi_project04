@@ -104,10 +104,12 @@
 				</div>
 			</div>
 			
-			<h2 align=center>상품 상세 설명</h2>
+			
 			
 				<div id="productDetailExplane" >
+				<h2 align=center>상품 상세 설명</h2>
 				<div  id="explane" align="center">
+				
 				<%
 				int sCnt = 0;
 				if( ProductImg != null){
@@ -139,7 +141,7 @@
 		</form>
 		<form method="get" action="deleteproduct" >
 			<input type="hidden" name="pro_no" value="<%=pro_no%>">
-			<button type="submit" id="saveBtn" class="productBtn">수정</button>
+			<button type="submit" id="saveBtn" class="productBtn">삭제</button>
 		</form>
 		</div>
 	</main>

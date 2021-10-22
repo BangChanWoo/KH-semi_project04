@@ -135,7 +135,34 @@ public class adminProductDao {
 		
 		return result;
 	}
-	
+	public ProductPost productTitleList(Connection conn, String pro_title) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ProductPost vo = new ProductPost();
+		String query="select * from product_post where pro_title like ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, pro_title);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				vo.setPro_cate_no(rset.getInt("pro_cate_no"));
+				//vo.setPro_title(rset.getString("pro_no"));
+				vo.setPro_no(rset.getInt("pro_no"));
+				vo.setPro_img(rset.getString("pro_img"));
+				vo.setPro_price(rset.getInt("pro_price"));
+				vo.setPro_delivery_fee(rset.getInt("pro_delivery_fee"));
+				vo.setPro_stock(rset.getInt("pro_stock"));
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("DB오류"+e.getMessage());
+		}finally {
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);
+		}
+		return vo;
+	}
 	public ProductPost productDetailList(Connection conn, int pro_no) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;

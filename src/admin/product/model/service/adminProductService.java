@@ -48,6 +48,14 @@ public class adminProductService {
 		JdbcTemplate.close(conn);
 		return vo;
 	}
+	
+	public ProductPost productTitleList(String pro_title){
+		ProductPost vo = new ProductPost();
+		Connection conn = JdbcTemplate.getConnection();
+		vo = new adminProductDao().productTitleList(conn, pro_title);
+		JdbcTemplate.close(conn);
+		return vo;
+	}
 	public int deleteProduct(int pro_no) {
 		int result=-1;
 		Connection conn = JdbcTemplate.getConnection();

@@ -175,3 +175,17 @@ a {
     background: black;
     color: #fff;
 }
+
+.categoryImg{
+    width: 3rem;
+    aspect-ratio: 1;
+    object-fit: cover;
+    margin: 2% 0;
+    border-radius: 5px;
+}
+.categoryImg:hover{
+	-webkit-transform: scale(1.03);
+	transform: scale(1.03);
+	box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+}
+

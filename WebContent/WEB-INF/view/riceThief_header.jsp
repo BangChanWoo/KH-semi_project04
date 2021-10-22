@@ -16,7 +16,7 @@
 				<button onclick="myFunction()" class="dropbtn">마이페이지</button>
 				<div id="myDropdown" class="dropdown-content">
 					<a onclick="location.href='updateuser'">나의 회원정보</a>
-					<a href="#">장바구니</a>
+					<a href="selectbasket">장바구니</a>
 					<a href="orderdetailview">결제내역</a>
 					<a href="likeview">관심 레시피</a>
 					<a href="#">1:1문의</a>
@@ -29,7 +29,7 @@
         	<button id="enrollBtn" class="headerBtnStyle" onclick="location.href='joinuser'">회원가입</button>
         	</c:when>
         	</c:choose>
-        	<button id="serviceBtn" class="headerBtnStyle">고객센터</button> 
+        	<button id="serviceBtn" class="headerBtnStyle" onclick="location.href='usernotice'">고객센터</button> 
         </div>
         <nav>
         	<ul>
@@ -37,7 +37,7 @@
         		<li id="navStore"><a href="productboard">스토어</a></li>
         	</ul>
         	<c:if test="${not empty sessionID}">
-        	<a id="cart" class="loginAfterBtn" href="#"><i class="fas fa-shopping-cart"></i></a>
+        	<a id="cart" class="loginAfterBtn" href="selectbasket"><i class="fas fa-shopping-cart"></i></a>
         	<a id="recipeWrite" class="loginAfterBtn" href="insertrecipe"><i class="fas fa-edit"></i></a>
         	</c:if>
         </nav>

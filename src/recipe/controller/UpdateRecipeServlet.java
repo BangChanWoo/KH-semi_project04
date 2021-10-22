@@ -46,15 +46,7 @@ public class UpdateRecipeServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
-		User LoginInfo = (User)request.getSession().getAttribute("LoginInfo");
-		String id = null;
-		if(LoginInfo != null) {
-			id = LoginInfo.getUid();
-		}
-		//로그인 기능 완료되면 삭제!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		if(id == null) {
-			id = "admin";
-		}
+		String id = (String)request.getSession().getAttribute("sessionID");
 		
 		//사진 업로드 설정
 		// 파일 저장 경로 (web 경로 밑에 해당 폴더를 생성해 주어야 한다)

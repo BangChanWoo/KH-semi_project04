@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/basic.css" />  <!-- 공통 css -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_header.css" /> <!-- header css -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_footer.css" /><!-- footer css -->
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/orderdetail.css" /><!-- footer css -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/orderdetail.css" /><!-- 자체 css -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% String ctxPath = request.getContextPath(); %>
 <!DOCTYPE html>
@@ -27,7 +27,6 @@
 				$('.pageBtn').click(function () {
 					pagenum = $('.pageBtn').val();
 				})
-				console.log(pagenum);
 				if($('#orderSelect').val() == 0){
 					$.ajax({
 						type : "GET",
@@ -151,8 +150,8 @@
 			</tr>
 			<%} }else if(orderList.isEmpty()){%>
 			<h2>결제 내역이 없습니다.</h2>
-			<%} %>
 			<h2><%=orderList %></h2>
+			<%} %>
 		</table>
 		<div id="pageBtnAll">
         <%if(startPage > 1){%>

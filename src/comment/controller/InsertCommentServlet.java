@@ -60,9 +60,15 @@ public class InsertCommentServlet extends HttpServlet {
 		int result = new CommentService().insertComment(vo);
 
 		if(result > 0) {
-			response.sendRedirect("selectrecipe?rno="+rno);
+			request.setAttribute("func", "commentInsert");
+			request.setAttribute("rno", rno);
+			request.setAttribute("msg", "댓글 작성을 성공했습니다.");
+			request.getRequestDispatcher("./WEB-INF/view/resultAlert.jsp").forward(request, response);
 		}else {
-			response.sendRedirect("selectrecipe?rno="+rno);
+			request.setAttribute("func", "commentInsert");
+			request.setAttribute("rno", rno);
+			request.setAttribute("msg", "댓글 작성을 실패했습니다.");
+			request.getRequestDispatcher("./WEB-INF/view/resultAlert.jsp").forward(request, response);
 		}
 	}
 

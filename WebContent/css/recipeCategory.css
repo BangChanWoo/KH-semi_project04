@@ -77,7 +77,7 @@ main h2{
     gap: 0.5rem;
     margin: 4rem auto 6rem;
 }
-.pageBtn{
+.pageBtn, .pageBtn i{
     border: 0;
     border-radius: 5px;
     background-color: #CFB9AF;

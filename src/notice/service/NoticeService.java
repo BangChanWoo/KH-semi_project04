@@ -35,11 +35,11 @@ public class NoticeService {
 		return vo;
 	}
 	
-	public int insertNotice(Notice NoticeVo) {
+	public int insertNotice(Notice vo) {
 		int result =-1;
 		Connection conn = JdbcTemplate.getConnection();
 			
-		result = new NoticeDao().insertNotice(conn, NoticeVo);				
+		result = new NoticeDao().insertNotice(conn, vo);				
 		JdbcTemplate.close(conn);
 		return result;
 	}

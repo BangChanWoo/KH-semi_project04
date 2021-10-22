@@ -17,18 +17,18 @@ public class FrequencyService {
 		JdbcTemplate.close(conn);
 		return result;	
 	}
-	public int getFquestionCount(int catenum) {
+	public int getFquestionCount() {
 		int result = 0;
 		Connection conn = JdbcTemplate.getConnection();
 			
-		result = new FrequencyDao().getFquestionCount(conn, catenum);
+		result = new FrequencyDao().getFquestionCount(conn);
 			
 		return result;
 	}
-	public ArrayList<Fquestion> FquestionList(int start , int end, int catenum) {
+	public ArrayList<Fquestion> FquestionList(int start , int end) {
 		ArrayList<Fquestion> volist = null;
 		Connection conn = JdbcTemplate.getConnection();
-		volist = new FrequencyDao().fquestionList(conn, start, end, catenum);
+		volist = new FrequencyDao().fquestionList(conn, start, end);
 		JdbcTemplate.close(conn);
 		return volist;
 	}

@@ -37,6 +37,7 @@ public class NoticeDetailViewServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		int notice_num =1;  //눌려진 페이지
+		
 		String notice_numStr = request.getParameter("notice_num");
 		if(notice_numStr != null) {
 			notice_num = Integer.parseInt(notice_numStr);

@@ -143,24 +143,22 @@ public class NoticeDao {
 		return vo;
 	}
 
-	public int insertNotice(Connection conn, Notice noticeVo) {
+	public int insertNotice(Connection conn, Notice vo) {
 		int result = -1;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		String noticeInsert = "insert into notice"
-				+ " values(notice_num.NEXTVAL, ?, ?, ?, ?, ?, sysdate)";
+		String noticeInsert = "insert into notice(notice_num, id, notice_title, notice_content, notice_time) values(notice_num.NEXTVAL, ?, ?, ?, ?, sysdate)";
 
 		try {
 			ps = conn.prepareStatement(noticeInsert);
-			ps.setString(1, noticeVo.getUid());
-			ps.setString(2, noticeVo.getNotice_title());
-			ps.setString(3, noticeVo.getNotice_content());
-			ps.setDate(4, noticeVo.getNotice_time());
-			ps.setInt(5, noticeVo.getNotice_num());
+			ps.setInt(1, vo.getNotice_num());
+			ps.setString(2, vo.getNotice_title());
+			ps.setString(3, vo.getNotice_content());
+			ps.setDate(4, vo.getNotice_time());
+		
 
 			result = ps.executeUpdate();
-			JdbcTemplate.close(ps);
 			System.out.println("NOTICEDAO.update() :글수정");
 
 		} catch (Exception e) {
@@ -169,6 +167,7 @@ public class NoticeDao {
 
 		} finally {
 			JdbcTemplate.close(ps);
+			JdbcTemplate.close(rs);
 		}
 		return result;
 	}

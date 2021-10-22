@@ -65,10 +65,11 @@ public class Recipe {
 		this.rec_cate_no=rec_cate_no;
 	}
 	//recommend list
-	public Recipe(String rec_img, String rec_title, int recipe_no, int likeCnt) {
+	public Recipe(String rec_img, String rec_title, int recipe_no, int likeCnt, String uid) {
 		this.rec_img = rec_img;
 		this.rec_title = rec_title;
 		this.recipe_no = recipe_no;
+		this.uid = uid;
 		this.setLikeCnt(likeCnt);
 	}
 

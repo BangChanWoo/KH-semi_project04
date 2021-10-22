@@ -46,6 +46,9 @@ public class updateGetProductServlet extends HttpServlet {
 		
 		ProductPost vo1 = new adminProductService().productTitleList(pro_name);
 		System.out.println(vo1 + "vo1값 =================");
+		
+		
+		
 		if(pro_no != 0) {
 			ProductPost vo = new adminProductService().productDetailList(pro_no);
 			ArrayList<ProductOption> ProductOption = new adminProductService().ProductOption(pro_no);
@@ -84,6 +87,7 @@ public class updateGetProductServlet extends HttpServlet {
 			request.setAttribute("ProductImg", ProductImg);
 			request.getRequestDispatcher("./WEB-INF/view/productUpdate.jsp").forward(request, response);
 		}
+		
 		else {
 			request.setAttribute("result33", "검색값없음");
 			request.getRequestDispatcher("./adminProductListServlet").forward(request, response);

@@ -101,20 +101,20 @@ public class RecipeDao {
 		ArrayList<Recipe> volist = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String selectAllQuery = "select * from (select rownum rnum, t1.cnt, t1.rec_title, t1.recipe_no, t1.rec_img, t1.rec_write_date"
-				+ " from (select count(ir.inter_no) cnt, r.rec_title, r.recipe_no, r.rec_img, r.rec_write_date"
+		String selectAllQuery = "select * from (select rownum rnum, t1.cnt, t1.rec_title, t1.recipe_no, t1.rec_img, t1.rec_write_date, t1.id"
+				+ " from (select count(ir.inter_no) cnt, r.rec_title, r.recipe_no, r.rec_img, r.rec_write_date, r.id"
 				+ " from recipe r left join interest_recipe ir"
 				+ " on r.recipe_no = ir.recipe_no"
-				+ " group by r.rec_title, r.recipe_no, r.rec_img, r.rec_write_date"
+				+ " group by r.rec_title, r.recipe_no, r.rec_img, r.rec_write_date, r.id"
 				+ " order by cnt desc, r.rec_write_date desc) t1)t2"
 				+ " where t2.rnum between ? and ?";
 		
-		String selectCateQuery = "select * from (select rownum rnum, t1.cnt, t1.rec_title, t1.recipe_no, t1.rec_img, t1.rec_write_date"
-				+ " from (select count(ir.inter_no) cnt, r.rec_title, r.recipe_no, r.rec_img, r.rec_write_date"
+		String selectCateQuery = "select * from (select rownum rnum, t1.cnt, t1.rec_title, t1.recipe_no, t1.rec_img, t1.rec_write_date, t1.id"
+				+ " from (select count(ir.inter_no) cnt, r.rec_title, r.recipe_no, r.rec_img, r.rec_write_date, r.id"
 				+ " from recipe r left join interest_recipe ir"
 				+ " on r.recipe_no = ir.recipe_no"
 				+ " where r.rec_cate_no like ?"
-				+ " group by r.rec_title, r.recipe_no, r.rec_img, r.rec_write_date"
+				+ " group by r.rec_title, r.recipe_no, r.rec_img, r.rec_write_date, r.id"
 				+ " order by cnt desc, r.rec_write_date desc) t1)t2"
 				+ " where t2.rnum between ? and ?";
 		try {
@@ -136,6 +136,7 @@ public class RecipeDao {
 				vo.setRecipe_no(rs.getInt("recipe_no"));
 				vo.setRec_img(rs.getString("rec_img"));
 				vo.setRec_title(rs.getString("rec_title"));
+				vo.setUid(rs.getString("id"));
 				volist.add(vo);
 			}
 		} catch (Exception e) {
@@ -521,5 +522,28 @@ public class RecipeDao {
 			JdbcTemplate.close(ps);
 		}
 		return volist;		
+	}
+	
+	public Recipe recipeTitleList(Connection conn, String rec_title) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Recipe vo = new Recipe();
+		String query = "select * from recipe where rec_title=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, rec_title);
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				vo.setRecipe_no(rset.getInt("recipe_no"));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JdbcTemplate.close(rset);
+			JdbcTemplate.close(pstmt);
+		}
+		return vo;
+		
 	}
 }

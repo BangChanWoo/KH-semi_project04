@@ -100,15 +100,7 @@ button:hover{
 	overflow: hidden;
 }
 
-#shareProduct{
-    color: #9a7b6c;
-    font-size: 2em;
-    position: absolute;
-    bottom: 0;
-    right: -1.5em;
-    display: block;
-}
-#likeRecipe:hover, #shareRecipe:hover{
+#likeProduct:hover, #shareProduct:hover{
     color: #CFB9AF;
 }
 hr{

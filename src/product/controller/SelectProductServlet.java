@@ -39,7 +39,6 @@ public class SelectProductServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
-		
 		String rnoStr = request.getParameter("rno");
 		int rno = 0;
 		if(rnoStr != null) {

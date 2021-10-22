@@ -483,10 +483,7 @@ public class RecipeDao {
 			JdbcTemplate.close(st);
 		}
 		return volist;
-	}
-	
-
-	
+	}		
 	
 	public ArrayList<Recipe> interRecList(Connection conn, int rno, String id){
 		ArrayList<Recipe> volist = null;

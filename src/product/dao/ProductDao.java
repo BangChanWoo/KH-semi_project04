@@ -3,6 +3,7 @@ package product.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import product_img.vo.ProductImg;
@@ -138,9 +139,7 @@ public class ProductDao {
 		}
 		return volist;
 	}
-	
-	// 더 작업해야하는 것 :  후기(리뷰) 
-	
+		
 	public ProductPost productDetailList(Connection conn, int rno) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -168,13 +167,13 @@ public class ProductDao {
 		return vo; 
 }
 	
-	//like read (재확인 필요 부분)
+	//like read
 		public int likeRead(Connection conn, int rno, String id) {
 			int result = -1;
 			PreparedStatement ps = null;
 			ResultSet rs = null;
 			
-			String likeInsertQuery = "select count(inter_no) from interest_product_post where pro_no like ? and id like ?";
+			String likeInsertQuery = "select count(inter_no) from interest_product where pro_no like ? and id like ?";
 			try {
 				ps = conn.prepareStatement(likeInsertQuery);
 				ps.setInt(1, rno);
@@ -198,7 +197,7 @@ public class ProductDao {
 			int result = -1;
 			PreparedStatement ps = null;
 		
-			String likeInsertQuery = "insert into interest_product_post values(inter_no.NEXTVAL, ?, sysdate, ?)";
+			String likeInsertQuery = "insert into interest_product values(inter_pro_no.NEXTVAL, ?, ?, sysdate)";
 			try {
 				ps = conn.prepareStatement(likeInsertQuery);
 				ps.setString(1, id);
@@ -217,7 +216,7 @@ public class ProductDao {
 			int result = -1;
 			PreparedStatement ps = null;
 		
-			String likeDeleteQuery = "delete from interest_product_post where pro_no like ? and id like ?";
+			String likeDeleteQuery = "delete from interest_product where pro_no like ? and id like ?";
 			try {
 				ps = conn.prepareStatement(likeDeleteQuery);
 				ps.setInt(1, rno);
@@ -231,7 +230,42 @@ public class ProductDao {
 			}
 			return result;
 		}
+		public ArrayList<ProductPost> interProList(Connection conn, int rno, String id){
+			ArrayList<ProductPost> volist = null;
+			Statement st = null;
+			ResultSet rs = null;
+			
+			PreparedStatement ps = null;
+			
+			String recommendQuery ="select * from (select rownum rnum, t1.cnt, t1.pro_title, t1.pro_no, t1.pro_img, t1.pro_price, t1.inter_pro_date" + 
+					" from (select count(ir.inter_pro_no) cnt, r.pro_title, r.pro_no, r.pro_img, ir.inter_pro_date" + 
+					" from product_post r join interest_product ir" + 
+					" on r.pro_no = ir.pro_no" + 
+					" where ir.id like ?" +
+					" group by r.pro_title, r.pro_no, r.pro_price, r.pro_img, ir.inter_pro_date" + 
+					" order by ir.inter_pro_date desc) t1) t2" + 
+					" where t2.rnum between 1 and 10";
+			
+			try {
+				ps = conn.prepareStatement(recommendQuery);
+					ps.setString(1, id);			
+				rs = ps.executeQuery();			
+				volist = new ArrayList<ProductPost>();
 
-
-
+				while(rs.next()) {
+					ProductPost vo = new ProductPost();
+					vo.setPro_no(rs.getInt("pro_no"));
+					vo.setPro_img(rs.getString("pro_img"));
+					vo.setPro_price(rs.getInt("pro_price"));
+					vo.setPro_title(rs.getString("pro_title"));
+					volist.add(vo);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			} finally {
+				JdbcTemplate.close(ps);
+			}
+			return volist;		
+		}
 }

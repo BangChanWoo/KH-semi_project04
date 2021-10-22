@@ -74,14 +74,12 @@ public class ProductService {
 		JdbcTemplate.close(conn);
 		return result;
 	}
-	//recommend product  (메인페이지에 추천상품 - 미완성)
-
-	/*public ArrayList<ProductPost> recommendProduct() {
+	//관심 recipe
+	public ArrayList<ProductPost> interProduct(int rno, String id) {
 		ArrayList<ProductPost> volist = null;
 		Connection conn = JdbcTemplate.getConnection();
-		volist = new ProductDao().recommendProduct(conn);
+		volist = new ProductDao().interProList(conn, rno, id);
 		JdbcTemplate.close(conn);
-		return volist; 
-	}*/
-	
+		return volist;
+	}
 }

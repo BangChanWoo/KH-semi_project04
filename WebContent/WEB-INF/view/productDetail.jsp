@@ -15,6 +15,7 @@
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <script src="https://kit.fontawesome.com/616f27e0c4.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="./js/mypage.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jquery -->
 <title>밥도둑_스토어 상품 상세조회</title>
 </head>
@@ -48,31 +49,46 @@
      		</div>
      		<div id="detailPriceContainer">
     	 	    <h3 id="detailPrice" class="categoryProductPrice"><%=vo.getPro_price()%>원</h3>
-     	    </div>
+    	 	    
+    	 	<!-- 좋아요, 공유하기 -->        	 	    
+    	 	   <div id="likeContainer">
+	        <c:if test="${not empty sessionID}">
+	            <c:if test="${like == 'yes'}">
+	            	<a href="prolikeornot?like=yes&rno=<%=rno%>"><i class="fas fa-heart"></i></a>
+	            </c:if>
+	            <c:if test="${like == null}">
+	            	<a href="prolikeornot?rno=<%=rno%>"><i class="far fa-heart"></i></a>
+	            </c:if>
+            </c:if>
+            
             <a href="#" onclick="productShare()" id="shareProduct"><i class="fas fa-share-square"></i></a>
-        	
+    	 	   </div>
+     	    </div>        	
         	<h3 id="deilveryFee">배송비 <%=vo.getPro_delivery_fee()%>원 </h3>
         	
+        	<!-- 선택 옵션 -->
         	<form action="#">
   				<label for="productOption"></label>
-  				<select id="option" onchange="handleOnChange(this)">
+  				<select id="option">
   				<% if(optionList != null){
   					for(int i=0; i<optionList.size(); i++){ %>
-  				<option>
+  				<option value="<%=optionList.get(i).getPro_option_content()%>">
   					<%=optionList.get(i).getPro_option_content()%>
   				</option>
   				<%} } %>
   				</select>
   			</form>
+  			
+  			<!-- 옵션 선택 시 나오는 부분-->
   			<div id="selectedContainer">
   				<div id="selectedOption">
   				</div>
-  				<div id="selectStock">
-  					
+  				<div id="selectStock">	
                 </div>
-				
-
-  				</div>
+  			</div>
+  				
+  				
+  				
   			</div>  			     	 
      	   </div>
      	<hr>
@@ -99,19 +115,54 @@
        	
        	<div id="review">
        		<h2>후기</h2>
-		</div>       	      	
+		</div>
+		
+		
+		      	      	
      </main>
     <%@ include file="riceThief_footer.jsp" %>
     <script type="text/javascript">
+    $("#option").change(handleOnChange);
     function handleOnChange(e) {
     	  // 선택된 데이터의 텍스트값 가져오기
-    	  const value = e.value;
+    	  var value = this.value;
+    	  console.log(value);
+  	// 	  var id = "#"+value;
+   // 	  var count = $(id).text()=="" ? 0:$(id).text();
+   // 	  $(id).text(count+1);
+    	  var html;
+  //  	  html+="<button id="btnMinus"></button>";
+   // 	  html+="<span id='"+value+"'>"+count+"</span>";
+   // 	  html+="<button id="btnPlus">+</button>";
+    	  html+= "<div>"+value+"</div>";
+   // 	  html+="</p>";
+ 
+   		
+        // 상품개수증가
+   	    $().live('click', function() {
+   	        var count = parseInt;
+   	        count++;
+   	        $cntinput.val(count);
+    	    });
+
     	  
+   
     	  // 선택한 옵션 텍스트 출력
-    	  document.getElementById("selectedOption").innerText
-    	    = value;
+    	  $("#selectedOption").append(html);
     	}
 
+    //공유하기
+    function productShare(){
+		var url = '';
+		var textarea = document.createElement("textarea");
+		document.body.appendChild(textarea);
+		url = window.document.location.href;
+		textarea.value = url;
+		textarea.select();
+		document.execCommand("copy");
+		document.body.removeChild(textarea);
+		alert("URL이 복사되었습니다.")
+	}
     </script>
 </body>
 </html>

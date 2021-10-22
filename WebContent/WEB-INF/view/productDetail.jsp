@@ -17,18 +17,14 @@
 <script src="https://kit.fontawesome.com/616f27e0c4.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="./js/mypage.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jquery -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="./js/httpRequest.js"></script> 
 <title>밥도둑_스토어 상품 상세조회</title>
 </head>
 <body>
 <%
-	//To-do : 로그인해야지만 장바구&바로구매 연결
-	
-	/* User memberLoginInfo = (User)request.getSession().getAttribute("loginInfo");
-	String id = null;
-	if(memberLoginInfo != null){
-		id = memberLoginInfo.getUid();
-	}
-	*/
+	session.getAttribute("sessionID");
+	session.getAttribute("sessionNickname");
 	
 	ProductPost vo = (ProductPost)request.getAttribute("vo");
 	int rno = (int)request.getAttribute("rno"); 
@@ -72,7 +68,7 @@
 					<select id="option">
 						<% if(optionList != null){
 						for(int i=0; i<optionList.size(); i++){ %>
-						<option>
+						<option id="<%=optionList.get(i).getPro_option_no()%>">
 							<%=optionList.get(i).getPro_option_content()%>
 						</option>
 						<%} } %>
@@ -80,7 +76,7 @@
 				</form>
 				<div id="selectedContainer">
 					<div class="option_column">
-					    <div class="option_info">옵션정보</div>
+					    <div class="option_info_label">옵션정보</div>
 	                    <div class="quantity">수량</div>
 	                    <!-- <div class="price">상품금액</div> -->
 	                   </div>
@@ -100,8 +96,8 @@
         	<p id="totalPro">총 합계 금액 : <span class="allsum" id="realAllSellingPrice">${sum+2500}</span><span class="won">원</span></p>
   		</div>	
   		<div id="proBtn">
-       		<button>장바구니 담기</button>
-       		<button>바로 구매</button>
+       		<button onclick="goBasket()">장바구니 담기</button>
+       		<button onclick="location.href='#'">바로 구매</button>
        	</div>
 	  
        	<div id="productExplain">
@@ -128,8 +124,8 @@
 	$("#option").change(function(){
 		// 선택된 데이터의 텍스트값 가져오기
 		var value = $(this).val();
+		var select_id = $("#option option:selected").attr('id');
 		
-		// 기존에 선택된 데이터와 같은 item이 있다면  true, 없으면 false
 		var isExistItem = false;
 		$(".option_info").each(function(){
 			if($(this).text()== value) {  // 기존에 선택된 데이터와 같은 item이 있다면 
@@ -148,9 +144,10 @@
 			}
 		});
 		
-		if( !isExistItem){  // 기존에 선택된 데이터와 같은 것이 없다면 item 추가
+		if(!isExistItem){  // 기존에 선택된 데이터와 같은 것이 없다면 item 추가
 			html='';
 			html+='<li class="item">';
+			html+='<div class="selectId" hidden="hidden">'+ select_id +'</div>'
 			html+='<div class="option_info">'+value+'</div>';
 			html+='<div class="quantity">';
 			// 추가된 버튼 + - 에 click event 등록 clickBtnMinusPlus(this)
@@ -188,7 +185,7 @@
 	function clickBtnMinusPlus(target){
 		var $l = $(target).parents('li');
 		var symPlusMinus = $(target).text();
-		var plus_value = 0; 
+		var plus_value = 0;
 		if(symPlusMinus == "+") plus_value= 1 
 		else if(symPlusMinus == "-") plus_value = -1;
 
@@ -203,6 +200,7 @@
 		var val = stat * $l.find('input.aprice').val();
 		$l.find('#price').val(val);
 		$l.find('input.optAmount').val(stat);
+		$l.find('input.optAmount').text(stat);
 		
 		// 총 가격 계산
 		calPrice();
@@ -220,6 +218,51 @@
 		document.body.removeChild(textarea);
 		alert("URL이 복사되었습니다.")
 	}
+    
+    function goBasket(){
+    	if("${sessionID}" == ""){
+    		alert("로그인하셔야 장바구니에 넣을 수 있습니다.");
+    	}else{
+    		var option = [];
+        	var cnt = [];
+        	$(".selectId").each(function(){
+        		option.push($(this).text());
+        	});
+        	$(".optAmount").each(function(){
+        		cnt.push($(this).val());
+        	});
+        	
+        	var bkList = [];
+        	var obj = null;
+        	for(var i=0; i<option.length; i++){
+        		obj = new Object;
+        		obj.option = option[i];
+        		obj.cnt = cnt[i];
+        		obj.proNo = "${rno}";
+        		obj.id = "${sessionID}";
+        		bkList.push(obj);
+        	}
+        	$.ajax({
+    			type : "POST",
+    	        url:"putbasket.do",
+    	        data: JSON.stringify(bkList),
+    	        contentType: "application/json; charset=utf-8",
+    	        //dataType: "json",
+    	        success : function(data){
+    	        	if (confirm("장바구니에 상품이 담겼습니다.\n장바구니로 이동하시겠습니까?") == true){
+            			location.href = "selectbasket";
+            			return true;
+            		}else{   
+            			return false;
+            		}
+    	        },
+    	        error : function(e) {
+    	        	alert("실패");
+    	        	//alert(e.responseText);
+    	        }
+    	    });
+    	}
+    }
     </script>
 </body>
 </html>

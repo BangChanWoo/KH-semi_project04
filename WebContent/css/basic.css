@@ -49,7 +49,10 @@ a{
 .selectBtnColor{
     background-color: #9a7b6c;
 }
-
+.center{
+	text-align: center;
+	margin: auto;
+}
 /*responsive*/
 /*스마트폰*/
 @media screen and (max-width:  767px){

@@ -68,41 +68,42 @@
         	
         	<!-- 선택 옵션 -->
         	<form action="#">
-  				<label for="productOption"></label>
-  				<select id="option">
-  				<% if(optionList != null){
-  					for(int i=0; i<optionList.size(); i++){ %>
-  				<option value="<%=optionList.get(i).getPro_option_content()%>">
-  					<%=optionList.get(i).getPro_option_content()%>
-  				</option>
-  				<%} } %>
-  				</select>
-  			</form>
-  			
-  			<!-- 옵션 선택 시 나오는 부분-->
-  			<div id="selectedContainer">
-  				<div id="selectedOption">
-  				</div>
-  				<div id="selectStock">	
-                </div>
-  			</div>
-  				
-  				
-  				
-  			</div>  			     	 
-     	   </div>
+					<!-- 사용안됨 <label for="productOption"></label> -->
+					<select id="option">
+						<% if(optionList != null){
+						for(int i=0; i<optionList.size(); i++){ %>
+						<option>
+							<%=optionList.get(i).getPro_option_content()%>
+						</option>
+						<%} } %>
+					</select>
+				</form>
+				<div id="selectedContainer">
+					<div class="option_column">
+					    <div class="option_info">옵션정보</div>
+	                    <div class="quantity">수량</div>
+	                    <!-- <div class="price">상품금액</div> -->
+	                   </div>
+	                   <ul class="option_list">
+	                   	<!-- <li class="item">
+						    <div class="option_info">옵션정보</div>
+		                    <div class="quantity"><button type="button" id="minus" class="btn minus">-</button><input type="number" min="1" id="optAmountNum" name="optAmount" class="optAmount" value="${vo.pro_price}" readonly><button type="button" class="btn plus" id="plus">+</button></div>
+		                    <div class="price">상품금액</div>
+	                   	</li> -->
+	                   </ul>
+				</div>
+			</div>
+	    </div>
      	<hr>
      	<div id="acount">	
-        	<p id="allPro">총 상품 금액 : <%=vo.getPro_price()%>원<p>
-        	<p id="totalPro">총 합계 금액 : <%=vo.getPro_price() + vo.getPro_delivery_fee() %>원</p>
+        	<p id="allPro">총 상품 금액 : <span class="allselling" id="allSellingPrice"><c:out value="${sum}"/></span><span class="won">원</span><p>
+        	<p id="totalPro">총 합계 금액 : <span class="allsum" id="realAllSellingPrice">${sum+2500}</span><span class="won">원</span></p>
   		</div>	
   		<div id="proBtn">
        		<button>장바구니 담기</button>
        		<button>바로 구매</button>
        	</div>
-       	</div>	
-       		 
-       		
+	  
        	<div id="productExplain">
        		<h2 id="expTxt">상품 상세정보</h2>
        		<div id="proExplainImg">
@@ -115,42 +116,98 @@
        	
        	<div id="review">
        		<h2>후기</h2>
-		</div>
-		
-		
-		      	      	
+		</div>       	      	
      </main>
     <%@ include file="riceThief_footer.jsp" %>
-    <script type="text/javascript">
-    $("#option").change(handleOnChange);
-    function handleOnChange(e) {
-    	  // 선택된 데이터의 텍스트값 가져오기
-    	  var value = this.value;
-    	  console.log(value);
-  	// 	  var id = "#"+value;
-   // 	  var count = $(id).text()=="" ? 0:$(id).text();
-   // 	  $(id).text(count+1);
-    	  var html;
-  //  	  html+="<button id="btnMinus"></button>";
-   // 	  html+="<span id='"+value+"'>"+count+"</span>";
-   // 	  html+="<button id="btnPlus">+</button>";
-    	  html+= "<div>"+value+"</div>";
-   // 	  html+="</p>";
- 
-   		
-        // 상품개수증가
-   	    $().live('click', function() {
-   	        var count = parseInt;
-   	        count++;
-   	        $cntinput.val(count);
-    	    });
+	<script type="text/javascript">
+	let cnt = 0;
+	
+	// 선택된 것이 없다면 옵션정보 보이지 않음.
+	$("#selectedContainer").hide(); 
+	
+	$("#option").change(function(){
+		// 선택된 데이터의 텍스트값 가져오기
+		var value = $(this).val();
+		
+		// 기존에 선택된 데이터와 같은 item이 있다면  true, 없으면 false
+		var isExistItem = false;
+		$(".option_info").each(function(){
+			if($(this).text()== value) {  // 기존에 선택된 데이터와 같은 item이 있다면 
+				// stat 1 증가
+				var $l = $(this).parents('li');
+				var stat = $l.find('input.optAmount').val();
+				stat = parseInt(stat) + 1;
+				// 클릭된 item의 정보 업데이트
+				var val = stat * $l.find('input.aprice').val();
+				$l.find('#price').val(val);
+				$l.find('input.optAmount').val(stat);
+				
+				// item이 추가되지 않도록 true
+				isExistItem = true;
+				return;
+			}
+		});
+		
+		if( !isExistItem){  // 기존에 선택된 데이터와 같은 것이 없다면 item 추가
+			html='';
+			html+='<li class="item">';
+			html+='<div class="option_info">'+value+'</div>';
+			html+='<div class="quantity">';
+			// 추가된 버튼 + - 에 click event 등록 clickBtnMinusPlus(this)
+			html+='<button type="button" id="minus" class="btn minus" onclick="clickBtnMinusPlus(this);">-</button>';
+			html+='<input type="number" min="1" id="optAmountNum" name="optAmount" class="optAmount" value="1" readonly>';
+			html+='<button type="button" class="btn plus" id="plus" onclick="clickBtnMinusPlus(this);">+</button>';
+			html+='</div>';
+			//html+='<div class="price"><input type="hidden" id="price" class="bbprice" value="0"></div>';
+			//${vo.pro_price}
+			html+='<input type="hidden" id="aprice" class="aprice" value="${vo.pro_price}">';
+			html+='<input type="hidden" id="price" class="bbprice" value="${vo.pro_price}">';
+			html+='</li>';
+			// 선택한 옵션 텍스트 출력
+			$(".option_list").append(html);
+		}
+		
+		// 총 가격 계산
+		calPrice();
+		
+		//select태그의 selected를 처음으로 돌리기
+		$("#option option:eq(0)").prop("selected", true);
+		$("#selectedContainer").show(); 
+	});
+	// 총 가격 계산
+	function calPrice(){
+		var sum =0;		
+		$('.bbprice').each(function(){
+			sum += parseInt($(this).val());
+		})
+		$('#allSellingPrice').html(sum);
+		$('#realAllSellingPrice').html(sum+"${vo.pro_delivery_fee}"*1);
+	}
+	
+	//상품 갯수+가격 조절
+	function clickBtnMinusPlus(target){
+		var $l = $(target).parents('li');
+		var symPlusMinus = $(target).text();
+		var plus_value = 0; 
+		if(symPlusMinus == "+") plus_value= 1 
+		else if(symPlusMinus == "-") plus_value = -1;
 
-    	  
-   
-    	  // 선택한 옵션 텍스트 출력
-    	  $("#selectedOption").append(html);
-    	}
-
+		var stat = $l.find('input.optAmount').val();
+		stat = parseInt(stat) + plus_value;
+		if(stat<1){  // 0 개가 되면 상품 삭제
+			alert('상품을 삭제합니다.');
+			$l.remove();
+			return;
+		}
+		// 클릭된 item의 정보 업데이트
+		var val = stat * $l.find('input.aprice').val();
+		$l.find('#price').val(val);
+		$l.find('input.optAmount').val(stat);
+		
+		// 총 가격 계산
+		calPrice();
+	}
+    
     //공유하기
     function productShare(){
 		var url = '';

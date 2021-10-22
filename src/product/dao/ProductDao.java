@@ -156,6 +156,7 @@ public class ProductDao {
 				vo.setPro_title(rs.getString("pro_title"));
 				vo.setPro_price(rs.getInt("pro_price"));
 				vo.setPro_cate_no(rs.getInt("pro_cate_no"));
+				vo.setPro_delivery_fee(rs.getInt("pro_delivery_fee"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

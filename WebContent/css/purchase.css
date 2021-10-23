@@ -1,0 +1,185 @@
+main{
+	width: 80%;
+	margin: auto;
+}
+h2{
+	margin: 5rem auto 1rem auto;
+}
+button{
+	border: 0;
+	border-radius: 5px;
+}
+.clear{
+	clear: both;
+}
+.noLine{
+	border: none;
+}
+.leftSide{
+	display: inline;
+	float:left;
+}
+.rightSide{
+	display: inline;
+	float:right;
+}
+.m-p{
+	margin: 1rem 1rem 1rem 0;
+}
+.m-3{
+	margin: 3rem 0;
+}
+#basketContainer{
+	margin: auto;
+	list-style-type: none;
+	display: none;
+}
+#basketContainer li{
+	clear: both;
+	border: solid 1px #CFB9AF;
+	display: inline-block;
+	margin: 1rem 0;
+	position: relative;
+}
+#basketContainer li:hover{
+	-webkit-transform: scale(1.03);
+	transform: scale(1.03);
+	box-shadow: 0px 10px 25px rgba(18, 10, 92, 0.05);
+}
+.checkPro{
+	float: left;
+	width: 5%;
+	margin: 2% 0;
+}
+.bkImg{
+	width: 30%;
+	aspect-ratio: 1;
+	object-fit: cover;
+	float: left;
+	border-radius: 7px;
+	margin: 6% 2% 4% 6%;
+}
+.bkContent{
+	width: 55%;
+	float: left;
+	margin: 2%;
+}
+.bkContent a{
+	margin: 0.5rem 0;
+	font-size: 0.75rem;
+}
+.bkContent p{
+	margin: 0.5rem;
+	font-size: 0.7rem;
+}
+.bkTitle{
+	width: 100%;
+    font-size: 1rem;
+    display: inline-block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: normal;
+	line-height: 1.1;
+	height: 1.6rem;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+.optionContent{
+	width: 100%;
+    font-size: 1rem;
+    display: inline-block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: normal;
+	line-height: 1;
+	height: 1.5rem;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+.deletePro{
+	display: right;
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+}
+#sendFrm{
+	width: 60%;
+	margin: auto;
+	display: grid;
+	grid-template-columns: 30% 70%;
+	font-size: 1rem;
+	gap: 0.4rem 0;
+}
+#sendFrm input{
+	padding: 0.5rem;
+	border: solid 1px #cfb9af;
+}
+#receiveFrm{
+	width: 60%;
+	margin: auto;
+	display: grid;
+	grid-template-columns: 30% 70%;
+	font-size: 1rem;
+	gap: 0.4rem 0;
+}
+#receiveFrm input{
+	padding: 0.5rem;
+	border: solid 1px #cfb9af;
+}
+#finalInfo{
+	background-color: #ebded4;
+	border-radius: 7px;
+	padding: 1rem;
+	margin: 3rem 1rem;
+	font-size: 1.1rem;
+}
+#finalInfo p{
+	margin: 1rem;
+}
+#paymentTb{
+	width: 60%;
+	margin: auto;
+	border: solid 1px black;
+	border-collapse: collapse;
+	text-align: center;
+}
+#paymentTb tr, #paymentTb td{
+	border: solid 1px black;
+	border-collapse: collapse;
+	padding: 1rem;
+}
+#paymentTb td:hover{
+	background-color: #cfb9af;
+}
+/*responsive*/
+/*스마트폰*/
+@media screen and (max-width:  767px){
+	#basketContainer{
+		width: 100%;
+	}
+	#sendFrm label, #receiveFrm label{
+		padding: 0 0 0 10%;
+	}
+}
+/*태블릿 pc*/
+@media screen and (min-width:  768px) and (max-width: 959px){
+	#basketContainer{
+		width: 60%;
+	}
+	#sendFrm label, #receiveFrm label{
+		padding: 0 0 0 40%;
+	}
+}
+/*데스크탑*/
+@media screen and (min-width:  960px){
+	#basketContainer{
+		width: 40%;
+	}
+	#sendFrm label, #receiveFrm label{
+		padding: 0 0 0 40%;
+	}
+} 

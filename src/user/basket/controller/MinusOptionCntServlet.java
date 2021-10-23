@@ -15,16 +15,16 @@ import com.google.gson.GsonBuilder;
 import user.basket.service.BasketService;
 
 /**
- * Servlet implementation class RemoveBasketServlet
+ * Servlet implementation class MinusOptionCntServlet
  */
-@WebServlet("/removebasket.do")
-public class RemoveBasketServlet extends HttpServlet {
+@WebServlet("/minus.do")
+public class MinusOptionCntServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RemoveBasketServlet() {
+    public MinusOptionCntServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,7 +43,7 @@ public class RemoveBasketServlet extends HttpServlet {
 		if(cnoStr != null) {
 			cno = Integer.parseInt(cnoStr);
 		}
-		int result = new BasketService().deleteBk(cno, id);
+		int result = new BasketService().minusCnt(id, cno);
 		
 		PrintWriter out = response.getWriter();
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();

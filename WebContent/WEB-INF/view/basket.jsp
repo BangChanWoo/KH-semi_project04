@@ -36,14 +36,14 @@
 			<ul id="basketContainer">
 			<input type="checkbox" onclick="allSelect()" id="allcheck"><p class=inline>전체 상품(<%=bkList.size()%>)</p>
 			<%for(CartDetailVo cVo: bkList){%>
-				<li id="con_<%=cVo.getCart_no()%>">
+				<li id="cno_<%=cVo.getCart_no()%>">
 					<input type="checkbox" id="check_<%=cVo.getCart_no()%>" class="checkPro" value="<%=cVo.getPro_price()%>" onclick="calc($(this), <%=cVo.getCart_no()%>, <%=cVo.getPro_no()%>)">
 					<a href="selectproduct?rno=<%=cVo.getPro_no()%>"><img class="bkImg" src="<%=cVo.getPro_img()%>"></a>
 					<div class="bkContent">
 						<a class="bkTitle" href="selectproduct?rno=<%=cVo.getPro_no()%>"><%=cVo.getPro_title()%></a>
 						<p><%=cVo.getPro_option()%></p>
 						<hr>
-						<p class="leftSide"><%=cVo.getPro_price()%> 원</p>
+						<p class="leftSide" id="onlyprice_<%=cVo.getCart_no()%>"><%=cVo.getPro_price()%> 원</p>
 						<p class="rightSide" id="dFee_<%=cVo.getCart_no()%>"><i class="fas fa-truck"></i> <%=cVo.getPro_delivery_fee()%> 원</p>
 						<hr class="clear noLine">
 						<div class="btnGroup">
@@ -76,6 +76,12 @@
 	<hr class="clear">
 	<%@ include file="riceThief_footer.jsp" %>
 	<script type="text/javascript">
+		$('p[id^=onlyprice_]').each(function() {
+			var cno = $(this).attr("id").split("_")[1];
+			var price = parseInt($("#check_"+cno).val());
+			sum = price * parseInt($("#cnt_"+cno).text());
+			$("#onlyprice_"+cno).html(sum);
+		})
 		function calc(cBox, cno, pno) {
 			var sum = parseInt($("#allPrice").text());
 			var dsum = parseInt($("#allDeliver").text());
@@ -95,7 +101,9 @@
 		}
 		function minusFunc(cno, price){
 			var cnt = parseInt($("#cnt_"+cno).text())-1;
+			var oprice = parseInt($("#check_"+cno).val());
 			if(cnt > 0){
+				$("#onlyprice_"+cno).html(oprice*cnt);
 				$("#cnt_"+cno).html(cnt);
 				$.ajax({
 					type : "GET",
@@ -106,12 +114,15 @@
 			        	if(data == "success"){
 			        		var sum = parseInt($("#allPrice").text());
 			    			var allSum = parseInt($("#allPurchase").text());
+			    			var onlyprice = parseInt($("#onlyprice_"+cno).text());
 			    			if($("#check_"+cno).is(":checked") == true){
 			    				sum -= parseInt(price);
 			    				allSum -= parseInt(price);
+			    				onlyprice -= parseInt(price);
 			    			}
 			    			$("#allPrice").html(sum);
 			    			$("#allPurchase").html(allSum);
+			    			$("#onlyprice_"+cno).html(onlyprice);
 			        	}
 			        },
 			        error : function(e) {
@@ -124,7 +135,9 @@
 		}
 		function plusFunc(cno, price){
 			var cnt = parseInt($("#cnt_"+cno).text())+1;
+			var oprice = parseInt($("#check_"+cno).val());
 			$("#cnt_"+cno).html(cnt);
+			$("#onlyprice_"+cno).html(oprice*cnt);
 			$.ajax({
 				type : "GET",
 		        url:"plus.do",
@@ -155,9 +168,8 @@
 		        dataType: "json",
 		        success : function(data){
 		        	if(data == "success"){
-		        		//질문: 왜 삭제 안돼!!!!!!!!
-		        		$("#cno_"+cno).remove();
-		        		alert("삭제 완료");
+	        			$("#cno_"+cno).remove();
+	        			alert("삭제 완료");
 		        	}
 		        },
 		        error : function(e) {

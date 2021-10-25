@@ -68,7 +68,68 @@ public class SelectRecipeServlet extends HttpServlet {
 		System.out.println("레시피 이름으로 가져온 해당 레시피 번호 : "+vo1.getRecipe_no());
 		
 		
-		if(id.equals("admin") && rno != 0) {
+		if(id==null) {
+			System.out.println(rno+"로그아웃 된 상황");
+			//게시글 한개 정보
+			Recipe vo  = new RecipeService().recipeDetailList(rno);
+			
+			//재료 리스트
+			ArrayList<Ingredient> ingreList = new RecipeService().ingreList(rno);
+			
+			//순서 리스트
+			ArrayList<RecipeSteps> stepList = new RecipeService().stepList(rno);
+			//게시글에 달린 댓글 list
+					final int PAGE_SIZE = 5;  //한페이지당 글 수 
+					final int PAGE_BLOCK = 3;  //한화면에 나타날 페이지 링크 수
+					int rCount = 0;  //총 글수
+					int pageCount = 0;  //총페이지 수 
+					int startPage = 1;  //화면에 나타날 시작페이지
+					int endPage = 1;  //화면에 나타날 마지막페이지
+					int currentPage =1;  //눌려진 페이지
+					int startRnum = 1; //화면에 나타날 글 번호
+					int endRnum = 1; //화면에 나타날 글 번호
+
+					String pageNum = request.getParameter("pagenum");
+					if(pageNum != null) {
+						currentPage = Integer.parseInt(pageNum);
+					}
+					rCount = new CommentService().getCommentCount(rno);
+
+					pageCount = (rCount/PAGE_SIZE) + (rCount%PAGE_SIZE == 0 ? 0 : 1);
+
+					startRnum = (currentPage - 1) * PAGE_SIZE + 1;
+					endRnum = startRnum + PAGE_SIZE -1;
+					if(endRnum > rCount) {
+						endRnum = rCount;
+					}
+
+					if(currentPage%PAGE_BLOCK == 0) {
+						startPage = (currentPage/PAGE_BLOCK - 1) *PAGE_BLOCK + 1;
+					}else {
+						startPage = (currentPage/PAGE_BLOCK) *PAGE_BLOCK + 1;
+					}
+
+					endPage = startPage + PAGE_BLOCK - 1;
+					if(endPage > pageCount) {
+						endPage = pageCount;
+					}
+
+					ArrayList<Comment> commentList = new CommentService().commentList(rno, startRnum, endRnum);
+			
+			
+			
+			request.setAttribute("vo", vo);
+			request.setAttribute("rno", rno);
+			request.setAttribute("ingreList", ingreList);
+			request.setAttribute("stepList", stepList);
+			request.setAttribute("msg", msgTxt);
+			request.setAttribute("commentList", commentList);
+			request.setAttribute("startPage", startPage);
+			request.setAttribute("endPage", endPage);
+			request.setAttribute("pageCount", pageCount);
+			request.getRequestDispatcher("./WEB-INF/view/recipeDetail.jsp").forward(request, response);
+		}
+		else if(id.equals("admin") && rno != 0) {
 			int result = new RecipeService().likeRead(rno, id);
 			//게시글 한개 정보
 			Recipe vo  = new RecipeService().recipeDetailList(rno);

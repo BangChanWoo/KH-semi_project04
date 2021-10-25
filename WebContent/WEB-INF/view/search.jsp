@@ -114,12 +114,13 @@
 		        </div>
 	        </div>
 	        <div id="storeList" class="tab_item">
+	        	<h2>스토어</h2>
 	        	<div class="imgCenter">
 		            <%if(productSearchList != null){
 		            	for(ProductPost vo : productSearchList){ %>
 		            <div>
-	                    <a href="#"><img src="<%=vo.getPro_img()%>" class="categoryImg" alt="검색 상품"></a>
-	                    <div class="categoryRecipeTitle"><a href="#"><%=vo.getPro_title()%></a></div>
+	                    <a href="selectproduct?rno=<%=vo.getPro_no()%>"><img src="<%=vo.getPro_img()%>" class="categoryImg" alt="검색 상품"></a>
+	                    <div class="categoryRecipeTitle"><a href="selectproduct?rno=<%=vo.getPro_no()%>"><%=vo.getPro_title()%></a></div>
 	                </div>
 		            <% } }%>
 	            </div>

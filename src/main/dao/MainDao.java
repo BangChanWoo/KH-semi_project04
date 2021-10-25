@@ -160,11 +160,11 @@ public class MainDao {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String selectAllQuery = "select * from (select rownum rnum, t1.*"
-				+ " from (select count(ip.pro_no) cnt, ip.pro_no, pp.pro_title, pp.pro_img"
+				+ " from (select count(ip.pro_no) cnt, pp.pro_no, pp.pro_title, pp.pro_img"
 				+ " from interest_product ip right join product_post pp"
 				+ " on ip.pro_no = pp.pro_no"
 				+ " where pp.pro_title like ?"
-				+ " group by ip.pro_no, pp.pro_title, pp.pro_img"
+				+ " group by pp.pro_no, pp.pro_title, pp.pro_img"
 				+ " order by cnt desc) t1)t2"
 				+ " where t2.rnum between ? and ?";
 		try {
@@ -178,6 +178,7 @@ public class MainDao {
 			while(rs.next()) {
 				ProductPost vo = new ProductPost();
 				vo.setPro_no(rs.getInt("pro_no"));
+				System.out.println(rs.getInt("pro_no"));
 				vo.setPro_img(rs.getString("pro_img"));
 				vo.setPro_title(rs.getString("pro_title"));
 				volist.add(vo);

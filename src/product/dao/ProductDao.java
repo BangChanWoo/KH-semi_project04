@@ -174,7 +174,7 @@ public class ProductDao {
 			PreparedStatement ps = null;
 			ResultSet rs = null;
 			
-			String likeInsertQuery = "select count(inter_no) from interest_product where pro_no like ? and id like ?";
+			String likeInsertQuery = "select count(inter_pro_no) from interest_product where pro_no like ? and id like ?";
 			try {
 				ps = conn.prepareStatement(likeInsertQuery);
 				ps.setInt(1, rno);
@@ -239,7 +239,7 @@ public class ProductDao {
 			PreparedStatement ps = null;
 			
 			String recommendQuery ="select * from (select rownum rnum, t1.cnt, t1.pro_title, t1.pro_no, t1.pro_img, t1.pro_price, t1.inter_pro_date" + 
-					" from (select count(ir.inter_pro_no) cnt, r.pro_title, r.pro_no, r.pro_img, ir.inter_pro_date" + 
+					" from (select count(ir.inter_pro_no) cnt, r.pro_title, r.pro_no, r.pro_img, r.pro_price, ir.inter_pro_date" + 
 					" from product_post r join interest_product ir" + 
 					" on r.pro_no = ir.pro_no" + 
 					" where ir.id like ?" +
@@ -249,7 +249,7 @@ public class ProductDao {
 			
 			try {
 				ps = conn.prepareStatement(recommendQuery);
-					ps.setString(1, id);			
+				ps.setString(1, id);			
 				rs = ps.executeQuery();			
 				volist = new ArrayList<ProductPost>();
 

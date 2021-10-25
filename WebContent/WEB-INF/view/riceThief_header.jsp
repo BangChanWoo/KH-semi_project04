@@ -18,6 +18,7 @@
 					<a onclick="location.href='updateuser'">나의 회원정보</a>
 					<a href="selectbasket">장바구니</a>
 					<a href="orderdetailview">결제내역</a>
+					<a href="likeviewpro">관심 상품</a>
 					<a href="likeview">관심 레시피</a>
 					<a href="#">1:1문의</a>
 					<!--마이페이지메뉴 //TODO  -->

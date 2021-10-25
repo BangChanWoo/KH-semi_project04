@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import cartDetail.vo.CartDetailVo;
 import getBasket.vo.GetBasketVo;
@@ -50,6 +51,9 @@ public class PaymentServlet extends HttpServlet {
 		}else {
 			bkList = (ArrayList<GetBasketVo>)request.getSession().getAttribute("bkList");
 			pcVoList = new ProductOrderService().getBkPurchaseList(bkList);
+			System.out.println(pcVoList);
+			HttpSession session = request.getSession(false);
+			session.removeAttribute("bkList");
 		}
 		User uVo = new ProductOrderService().getUserInfo(id);
 

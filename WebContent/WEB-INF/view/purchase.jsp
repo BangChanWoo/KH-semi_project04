@@ -36,19 +36,19 @@
 		<div>
 			<h2>주문 상품 <a onclick="proToggle()"><i class="fas fa-chevron-down"></i></a></h2>
 			<ul id="basketContainer">
-			<%for(CartDetailVo cVo: pcVoList){%>
-				<li id="con_<%=cVo.getCart_no()%>">
-					<a href="selectproduct?rno=<%=cVo.getPro_no()%>"><img class="bkImg" src="<%=cVo.getPro_img()%>"></a>
+			<%for(int i=0; i<pcVoList.size(); i++){%>
+				<li id="con_<%=pcVoList.get(i).getCart_no()%>">
+					<a href="selectproduct?rno=<%=pcVoList.get(i).getPro_no()%>"><img class="bkImg" src="<%=pcVoList.get(i).getPro_img()%>"></a>
 					<div class="bkContent">
-						<a class="bkTitle" href="selectproduct?rno=<%=cVo.getPro_no()%>"><%=cVo.getPro_title()%></a>
-						<p class="optionContent"><%=cVo.getPro_option()%></p>
+						<a class="bkTitle" href="selectproduct?rno=<%=pcVoList.get(i).getPro_no()%>"><%=pcVoList.get(i).getPro_title()%></a>
+						<p class="optionContent"><%=pcVoList.get(i).getPro_option()%></p>
 						<hr>
-						<p class="leftSide"><%=cVo.getPro_price()%> 원</p>
-						<p class="rightSide" id="dFee_<%=cVo.getCart_no()%>"><i class="fas fa-truck"></i> <%=cVo.getPro_delivery_fee()%> 원</p>
+						<p class="leftSide"><%=pcVoList.get(i).getPro_price()%> 원</p>
+						<p class="rightSide" id="dFee_<%=i%>"><i class="fas fa-truck"></i> <%=pcVoList.get(i).getPro_delivery_fee()%> 원</p>
 						<hr class="clear noLine">
-						<p><%=cVo.getOption_cnt()%>개</p>
+						<p><%=pcVoList.get(i).getOption_cnt()%>개</p>
 					</div>
-					<a href="#" class="deletePro" onclick="deleteBk(<%=cVo.getCart_no()%>)"><i class="fas fa-times"></i></a>
+					<a href="#" class="deletePro" onclick="deleteBk(<%=i%>)"><i class="fas fa-times"></i></a>
 				</li>
 			<%} %>
 			</ul>
@@ -61,6 +61,9 @@
 				<input name="pn_size" hidden="hidden" value="<%=pcVoList.size()%>">
 			<%for(int i=0; i<pcVoList.size(); i++){%>
 				<input name="cno_<%=i%>" hidden="hidden" value="<%=pcVoList.get(i).getCart_no()%>">
+				<input name="prono_<%=i%>" hidden="hidden" value="<%=pcVoList.get(i).getPro_no()%>">
+				<input name="cnt_<%=i%>" hidden="hidden" value="<%=pcVoList.get(i).getOption_cnt()%>">
+				<input name="pp_<%=i%>" hidden="hidden" value="<%=pcVoList.get(i).getPro_price()%>">
 			<%} %>
 				<label>이름</label>
 				<input name="name" value="<%=uVo.getUname()%>">

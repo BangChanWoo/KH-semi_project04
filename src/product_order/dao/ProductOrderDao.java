@@ -60,7 +60,7 @@ public class ProductOrderDao {
 				+ " join user_order uo"
 				+ " on po.order_no = uo.order_no"
 				+ " where uo.id like ?"
-				+ " order by uo.order_date desc) t1)t2"
+				+ " order by po.order_detail_no desc) t1)t2"
 				+ " where t2.rnum between ? and ?";
 		
 		String selectReadyQuery = "select * from (select rownum rnum, t1.*"
@@ -70,7 +70,7 @@ public class ProductOrderDao {
 				+ " join user_order uo"
 				+ " on po.order_no = uo.order_no"
 				+ " where po.order_status like 'N' and uo.id like ?"
-				+ " order by uo.order_date desc) t1)t2"
+				+ " order by po.order_detail_no desc) t1)t2"
 				+ " where t2.rnum between ? and ?";
 		
 		String selectCompleteQuery = "select * from (select rownum rnum, t1.*"
@@ -80,7 +80,7 @@ public class ProductOrderDao {
 				+ " join user_order uo"
 				+ " on po.order_no = uo.order_no"
 				+ " where po.order_status like 'Y' and uo.id like ?"
-				+ " order by uo.order_date desc) t1)t2"
+				+ " order by po.order_detail_no desc) t1)t2"
 				+ " where t2.rnum between ? and ?";
 		try {
 			if(state == 0) {
@@ -262,7 +262,7 @@ public class ProductOrderDao {
 				ps = conn.prepareStatement(getQuery);
 				ps.setInt(1, i);
 				rs = ps.executeQuery();
-				System.out.println(i);
+				
 				while(rs.next()) {
 					CartDetailVo vo = new CartDetailVo();
 					vo.setPro_no(rs.getInt("pro_no"));
@@ -278,6 +278,29 @@ public class ProductOrderDao {
 				ps.setInt(1, cVo.getOption_cnt());
 				ps.setInt(2, cVo.getPro_no());
 				ps.setInt(3, cVo.getPro_price());
+				rs = ps.executeQuery();
+			}
+		} catch (Exception e) {
+			System.out.println("연결 실패");
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(ps);
+		}
+		return result;
+	}
+	public int insertBkProductOrder(Connection conn, ArrayList<Integer> pro_no, ArrayList<Integer> cnt, ArrayList<Integer> price) {
+		int result = -1;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String insertPro ="insert into product_order values(order_detail_no.nextval, ?, 'N', order_no.currval, ?, ?)";
+		try {
+			for(int i=0; i<pro_no.size(); i++) {
+				ps = conn.prepareStatement(insertPro);
+				System.out.println(cnt.get(i));
+				ps.setInt(1, cnt.get(i));
+				ps.setInt(2, pro_no.get(i));
+				ps.setInt(3, price.get(i));
 				rs = ps.executeQuery();
 			}
 		} catch (Exception e) {

@@ -41,7 +41,11 @@
 								html += "<td class='proContent'><img src='"+data[i].pro_img+"'><a href='selectproduct?rno="+data[i].pro_no+"'>"+data[i].pro_title+"</a></td>"
 								html += "<td>"+data[i].order_date+"</td>"
 								html += "<td>"+data[i].pro_price+"("+data[i].order_count+")</td>"
-								html += "<td>"+data[i].order_state+"</td>"
+								if(data[i].order_state == 'N'){
+									html += "<td>상품준비중</td>"
+								}else if(data[i].order_state == 'Y'){
+									html += "<td>배송완료</td>"
+								}
 								html += "<td><button onclick='writeReview()'>리뷰 작성</button><button onclick=''>주문 취소</button></td>"
 								html += "</tr>";
 				        	}
@@ -65,7 +69,11 @@
 								html += "<td class='proContent'><img src='"+data[i].pro_img+"'><a href='selectproduct?rno="+data[i].pro_no+"'>"+data[i].pro_title+"</a></td>"
 								html += "<td>"+data[i].order_date+"</td>"
 								html += "<td>"+data[i].pro_price+"("+data[i].order_count+")</td>"
-								html += "<td>"+data[i].order_state+"</td>"
+								if(data[i].order_state == 'N'){
+									html += "<td>상품준비중</td>"
+								}else if(data[i].order_state == 'Y'){
+									html += "<td>배송완료</td>"
+								}
 								html += "<td><button onclick='writeReview()'>리뷰 작성</button><button onclick=''>주문 취소</button></td>"
 								html += "</tr>";
 				        	}
@@ -89,7 +97,11 @@
 								html += "<td class='proContent'><img src='"+data[i].pro_img+"'><a href='selectproduct?rno="+data[i].pro_no+"'>"+data[i].pro_title+"</a></td>"
 								html += "<td>"+data[i].order_date+"</td>"
 								html += "<td>"+data[i].pro_price+"("+data[i].order_count+")</td>"
-								html += "<td>"+data[i].order_state+"</td>"
+								if(data[i].order_state == 'N'){
+									html += "<td>상품준비중</td>"
+								}else if(data[i].order_state == 'Y'){
+									html += "<td>배송완료</td>"
+								}
 								html += "<td><button onclick='writeReview()'>리뷰 작성</button><button onclick=''>주문 취소</button></td>"
 								html += "</tr>";
 				        	}
@@ -145,7 +157,11 @@
 				<td class="proContent"><img src="<%=vo.getPro_img()%>"><a href="selectproduct?rno=<%=vo.getPro_no()%>"><%=vo.getPro_title()%></a></td>
 				<td><%=vo.getOrder_date()%></td>
 				<td><%=vo.getPro_price()%>(<%=vo.getOrder_count()%>)</td>
-				<td><%=vo.getOrder_state()%></td>
+				<%if(vo.getOrder_state() == 'N'){%>
+				<td>상품준비중</td>
+				<%} else if(vo.getOrder_state() == 'Y'){%>
+				<td>배송완료</td>
+				<%} %>
 				<td><button onclick="writeReview()">리뷰 작성</button><button onclick="location.href='#'">주문 취소</button></td>
 			</tr>
 			<%} }else if(orderList.isEmpty()){%>

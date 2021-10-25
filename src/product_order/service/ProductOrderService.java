@@ -62,4 +62,11 @@ public class ProductOrderService {
 		JdbcTemplate.close(conn);
 		return result;	
 	}
+	public int insertBkProductOrder(ArrayList<Integer> pro_no, ArrayList<Integer> cnt, ArrayList<Integer> price) {
+		int result =-1;
+		Connection conn = JdbcTemplate.getConnection();
+		result = new ProductOrderDao().insertBkProductOrder(conn, pro_no, cnt, price);
+		JdbcTemplate.close(conn);
+		return result;	
+	}
 }

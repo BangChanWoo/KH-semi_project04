@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cartDetail.vo.CartDetailVo;
+import getBasket.vo.GetBasketVo;
 import product_order.service.ProductOrderService;
 import user.vo.User;
 
@@ -39,9 +40,17 @@ public class PaymentServlet extends HttpServlet {
 		
 		String id = (String)request.getSession().getAttribute("sessionID");
 		String getpcList = request.getParameter("pcList");
-		String[] pcList = getpcList.split(",");
-
-		ArrayList<CartDetailVo> pcVoList = new ProductOrderService().getPurchaseList(id, pcList);
+		String[] pcList = null;
+		ArrayList<GetBasketVo> bkList = null;
+		ArrayList<CartDetailVo> pcVoList = null;
+		
+		if(getpcList != null) {
+			pcList = getpcList.split(",");
+			pcVoList = new ProductOrderService().getPurchaseList(id, pcList);
+		}else {
+			bkList = (ArrayList<GetBasketVo>)request.getSession().getAttribute("bkList");
+			pcVoList = new ProductOrderService().getBkPurchaseList(bkList);
+		}
 		User uVo = new ProductOrderService().getUserInfo(id);
 
 		request.setAttribute("pcVoList", pcVoList);

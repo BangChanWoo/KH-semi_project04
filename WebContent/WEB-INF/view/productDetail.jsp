@@ -97,7 +97,7 @@
   		</div>	
   		<div id="proBtn">
        		<button onclick="goBasket()">장바구니 담기</button>
-       		<button onclick="location.href='#'">바로 구매</button>
+       		<button onclick="goPurchase()">바로 구매</button>
        	</div>
 	  
        	<div id="productExplain">
@@ -263,6 +263,45 @@
     	    });
     	}
     }
+    function goPurchase(){
+    	if("${sessionID}" == ""){
+    		alert("로그인하셔야 구매할 수 있습니다.");
+    	}else{
+    		var option = [];
+        	var cnt = [];
+        	$(".selectId").each(function(){
+        		option.push($(this).text());
+        	});
+        	$(".optAmount").each(function(){
+        		cnt.push($(this).val());
+        	});
+        	
+        	var bkList = [];
+        	var obj = null;
+        	for(var i=0; i<option.length; i++){
+        		obj = new Object;
+        		obj.option = option[i];
+        		obj.cnt = cnt[i];
+        		obj.proNo = "${rno}";
+        		obj.id = "${sessionID}";
+        		bkList.push(obj);
+        	}
+        	$.ajax({
+    			type : "POST",
+    	        url:"directpurchase.do",
+    	        data: JSON.stringify(bkList),
+    	        contentType: "application/json; charset=utf-8",
+    	        //dataType: "json",
+    	        success : function(data){
+    	        	location.href='payment';
+    	        },
+    	        error : function(e) {
+    	        	alert("실패");
+    	        	//alert(e.responseText);
+    	        }
+    	    });
+    	}
+	}
     </script>
 </body>
 </html>

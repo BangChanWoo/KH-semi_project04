@@ -34,6 +34,13 @@ public class ProductOrderService {
 		JdbcTemplate.close(conn);
 		return volist;
 	}
+	public ArrayList<CartDetailVo> getBkPurchaseList(ArrayList<GetBasketVo> bkList) {
+		ArrayList<CartDetailVo> volist = null;
+		Connection conn = JdbcTemplate.getConnection();
+		volist = new ProductOrderDao().getBkPurchaseList(conn, bkList);
+		JdbcTemplate.close(conn);
+		return volist;
+	}
 	public User getUserInfo(String id) {
 		User vo = null;
 		Connection conn = JdbcTemplate.getConnection();

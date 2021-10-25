@@ -163,6 +163,44 @@ public class ProductOrderDao {
 		}
 		return volist;
 	}
+	public ArrayList<CartDetailVo> getBkPurchaseList(Connection conn, ArrayList<GetBasketVo> bkList) {
+		ArrayList<CartDetailVo> volist = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String selectAllQuery = "select pp.pro_title, pp.pro_img, po.pro_option_content, pp.pro_price, pp.pro_delivery_fee"
+				+ " from product_post pp join product_option po"
+				+ " on pp.pro_no = po.pro_no"
+				+ " where po.pro_no like ? and po.pro_option_no like ?";
+		
+		try {
+			volist = new ArrayList<CartDetailVo>();
+			for(GetBasketVo bVo : bkList) {
+				ps = conn.prepareStatement(selectAllQuery);
+				ps.setInt(1, Integer.parseInt(bVo.getProNo()));
+				ps.setInt(2, Integer.parseInt(bVo.getOption()));
+				rs = ps.executeQuery();
+				
+				while(rs.next()) {
+					CartDetailVo vo = new CartDetailVo();
+					vo.setPro_no(Integer.parseInt(bVo.getProNo()));
+					vo.setPro_img(rs.getString("pro_img"));
+					vo.setPro_title(rs.getString("pro_title"));
+					vo.setPro_price(rs.getInt("pro_price"));
+					vo.setPro_option(rs.getString("pro_option_content"));
+					vo.setOption_cnt(Integer.parseInt(bVo.getCnt()));
+					vo.setPro_delivery_fee(rs.getInt("pro_delivery_fee"));
+					volist.add(vo);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(ps);
+		}
+		return volist;
+	}
 	public User getUserInfo(Connection conn, String id) {
 		User vo = null;
 		PreparedStatement ps = null;

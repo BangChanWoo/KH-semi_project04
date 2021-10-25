@@ -133,7 +133,7 @@
 	<% int sum = 0;
 	int dsum = 0;
 	for(CartDetailVo cVo: pcVoList){
-		sum += cVo.getPro_price();
+		sum += cVo.getPro_price() * cVo.getOption_cnt();
 		dsum += cVo.getPro_delivery_fee();
 	}
 	int allsum = sum + dsum;

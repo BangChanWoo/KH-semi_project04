@@ -9,10 +9,7 @@
 </head>
 <body>
 <script>
-	if("${func}" == "recipeUpdate"){
-		alert("${msg}");
-		location.href = "selectrecipe?rno=${rno}";
-	}else if("${func}" == "recipeInsert"){
+	if("${func}" == "recipeInsert"){
 		alert("${msg}");
 		location.href = "recipeboard";
 	}else if("${func}" == "recipeDelete"){

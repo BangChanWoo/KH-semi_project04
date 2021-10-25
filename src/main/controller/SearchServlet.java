@@ -126,7 +126,7 @@ public class SearchServlet extends HttpServlet {
 			
 			ArrayList<Recipe> recipeList = new MainService().searchRecipe(r_startRnum, r_endRnum, searchField);
 			ArrayList<ProductPost> productList = new MainService().searchProduct(p_startRnum, p_endRnum, searchField);
-			
+			System.out.println(productList);
 			String check = request.getParameter("check");
 			request.setAttribute("check", check);
 			request.setAttribute("r_startPage", r_startPage);

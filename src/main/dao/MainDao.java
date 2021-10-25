@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import getProLike.vo.GetProLikeVo;
 import product_post.vo.ProductPost;
 import recipe.model.vo.Recipe;
 import riceThief.common.JdbcTemplate;
@@ -104,17 +105,15 @@ public class MainDao {
 		ArrayList<ProductPost> volist = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String selectAllQuery = "select * from (select rownum rnum, t1.cnt, t1.pro_title, t1.pro_no, t1.pro_img, t1.pro_date"
-				+ " from (select count(ir.inter_no) cnt, p.pro_title, p.pro_no, p.pro_img, p.rec_write_date"
-				+ " from product_post p left join interest_recipe ir"
-				+ " on p.pro_no = ir.pro_no"
-				+ " group by p.pro_title, p.pro_no, p.pro_img, p.pro_date"
-				+ " order by cnt desc, p.pro_date desc) t1)t2"
+		String selectAllQuery = "select * from (select rownum rnum, t1.*"
+				+ " from (select count(ip.pro_no) cnt, ip.pro_no, pp.pro_title, pp.pro_img"
+				+ " from interest_product ip right join product_post pp"
+				+ " on ip.pro_no = pp.pro_no"
+				+ " group by ip.pro_no, pp.pro_title, pp.pro_img, pp.pro_date"
+				+ " order by cnt desc, pp.pro_date) t1)t2"
 				+ " where t2.rnum between 1 and 20";
-		//보관 없는 동안 사용
-		String query = "select * from product_post where pro_no between 1 and 20 order by pro_date desc";
 		try {
-			ps = conn.prepareStatement(query);
+			ps = conn.prepareStatement(selectAllQuery);
 			rs = ps.executeQuery();
 			
 			volist = new ArrayList<ProductPost>();
@@ -160,23 +159,16 @@ public class MainDao {
 		ArrayList<ProductPost> volist = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String selectAllQuery = "select * from (select rownum rnum, t1.cnt, t1.pro_title, t1.pro_no, t1.pro_img, t1.pro_date"
-				+ " from (select count(ir.inter_no) cnt, p.pro_title, p.pro_no, p.pro_img, p.pro_date"
-				+ " from product_post p left join interest_recipe ir"
-				+ " on p.pro_no = ir.pro_no"
-				+ " where p.pro_title like ?"
-				+ " group by p.pro_title, p.pro_no, p.pro_img, p.pro_date"
-				+ " order by cnt desc, p.pro_date desc) t1)t2"
+		String selectAllQuery = "select * from (select rownum rnum, t1.*"
+				+ " from (select count(ip.pro_no) cnt, ip.pro_no, pp.pro_title, pp.pro_img"
+				+ " from interest_product ip right join product_post pp"
+				+ " on ip.pro_no = pp.pro_no"
+				+ " where pp.pro_title like ?"
+				+ " group by ip.pro_no, pp.pro_title, pp.pro_img"
+				+ " order by cnt desc) t1)t2"
 				+ " where t2.rnum between ? and ?";
-		//보관 없는 동안 사용
-		String query = "select t1.*"
-				+ " from (select rownum r, p.*"
-				+ " from product_post p"
-				+ " where p.pro_title like ?"
-				+ " order by p.pro_date desc) t1"
-				+ " where t1.r between ? and ?";
 		try {
-			ps = conn.prepareStatement(query);
+			ps = conn.prepareStatement(selectAllQuery);
 			ps.setString(1, "%"+searchField+"%");
 			ps.setInt(2, start);
 			ps.setInt(3, end);
@@ -199,30 +191,28 @@ public class MainDao {
 		}
 		return volist;
 	}
-	public ArrayList<ProductPost> popularProduct(Connection conn) {
-		ArrayList<ProductPost> volist = null;
+	public ArrayList<GetProLikeVo> popularProduct(Connection conn) {
+		ArrayList<GetProLikeVo> volist = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String selectAllQuery = "select * from (select rownum rnum, t1.cnt, t1.pro_title, t1.pro_no, t1.pro_img, t1.pro_date"
-				+ " from (select count(ir.inter_no) cnt, p.pro_title, p.pro_no, p.pro_img, p.rec_write_date"
-				+ " from product_post p left join interest_recipe ir"
-				+ " on p.pro_no = ir.pro_no"
-				+ " group by p.pro_title, p.pro_no, p.pro_img, p.pro_date"
-				+ " order by cnt desc, p.pro_date desc) t1)t2"
-				+ " where t2.rnum between 1 and 20";
-		//보관 없는 동안 사용
-		String query = "select t1.* from (select rownum r, po.* from product_post po order by pro_date desc) t1"
-				+ " where t1.r between 1 and 4";
+		String selectAllQuery = "select * from (select rownum rnum, t1.*"
+				+ " from (select count(ip.pro_no) cnt, ip.pro_no, pp.pro_title, pp.pro_img"
+				+ " from interest_product ip join product_post pp"
+				+ " on ip.pro_no = pp.pro_no"
+				+ " group by ip.pro_no, pp.pro_title, pp.pro_img"
+				+ " order by cnt desc) t1)t2"
+				+ " where t2.rnum between 1 and 4";
 		try {
-			ps = conn.prepareStatement(query);
+			ps = conn.prepareStatement(selectAllQuery);
 			rs = ps.executeQuery();
 			
-			volist = new ArrayList<ProductPost>();
+			volist = new ArrayList<GetProLikeVo>();
 			while(rs.next()) {
-				ProductPost vo = new ProductPost();
+				GetProLikeVo vo = new GetProLikeVo();
 				vo.setPro_no(rs.getInt("pro_no"));
 				vo.setPro_img(rs.getString("pro_img"));
 				vo.setPro_title(rs.getString("pro_title"));
+				vo.setCnt(rs.getInt("cnt"));
 				volist.add(vo);
 			}
 		} catch (Exception e) {

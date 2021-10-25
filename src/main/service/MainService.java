@@ -3,6 +3,7 @@ package main.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import getProLike.vo.GetProLikeVo;
 import main.dao.MainDao;
 import product_post.vo.ProductPost;
 import recipe.model.vo.Recipe;
@@ -53,8 +54,8 @@ public class MainService {
 		JdbcTemplate.close(conn);
 		return volist;
 	}
-	public ArrayList<ProductPost> popularProduct() {
-		ArrayList<ProductPost> volist = null;
+	public ArrayList<GetProLikeVo> popularProduct() {
+		ArrayList<GetProLikeVo> volist = null;
 		Connection conn = JdbcTemplate.getConnection();
 		volist = new MainDao().popularProduct(conn);
 		JdbcTemplate.close(conn);

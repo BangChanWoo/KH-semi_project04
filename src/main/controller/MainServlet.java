@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import getProLike.vo.GetProLikeVo;
 import main.service.MainService;
 import product_post.vo.ProductPost;
 import recipe.model.service.RecipeService;
@@ -42,7 +43,7 @@ public class MainServlet extends HttpServlet {
 		
 		ArrayList<Recipe> recommendList = new RecipeService().recommendRecipe();
 		ArrayList<Recipe> popularRecipe = new RecipeService().popularRecipe();
-		ArrayList<ProductPost> popularProduct = new MainService().popularProduct();
+		ArrayList<GetProLikeVo> popularProduct = new MainService().popularProduct();
 
 		request.setAttribute("recommendList", recommendList);
 		request.setAttribute("popularRecipe", popularRecipe);

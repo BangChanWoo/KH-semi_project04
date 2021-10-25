@@ -1,3 +1,4 @@
+<%@page import="getProLike.vo.GetProLikeVo"%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/basic.css" />  <!-- 공통 css -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_header.css" /> <!-- header css -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_footer.css" /><!-- footer css -->
@@ -26,7 +27,7 @@
 <%
 	ArrayList<Recipe> recommendList = (ArrayList<Recipe>)request.getAttribute("recommendList");
 	ArrayList<Recipe> popularRecipe = (ArrayList<Recipe>)request.getAttribute("popularRecipe");
-	ArrayList<ProductPost> popularProduct = (ArrayList<ProductPost>)request.getAttribute("popularProduct");
+	ArrayList<GetProLikeVo> popularProduct = (ArrayList<GetProLikeVo>)request.getAttribute("popularProduct");
 	session.getAttribute("sessionID");
 	session.getAttribute("sessionNickname");
 %>
@@ -92,13 +93,13 @@
 	            <div id="leftContent">
 	            	<a href="selectproduct?rno=<%=popularProduct.get(0).getPro_no()%>"><img id="leftImg" src="<%=popularProduct.get(0).getPro_img()%>" alt="인기 상품"></a>
 	            	<p class="proTitle"><a href="selectproduct?rno=<%=popularProduct.get(0).getPro_no()%>">1. <%=popularProduct.get(0).getPro_title()%></a></p>
-	            	<p><i class="fas fa-heart"></i></p>
+	            	<p><i class="fas fa-heart"></i><%=popularProduct.get(0).getCnt()%></p>
 	            </div>
 	            <%for(int proCnt = 1; proCnt<popularProduct.size(); proCnt++){ %>
 	            <div class="rightContent">
 	            	<a href="selectproduct?rno=<%=popularProduct.get(proCnt).getPro_no()%>" class="rightContainer"><img class="rightImg" src="<%=popularProduct.get(proCnt).getPro_img()%>" alt="인기 상품"></a>
 	            	<p class="proTitle"><a href="selectproduct?rno=<%=popularProduct.get(proCnt).getPro_no()%>"><%=proCnt+1%>. <%=popularProduct.get(0).getPro_title()%></a></p>
-	            	<p><i class="fas fa-heart"></i></p>
+	            	<p><i class="fas fa-heart"></i><%=popularProduct.get(proCnt).getCnt()%></p>
 	            </div>
 	            <%} %>
             </div>

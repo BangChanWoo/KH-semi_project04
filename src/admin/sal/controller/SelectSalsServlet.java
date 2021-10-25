@@ -37,8 +37,8 @@ public class SelectSalsServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 
-		final int PAGE_SIZE = 5; // 한 페이지 당 글수
-		final int PAGE_BLOCK = 3; // 한 화면에 나타날 페이지 링크 수
+		final int PAGE_SIZE = 10; // 한 페이지 당 글수
+		final int PAGE_BLOCK = 5; // 한 화면에 나타날 페이지 링크 수
 		int bCount = 0; // 총 글수
 		int pageCount = 0; // 총 페이지수
 		int startPage = 1; // 화면에 나타날 시작페이지

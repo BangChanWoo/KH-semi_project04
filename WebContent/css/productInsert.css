@@ -14,11 +14,19 @@
 	background-color: white;
 }
 
-#titleImgContainer {
-	border: 1px solid #EBDED4;
-	float: left;
-	width: 33%;
-	margin: 10px 0px 10px 10px;
+#titleImgContainer{
+    float: left;
+    width: 30%;
+    margin: 0 0 0 5%;
+    text-align: center;
+    font-size: 1.5rem;
+}
+#titleImg{
+    width: 100%;
+    border: solid 1px #9a7b6c;
+    border-radius: 5px;
+    color: #CFB9AF;
+    margin: 0 0 1rem 0;
 }
 
 #txtContainer {

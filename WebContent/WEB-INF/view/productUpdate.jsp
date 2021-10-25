@@ -145,7 +145,8 @@
 		</form>
 		</div>
 	</main>
-    <!-- <%@ include file="riceThief_footer.jsp" %> -->
+	<hr>
+	<%@ include file="riceThief_footer.jsp"%>
 		<script>
 		//배송비 
 			$('.fee_value').on('click', function() {

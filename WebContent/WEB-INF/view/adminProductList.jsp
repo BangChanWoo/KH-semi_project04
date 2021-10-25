@@ -34,7 +34,7 @@
 var result33 = "${result33}";
 console.log(result33);
 if(result33 == "검색값없음"){
-	alert("일치된 사용자 없음");
+	alert("일치된 상품 없음");
 }
 </script>
 	<%@ include file="riceThief_adminHeader.jsp"%>
@@ -57,12 +57,18 @@ if(result33 == "검색값없음"){
 			<a href="adminProductListServlet?catenum=<%=6008%>" id="6008"
 				class="categoryBtn">샐러드/도시락</a>
 		</div>
-		 <form action="updateGetProductServlet" method="get">
+		 <form action="insertproduct" method="get">
+		<div class='right-box'>
+			<input type="submit" id="product_insert"value="상품 등록" >
+		</div>
+		</form>
+		<form action="updateGetProductServlet" method="get">
 		<div class='right-box'>
 			<input type="text" name = "pro_name" id="name1" placeholder="상품 명 검색">
 			<input type="submit" id="product_search"value="검색" >
 		</div>
 		</form>
+		
 		<div class="board_list_wrap">
 			<form method="get" action="updateGetProductServlet">
 				<table class="board_list">
@@ -95,21 +101,21 @@ if(result33 == "검색값없음"){
 				<%
 					if (startPage > 1) {
 				%>
-				<a href="./SelectUserServlet?pagenum=<%=startPage - 1%>" class="num">이전</a>
+				<a href="./adminProductListServlet?pagenum=<%=startPage - 1%>" class="num">이전</a>
 				<%
 					}
 				%>
 				<%
 					for (int i = startPage; i <= endPage; i++) {
 				%>
-				<a href="./selectsals?pagenum=<%=i%>" class="num"><%=i%></a>
+				<a href="./adminProductListServlet?pagenum=<%=i%>" class="num"><%=i%></a>
 				<%
 					}
 				%>
 				<%
 					if (endPage < pageCount) {
 				%>
-				<a href="./SelectUserServlet?pagenum=<%=endPage + 1%>" class="num">다음</a>
+				<a href="./adminProductListServlet?pagenum=<%=endPage + 1%>" class="num">다음</a>
 				<%
 					}
 				%>

@@ -64,6 +64,7 @@ if(result33 == "검색값없음"){
 			<a href="adminRecipeList?catenum=<%=59%>" id="59" class="categoryBtn">차/음료/술</a>
 			<a href="adminRecipeList?catenum=<%=62%>" id="62" class="categoryBtn">기타</a>
 		</div>
+		
 		<form action="selectrecipe" method="get">
 			<div class='right-box'>
 				<input type="text" name="recipe_name" id="name1" placeholder="레시피 검색">
@@ -104,21 +105,21 @@ if(result33 == "검색값없음"){
 				<%
 					if (startPage > 1) {
 				%>
-				<a href="./SelectUserServlet?pagenum=<%=startPage - 1%>" class="num">이전</a>
+				<a href="./adminRecipeList?pagenum=<%=startPage - 1%>" class="num">이전</a>
 				<%
 					}
 				%>
 				<%
 					for (int i = startPage; i <= endPage; i++) {
 				%>
-				<a href="./selectsals?pagenum=<%=i%>" class="num"><%=i%></a>
+				<a href="./adminRecipeList?pagenum=<%=i%>" class="num"><%=i%></a>
 				<%
 					}
 				%>
 				<%
 					if (endPage < pageCount) {
 				%>
-				<a href="./SelectUserServlet?pagenum=<%=endPage + 1%>" class="num">다음</a>
+				<a href="./adminRecipeList?pagenum=<%=endPage + 1%>" class="num">다음</a>
 				<%
 					}
 				%>

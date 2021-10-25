@@ -19,7 +19,7 @@
         		<li id="navStore"><a href="adminProductListServlet">스토어</a></li>
         		<li id="navUser_admin"><a href="SelectUserServlet">회원관리</a></li>
         		<li id="navSale_admin"><a href="selectsals">매출관리</a></li>
-        		<li id="navService_admin"><a href="#">고객센터</a></li>
+        		<li id="navService_admin"><a href="adminnoticeservlet">고객센터</a></li>
         	</ul>
         </nav>
     </div>

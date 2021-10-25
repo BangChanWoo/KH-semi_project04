@@ -148,7 +148,7 @@ public class NoticeDao {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		String noticeInsert = "insert into notice(notice_num, id, notice_title, notice_content, notice_time) values(notice_num.NEXTVAL, ?, ?, ?, ?, sysdate)";
+		String noticeInsert = "insert into notice values(?, ?, ?, ?, sysdate)";
 
 		try {
 			ps = conn.prepareStatement(noticeInsert);
@@ -162,8 +162,8 @@ public class NoticeDao {
 			System.out.println("NOTICEDAO.update() :글수정");
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			System.out.println("공지 글쓰기 데이터 처리중 db오류 발생");
+			e.printStackTrace();
 
 		} finally {
 			JdbcTemplate.close(ps);

@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/basic.css" />  <!-- °øÅë css -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/basic.css" />  <!-- ê³µí†µ css -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_header.css" /> <!-- header css -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/riceThief_footer.css" /><!-- footer css -->
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/fquestionboard.css" />
@@ -16,7 +16,7 @@
 <script src="https://kit.fontawesome.com/616f27e0c4.js" crossorigin="anonymous"></script>
 
 
-<title>¹äµµµÏ ÀÚÁÖ¹¯´ÂÁú¹®</title>
+<title>ë°¥ë„ë‘‘ ìžì£¼ë¬»ëŠ”ì§ˆë¬¸</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="./js/mypage.js"></script>
 </head>
@@ -26,23 +26,24 @@
 	int startPage = (int)request.getAttribute("startPage");
 	int endPage = (int)request.getAttribute("endPage");
 	int pageCount = (int)request.getAttribute("pageCount");
+
 %>
 	<%@ include file="riceThief_header.jsp" %>
 	<hr>
 	<main>
-		<h2>ÀÚÁÖ¹¯´ÂÁú¹®</h2>
-		<button id="NoticeBtn" class="headerBtnStyle" onclick="location.href='usernotice'">°øÁö»çÇ×</button>
-        <button id="FquestionBtn" class="headerBtnStyle" onclick="location.href='fquestionboard'">ÀÚÁÖ¹¯´ÂÁú¹®</button>       	
-        <button id="QuestionBtn" class="headerBtnStyle">1´ë1¹®ÀÇ</button>	
+		<h2>ìžì£¼ë¬»ëŠ”ì§ˆë¬¸</h2>
+		<button id="NoticeBtn" class="headerBtnStyle" onclick="location.href='usernotice'">ê³µì§€ì‚¬í•­</button>
+        <button id="FquestionBtn" class="headerBtnStyle" onclick="location.href='fquestionboard'">ìžì£¼ë¬»ëŠ”ì§ˆë¬¸</button>       	
+        <button id="QuestionBtn" class="headerBtnStyle">1ëŒ€1ë¬¸ì˜</button>	
  		
  		
         	<div class="fquestion_row">
         		<table class="fquestion_board">
-        			<caption>ÀÚÁÖ¹¯´Â Áú¹®¸ñ·Ï</caption>
+        			<caption>ìžì£¼ë¬»ëŠ” ì§ˆë¬¸ëª©ë¡</caption>
         			<thead>
         					<tr>
-        						<th>¹øÈ£</th>
-        						<th>Á¦¸ñ</th>
+        						<th>ë²ˆí˜¸</th>
+        						<th>ì œëª©</th>
         				
         					</tr>
         					</thead>
@@ -58,13 +59,14 @@
 								</tr>
 								<%
 							}
-					}else{ 
+						}else{ 
 					%>
 						<tr>
-						<td colspan="2">°Ô½Ã±ÛÀÌ ¾ø½À´Ï´Ù.</td>
+						<td colspan="2">ê²Œì‹œê¸€ì´ ì—†ìŠµë‹ˆë‹¤.</td>
 						</tr>
 					<%
 					}
+
 					%>
         					</tbody>
         		</table>

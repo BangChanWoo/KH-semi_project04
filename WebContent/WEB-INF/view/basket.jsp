@@ -168,8 +168,8 @@
 		        dataType: "json",
 		        success : function(data){
 		        	if(data == "success"){
+		        		alert("삭제 완료")
 	        			$("#cno_"+cno).remove();
-	        			alert("삭제 완료");
 		        	}
 		        },
 		        error : function(e) {
@@ -207,7 +207,11 @@
 				var cno = $(this).attr("id").split("_")[1];
 				pcList.push(cno);
 			})
-			location.href='payment?pcList='+pcList;
+			if(pcList != ""){
+				location.href='payment?pcList='+pcList;
+			}else{
+				alert("구매하실 상품을 선택해주세요.");
+			}
 		}
 	</script>
 </body>

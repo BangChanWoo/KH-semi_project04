@@ -96,7 +96,7 @@ public class ProductOrderDao {
 			}else if(state == 2) {
 				ps = conn.prepareStatement(selectCompleteQuery);
 				ps.setString(1, id);
-				ps.setInt(1, start);
+				ps.setInt(2, start);
 				ps.setInt(3, end);
 			}
 			rs = ps.executeQuery();

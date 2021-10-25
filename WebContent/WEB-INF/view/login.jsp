@@ -19,9 +19,13 @@
 body {
 	text-align: center;
 }
-
+h2{
+	text-align: center;
+	margin: 5rem 0 0 0;
+}
 .id, .pw {
-	width: 150px;
+	font-size: 1rem;
+	padding: 0.5rem;
 }
 
 .vv {
@@ -29,6 +33,25 @@ body {
 }
 #ckid{
 	margin-left:30px;
+}
+form{
+	margin: 3rem 0 0 0;
+}
+button{
+	background-color: #CFB9AF;
+	border: 0;
+	border-radius: 5px;
+	font-size: 0.8rem;
+	padding: 0.3rem;
+}
+button:hover{
+	background-color: #9a7b6c;
+}
+#loginbtn1{
+	margin: 1rem 0 0.5rem 0;
+}
+#ckid, #ckpw{
+	margin: 0 0 1rem 0.5rem;
 }
 </style>
 <script src="https://kit.fontawesome.com/616f27e0c4.js" crossorigin="anonymous"></script>
@@ -48,6 +71,7 @@ if(result1 == "로그인 실패했습니다."){
 	</header>
 
 	<section>
+		<h2>로그인</h2>
 		<br>
 		<form action="login" method="POST">
 			<i class="far fa-user" style="font-size: 1px 1px;"></i> <input
@@ -70,14 +94,8 @@ if(result1 == "로그인 실패했습니다."){
 			</div>
 
 		</form>
-		<button id="ckid" onclick="location.href='checkid'">
-					아이디 찾기
-				</button>
-				<button id="ckpw" onclick="location.href='checkpw'">
-					비밀번호 찾기
-				</button>
-
-
+		<button id="ckid" onclick="location.href='checkid'">아이디 찾기</button>
+		<button id="ckpw" onclick="location.href='checkpw'">비밀번호 찾기</button>
 	</section>
 
 	<footer>

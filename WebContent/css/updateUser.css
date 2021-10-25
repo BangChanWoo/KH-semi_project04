@@ -1,0 +1,31 @@
+section{
+	width: 100%;
+    margin: auto;
+}
+h1{
+	text-align: center;
+	margin: 3rem auto;
+}
+#frmCon{
+	width: 100%;
+	text-align: center;
+	margin: auto;
+}
+form{
+	display: inline-block;
+}
+td, td input{
+	font-size: 1rem;
+	padding: 0.3rem;
+}
+button{
+	background-color: #CFB9AF;
+	border: 0;
+	border-radius: 5px;
+	font-size: 1rem;
+	padding: 0.3rem;
+	margin: 1rem 0;
+}
+button:hover{
+	background-color: #9a7b6c;
+}

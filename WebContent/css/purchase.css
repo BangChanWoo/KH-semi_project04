@@ -116,7 +116,9 @@ button{
 }
 #sendFrm input{
 	padding: 0.5rem;
-	border: solid 1px #cfb9af;
+	border: solid 1px #9a7b6c;
+	border-radius: 5px;
+	font-size: 1rem;
 }
 #receiveFrm{
 	width: 60%;
@@ -128,7 +130,9 @@ button{
 }
 #receiveFrm input{
 	padding: 0.5rem;
-	border: solid 1px #cfb9af;
+	border: solid 1px #9a7b6c;
+	border-radius: 5px;
+	font-size: 1rem;
 }
 #finalInfo{
 	background-color: #ebded4;
@@ -141,19 +145,36 @@ button{
 	margin: 1rem;
 }
 #paymentTb{
-	width: 60%;
 	margin: auto;
-	border: solid 1px black;
+	border: solid 1px #9a7b6c;
 	border-collapse: collapse;
 	text-align: center;
+	font-size: 1rem;
 }
 #paymentTb tr, #paymentTb td{
-	border: solid 1px black;
+	border: solid 1px #9a7b6c;
 	border-collapse: collapse;
 	padding: 1rem;
 }
 #paymentTb td:hover{
 	background-color: #cfb9af;
+}
+#couponCon{
+	margin: 0 0 0 20%;
+	font-size: 1rem;
+	padding: 0.3rem;
+	text-align: center;
+}
+#pcBtnCon{
+	width: 40%;
+	margin: 3rem auto;
+}
+#pcBtn{
+	width: 100%;
+	font-size: 1rem;
+	padding: 0.7rem 0;
+	background-color: #cfb9af;
+	text-align: center;
 }
 /*responsive*/
 /*스마트폰*/
@@ -164,6 +185,9 @@ button{
 	#sendFrm label, #receiveFrm label{
 		padding: 0 0 0 10%;
 	}
+	#paymentTb{
+		width: 100%;
+	}
 }
 /*태블릿 pc*/
 @media screen and (min-width:  768px) and (max-width: 959px){
@@ -173,6 +197,9 @@ button{
 	#sendFrm label, #receiveFrm label{
 		padding: 0 0 0 40%;
 	}
+	#paymentTb{
+		width: 60%;
+	}
 }
 /*데스크탑*/
 @media screen and (min-width:  960px){
@@ -181,5 +208,8 @@ button{
 	}
 	#sendFrm label, #receiveFrm label{
 		padding: 0 0 0 40%;
+	}
+	#paymentTb{
+		width: 60%;
 	}
 } 

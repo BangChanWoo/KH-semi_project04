@@ -1,3 +1,4 @@
+<%@page import="user.vo.User"%>
 <%@page import="cartDetail.vo.CartDetailVo"%>
 <%@page import="java.util.ArrayList"%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/basic.css" />  <!-- 공통 css -->
@@ -27,6 +28,7 @@
 	session.getAttribute("sessionNickname");
 	
  	ArrayList<CartDetailVo> pcVoList = (ArrayList<CartDetailVo>)request.getAttribute("pcVoList");
+ 	User uVo = (User)request.getAttribute("uVo");
 %>
 	<%@ include file="riceThief_header.jsp" %>
 	<hr>
@@ -52,34 +54,44 @@
 			</ul>
 		</div>
 		<hr class="m-3">
+		<form action="payprogress" method="post">
 		<div>
 			<h2>배송지 정보</h2>
-			<form action="#" method="post" id="sendFrm">
+			<div id="sendFrm">
+				<input name="pn_size" hidden="hidden" value="<%=pcVoList.size()%>">
+			<%for(int i=0; i<pcVoList.size(); i++){%>
+				<input name="cno_<%=i%>" hidden="hidden" value="<%=pcVoList.get(i).getCart_no()%>">
+			<%} %>
 				<label>이름</label>
-				<input>
+				<input name="name" value="<%=uVo.getUname()%>">
 				<label>주소</label>
-				<input>
+				<input name="address" value="<%=uVo.getAddress()%>">
 				<label>전화번호</label>
-				<input>
+				<input name="phone" value="<%=uVo.getPhone()%>">
 				<label>배송<br>요청사항</label>
-				<input>
-			</form>
+				<input name="info">
+			</div>
 		</div>
 		<hr class="m-3">
 		<div>
 			<h2>주문자 정보</h2>
-			<form action="#" method="post" id="receiveFrm">
+			<div id="receiveFrm">
 				<label>주문자</label>
-				<input>
+				<input name="orderName" value="<%=uVo.getUname()%>">
 				<label>전화번호</label>
-				<input>
+				<input name="orderPhone" value="<%=uVo.getPhone()%>">
 				<label>이메일</label>
-				<input>
-			</form>
+				<input name="orderEmail" value="<%=uVo.getEmail()%>">
+			</div>
 		</div>
 		<hr class="m-3">
 		<div>
 			<h2>쿠폰</h2>
+			<div id="couponWrap">
+				<select id="couponCon">
+					<option>사용할 수 있는 쿠폰이 없습니다.</option>
+				</select>
+			</div>
 		</div>
 		<hr class="m-3">
 		<div>
@@ -111,21 +123,25 @@
 				<hr class="clear noLine">
 			</div>
 		</div>
+		<div id="pcBtnCon">
+			<button id="pcBtn" type="submit">구매하기</button>
+		</div>
+		</form>
 	</main>
 	<hr class="clear">
 	<%@ include file="riceThief_footer.jsp" %>
+	<% int sum = 0;
+	int dsum = 0;
+	for(CartDetailVo cVo: pcVoList){
+		sum += cVo.getPro_price();
+		dsum += cVo.getPro_delivery_fee();
+	}
+	int allsum = sum + dsum;
+	%>
 	<script type="text/javascript">
 		function proToggle() {
 			$("#basketContainer").slideToggle(1000);
 		}
-		<% int sum = 0;
-		int dsum = 0;
-		for(CartDetailVo cVo: pcVoList){
-			sum += cVo.getPro_price();
-			dsum += cVo.getPro_delivery_fee();
-		}
-		int allsum = sum + dsum;
-		%>
 		$("#allPrice").html(<%=sum%>);
 		$("#allDeliver").html(<%=dsum%>);
 		$("#allPurchase").html(<%=allsum%>);

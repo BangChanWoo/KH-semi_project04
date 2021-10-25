@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cartDetail.vo.CartDetailVo;
-import user.basket.service.BasketService;
+import product_order.service.ProductOrderService;
+import user.vo.User;
 
 
 /**
@@ -40,10 +41,11 @@ public class PaymentServlet extends HttpServlet {
 		String getpcList = request.getParameter("pcList");
 		String[] pcList = getpcList.split(",");
 
-		ArrayList<CartDetailVo> pcVoList = new BasketService().getPurchaseList(id, pcList);
-		System.out.println(pcVoList);
+		ArrayList<CartDetailVo> pcVoList = new ProductOrderService().getPurchaseList(id, pcList);
+		User uVo = new ProductOrderService().getUserInfo(id);
 
 		request.setAttribute("pcVoList", pcVoList);
+		request.setAttribute("uVo", uVo);
 		request.getRequestDispatcher("./WEB-INF/view/purchase.jsp").forward(request, response);
 	}
 }

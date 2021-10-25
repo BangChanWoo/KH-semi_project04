@@ -34,7 +34,7 @@
 		<h2><i class="fas fa-shopping-cart"></i> ${sessionNickname}님의 장바구니</h2>
 		<div id="flexContainer">
 			<ul id="basketContainer">
-			<input type="checkbox" onclick="allSelect()"> 전체 상품(<%=bkList.size()%>)
+			<input type="checkbox" onclick="allSelect()" id="allcheck"><p class=inline>전체 상품(<%=bkList.size()%>)</p>
 			<%for(CartDetailVo cVo: bkList){%>
 				<li id="con_<%=cVo.getCart_no()%>">
 					<input type="checkbox" id="check_<%=cVo.getCart_no()%>" class="checkPro" value="<%=cVo.getPro_price()%>" onclick="calc($(this), <%=cVo.getCart_no()%>, <%=cVo.getPro_no()%>)">
@@ -167,7 +167,27 @@
 		    });
 		}
 		function allSelect() {
-			$("input[type=checkbox]").prop("checked",true);
+			if($("#allcheck").is(":checked") == true){
+				$("input[type=checkbox]").prop("checked",true);
+				
+				var sum = 0;
+				var dsum = 0;
+				var allSum = 0;
+				$('input[id^=check_]:checked').each(function() {
+					var cno = $(this).attr("id").split("_")[1];
+					sum += parseInt($(this).val());
+					dsum += parseInt($("#dFee_"+cno).text());
+				})
+				allSum = sum + dsum;
+				$("#allPrice").html(sum);
+				$("#allDeliver").html(dsum);
+				$("#allPurchase").html(allSum);
+			}else{
+				$("input[type=checkbox]").prop("checked",false);
+				$("#allPrice").html(0);
+				$("#allDeliver").html(0);
+				$("#allPurchase").html(0);
+			}
 		}
 		function goPurchase(){
 			var pcList = [];

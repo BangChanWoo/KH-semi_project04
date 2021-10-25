@@ -24,6 +24,10 @@ button{
 	display: inline;
 	float:right;
 }
+.inline{
+	display: inline-block;
+	margin-left: 0.3rem;
+}
 .m-p{
 	margin: 1rem 1rem 1rem 0;
 }

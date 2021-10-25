@@ -7,6 +7,7 @@ import cartDetail.vo.CartDetailVo;
 import getBasket.vo.GetBasketVo;
 import riceThief.common.JdbcTemplate;
 import user.basket.dao.BasketDao;
+import user.vo.User;
 
 public class BasketService {
 	public int getBasketCount(String id) {
@@ -49,12 +50,5 @@ public class BasketService {
 		result = new BasketDao().deleteBk(conn, cno, id);
 		JdbcTemplate.close(conn);
 		return result;
-	}
-	public ArrayList<CartDetailVo> getPurchaseList(String id, String[] pcList) {
-		ArrayList<CartDetailVo> volist = null;
-		Connection conn = JdbcTemplate.getConnection();
-		volist = new BasketDao().getPurchaseList(conn, id, pcList);
-		JdbcTemplate.close(conn);
-		return volist;
 	}
 }

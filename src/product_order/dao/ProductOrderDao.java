@@ -5,10 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import cartDetail.vo.CartDetailVo;
+import getBasket.vo.GetBasketVo;
 import product_order.vo.ProductOrder;
 import product_order_detail.vo.ProductOrderDetailVo;
 import product_post.vo.ProductPost;
 import riceThief.common.JdbcTemplate;
+import user.vo.User;
 
 public class ProductOrderDao {
 	public int getOrderCount(Connection conn, int state, String id) {
@@ -118,5 +121,134 @@ public class ProductOrderDao {
 			JdbcTemplate.close(ps);
 		}
 		return volist;
+	}
+	public ArrayList<CartDetailVo> getPurchaseList(Connection conn, String id, String[] pcList) {
+		ArrayList<CartDetailVo> volist = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String selectAllQuery = "select pp.pro_no, c.cart_no, pp.pro_title, pp.pro_img, pp.pro_price, po.pro_option_content, c.pro_count, pp.pro_delivery_fee"
+				+ " from cart c join product_post pp"
+				+ " on c.pro_no = pp.pro_no"
+				+ " join product_option po"
+				+ " on c.select_option_no = po.pro_option_no"
+				+ " where id like ? and cart_no like ?";
+		
+		try {
+			volist = new ArrayList<CartDetailVo>();
+			for(int i=0; i<pcList.length; i++) {
+				ps = conn.prepareStatement(selectAllQuery);
+				ps.setString(1, id);
+				ps.setInt(2, Integer.parseInt(pcList[i]));
+				rs = ps.executeQuery();
+				
+				while(rs.next()) {
+					CartDetailVo vo = new CartDetailVo();
+					vo.setCart_no(rs.getInt("cart_no"));
+					vo.setPro_no(rs.getInt("pro_no"));
+					vo.setPro_img(rs.getString("pro_img"));
+					vo.setPro_title(rs.getString("pro_title"));
+					vo.setPro_price(rs.getInt("pro_price"));
+					vo.setPro_option(rs.getString("pro_option_content"));
+					vo.setOption_cnt(rs.getInt("pro_count"));
+					vo.setPro_delivery_fee(rs.getInt("pro_delivery_fee"));
+					volist.add(vo);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(ps);
+		}
+		return volist;
+	}
+	public User getUserInfo(Connection conn, String id) {
+		User vo = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String selectAllQuery = "select * from member where id like ?";
+		
+		try {
+			ps = conn.prepareStatement(selectAllQuery);
+			ps.setString(1, id);
+			rs = ps.executeQuery();
+			
+			vo = new User();
+			while(rs.next()) {
+				vo.setUname(rs.getString("uname"));
+				vo.setPhone(rs.getString("phone"));
+				vo.setEmail(rs.getString("email"));
+				vo.setAddress(rs.getString("address"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(ps);
+		}
+		return vo;
+	}
+	public int insertUserOrder(Connection conn, String address, String name, String phone, String id) {
+		int result = -1;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String insertUser ="insert into user_order values(order_no.nextval, sysdate, ?, ?, ? ,?)";
+		
+		try {
+			ps = conn.prepareStatement(insertUser);
+			ps.setString(1, address);
+			ps.setString(2, name);
+			ps.setString(3, phone);
+			ps.setString(4, id);
+			rs = ps.executeQuery();
+		} catch (Exception e) {
+			System.out.println("연결 실패");
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(ps);
+		}
+		return result;
+	}
+	public int insertProductOrder(Connection conn, ArrayList<Integer> pno) {
+		int result = -1;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String getQuery = "select c.pro_no, pp.pro_price, c.pro_count from product_post pp join cart c on pp.pro_no = c.pro_no where c.cart_no like ?";
+		String insertPro ="insert into product_order values(order_detail_no.nextval, ?, 'N', order_no.currval, ?, ?)";
+		ArrayList<CartDetailVo> pvoList = new ArrayList<CartDetailVo>();
+		try {
+			for(int i: pno) {
+				ps = conn.prepareStatement(getQuery);
+				ps.setInt(1, i);
+				rs = ps.executeQuery();
+				System.out.println(i);
+				while(rs.next()) {
+					CartDetailVo vo = new CartDetailVo();
+					vo.setPro_no(rs.getInt("pro_no"));
+					vo.setPro_price(rs.getInt("pro_price"));
+					vo.setOption_cnt(rs.getInt("pro_count"));
+					pvoList.add(vo);
+				}
+				JdbcTemplate.close(ps);
+			}
+			System.out.println(pvoList.size());
+			for(CartDetailVo cVo: pvoList) {
+				ps = conn.prepareStatement(insertPro);
+				ps.setInt(1, cVo.getOption_cnt());
+				ps.setInt(2, cVo.getPro_no());
+				ps.setInt(3, cVo.getPro_price());
+				rs = ps.executeQuery();
+			}
+		} catch (Exception e) {
+			System.out.println("연결 실패");
+			e.printStackTrace();
+		} finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(ps);
+		}
+		return result;
 	}
 }

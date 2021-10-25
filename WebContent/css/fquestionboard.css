@@ -11,6 +11,10 @@ main h2{
 table {
     border-collapse: collapse;
 }
+th, td{
+	font-size: 1rem;
+    padding: 0.6rem;
+}
 caption {
     display: none;
 }
@@ -19,18 +23,24 @@ caption {
 	left: 18%;
     width: 15rem;
     text-align: center;
+    font-size: 1rem;
+    padding: 0.4rem 0;
 }
 #FquestionBtn {
 	position: relative;
 	left: 18%;
     width: 15rem;
     text-align: center;
+    font-size: 1rem;
+    padding: 0.4rem 0;
 }
 #QuestionBtn {
 	position: relative;
 	left: 18%;
     width: 15rem;
     text-align: center;
+    font-size: 1rem;
+    padding: 0.4rem 0;
 }
 #fcateBtnAll{
 	position: relative;

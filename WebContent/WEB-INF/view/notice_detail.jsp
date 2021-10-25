@@ -21,7 +21,7 @@
 <script type="text/javascript" src="./js/mypage.js"></script> 
 <title>Insert title here</title>
 <style>
-body {
+main {
 	text-align: center;
 }
 
@@ -39,19 +39,32 @@ body {
 	margin: 5rem;
 	text-align: center;
 }
+#notice_h2{
+	margin: 5rem 0 0 0;
+}
+button{
+	background-color: #cfb9af;
+	border: 0;
+	border-radius: 7px;
+	padding: 0.4rem;
+	font-size: 1rem;
+	margin: 0 1rem 5rem 1rem;
+}
+button:hover{
+	background-color: #ebded4;
+}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <%@ include file="riceThief_header.jsp" %>
-<hr>
-<h2>공지사항</h2>
+<main>
+	<hr>
+	<h2 id="notice_h2">공지사항</h2>
 
 <% 
 Notice vo = (Notice)request.getAttribute("vo");
 int notice_num = (int)request.getAttribute("notice_num"); 
-
-
 %>
 
 	<br><br>
@@ -70,7 +83,8 @@ int notice_num = (int)request.getAttribute("notice_num");
 		<br><br><br>
 		<button onclick="location.href='usernotice'">게시물목록보기</button>   
     <button onclick="location.href='main'">홈으로 이동</button>
+</main>
+	<hr>
 	<%@ include file="riceThief_footer.jsp" %>
-
 </body>
 </html>

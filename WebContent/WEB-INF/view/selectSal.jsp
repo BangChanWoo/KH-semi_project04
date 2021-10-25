@@ -141,7 +141,7 @@
 							
 							var year= date.getFullYear();
 							var month=date.getMonth()+1
-							var asd = year+"-"+month+"-"+day;
+							var asd = year+"/"+month+"/"+day;
 							
 							// 선택날짜 yy-mm-dd 형식 문자열
 							var chooseDay=asd.substr(2,9);
@@ -204,7 +204,7 @@
 							console.log("이후");
 							var year= date.getFullYear();
 							var month=date.getMonth()+1
-							var asd = year+"-"+month+"-"+day;
+							var asd = year+"/"+month+"/"+day;
 							
 							// 선택날짜 yy-mm-dd 형식 문자열
 							var chooseDay=asd.substr(2,9);
@@ -272,7 +272,7 @@
 							var day = date.getDate();
 							console.log(year-2000);
 							
-							var asd = year+"-"+month+"-"+day;
+							var asd = year+"/"+month+"/"+day;
 							console.log(asd);
 							
 							// 선택날짜 yy-mm-dd 형식 문자열
@@ -336,7 +336,7 @@
 							
 							var year= date.getFullYear();
 							var month=today.getMonth()+1
-							var asd = year+"-"+month+"-"+day;
+							var asd = year+"/"+month+"/"+day;
 							// 선택날짜 yy-mm-dd 형식 문자열
 							var chooseDay=asd.substr(2,9);
 							var chooseMonth=asd.substr(2,5);
@@ -398,7 +398,7 @@
 							calendarChoiceDay(this);
 							var year= date.getFullYear();
 							var month=today.getMonth()+1
-							var asd = year+"-"+month+"-"+day;
+							var asd = year+"/"+month+"/"+day;
 							
 							// 선택날짜 yy-mm-dd 형식 문자열
 							var chooseDay=asd.substr(2,9);
@@ -464,7 +464,7 @@
 						calendarChoiceDay(this);
 						var year= today.getFullYear();
 						var month=today.getMonth()+1
-						var asd = year+"-"+month+"-"+day;
+						var asd = year+"/"+month+"/"+day;
 						
 						// 선택날짜 yy-mm-dd 형식 문자열
 						var chooseDay=asd.substr(2,9);
@@ -528,7 +528,7 @@
 						calendarChoiceDay(this);
 						var year= today.getFullYear();
 						var month=today.getMonth()+1
-						var asd = year+"-"+month+"-"+day;
+						var asd = year+"/"+month+"/"+day;
 						
 						// 선택날짜 yy-mm-dd 형식 문자열
 						var chooseDay=asd.substr(2,9);

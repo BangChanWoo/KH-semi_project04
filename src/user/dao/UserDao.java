@@ -124,7 +124,7 @@ public class UserDao {
 			rs = pstmt.executeQuery();
 			u = new User();
 			if (rs.next()) {
-				u.setUid(rs.getString("uid"));
+				u.setUid(rs.getString("id"));
 			}
 
 		} catch (Exception e) {

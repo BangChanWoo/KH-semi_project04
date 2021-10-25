@@ -44,9 +44,14 @@ public class SelectProductServlet extends HttpServlet {
 		if(rnoStr != null) {
 			rno = Integer.parseInt(rnoStr);
 		}
-	//	String id = (String)request.getSession().getAttribute("sessionID");
+		String id = (String)request.getSession().getAttribute("sessionID");
 				
-	//	int result = new ProductService().likeRead(rno, id);
+		int result = new ProductService().likeRead(rno, id);			
+			if(result > 0) {
+			request.setAttribute("like", "yes");
+			}else {
+			request.setAttribute("like", null);
+			}
 		
 		//게시글 한개 정보
 		ProductPost vo  = new ProductService().productDetailList(rno);

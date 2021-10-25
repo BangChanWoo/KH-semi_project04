@@ -54,35 +54,20 @@ int notice_num = (int)request.getAttribute("notice_num");
 
 %>
 
-
-<div class="filedlable">
-			<label class="nd1">공지번호</label>
-		</div>
-		<div class="formlable">
-			<input type="text" name="id" id="id" value="<%=vo.getNotice_num()%>" readonly>
-		</div>
-		
-		<div class="filedlable">
-			<label class="nd1">공지제목</label>
-		</div>
-		<div class="formlable">
-			<input type="text" name="title" value="<%=vo.getNotice_title()%>">
+	<br><br>
+		<div id = "detailContent" style= 
+	"margin: 3em auto;
+    padding: 2rem;
+    background-color: #ebded4;
+    border-radius: 5px;">
+			<h2 id ="detailContent class="noticeTitle">제목: <%=vo.getNotice_title()%></h2>
+			<br><br><br>
+			<p id="detailContent"><%=vo.getNotice_content()%></p>
+			<br><br>
+			<p id="detailDate"><%=vo.getNotice_time()%></p>
 		</div>
 		
-		<div class="filedlable">
-			<label class="nd1">공지시간</label>
-		</div>
-		<div class="formlable">
-			<input type="text" name="time" value="<%=vo.getNotice_time()%>">
-		</div>
-		
-		<div class="filedlable">
-			<label class="nd1">공지내용</label>
-		</div>
-		<div class="formlable">
-			<input type="text" name="content" value="<%=vo.getNotice_content()%>">
-		</div>
-		
+		<br><br><br>
 		<button onclick="location.href='usernotice'">게시물목록보기</button>   
     <button onclick="location.href='main'">홈으로 이동</button>
 	<%@ include file="riceThief_footer.jsp" %>

@@ -51,18 +51,19 @@ int f_question_num = (int)request.getAttribute("f_question_num");
 
 %>
 
-<div class="filedlable">
-			<label class="nd1">질문</label>
-		</div>
-		<div class="formlable">
-			<input type="text" name="id" id="id" value="<%=vo.getfquestion_title()%>" readonly>
+<br><br>
+		<div id = "detailContent" style= 
+	"margin: 3em auto;
+    padding: 2rem;
+    background-color: #ebded4;
+    border-radius: 5px;">
+			<h2 id ="detailContent class="noticeTitle">질문: <%=vo.getfquestion_title()%></h2>
+			<br><br><br>
+			<p id="detailContent">답변: <%=vo.getfquestion_content()%></p>
+			
 		</div>
 		
-		<div class="filedlable">
-			<label class="nd1">답변</label>
-		</div>
-		<div class="formlable">
-			<input type="text" name="content" value="<%=vo.getfquestion_content()%>">
+		<br><br><br>
 		</div>
 		 <button onclick="location.href='fquestionboard'">목록보기</button>   
     <button onclick="location.href='main'">홈으로 이동</button>

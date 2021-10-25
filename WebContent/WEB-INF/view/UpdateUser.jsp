@@ -66,7 +66,7 @@
 					</tr>
 				</table>
 				<button type="submit" id="updateuserbtn" class="line">수정확인</button>
-				<button>회원탈퇴</button>
+				<button onclick="deleteAlert()">회원탈퇴</button>
 			</form>
 		</div>
 	</section>
@@ -87,6 +87,15 @@
 			location.href="updateuser";
 		} 
 	}; */
+	function deleteAlert(){
+		if (confirm("정말 탈퇴하시겠습니까?") == true){
+			location.href = "userout";
+			return true;
+		}else{   
+			alert("회원탈퇴를 취소하였습니다.")
+			return false;
+		}
+	}
 	</script>
 </body>
 </html>

@@ -64,10 +64,12 @@ public class UpdateUserServlet extends HttpServlet {
 		String address=request.getParameter("address");
 		int age =Integer.parseInt(request.getParameter("age"));
 
-				User uservo=new User(pw,uname,nickname,email,phone,address,age);
-		 int result=new UserService().updateUser(uservo);
+		User uservo = new User(uid, pw,uname,nickname,email,phone,address,age);
+		int result = new UserService().updateUser(uservo);
 		 
 		if (result > 0) {
+			HttpSession session = request.getSession();
+			session.setAttribute("sessionNickname", nickname);
 			request.getSession().setAttribute("sessionID",uid);
 //			response.sendRedirect("main");
 			request.getRequestDispatcher("main").forward(request,response);

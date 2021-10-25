@@ -91,5 +91,15 @@ public class UserService {
 		User vo=dao.getUserInfo(conn,uid);
 		return vo;
 	}
-	
+	public int userOut(String id) {
+		Connection conn=getConnection();
+		UserDao dao=new UserDao();
+		int result=dao.userOut(conn,id);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		return result;
+	}
 }

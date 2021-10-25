@@ -179,7 +179,7 @@ public class UserDao {
 	public int updateUser(Connection conn, User u) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = "update member set pw=?,uname=?,nickname=?,email=?,phone=?,address=?,age=?";
+		String sql = "update member set pw=?,uname=?,nickname=?,email=?,phone=?,address=?,age=? where id like ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -190,6 +190,7 @@ public class UserDao {
 			pstmt.setString(5, u.getPhone());
 			pstmt.setString(6, u.getAddress());
 			pstmt.setString(7, String.valueOf(u.getAge()));
+			pstmt.setString(8, u.getUid());
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -229,5 +230,21 @@ public class UserDao {
 		}
 		System.out.println("getUserInfo() 결과 :"+u);
 		return u;
+	}
+	public int userOut(Connection conn, String id) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = "delete from member where id like ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 }

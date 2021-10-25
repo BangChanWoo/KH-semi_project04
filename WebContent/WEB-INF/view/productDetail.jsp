@@ -90,7 +90,7 @@
 				</div>
 			</div>
 	    </div>
-     	<hr>
+     	<hr class="clear">
      	<div id="acount">	
         	<p id="allPro">총 상품 금액 : <span class="allselling" id="allSellingPrice"><c:out value="${sum}"/></span><span class="won">원</span><p>
         	<p id="totalPro">총 합계 금액 : <span class="allsum" id="realAllSellingPrice">${sum+2500}</span><span class="won">원</span></p>
@@ -99,7 +99,7 @@
        		<button onclick="goBasket()">장바구니 담기</button>
        		<button onclick="goPurchase()">바로 구매</button>
        	</div>
-	  
+       	<hr>
        	<div id="productExplain">
        		<h2 id="expTxt">상품 상세정보</h2>
        		<div id="proExplainImg">
@@ -109,11 +109,13 @@
        		<%} } %>
        		</div>
        	</div>
-       	
+       	<hr class="clear">
        	<div id="review">
-       		<h2>후기</h2>
+       		<h2>리뷰</h2>
+       		<p>아직 리뷰가 작성되지 않았습니다.</p>
 		</div>       	      	
      </main>
+     <hr class="clear">
     <%@ include file="riceThief_footer.jsp" %>
 	<script type="text/javascript">
 	let cnt = 0;

@@ -1,3 +1,7 @@
+main{
+	width: 100%;
+	margin: auto;
+}
 h2{
 	font-size: 2.2rem;
 }
@@ -11,6 +15,9 @@ ul, li{
 	margin: 0;
 	padding: 0;
 }
+.clear{
+	clear: both;
+}
 button{
 	padding: 0.5em;
 	background-color: #9a7b6c;
@@ -18,25 +25,33 @@ button{
 	border-radius: 7px;
 	font-weight: bold;
 }
+#proBtn button{
+	padding: 0.5em;
+	background-color: #9a7b6c;
+	border: none;
+	border-radius: 7px;
+	font-weight: bold;
+	margin: 0 0 2rem 1rem;
+}
 button:hover{
 	background-color: #CFB9AF;
 }
 #proBtn{
 	padding: 0 3em 0 0;
 	text-align: right;
+	background-color: #ebded4;
 }
 #contentContainer{
     clear: both;
-    float: left;
-    width: 100%;
-    margin: 0.5rem 0;
+    width: 80%;
+    margin: auto;
     padding: 5em 0;
     border-radius: 5px;
 }
 #detailImgContainer{
     float: left;
-    width: 30%;
-    margin: 0 0 0 5%;
+    width: 40%;
+    margin: 0 0 5% 5%;
     text-align: center;
     font-size: 1.5rem;
 }
@@ -46,11 +61,13 @@ button:hover{
     border-radius: 5px;
     color: #CFB9AF;
     margin: 0 0 1rem 0;
+    aspect-ratio: 1;
+    object-fit: cover;
 }
 #detailContainer{
     float: right;
-    width: 60%;
-    margin: 0 2% 0 0;
+    width: 50%;
+    margin: 0 2% 5% 0;
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows : auto;
@@ -94,19 +111,18 @@ button:hover{
 #productExplain{
 	width: 100%;
     clear: both;
-    float: left;
-    margin: 3em auto;
+    margin: 1em auto;
     padding: 2em;
     border-radius: 5px;
-    background-color: #ebded4;
     text-align : center;
 }
 #expTxt{
 	text-align : left;
-	padding: 0 0 0.5em 0;
+	padding: 0 0 1em 0;
+	margin: 3rem 0;
 }
 #explainImg{
-	width: 100%;
+	width: 80%;
 	overflow: hidden;
 }
 #likeProduct{
@@ -129,6 +145,7 @@ hr{
 	padding: 1em 3em 1em 0;
 	text-align : right;
 	font-weight: bold;
+	background-color: #ebded4;
 }
 #allPro{
 	font-size: 1.5em;
@@ -154,23 +171,21 @@ hr{
 }
 .option_info {
     text-align: left;
-    flex: 1 1 auto;
-    margin: auto;
-    margin-left: 20px;
+    flex: 1;
+    margin: auto auto auto 1rem;
     overflow: hidden;
     color:#333333;
 }
 .option_info_label{
 	text-align: left;
-    flex: 1 1 auto;
-    margin: auto;
-    margin-left: 20px;
+    flex: 1;
+    margin: auto auto auto 1rem;
     overflow: hidden;
     color:#333333;
 }
 .quantity {
     text-align: center;
-    flex-basis: 100px;
+    flex-basis: 10rem;
     flex-shrink: 0;
     margin: auto;
 }
@@ -200,4 +215,12 @@ input[type=number]::-webkit-inner-spin-button{
     flex-shrink: 0;
     margin: auto;
     margin-right: 10px;
+}
+#review h2{
+	margin: 3rem 1rem 2rem 1rem;
+}
+#review p{
+	font-size: 1.2rem;
+	text-align: center;
+	margin: 0 0 6rem 0;
 }

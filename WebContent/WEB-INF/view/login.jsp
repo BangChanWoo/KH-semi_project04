@@ -1,11 +1,8 @@
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/basic.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/basic.css" />
 <!-- 공통 css -->
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/riceThief_header.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/riceThief_header.css" />
 <!-- header css -->
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/riceThief_footer.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/riceThief_footer.css" />
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -21,11 +18,6 @@
 <style>
 body {
 	text-align: center;
-}
-
-#loginbtn {
-	width: 140px;
-	margin-left: 1px;
 }
 
 .id, .pw {

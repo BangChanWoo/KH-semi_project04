@@ -504,7 +504,7 @@ public class RecipeDao {
 		
 		try {
 			ps = conn.prepareStatement(recommendQuery);
-				ps.setString(1, id);			
+			ps.setString(1, id);			
 			rs = ps.executeQuery();			
 			volist = new ArrayList<Recipe>();
 

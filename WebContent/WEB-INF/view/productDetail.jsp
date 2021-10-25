@@ -50,10 +50,10 @@
     	 	   <div id="likeContainer">
 	        <c:if test="${not empty sessionID}">
 	            <c:if test="${like == 'yes'}">
-	            	<a href="prolikeornot?like=yes&rno=<%=rno%>"><i class="fas fa-heart"></i></a>
+	            	<a href="likeornotpro?like=yes&rno=<%=rno%>" id="likeProduct"><i class="fas fa-heart"></i></a>
 	            </c:if>
 	            <c:if test="${like == null}">
-	            	<a href="prolikeornot?rno=<%=rno%>"><i class="far fa-heart"></i></a>
+	            	<a href="likeornotpro?rno=<%=rno%>" id="likeProduct"><i class="far fa-heart"></i></a>
 	            </c:if>
             </c:if>
             

@@ -10,7 +10,8 @@
 
 개발환경 : 
  - JAVA : jdk 1.8.0_291
- - JSP : 2.3, CSS3, HTML5
+ - HTML5, CSS3, JQuery
+ - JSP : 2.3
  - Servlet : 3.1
  - Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
  - Apache Tomcat/8.5.70
